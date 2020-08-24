@@ -1,0 +1,22 @@
+{
+  "name": "moai-app-mobile",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "zen -e android start",
+    "android": "zen -d web -d ios -e android start",
+    "ios": "zen -d web -d ios -e android start",
+    "build": "zen build"
+  },
+  "dependencies": {
+    "apollo-boost": "0.3.1",
+    "apollo-client": "2.5.1",
+    "expo": "32.0.6",
+    "graphql": "14.0.2",
+    "raf": "^3.4.1",
+    "react": "16.8.2",
+    "react-apollo": "2.4.1",
+    "react-dom": "16.8.2",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
+  }
+}
