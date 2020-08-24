@@ -13,7 +13,7 @@
     "apollo-client": "2.5.1",
     "expo": "32.0.6",
     "graphql": "14.0.2",
-    "raf": "^3.4.1",
+    "raf": "3.4.1",
     "react": "16.8.2",
     "react-apollo": "2.4.1",
     "react-dom": "16.8.2",
