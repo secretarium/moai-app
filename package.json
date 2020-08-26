@@ -77,7 +77,7 @@
     "webpack-dev-server": "3.1.14",
     "webpack-hot-middleware": "2.24.3",
     "webpack-manifest-plugin": "2.0.4",
-    "webpack-virtual-modules": "0.1.10",
+    "webpack-virtual-modules": "0.2.2",
     "xdl": "49.2.0"
   },
   "resolutions": {
