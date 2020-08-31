@@ -5,5 +5,10 @@
 *.jpg binary
 
 # GitHub Linguist Override
-.yarn/* linguist-vendored
-.pnp.js linguist-vendored
+.github/* linguist-vendored
+.vscode/* linguist-vendored
+scripts/* linguist-vendored
+packages/mobile/*.* linguist-vendored
+packages/mobile/.expo/* linguist-vendored
+packages/server/*.* linguist-vendored
+*.* linguist-vendored

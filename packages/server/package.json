@@ -1,20 +1,19 @@
 {
-  "name": "moai-app-server",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "zen start",
-    "build": "zen build"
-  },
-  "dependencies": {
-    "apollo-server-express": "2.14.2",
-    "apollo-server-module-graphiql": "1.3.4",
-    "body-parser": "1.18.3",
-    "cors": "2.8.4",
-    "express": "4.16.4",
-    "graphql": "14.0.2",
-    "graphql-tools": "4.0.4",
-    "opn": "5.3.0",
-    "subscriptions-transport-ws": "0.9.15"
-  }
+    "name": "@secretarium/moai-server",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "echo start",
+        "build": "echo build"
+    },
+    "dependencies": {
+        "apollo-server-express": "2.17.0",
+        "apollo-server-module-graphiql": "1.4.0",
+        "body-parser": "1.19.0",
+        "cors": "2.8.5",
+        "express": "4.17.1",
+        "graphql": "15.3.0",
+        "graphql-tools": "6.1.0",
+        "subscriptions-transport-ws": "0.9.18"
+    }
 }
