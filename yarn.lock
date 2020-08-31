@@ -1664,11 +1664,6 @@
   dependencies:
     "@types/express" "*"
 
-"@types/events@*":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
-  integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
-
 "@types/expo@32.0.2":
   version "32.0.2"
   resolved "https://registry.yarnpkg.com/@types/expo/-/expo-32.0.2.tgz#5bbe0ba557e383c6c1fa384472c9744b34294ed9"
@@ -1945,15 +1940,7 @@
   resolved "https://registry.yarnpkg.com/@types/websql/-/websql-0.0.27.tgz#621a666a7f02018e7cbb4abab956a25736c27d71"
   integrity sha1-Yhpman8CAY58u0q6uVaiVzbCfXE=
 
-"@types/ws@5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-5.1.1.tgz#4adc1f1a5e92e7e0e95658fb35c7eab1bc52f4ac"
-  integrity sha512-zf12eIggrJKYkOXood4EbQOsMFaVR8e5W8azkesRH1yFg4GhocS7j4sqE+FesLbvf1FLws4HenWUG6YZQ/LTJQ==
-  dependencies:
-    "@types/events" "*"
-    "@types/node" "*"
-
-"@types/ws@^7.0.0":
+"@types/ws@7.2.6", "@types/ws@^7.0.0":
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/@types/ws/-/ws-7.2.6.tgz#516cbfb818310f87b43940460e065eb912a4178d"
   integrity sha512-Q07IrQUSNpr+cXU4E4LtkSIBPie5GLZyyMC1QtQYRLWz701+XcoVygGUZgvLqElq1nU4ICldMYPnexlBsg3dqQ==
