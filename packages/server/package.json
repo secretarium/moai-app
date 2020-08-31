@@ -7,13 +7,8 @@
         "build": "echo build"
     },
     "dependencies": {
-        "apollo-server-express": "2.17.0",
-        "apollo-server-module-graphiql": "1.4.0",
         "body-parser": "1.19.0",
         "cors": "2.8.5",
-        "express": "4.17.1",
-        "graphql": "15.3.0",
-        "graphql-tools": "6.1.0",
-        "subscriptions-transport-ws": "0.9.18"
+        "express": "4.17.1"
     }
 }
