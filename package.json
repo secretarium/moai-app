@@ -31,7 +31,7 @@
     "@types/expo": "32.0.2",
     "@types/expo__vector-icons": "9.0.1",
     "@types/express": "4.11.1",
-    "@types/graphql": "14.0.7",
+    "@types/graphql": "14.5.0",
     "@types/node": "10.1.4",
     "@types/opn": "5.1.0",
     "@types/prop-types": "15.5.9",
