@@ -1,24 +1,17 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "es6",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowJs": true,
-    "noUnusedLocals": true,
-    "jsx": "react",
-    "lib": [
-      "es2015",
-      "dom",
-      "esnext"
+    "exclude": [
+        "node_modules"
     ],
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true,
-    "pretty": true,
-    "removeComments": true,
-    "skipLibCheck": true
-  }
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react-native",
+        "lib": [
+            "dom",
+            "esnext"
+        ],
+        "moduleResolution": "node",
+        "noEmit": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true
+    }
 }

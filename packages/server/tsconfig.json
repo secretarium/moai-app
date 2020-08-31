@@ -1,12 +1,12 @@
 {
-  "extends": "../../tsconfig.json",
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.graphql",
-    "typings/*.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ]
+    "extends": "../../tsconfig.json",
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.graphql",
+        "typings/*.d.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "build"
+    ]
 }
