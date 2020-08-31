@@ -1,9 +1,12 @@
 import React from 'react';
 import { registerRootComponent } from 'expo';
+import App from './App';
 import Providers from './Providers';
 
 const Entry: React.FC = () => (
-    <Providers />
+    <Providers>
+        <App />
+    </Providers>
 );
 
 registerRootComponent(Entry);
