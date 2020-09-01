@@ -19,5 +19,14 @@ yarn-error.log
 #Stryker
 reports
 
+#Jest
+coverage
+
 #Yarn
 .yarn
+
+#Dotenv
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
