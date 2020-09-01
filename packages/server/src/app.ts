@@ -4,7 +4,6 @@ import express, { Request, Application, Response } from 'express';
 import mongoose from 'mongoose';
 import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
-import { i18next, middleware } from '@secretarium/moai-locales';
 
 class App {
     public app: Application;
@@ -43,11 +42,6 @@ class App {
             limit: '10mb'
         }));
         this.app.use(cookieParser());
-
-        i18next.use(middleware.LanguageDetector).init({
-            preload: ['en', 'de', 'it'],
-            ...otherOptions
-        });
 
         // this.app.use(csrf());
         // this.app.use((error: any, __unused__req: Request, res: Response, next: NextFunction) => {
