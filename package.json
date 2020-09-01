@@ -13,9 +13,11 @@
     "packman": "yarn@2.1.1",
     "scripts": {
         "lint": "yarn workspaces foreach run lint",
+        "lint:fix": "yarn workspaces foreach run lint:fix",
         "start": "yarn workspaces foreach run start",
         "web": "yarn workspace @secretarium/moai-expo web",
         "test": "yarn workspaces foreach run test",
+        "test:mutation": "yarn workspaces foreach run test:mutation",
         "preinstall": "node ./scripts/hintYarn.js",
         "postinstall": "cd ./packages/mobile && expo-yarn-workspaces postinstall",
         "release": "release-it"

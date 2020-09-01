@@ -1,9 +1,7 @@
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import express, { Request, Application, Response, NextFunction } from 'express';
-import http from 'http';
+import express, { Request, Application, Response } from 'express';
 import mongoose from 'mongoose';
-import csrf from 'csurf';
 import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
 
