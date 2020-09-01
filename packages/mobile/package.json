@@ -9,7 +9,6 @@
         "android": "expo start --android",
         "ios": "expo start --ios",
         "web": "expo web",
-        "eject": "expo eject",
         "test": "jest",
         "test:mutation": "stryker run stryker.config.js",
         "storybook": "start-storybook -p 6006"
