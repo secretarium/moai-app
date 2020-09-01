@@ -1,0 +1,10 @@
+{
+    "name": "@secretarium/moai-locales",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Internationalisation for Moai",
+    "scripts": {
+        "lint": "eslint --ext .ts,.tsx,.js,.jsx ./",
+        "lint:fix": "eslint --ext .ts,.tsx,.js,.jsx --fix ./"
+    }
+}
