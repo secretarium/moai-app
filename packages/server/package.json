@@ -18,6 +18,7 @@
         "test:mutation": "stryker run stryker.config.js"
     },
     "dependencies": {
+        "@secretarium/moai-locales": "../locales",
         "bcrypt": "5.0.0",
         "body-parser": "1.19.0",
         "class-transformer": "0.3.1",
