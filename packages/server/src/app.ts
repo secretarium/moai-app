@@ -72,7 +72,7 @@ class App {
         });
     }
 
-    private initializeControllers(controllers: Controller[]) {
+    private initializeControllers(controllers: Moai.Controller[]) {
         controllers.forEach((controller) => {
             this.app.use('/', controller.router);
         });
