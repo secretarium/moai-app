@@ -35,7 +35,7 @@
         "@storybook/addon-actions": "6.0.21",
         "@storybook/addon-links": "6.0.21",
         "@storybook/addons": "6.0.21",
-        "@storybook/react": "6.0.20",
+        "@storybook/react": "6.0.21",
         "@storybook/react-native": "5.3.21",
         "@stryker-mutator/core": "3.3.1",
         "@stryker-mutator/javascript-mutator": "3.3.1",
