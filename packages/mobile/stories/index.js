@@ -1,1 +1,1 @@
-import './0-Welcome.stories.js'
+import './0-Welcome.stories.js';
