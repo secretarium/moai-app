@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> has 1 child 1`] = `
+<div
+  className="css-view-1dbjc4n"
+>
+  <div
+    className="css-text-901oao"
+    dir="auto"
+    onClick={[Function]}
+  >
+    Home
+  </div>
+</div>
+`;
