@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Providers /> has 1 child 1`] = `
+<div
+  className="css-text-901oao"
+  dir="auto"
+  onClick={[Function]}
+>
+  Test
+</div>
+`;
