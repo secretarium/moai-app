@@ -2,9 +2,6 @@ import bcrypt from 'bcrypt';
 import { Request, Response, NextFunction, Router } from 'express';
 import jwt from 'jsonwebtoken';
 import WrongCredentialsException from '../exceptions/WrongCredentialsException';
-import Controller from '../interfaces/controller.interface';
-import DataStoredInToken from '../interfaces/dataStoredInToken';
-import TokenData from '../interfaces/tokenData.interface';
 import validationMiddleware from '../middleware/validation.middleware';
 import CreateUserDto from '../user/user.dto';
 import User from '../user/user.interface';
@@ -12,7 +9,7 @@ import userModel from './../user/user.model';
 import AuthenticationService from './authentication.service';
 import LogInDto from './logIn.dto';
 
-class AuthenticationController implements Controller {
+class AuthenticationController implements Moai.Controller {
     public path = '/auth';
     public router = Router();
     public authenticationService = new AuthenticationService();
@@ -69,14 +66,14 @@ class AuthenticationController implements Controller {
         response.json({});
     }
 
-    private createCookie(tokenData: TokenData) {
+    private createCookie(tokenData: Moai.TokenData) {
         return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
     }
 
-    private createToken(user: User): TokenData {
+    private createToken(user: User): Moai.TokenData {
         const expiresIn = 60 * 60; // an hour
         const secret = process.env.JWT_SECRET;
-        const dataStoredInToken: DataStoredInToken = {
+        const dataStoredInToken: Moai.DataStoredInToken = {
             _id: user._id
         };
         return {

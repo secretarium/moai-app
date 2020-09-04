@@ -1,16 +1,12 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import NotAuthorizedException from '../exceptions/NotAuthorizedException';
-import Controller from '../interfaces/controller.interface';
-import RequestWithUser from '../interfaces/requestWithUser.interface';
 import authMiddleware from '../middleware/auth.middleware';
-import tagModel from '../tag/tag.model';
 import userModel from './user.model';
 import UserNotFoundException from '../exceptions/UserNotFoundException';
 
-class UserController implements Controller {
+class UserController implements Moai.Controller {
     public path = '/users';
     public router = Router();
-    private tag = tagModel;
     private user = userModel;
 
     constructor() {
@@ -36,7 +32,7 @@ class UserController implements Controller {
         }
     }
 
-    private getAllTagsOfUser = async (request: RequestWithUser, response: Response, next: NextFunction) => {
+    private getAllTagsOfUser = async (request: Moai.RequestWithUser, response: Response, next: NextFunction) => {
         const userId = request.params.id;
         if (userId === request.user._id.toString()) {
             const tags = await this.tag.find({ author: userId });

@@ -1,5 +1,5 @@
 var defaultPlugins = [
-    '@typescript-eslint/eslint-plugin',
+    '@typescript-eslint',
     'import',
     'jest',
     'react',

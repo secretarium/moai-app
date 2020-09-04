@@ -1,9 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import UserAlreadyExistsException from '../exceptions/UserAlreadyExistsException';
-import DataStoredInToken from '../interfaces/dataStoredInToken';
-import TokenData from '../interfaces/tokenData.interface';
-import UserCreationData from '../interfaces/userCreationData';
 import CreateUserDto from '../user/user.dto';
 import User from '../user/user.interface';
 import userModel from './../user/user.model';
@@ -11,7 +8,7 @@ import userModel from './../user/user.model';
 class AuthenticationService {
     public user = userModel;
 
-    public async register(userData: CreateUserDto): Promise<UserCreationData> {
+    public async register(userData: CreateUserDto): Promise<Moai.UserCreationData> {
         if (
             await this.user.findOne({ email: `${userData.email}` })
         ) {
@@ -29,14 +26,14 @@ class AuthenticationService {
             user
         };
     }
-    public createCookie(tokenData: TokenData): string {
+    public createCookie(tokenData: Moai.TokenData): string {
         return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
     }
 
-    public createToken(user: User): TokenData {
+    public createToken(user: User): Moai.TokenData {
         const expiresIn = 60 * 60; // an hour
         const secret = process.env.JWT_SECRET;
-        const dataStoredInToken: DataStoredInToken = {
+        const dataStoredInToken: Moai.DataStoredInToken = {
             _id: user._id
         };
         return {
