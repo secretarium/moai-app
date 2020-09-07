@@ -1,8 +1,8 @@
-import React from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import styles from "../../styles/chat";
-import MessageBubble from "../../components/MessageBubble/MessageBubble";
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import styles from '../../styles/chat';
+import MessageBubble from '../../components/MessageBubble';
 
 const Conversation: React.FC = () => {
     return (
