@@ -1,34 +1,34 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     messageContainerReceived: {
-        justifyContent: "flex-start",
+        justifyContent: 'flex-start',
         paddingTop: 0,
         paddingBottom: 0,
-        paddingLeft: "2%",
-        paddingRight: "2%",
-        marginTop: 4,
+        paddingLeft: '2%',
+        paddingRight: '2%',
+        marginTop: 4
     },
     messageContainerSent: {
-        justifyContent: "flex-end",
+        justifyContent: 'flex-end',
         paddingTop: 0,
         paddingBottom: 0,
-        paddingLeft: "2%",
-        paddingRight: "2%",
-        marginTop: 4,
+        paddingLeft: '2%',
+        paddingRight: '2%',
+        marginTop: 4
     },
     messageBubble: {
         borderRadius: 22,
-        backgroundColor: "#d94481",
+        backgroundColor: '#d94481',
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 20,
         paddingRight: 20,
-        alignSelf: "flex-start",
+        alignSelf: 'flex-start'
     },
     messageText: {
         letterSpacing: 0,
         fontSize: 16,
-        color: "white",
-    },
+        color: 'white'
+    }
 });

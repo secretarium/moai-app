@@ -1,10 +1,10 @@
-import "@expo/match-media";
-import React from "react";
-import { View } from "react-native";
-import { useMediaQuery } from "react-responsive";
-import Conversation from "./Conversation";
-import ConversationList from "./ConversationList";
-import styles from "../../styles/chat";
+import '@expo/match-media';
+import React from 'react';
+import { View } from 'react-native';
+import { useMediaQuery } from 'react-responsive';
+import Conversation from './Conversation';
+import ConversationList from './ConversationList';
+import styles from '../../styles/chat';
 
 const DesktopOrTablet = ({ children }) => {
     const isDesktopOrTablet = useMediaQuery({ minWidth: 768 });
