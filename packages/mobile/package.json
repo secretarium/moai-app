@@ -15,6 +15,7 @@
         "storybook": "start-storybook -p 6006"
     },
     "dependencies": {
+        "@expo/match-media": "0.0.0-beta.2",
         "@expo/vector-icons": "10.2.1",
         "expo": "38.0.10",
         "expo-asset": "8.2.0",
@@ -25,6 +26,7 @@
         "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
         "react-native-screens": "2.10.1",
         "react-native-web": "0.13.9",
+        "react-responsive": "8.1.0",
         "react-router-dom": "5.2.0",
         "react-router-native": "5.2.0"
     },
