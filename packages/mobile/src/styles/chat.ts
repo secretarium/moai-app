@@ -46,4 +46,7 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
+    messages: {
+        flex: 1,
+    },
 });

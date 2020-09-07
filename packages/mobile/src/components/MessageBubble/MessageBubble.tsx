@@ -4,8 +4,10 @@ import styles from "./styles";
 
 const MessageBubble: React.FC = () => {
     return (
-        <View style={styles.messageReceived}>
-            <Text style={styles.messageText}>Test message bubble</Text>
+        <View style={styles.messageContainerReceived}>
+            <View style={styles.messageBubble}>
+                <Text style={styles.messageText}>Test message bubble</Text>
+            </View>
         </View>
     );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import styles from "../../styles/chat";
+import MessageBubble from "../../components/MessageBubble/MessageBubble";
 
 const Conversation: React.FC = () => {
     return (
@@ -9,7 +10,9 @@ const Conversation: React.FC = () => {
             <View style={styles.header}>
                 <Text style={styles.h1}>Start chatting</Text>
             </View>
-            <Text>Conversation</Text>
+            <View style={styles.messages}>
+                <MessageBubble />
+            </View>
             <View style={styles.messageInputContainer}>
                 <TextInput
                     style={styles.messageInput}
