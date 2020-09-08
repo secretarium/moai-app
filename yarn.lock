@@ -4084,6 +4084,7 @@ __metadata:
     expo-asset: 8.2.0
     expo-cli: 3.25.1
     expo-constants: 9.2.0
+    expo-linking: 1.0.3
     expo-yarn-workspaces: 1.2.1
     jest: 26.4.2
     jest-expo: 38.0.2
@@ -12127,6 +12128,19 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: fc327ebc887671abc9298b0b839cf8b9ac3c8ecdfedf5cd93940f99dc9fa67707691b6a04d8721f356fbcfe5204192a5aed4b037fe8961a397d624438fdaad87
+  languageName: node
+  linkType: hard
+
+"expo-linking@npm:1.0.3":
+  version: 1.0.3
+  resolution: "expo-linking@npm:1.0.3"
+  dependencies:
+    expo-constants: ~9.1.1
+    qs: ^6.5.0
+    url-parse: ^1.4.4
+  peerDependencies:
+    react-native: "*"
+  checksum: e8878e9c2f9781a3136afe33f2478fbb8aaa109076856625fbdf12567dbd129a97d6c3e60b1199d5789f7e59f0e32041aa8079ec5bc21568a842e2733ac3e27f
   languageName: node
   linkType: hard
 
