@@ -2,7 +2,7 @@ module.exports = (config) => {
     config.set({
         mutate: [
             '{src,lib}/**/*.[jt]s?(x)',
-            '!{src,lib}/**/?(*.)+(spec|test).[jt]s?(x)',
+            '!{src,lib}/**/?(*.)+(spec|test).[jt]s?(x)'
         ],
         mutator: 'typescript',
         packageManager: 'yarn',
