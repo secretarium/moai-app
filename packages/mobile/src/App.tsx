@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from './ReactRouter';
 import Home from './Home';
 import About from './About';
-import Chat from './pages/Chat/Chat';
+import Chat from './components/Chat';
 
 const App: React.FC = () => (
     <>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as Linking from 'expo-linking';
 import { Route } from './ReactRouter';
 import About from './About';
-import Chat from './pages/Chat/Chat';
+import Chat from './components/Chat';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { useCallback } from 'react';
 
