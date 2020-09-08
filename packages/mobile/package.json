@@ -25,7 +25,7 @@
         "react-dom": "16.13.1",
         "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
         "react-native-screens": "2.10.1",
-        "react-native-web": "0.13.9",
+        "react-native-web": "0.13.11",
         "react-responsive": "8.1.0",
         "react-router-dom": "5.2.0",
         "react-router-native": "5.2.0"
@@ -33,7 +33,7 @@
     "devDependencies": {
         "@babel/core": "7.11.6",
         "@babel/preset-typescript": "7.10.4",
-        "@expo/webpack-config": "0.12.28",
+        "@expo/webpack-config": "0.12.29",
         "@storybook/addon-actions": "6.0.21",
         "@storybook/addon-links": "6.0.21",
         "@storybook/addons": "6.0.21",
@@ -47,7 +47,7 @@
         "@types/jest": "26.0.13",
         "@types/react": "16.9.49",
         "@types/react-dom": "16.9.8",
-        "@types/react-native": "0.63.14",
+        "@types/react-native": "0.63.16",
         "@types/react-router": "5.1.8",
         "@types/react-router-dom": "5.1.5",
         "@types/react-router-native": "5.1.0",
