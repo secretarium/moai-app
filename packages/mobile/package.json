@@ -21,6 +21,7 @@
         "expo-asset": "8.2.0",
         "expo-cli": "3.25.1",
         "expo-constants": "9.2.0",
+        "expo-linking": "1.0.3",
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
