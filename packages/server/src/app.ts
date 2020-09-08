@@ -2,13 +2,12 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express, { Request, Application, Response } from 'express';
 import mongoose from 'mongoose';
-import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
 
 class App {
     public app: Application;
 
-    constructor(controllers: Controller[]) {
+    constructor(controllers: Moai.Controller[]) {
         this.app = express();
         this.app.set('x-powered-by', false);
 
@@ -75,7 +74,7 @@ class App {
         });
     }
 
-    private initializeControllers(controllers: Controller[]) {
+    private initializeControllers(controllers: Moai.Controller[]) {
         controllers.forEach((controller) => {
             this.app.use('/', controller.router);
         });

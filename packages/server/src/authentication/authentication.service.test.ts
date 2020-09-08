@@ -1,12 +1,11 @@
 import UserAlreadyExistsException from '../exceptions/UserAlreadyExistsException';
-import TokenData from '../interfaces/tokenData.interface';
 import CreateUserDto from '../user/user.dto';
 import AuthenticationService from './authentication.service';
 
 describe('The AuthenticationService', () => {
     describe('when creating a cookie', () => {
         it('should return a string', () => {
-            const tokenData: TokenData = {
+            const tokenData: Moai.TokenData = {
                 token: '',
                 expiresIn: 1
             };

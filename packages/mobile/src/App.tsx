@@ -1,12 +1,14 @@
 import React from 'react';
-import { Route } from './react-router';
-import { View, Text } from 'react-native';
+import { Route } from './ReactRouter';
+import Home from './Home';
+import About from './About';
+import Chat from './pages/Chat/Chat';
 
 const App: React.FC = () => (
     <>
-        <Route exact path="/" render={() => <View><Text>Home</Text></View>} />
-        <Route path="/about" render={() => <View><Text>About</Text></View>} />
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/chat" component={Chat} />
     </>
 );
-
 export default App;

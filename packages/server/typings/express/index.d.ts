@@ -11,6 +11,5 @@ declare namespace Express {
     interface Request {
         moaiRootUrl: string;
         moaiCSRFToken: string;
-        // csrfToken: () => string;
     }
 }
