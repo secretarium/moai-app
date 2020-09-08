@@ -1,7 +1,7 @@
 const config = {
     name: 'Moai',
     description: 'An app for Confidential Track and Trace',
-    icon: 'https://github.com/expo/expo/blob/master/templates/expo-template-blank/assets/icon.png?raw=true',
+    icon: './assets/icon.png',
     version: '0.0.1',
     slug: 'moai-confidential-test-and-trace',
     ios: {
@@ -38,13 +38,15 @@ const config = {
             'js',
             'json',
             'ts',
-            'tsx',
-            'graphql',
-            'gql'
+            'tsx'
         ]
     },
+    loading: {
+        icon: './assets/logo.png',
+        hideExponentText: false
+    },
     splash: {
-        image: 'https://github.com/expo/expo/blob/master/templates/expo-template-blank/assets/splash.png?raw=true',
+        image: './assets/logo.png',
         resizeMode: 'contain',
         backgroundColor: '#ffffff'
     }

@@ -1,9 +1,16 @@
 {
     "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true
+    },
     "include": [
-        "src/**/*.ts",
-        "src/**/*.graphql",
-        "typings/*.d.ts"
+        "./src/**/*.ts",
+        "./src/**/*.graphql",
+        "./typings/**/*.d.ts"
     ],
     "exclude": [
         "node_modules",
