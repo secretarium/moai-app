@@ -4178,9 +4178,9 @@ __metadata:
     "@types/react-router-native": 5.1.0
     expo: 38.0.10
     expo-asset: 8.2.0
-    expo-camera: ~8.3.1
     expo-cli: 3.26.2
     expo-constants: 9.2.0
+    expo-linking: 1.0.3
     expo-yarn-workspaces: 1.2.1
     jest: 26.4.2
     jest-expo: 38.0.2
@@ -4189,6 +4189,7 @@ __metadata:
     react-native: "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz"
     react-native-screens: 2.10.1
     react-native-web: 0.13.9
+    react-responsive: 8.1.0
     react-router-dom: 5.2.0
     react-router-native: 5.2.0
     typescript: 4.0.2
@@ -12629,21 +12630,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-camera@npm:~8.3.1":
-  version: 8.3.1
-  resolution: "expo-camera@npm:8.3.1"
-  dependencies:
-    fbjs: 1.0.0
-    invariant: 2.2.4
-    lodash: ^4.6.0
-    prop-types: ^15.6.0
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 72f8036464d726d526b7cc001d1f109a197ef8e0273cb65886419eeb924eba17a3a0fdbb108607938604db3839fd173fa24ba66e1e9f31fd7b4cb18ef5c12f8b
-  languageName: node
-  linkType: hard
-
 "expo-cli@npm:3.26.2":
   version: 3.26.2
   resolution: "expo-cli@npm:3.26.2"
@@ -12798,7 +12784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-linking@npm:~1.0.3":
+"expo-linking@npm:1.0.3, expo-linking@npm:~1.0.3":
   version: 1.0.3
   resolution: "expo-linking@npm:1.0.3"
   dependencies:
@@ -15202,7 +15188,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"hyphenate-style-name@npm:^1.0.2, hyphenate-style-name@npm:^1.0.3":
+"hyphenate-style-name@npm:^1.0.0, hyphenate-style-name@npm:^1.0.2, hyphenate-style-name@npm:^1.0.3":
   version: 1.0.4
   resolution: "hyphenate-style-name@npm:1.0.4"
   checksum: e1ef5816f38e6da74dd3f06b7d4cfa5d13ca9b8ba8392847de1061330ffb5da59853a9f04d1bde712a8eaf9f81a6e9b7c58c654edb2f73b85daf9c2d663dc80e
@@ -18800,6 +18786,15 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: 0aba14e7e8bf663583bc1771f98b85057db39a1ded2050ede5e87c45c4eec145944620fa5ac1726014ae766ed676d2b036a74af4d6b3649671bfca007ec833f7
+  languageName: node
+  linkType: hard
+
+"matchmediaquery@npm:^0.3.0":
+  version: 0.3.1
+  resolution: "matchmediaquery@npm:0.3.1"
+  dependencies:
+    css-mediaquery: ^0.1.2
+  checksum: fd13e2d63af004507668845604b351ced706e72b7f9876e7d7854b3641f7c3c9f08315609c3321eb79511506f47693573547cce9dc3e3abb306573805aa395a0
   languageName: node
   linkType: hard
 
@@ -23088,6 +23083,20 @@ fsevents@^1.2.7:
   version: 0.4.3
   resolution: "react-refresh@npm:0.4.3"
   checksum: d1480c21dded2c7d47cc9be4130122332dec9840922bad68a73a1b0dfb91138c4bf1308b20c9fac12e2c6ccd7b1a00adf8d294ac7d29bc3072fdd986fb020e97
+  languageName: node
+  linkType: hard
+
+"react-responsive@npm:8.1.0":
+  version: 8.1.0
+  resolution: "react-responsive@npm:8.1.0"
+  dependencies:
+    hyphenate-style-name: ^1.0.0
+    matchmediaquery: ^0.3.0
+    prop-types: ^15.6.1
+    shallow-equal: ^1.1.0
+  peerDependencies:
+    react: ^16.8.0
+  checksum: 8ec767ca8a5ca9b9aefb44454910873aff30f1d132b2965c4bff6d55dece5a8332c5680695689d60d46d259812a5abf1d4ba96c30021f83a832aac0c0ba1f1ba
   languageName: node
   linkType: hard
 

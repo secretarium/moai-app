@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   lint:
-    name: Linting
+    name: Lint
     runs-on: ubuntu-latest
 
     strategy:
@@ -17,19 +17,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install
+    - run: yarn install --immutable
     - run: yarn lint
-      env:
-        CI: true
 
   test:
-    name: Testing
+    name: Test
     runs-on: ${{ matrix.os-version }}
     needs: lint
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [14.x]
         os-version: [ubuntu-latest]
 
     steps:
@@ -38,7 +36,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install
+    - run: yarn install --immutable
     - run: yarn test
       env:
         CI: true
