@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    SafeAreaView,
-} from "react-native";
-import { AntDesign } from '@expo/vector-icons';
+import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import styles from "../../styles/scanner";
 
 const Scanner: React.FC = () => {
     const [permission, setPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const [buttonPress, setButtonPress] = useState(false);
+    const [openScanner, setOpenScanner] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -23,7 +18,7 @@ const Scanner: React.FC = () => {
 
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
-        alert(`Bar code with type ${type} and data ${data} has been scanned`);
+        alert(`Code with type ${type} and data ${data} has been scanned`);
     };
 
     if (permission === null) {
@@ -37,11 +32,11 @@ const Scanner: React.FC = () => {
         <SafeAreaView style={styles.container}>
             <TouchableOpacity
                 style={styles.circleButton}
-                onPress={() => setButtonPress(true)}
+                onPress={() => setOpenScanner(true)}
             >
                 <Text style={styles.text}>Scan Code</Text>
             </TouchableOpacity>
-            {buttonPress && (
+            {openScanner && (
                 <>
                     <BarCodeScanner
                         onBarCodeScanned={
@@ -54,7 +49,7 @@ const Scanner: React.FC = () => {
                             style={styles.roundedButton}
                             onPress={() => {
                                 setScanned(false);
-                                setButtonPress(false);
+                                setOpenScanner(false);
                             }}
                         >
                             <AntDesign name="back" size={30} color="white" />
@@ -77,35 +72,3 @@ const Scanner: React.FC = () => {
 };
 
 export default Scanner;
-
-{
-    /* <View
-            style={{
-                flex: 1,
-                flexDirection: "column",
-                justifyContent: "flex-end",
-            }}
-        >
-            <Button title={"Scan"} onPress={() => setButtonPress(true)} />
-            {buttonPress && (
-                <>
-                    <BarCodeScanner
-                        onBarCodeScanned={
-                            scanned ? undefined : handleBarCodeScanned
-                        }
-                        style={StyleSheet.absoluteFillObject}
-                    />
-                    <Button
-                        title={"Go Back"}
-                        onPress={() => setButtonPress(false)}
-                    />
-                </>
-            )}
-            {scanned && (
-                <Button
-                    title={"Tap to Scan Again"}
-                    onPress={() => setScanned(false)}
-                />
-            )}
-        </View> */
-}
