@@ -3,6 +3,7 @@
         "node_modules"
     ],
     "compilerOptions": {
+        "sourceMap": true,
         "allowSyntheticDefaultImports": true,
         "jsx": "react-native",
         "lib": [
