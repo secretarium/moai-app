@@ -6,9 +6,11 @@
     "main": "./src/AppEntry.tsx",
     "scripts": {
         "start": "expo start",
+        "start:web": "next dev",
+        "build:web": "next build",
+        "export:web": "next export",
         "android": "expo start --android",
         "ios": "expo start --ios",
-        "web": "expo web",
         "eject": "expo eject",
         "test": "jest",
         "test:mutation": "stryker run stryker.config.js",
@@ -21,6 +23,7 @@
         "expo-asset": "8.2.0",
         "expo-cli": "3.25.1",
         "expo-constants": "9.2.0",
+        "next": "9.5.3",
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
@@ -28,11 +31,14 @@
         "react-native-web": "0.13.9",
         "react-responsive": "8.1.0",
         "react-router-dom": "5.2.0",
-        "react-router-native": "5.2.0"
+        "react-router-native": "5.2.0",
+        "resize-observer-polyfill": "1.5.1",
+        "setimmediate": "1.0.5"
     },
     "devDependencies": {
         "@babel/core": "7.11.6",
         "@babel/preset-typescript": "7.10.4",
+        "@expo/next-adapter": "2.1.29",
         "@expo/webpack-config": "0.12.27",
         "@storybook/addon-actions": "6.0.21",
         "@storybook/addon-links": "6.0.21",

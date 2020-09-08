@@ -2,6 +2,22 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "baseUrl": "./src",
-        "outDir": "./dist"
-    }
+        "outDir": "./dist",
+        "target": "es5",
+        "allowJs": true,
+        "strict": false,
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "isolatedModules": true,
+        "jsx": "preserve"
+    },
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }
