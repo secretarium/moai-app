@@ -5,7 +5,7 @@ import styles from "../../styles/chat";
 import MessageItem from "../../components/MessageItem/MessageItem";
 
 const ConversationList: React.FC = () => {
-    const [convoPartner, setConvoPartner] = useState(["Jack", "Jill"]);
+    const [convoPartner] = useState(['Jack', 'Jill']);
 
     return (
         <SafeAreaView style={styles.conversationListContainer}>

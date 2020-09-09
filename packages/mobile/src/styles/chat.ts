@@ -9,18 +9,18 @@ export default StyleSheet.create({
     },
     conversationListContainer: {
         flex: 1,
-        borderRightColor: "#d3d3d3",
-        borderRightWidth: 1,
+        borderRightColor: '#d3d3d3',
+        borderRightWidth: 1
     },
     conversationContainer: {
         flex: 3,
-        justifyContent: "space-between",
+        justifyContent: 'space-between'
     },
     header: {
-        height: "5%",
-        width: "100%",
-        backgroundColor: "#2d3083",
-        justifyContent: "center",
+        height: '5%',
+        width: '100%',
+        backgroundColor: '#2d3083',
+        justifyContent: 'center'
     },
     headerMobile: {
         height: "10%",
@@ -29,16 +29,16 @@ export default StyleSheet.create({
         justifyContent: "center",
     },
     h1: {
-        color: "white",
+        color: 'white',
         fontSize: 25,
-        paddingLeft: 10,
+        paddingLeft: 10
     },
     messageInputContainer: {
-        height: "6%",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#2d3083",
-        flexDirection: "row",
+        height: '6%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#2d3083',
+        flexDirection: 'row'
     },
     messageInputContainerMobile: {
         height: "10%",
@@ -54,9 +54,9 @@ export default StyleSheet.create({
         padding: 10,
     },
     messageButton: {
-        width: "7%",
-        justifyContent: "center",
-        alignItems: "center",
+        width: '7%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     messageButtonMobile: {
         width: "10%",
@@ -64,6 +64,6 @@ export default StyleSheet.create({
         alignItems: "center",
     },
     messages: {
-        flex: 1,
-    },
+        flex: 1
+    }
 });
