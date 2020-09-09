@@ -1,24 +1,18 @@
-import "@expo/match-media";
 import React from "react";
-import { SafeAreaView } from "react-native";
-import { useMediaQuery } from "react-responsive";
+import { SafeAreaView, StatusBar } from "react-native";
 import Conversation from "./Conversation";
 import ConversationList from "./ConversationList";
 import styles from "../../styles/chat";
-
-const DesktopOrTablet = ({ children }) => {
-    const isDesktopOrTablet = useMediaQuery({ minWidth: 768 });
-    return isDesktopOrTablet ? children : null;
-};
-
-const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-    return isMobile ? children : null;
-};
+import { DesktopOrTablet, Mobile } from "../../Breakpoints";
 
 const Chat: React.FC = () => {
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar
+                translucent
+                backgroundColor="#fff"
+                barStyle="dark-content"
+            />
             <DesktopOrTablet>
                 <ConversationList />
                 <Conversation />

@@ -1,4 +1,4 @@
-import { StyleSheet, Platform, StatusBar } from "react-native";
+import { StyleSheet, Platform, StatusBar, Dimensions } from "react-native";
 
 export default StyleSheet.create({
     container: {
@@ -22,6 +22,12 @@ export default StyleSheet.create({
         backgroundColor: "#2d3083",
         justifyContent: "center",
     },
+    headerMobile: {
+        height: "10%",
+        width: "100%",
+        backgroundColor: "#2d3083",
+        justifyContent: "center",
+    },
     h1: {
         color: "white",
         fontSize: 25,
@@ -29,6 +35,13 @@ export default StyleSheet.create({
     },
     messageInputContainer: {
         height: "6%",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#2d3083",
+        flexDirection: "row",
+    },
+    messageInputContainerMobile: {
+        height: "10%",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#2d3083",
@@ -42,6 +55,11 @@ export default StyleSheet.create({
     },
     messageButton: {
         width: "7%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    messageButtonMobile: {
+        width: "10%",
         justifyContent: "center",
         alignItems: "center",
     },
