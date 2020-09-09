@@ -1,11 +1,11 @@
-import { StyleSheet, Platform, StatusBar } from "react-native";
+import { StyleSheet, Platform, StatusBar } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        display: "flex",
-        flexDirection: "row",
-        height: "100%",
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+        display: 'flex',
+        flexDirection: 'row',
+        height: '100%',
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     },
     conversationListContainer: {
         flex: 1,
@@ -23,10 +23,10 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     headerMobile: {
-        height: "10%",
-        width: "100%",
-        backgroundColor: "#2d3083",
-        justifyContent: "center",
+        height: '10%',
+        width: '100%',
+        backgroundColor: '#2d3083',
+        justifyContent: 'center'
     },
     h1: {
         color: 'white',
@@ -41,17 +41,17 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     messageInputContainerMobile: {
-        height: "10%",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#2d3083",
-        flexDirection: "row",
+        height: '10%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#2d3083',
+        flexDirection: 'row'
     },
     messageInput: {
         borderRadius: 25,
-        width: "85%",
-        backgroundColor: "#fff",
-        padding: 10,
+        width: '85%',
+        backgroundColor: '#fff',
+        padding: 10
     },
     messageButton: {
         width: '7%',
@@ -59,9 +59,9 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     messageButtonMobile: {
-        width: "10%",
-        justifyContent: "center",
-        alignItems: "center",
+        width: '10%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     messages: {
         flex: 1

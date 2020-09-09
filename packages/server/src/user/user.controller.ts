@@ -25,7 +25,7 @@ class UserController implements Moai.Controller {
         } else {
             next(new UserNotFoundException(id));
         }
-    }
+    };
 }
 
 export default UserController;

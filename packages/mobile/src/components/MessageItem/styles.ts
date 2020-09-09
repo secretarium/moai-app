@@ -9,11 +9,11 @@ export default StyleSheet.create({
         flexDirection: 'row'
     },
     containerMobile: {
-        width: "100%",
-        height: "12%",
-        borderBottomColor: "#d3d3d3",
+        width: '100%',
+        height: '12%',
+        borderBottomColor: '#d3d3d3',
         borderBottomWidth: 1,
-        flexDirection: "row",
+        flexDirection: 'row'
     },
     guestProfile: {
         flex: 1,

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { BarCodeScanner } from "expo-barcode-scanner";
-import { Camera } from "expo-camera";
-import styles from "../../styles/scanner";
+import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import { Camera } from 'expo-camera';
+import styles from '../../styles/scanner';
 
 const Scanner: React.FC = () => {
     const [permission, setPermission] = useState(null);
@@ -13,7 +13,7 @@ const Scanner: React.FC = () => {
     useEffect(() => {
         (async () => {
             const { status } = await Camera.requestPermissionsAsync();
-            setPermission(status === "granted");
+            setPermission(status === 'granted');
         })();
     }, []);
 
@@ -45,12 +45,12 @@ const Scanner: React.FC = () => {
                         }
                         barCodeScannerSettings={{
                             barCodeTypes: [
-                                BarCodeScanner.Constants.BarCodeType.qr,
-                            ],
+                                BarCodeScanner.Constants.BarCodeType.qr
+                            ]
                         }}
                         style={[
                             StyleSheet.absoluteFillObject,
-                            styles.cameraContainer,
+                            styles.cameraContainer
                         ]}
                     />
                     <SafeAreaView style={styles.goBack}>

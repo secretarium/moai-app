@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { SafeAreaView, Text } from "react-native";
-import { DesktopOrTablet, Mobile } from "../../Breakpoints";
-import styles from "../../styles/chat";
-import MessageItem from "../../components/MessageItem/MessageItem";
+import React, { useState } from 'react';
+import { SafeAreaView, Text } from 'react-native';
+import { DesktopOrTablet, Mobile } from '../../Breakpoints';
+import styles from '../../styles/chat';
+import MessageItem from '../../components/MessageItem/MessageItem';
 
 const ConversationList: React.FC = () => {
     const [convoPartner] = useState(['Jack', 'Jill']);

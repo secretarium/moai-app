@@ -1,9 +1,9 @@
-import React from "react";
-import { SafeAreaView, StatusBar } from "react-native";
-import Conversation from "./Conversation";
-import ConversationList from "./ConversationList";
-import styles from "../../styles/chat";
-import { DesktopOrTablet, Mobile } from "../../Breakpoints";
+import React from 'react';
+import { SafeAreaView, StatusBar } from 'react-native';
+import Conversation from './Conversation';
+import ConversationList from './ConversationList';
+import styles from '../../styles/chat';
+import { DesktopOrTablet, Mobile } from '../../Breakpoints';
 
 const Chat: React.FC = () => {
     return (

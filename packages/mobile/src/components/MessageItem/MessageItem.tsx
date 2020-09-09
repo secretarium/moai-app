@@ -1,8 +1,8 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import styles from "./styles";
-import { DesktopOrTablet, Mobile } from "../../Breakpoints";
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import styles from './styles';
+import { DesktopOrTablet, Mobile } from '../../Breakpoints';
 
 interface Props {
     guestName: string;

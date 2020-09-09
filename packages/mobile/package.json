@@ -11,6 +11,8 @@
         "web": "expo web",
         "test": "jest",
         "test:mutation": "stryker run stryker.config.js",
+        "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
+        "lint:fix": "yarn run lint --fix",
         "storybook": "start-storybook -p 6006"
     },
     "dependencies": {

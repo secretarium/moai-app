@@ -19,7 +19,7 @@ export default StyleSheet.create({
     },
     messageBubble: {
         borderRadius: 22,
-        backgroundColor: "#d94481",
+        backgroundColor: '#d94481',
         paddingTop: 8,
         paddingBottom: 8,
         paddingLeft: 20,

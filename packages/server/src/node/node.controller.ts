@@ -26,7 +26,7 @@ class UserController implements Moai.Controller {
         } else {
             next();
         }
-    }
+    };
 
     private getMarkerNode = async (request: Request, response: Response, next: NextFunction) => {
         const id = request.params.id;
@@ -37,7 +37,7 @@ class UserController implements Moai.Controller {
         } else {
             next();
         }
-    }
+    };
 
     private getRegistryNode = async (request: Request, response: Response, next: NextFunction) => {
         const id = request.params.id;
@@ -48,7 +48,7 @@ class UserController implements Moai.Controller {
         } else {
             next();
         }
-    }
+    };
 }
 
 export default UserController;
