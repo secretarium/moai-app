@@ -37,7 +37,7 @@ class AuthenticationController implements Moai.Controller {
         } catch (error) {
             next(error);
         }
-    }
+    };
 
     private loggingIn = async (request: Request, response: Response, next: NextFunction) => {
         const logInData: LogInDto = request.body;
@@ -58,13 +58,13 @@ class AuthenticationController implements Moai.Controller {
         } else {
             next(new WrongCredentialsException());
         }
-    }
+    };
 
     private loggingOut = (request: Request, response: Response) => {
         response.setHeader('Set-Cookie', ['Authorization=;Max-age=0']);
         response.status(200);
         response.json({});
-    }
+    };
 
     private createCookie(tokenData: Moai.TokenData) {
         return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;

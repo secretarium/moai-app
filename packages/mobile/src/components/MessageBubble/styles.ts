@@ -20,8 +20,8 @@ export default StyleSheet.create({
     messageBubble: {
         borderRadius: 22,
         backgroundColor: '#d94481',
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingTop: 8,
+        paddingBottom: 8,
         paddingLeft: 20,
         paddingRight: 20,
         alignSelf: 'flex-start'
