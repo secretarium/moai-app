@@ -1,19 +1,24 @@
 import React from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+    Text,
+    TextInput,
+    TouchableOpacity,
+    SafeAreaView,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import styles from "../../styles/chat";
 import MessageBubble from "../../components/MessageBubble/MessageBubble";
 
 const Conversation: React.FC = () => {
     return (
-        <View style={styles.conversationContainer}>
-            <View style={styles.header}>
+        <SafeAreaView style={styles.conversationContainer}>
+            <SafeAreaView style={styles.header}>
                 <Text style={styles.h1}>Start chatting</Text>
-            </View>
-            <View style={styles.messages}>
+            </SafeAreaView>
+            <SafeAreaView style={styles.messages}>
                 <MessageBubble />
-            </View>
-            <View style={styles.messageInputContainer}>
+            </SafeAreaView>
+            <SafeAreaView style={styles.messageInputContainer}>
                 <TextInput
                     style={styles.messageInput}
                     placeholder="Type a message"
@@ -21,8 +26,8 @@ const Conversation: React.FC = () => {
                 <TouchableOpacity style={styles.messageButton}>
                     <FontAwesome name="send" size={24} color="white" />
                 </TouchableOpacity>
-            </View>
-        </View>
+            </SafeAreaView>
+        </SafeAreaView>
     );
 };
 

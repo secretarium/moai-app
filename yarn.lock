@@ -4088,6 +4088,7 @@ __metadata:
     expo: 38.0.10
     expo-asset: 8.2.0
     expo-barcode-scanner: 8.2.1
+    expo-camera: 8.3.1
     expo-cli: 3.25.1
     expo-constants: 9.2.0
     expo-yarn-workspaces: 1.2.1
@@ -12434,6 +12435,21 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: f3a970b92ca1875709b7d49d6ec049a5b78b28887ed4f9da45698d50757f887ebc76dc883237933f54ecdd683c0d86c6dbb935a7ca1fc4624bbdc32e465b2ad4
+  languageName: node
+  linkType: hard
+
+"expo-camera@npm:8.3.1":
+  version: 8.3.1
+  resolution: "expo-camera@npm:8.3.1"
+  dependencies:
+    fbjs: 1.0.0
+    invariant: 2.2.4
+    lodash: ^4.6.0
+    prop-types: ^15.6.0
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 72f8036464d726d526b7cc001d1f109a197ef8e0273cb65886419eeb924eba17a3a0fdbb108607938604db3839fd173fa24ba66e1e9f31fd7b4cb18ef5c12f8b
   languageName: node
   linkType: hard
 

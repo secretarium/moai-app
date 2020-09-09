@@ -1,10 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform, StatusBar } from "react-native";
 
 export default StyleSheet.create({
     container: {
         display: "flex",
         flexDirection: "row",
-        height: "100vh",
+        height: "100%",
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     conversationListContainer: {
         flex: 1,
@@ -38,8 +39,6 @@ export default StyleSheet.create({
         width: "85%",
         backgroundColor: "#fff",
         padding: 10,
-        outlineStyle: "none",
-        outlineWidth: 0,
     },
     messageButton: {
         width: "7%",

@@ -1,6 +1,6 @@
 import "@expo/match-media";
 import React from "react";
-import { View } from "react-native";
+import { SafeAreaView } from "react-native";
 import { useMediaQuery } from "react-responsive";
 import Conversation from "./Conversation";
 import ConversationList from "./ConversationList";
@@ -18,7 +18,7 @@ const Mobile = ({ children }) => {
 
 const Chat: React.FC = () => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <DesktopOrTablet>
                 <ConversationList />
                 <Conversation />
@@ -26,7 +26,7 @@ const Chat: React.FC = () => {
             <Mobile>
                 <ConversationList />
             </Mobile>
-        </View>
+        </SafeAreaView>
     );
 };
 
