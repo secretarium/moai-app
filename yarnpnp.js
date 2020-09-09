@@ -4,6 +4,13 @@ const path = require('path');
 
 const getPluginUrl = plugin => `https://raw.githubusercontent.com/yarnpkg/berry/master/packages/plugin-${plugin}/bin/%40yarnpkg/plugin-${plugin}.js`;
 
+const packageData = require('./package.json');
+
+if (!packageData.packman) {
+    console.error('You must provide the `pacman` field in your package.json file!');
+    process.exit(0);
+}
+
 const REQUESTED_VERSION = require('./package.json').packman.split('@')[1];
 const YARNRC_YML_PATH = path.join(__dirname, '.yarnrc.yml');
 const PLUGIN_LIST = !fs.existsSync(YARNRC_YML_PATH) ? [] : fs.readFileSync(YARNRC_YML_PATH, 'utf-8')
@@ -58,7 +65,7 @@ const downloadFile = async (filePath, url) => {
                 });
             }
         }).on('error', err => {
-            console.log(err);
+            console.error(err);
             fs.unlink(filePath);
             reject(err);
         });
@@ -103,6 +110,6 @@ if (PLUGIN_LIST.length === 0) {
         await Promise.all(promises);
         launchBerry();
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 })();
