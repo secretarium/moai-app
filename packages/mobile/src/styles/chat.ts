@@ -1,4 +1,4 @@
-import { StyleSheet, Platform, StatusBar, Dimensions } from "react-native";
+import { StyleSheet, Platform, StatusBar } from "react-native";
 
 export default StyleSheet.create({
     container: {
