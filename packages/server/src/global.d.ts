@@ -24,7 +24,7 @@ declare namespace Moai {
     type UserCreationData = {
         cookie: string;
         user: User;
-    }
+    };
 }
 
 export = Moai;

@@ -11,6 +11,8 @@
         "web": "expo web",
         "test": "jest",
         "test:mutation": "stryker run stryker.config.js",
+        "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
+        "lint:fix": "yarn run lint --fix",
         "storybook": "start-storybook -p 6006"
     },
     "dependencies": {
@@ -18,6 +20,8 @@
         "@expo/vector-icons": "10.2.1",
         "expo": "38.0.10",
         "expo-asset": "8.2.0",
+        "expo-barcode-scanner": "8.2.1",
+        "expo-camera": "8.3.1",
         "expo-cli": "3.26.2",
         "expo-constants": "9.2.0",
         "expo-linking": "1.0.3",
