@@ -13,7 +13,8 @@
         "test:mutation": "stryker run stryker.config.js",
         "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
         "lint:fix": "yarn run lint --fix",
-        "storybook": "start-storybook -p 6006"
+        "storybook": "start-storybook -p 6006",
+        "licenses": "yarn license-checker --no-progress --non-interactive --json --production > ./public/licenses.json"
     },
     "dependencies": {
         "@expo/match-media": "0.0.0-beta.2",
@@ -58,6 +59,7 @@
         "expo-yarn-workspaces": "1.2.1",
         "jest": "26.4.2",
         "jest-expo": "38.0.2",
+        "license-checker": "25.0.1",
         "typescript": "4.0.2"
     }
 }

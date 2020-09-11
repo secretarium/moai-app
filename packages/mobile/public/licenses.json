@@ -1,0 +1,290 @@
+{
+  "@babel/core@7.11.6": {
+    "licenses": "MIT",
+    "repository": "https://github.com/babel/babel",
+    "publisher": "Sebastian McKenzie",
+    "email": "sebmck@gmail.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/core",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/core/LICENSE"
+  },
+  "@babel/generator@7.11.6": {
+    "licenses": "MIT",
+    "repository": "https://github.com/babel/babel",
+    "publisher": "Sebastian McKenzie",
+    "email": "sebmck@gmail.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/generator",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/generator/LICENSE"
+  },
+  "@babel/parser@7.11.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/babel/babel",
+    "publisher": "Sebastian McKenzie",
+    "email": "sebmck@gmail.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/parser",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/parser/LICENSE"
+  },
+  "@babel/preset-typescript@7.10.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/babel/babel",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/preset-typescript",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/preset-typescript/LICENSE"
+  },
+  "@babel/traverse@7.11.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/babel/babel",
+    "publisher": "Sebastian McKenzie",
+    "email": "sebmck@gmail.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/traverse",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/traverse/LICENSE"
+  },
+  "@babel/types@7.11.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/babel/babel",
+    "publisher": "Sebastian McKenzie",
+    "email": "sebmck@gmail.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/types",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/types/LICENSE"
+  },
+  "@jest/types@24.9.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/jest",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/@jest/types",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/@jest/types/LICENSE"
+  },
+  "@secretarium/moai-expo@0.0.1": {
+    "licenses": "UNLICENSED",
+    "private": true,
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/README.md"
+  },
+  "@storybook/react@6.0.21": {
+    "licenses": "MIT",
+    "repository": "https://github.com/storybookjs/storybook",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@storybook/react",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@storybook/react/LICENSE"
+  },
+  "@types/yargs@13.0.10": {
+    "licenses": "MIT",
+    "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/@types/yargs",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/@types/yargs/LICENSE"
+  },
+  "acorn@6.4.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/acornjs/acorn",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/acorn",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/acorn/LICENSE"
+  },
+  "ansi-regex@3.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/chalk/ansi-regex",
+    "publisher": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/ansi-regex",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/ansi-regex/license"
+  },
+  "ansi-regex@4.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/chalk/ansi-regex",
+    "publisher": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/ansi-regex",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/ansi-regex/license"
+  },
+  "ansi-styles@3.2.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/chalk/ansi-styles",
+    "publisher": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/ansi-styles",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/ansi-styles/license"
+  },
+  "braces@2.3.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/micromatch/braces",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/braces",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/braces/LICENSE"
+  },
+  "cacache@12.0.4": {
+    "licenses": "ISC",
+    "repository": "https://github.com/npm/cacache",
+    "publisher": "Kat Marchán",
+    "email": "kzm@sykosomatic.org",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/cacache",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/cacache/LICENSE.md"
+  },
+  "define-property@2.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonschlinkert/define-property",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/define-property",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/define-property/LICENSE"
+  },
+  "eslint-scope@4.0.3": {
+    "licenses": "BSD-2-Clause",
+    "repository": "https://github.com/eslint/eslint-scope",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/eslint-scope",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/eslint-scope/LICENSE"
+  },
+  "expo-asset@8.1.7": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expo/expo",
+    "publisher": "650 Industries, Inc.",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/expo-asset",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/expo-asset/README.md"
+  },
+  "expo-constants@9.2.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expo/expo",
+    "publisher": "650 Industries, Inc.",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo-constants",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo-constants/README.md"
+  },
+  "expo@38.0.10": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expo/expo",
+    "publisher": "Expo",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/README.md"
+  },
+  "extend-shallow@2.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonschlinkert/extend-shallow",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/extend-shallow",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/extend-shallow/LICENSE"
+  },
+  "extend-shallow@3.0.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonschlinkert/extend-shallow",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/micromatch/node_modules/extend-shallow",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/micromatch/node_modules/extend-shallow/LICENSE"
+  },
+  "fill-range@4.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonschlinkert/fill-range",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/fill-range",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/fill-range/LICENSE"
+  },
+  "is-extendable@1.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonschlinkert/is-extendable",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/micromatch/node_modules/is-extendable",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/micromatch/node_modules/is-extendable/LICENSE"
+  },
+  "is-wsl@1.1.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/sindresorhus/is-wsl",
+    "publisher": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/is-wsl",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/is-wsl/license"
+  },
+  "kind-of@6.0.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/jonschlinkert/kind-of",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/kind-of",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/kind-of/LICENSE"
+  },
+  "lru-cache@5.1.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/isaacs/node-lru-cache",
+    "publisher": "Isaac Z. Schlueter",
+    "email": "i@izs.me",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/lru-cache",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/lru-cache/LICENSE"
+  },
+  "micromatch@3.1.10": {
+    "licenses": "MIT",
+    "repository": "https://github.com/micromatch/micromatch",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/micromatch",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/micromatch/LICENSE"
+  },
+  "pretty-format@23.6.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/jest",
+    "publisher": "James Kyle",
+    "email": "me@thejameskyle.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/pretty-format",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/expo/node_modules/pretty-format/README.md"
+  },
+  "pretty-format@24.9.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/jest",
+    "publisher": "James Kyle",
+    "email": "me@thejameskyle.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/pretty-format",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/node_modules/pretty-format/LICENSE"
+  },
+  "react-native@0.62.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react-native",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/react-native/LICENSE"
+  },
+  "schema-utils@1.0.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/webpack-contrib/schema-utils",
+    "publisher": "webpack Contrib",
+    "url": "https://github.com/webpack-contrib",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/schema-utils",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/schema-utils/LICENSE"
+  },
+  "source-map@0.5.7": {
+    "licenses": "BSD-3-Clause",
+    "repository": "https://github.com/mozilla/source-map",
+    "publisher": "Nick Fitzgerald",
+    "email": "nfitzgerald@mozilla.com",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/generator/node_modules/source-map",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/@babel/generator/node_modules/source-map/LICENSE"
+  },
+  "ssri@6.0.1": {
+    "licenses": "ISC",
+    "repository": "https://github.com/zkat/ssri",
+    "publisher": "Kat Marchán",
+    "email": "kzm@sykosomatic.org",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/ssri",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/ssri/LICENSE.md"
+  },
+  "terser-webpack-plugin@1.4.5": {
+    "licenses": "MIT",
+    "repository": "https://github.com/webpack-contrib/terser-webpack-plugin",
+    "publisher": "webpack Contrib Team",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/terser-webpack-plugin",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/terser-webpack-plugin/LICENSE"
+  },
+  "to-regex-range@2.1.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/micromatch/to-regex-range",
+    "publisher": "Jon Schlinkert",
+    "url": "https://github.com/jonschlinkert",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/to-regex-range",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/to-regex-range/LICENSE"
+  },
+  "webpack@4.44.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/webpack/webpack",
+    "publisher": "Tobias Koppers @sokra",
+    "path": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/webpack",
+    "licenseFile": "/Users/damiantziamtzis/Desktop/work/secretarium/moai-app/packages/mobile/node_modules/webpack/LICENSE"
+  }
+}
+
