@@ -39,7 +39,7 @@
         "@types/bcrypt": "3.0.0",
         "@types/cookie-parser": "1.4.2",
         "@types/csurf": "1.9.36",
-        "@types/dotenv-flow": "3.0.1",
+        "@types/dotenv-flow": "3.1.0",
         "@types/express": "4.17.8",
         "@types/jest": "26.0.13",
         "@types/jsonwebtoken": "8.5.0",
