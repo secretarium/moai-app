@@ -6,18 +6,15 @@ type OnboardingState = {
 };
 
 const initialState: OnboardingState = {
-    onboardUser: true,
+    onboardUser: true
 };
 
-export const onboardingReducer = (
-    state: OnboardingState = initialState,
-    action: OnboardingActions
-) => {
+export const onboardingReducer = (state: OnboardingState = initialState, action: OnboardingActions) => {
     switch (action.type) {
         case SHOW_ONBOARDING:
             return {
                 ...state,
-                onboardUser: action.payload,
+                onboardUser: action.payload
             };
         default:
             return state;

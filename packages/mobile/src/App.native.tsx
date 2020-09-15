@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        textAlign: 'center',
+        textAlign: 'center'
     },
     image: {
         height: '20%',
         width: '50%',
         alignItems: 'center',
-        justifyContent: 'center',
-    },
+        justifyContent: 'center'
+    }
 });
 
 const App: React.FC = () => {

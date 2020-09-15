@@ -14,7 +14,7 @@ const persistConfig = {
     migrate: (state) => {
         console.log('Migration running...');
         return Promise.resolve(state);
-    },
+    }
 };
 
 // Middlewares
