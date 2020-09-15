@@ -6,7 +6,7 @@ import About from './About';
 import Chat from './pages/Chat/Chat';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { AppState } from './reducers/index';
-import OnboardingScreen from './components/Onboarding/OnboardingScreen'
+import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 
 const styles = StyleSheet.create({
     container: {
@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
     const setInitialScreen = () => {
         if (onboardUser === true) {
-            return <OnboardingScreen />
+            return <OnboardingScreen />;
         } else {
             return <View style={styles.container} >
                 <Image
@@ -62,9 +62,9 @@ const App: React.FC = () => {
                         <Text>Cheking in {initialUrl} ...</Text>
                     ) : null
                 }
-            </View>
+            </View>;
         }
-    }
+    };
 
     return (
         <Switch>

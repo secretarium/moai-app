@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
-import Onboarding from 'react-native-onboarding-swiper'
+import Onboarding from 'react-native-onboarding-swiper';
 import { useDispatch } from 'react-redux';
 import { OnboardingActions } from 'actions/onboardingActions';
 //import { SHOW_ONBOARDING } from 'actions/types';
@@ -9,8 +9,8 @@ const OnboardingScreen: React.FC = () => {
     const onboardingDispatch = useDispatch<Dispatch<OnboardingActions>>();
 
     const onDone = () => {
-        onboardingDispatch({ type: "SHOW_ONBOARDING", payload: false });
-    }
+        onboardingDispatch({ type: 'SHOW_ONBOARDING', payload: false });
+    };
 
     return (
         <Onboarding
