@@ -1,11 +1,11 @@
-import React from "react";
-import { registerRootComponent } from "expo";
-import AppTest from "./AppTest";
-import Providers from "./Providers";
+import React from 'react';
+import { registerRootComponent } from 'expo';
+import App from './App';
+import Providers from './Providers';
 
 const Entry: React.FC = () => (
     <Providers>
-        <AppTest />
+        <App />
     </Providers>
 );
 

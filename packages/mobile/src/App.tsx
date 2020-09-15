@@ -1,9 +1,9 @@
-import React from "react";
-import { Route, Switch } from "./ReactRouter";
-import Home from "./Home";
-import About from "./About";
-import Chat from "./pages/Chat/Chat";
-import Scanner from "./pages/Scanner/Scanner";
+import React from 'react';
+import { Route, Switch } from './ReactRouter';
+import Home from './Home';
+import About from './About';
+import Chat from './pages/Chat/Chat';
+import Scanner from './pages/Scanner/Scanner';
 
 const App: React.FC = () => (
     <Switch>

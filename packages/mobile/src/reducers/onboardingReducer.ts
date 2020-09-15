@@ -1,5 +1,5 @@
-import { SHOW_ONBOARDING } from "../actions/types";
-import { OnboardingActions } from "../actions/onboardingActions";
+import { SHOW_ONBOARDING } from '../actions/types';
+import { OnboardingActions } from '../actions/onboardingActions';
 
 type OnboardingState = {
     onboardUser: boolean;
