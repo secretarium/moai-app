@@ -25,6 +25,8 @@
     "dependencies": {
         "@expo/match-media": "0.0.0-beta.2",
         "@expo/vector-icons": "10.2.1",
+        "@react-native-community/async-storage": "1.12.0",
+        "@types/redux-logger": "3.0.8",
         "expo": "38.0.10",
         "expo-asset": "8.2.0",
         "expo-barcode-scanner": "8.2.1",
@@ -38,11 +40,17 @@
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+        "react-native-onboarding-swiper": "1.1.4",
         "react-native-screens": "2.10.1",
         "react-native-web": "0.13.12",
+        "react-redux": "7.2.1",
         "react-responsive": "8.1.0",
         "react-router-dom": "5.2.0",
         "react-router-native": "5.2.0",
+        "redux": "4.0.5",
+        "redux-logger": "3.0.6",
+        "redux-persist": "6.0.0",
+        "redux-thunk": "2.3.0",
         "resize-observer-polyfill": "1.5.1",
         "setimmediate": "1.0.5"
     },
@@ -66,6 +74,7 @@
         "@types/react": "16.9.49",
         "@types/react-dom": "16.9.8",
         "@types/react-native": "0.63.18",
+        "@types/react-redux": "7.1.9",
         "@types/react-router": "5.1.8",
         "@types/react-router-dom": "5.1.5",
         "@types/react-router-native": "5.1.0",
@@ -73,6 +82,7 @@
         "expo-yarn-workspaces": "1.2.1",
         "jest": "26.4.2",
         "jest-expo": "38.0.2",
+        "redux-devtools-extension": "2.13.8",
         "sharp-cli": "1.14.1",
         "typescript": "4.0.2"
     }
