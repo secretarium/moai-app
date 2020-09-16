@@ -2,14 +2,14 @@ import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { rootReducer } from '../reducers';
 import thunk from 'redux-thunk';
 
 // Persistence layer configuration
 const persistConfig = {
     key: 'moai',
-    storage: storage,
+    storage: AsyncStorage,
     version: 0,
     migrate: (state) => {
         console.log('Migration running...');
