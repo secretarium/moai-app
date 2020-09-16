@@ -1,3 +1,4 @@
+import Banner from 'components/Website/Banner';
 import { NextPage } from 'next';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -21,16 +22,19 @@ const IndexPage: NextPage = () => {
     const { t } = useTranslation();
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>{t('hello')} <span aria-label="Waving hand" role="img">👋</span></Text>
-            <button
-                type='button'
-                onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en')}
-            >
-                {t('change-locale')}
-            </button>
-            <Link href='/check' >Check</Link>
-        </View>
+        <div>
+            <Banner />
+        </div>
+        // <View style={styles.container}>
+        //     <Text style={styles.text}>{t('hello')} <span aria-label="Waving hand" role="img">👋</span></Text>
+        //     <button
+        //         type='button'
+        //         onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'fr' : 'en')}
+        //     >
+        //         {t('change-locale')}
+        //     </button>
+        //     <Link href='/check' >Check</Link>
+        // </View>
     );
 };
 

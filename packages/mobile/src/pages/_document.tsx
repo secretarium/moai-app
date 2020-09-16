@@ -17,6 +17,7 @@ class MoaiDocument extends Document {
         return (
             <Html>
                 <Head title="Moai" />
+                <link href="https://unpkg.com/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet" />
                 <body>
                     <Main />
                     <NextScript />

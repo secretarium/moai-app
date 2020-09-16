@@ -4,7 +4,17 @@ const localeSubpaths = {};
 
 module.exports = {
     ...withExpo({
-        projectRoot: __dirname
+        projectRoot: __dirname,
+        webpack: (config) => {
+            config.module.rules.unshift({
+                test: /\.svg$/,
+                issuer: {
+                    test: /\.(js|ts)x?$/
+                },
+                use: ['@svgr/webpack']
+            });
+            return config;
+        }
     }),
     reactStrictMode: true,
     rewrites: async () => nextI18NextRewrites(localeSubpaths),
