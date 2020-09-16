@@ -4264,6 +4264,7 @@ __metadata:
     react: 16.13.1
     react-dom: 16.13.1
     react-native: "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz"
+    react-native-onboarding-swiper: 1.1.4
     react-native-screens: 2.10.1
     react-native-web: 0.13.11
     react-redux: 7.2.1
@@ -23039,6 +23040,19 @@ fsevents@^1.2.7:
     invariant: ^2.2.4
     use-subscription: ^1.0.0
   checksum: 3caea7ec8a191cb15de94110ccf9b683a3fa6e493509d17888648e5c92f697c530571f1346337b00ae9949a8ed94a4f13b830e2dc17c44e7f4c0ff98d9072fd2
+  languageName: node
+  linkType: hard
+
+"react-native-onboarding-swiper@npm:1.1.4":
+  version: 1.1.4
+  resolution: "react-native-onboarding-swiper@npm:1.1.4"
+  dependencies:
+    tinycolor2: ^1.4.1
+  peerDependencies:
+    prop-types: "*"
+    react: "*"
+    react-native: "*"
+  checksum: 97bcc1926a8214712a0d7d2e8caf946890b10c4e70e7fe715e1200f90e15af51d587ff5a02cce9f4cc1518ace4e8ea7de538fe433fd3cc7e97e57e07df2bc232
   languageName: node
   linkType: hard
 

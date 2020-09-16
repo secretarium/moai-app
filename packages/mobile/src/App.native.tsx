@@ -1,13 +1,12 @@
-import React, { useEffect, useState, useCallback, Dispatch } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import * as Linking from 'expo-linking';
 import { Route, Switch } from './ReactRouter';
 import About from './About';
 import Chat from './pages/Chat/Chat';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { AppState } from './reducers/index';
-import { OnboardingActions } from './actions/onboardingActions';
-import { SHOW_ONBOARDING } from './actions/types';
+import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 
 const styles = StyleSheet.create({
     container: {
@@ -28,7 +27,6 @@ const styles = StyleSheet.create({
 const App: React.FC = () => {
     const [initialUrl, setInitialUrl] = useState<string>();
     const { onboardUser } = useSelector((state: AppState) => state.onboarding);
-    const onboardingDispatch = useDispatch<Dispatch<OnboardingActions>>();
 
     const parseUrl = useCallback((url: string | null | undefined) => {
         const comps = url ? url.split('/').slice(-2) : undefined;
@@ -49,9 +47,23 @@ const App: React.FC = () => {
         }
     }, [initialUrl, parseUrl]);
 
-    const onPress = (): void => {
-        onboardingDispatch({ type: SHOW_ONBOARDING, payload: false });
-        console.log(onboardUser);
+    const setInitialScreen = () => {
+        if (onboardUser === true) {
+            return <OnboardingScreen />;
+        } else {
+            return <View style={styles.container} >
+                <Image
+                    source={require('./assets/logo.png')}
+                    resizeMode={'contain'}
+                    style={styles.image}
+                />
+                {
+                    initialUrl ? (
+                        <Text>Cheking in {initialUrl} ...</Text>
+                    ) : null
+                }
+            </View>;
+        }
     };
 
     return (
@@ -59,23 +71,7 @@ const App: React.FC = () => {
             <Route
                 exact
                 path="/"
-                render={() => {
-                    return (
-                        <View style={styles.container}>
-                            <Image
-                                source={require('./assets/logo.png')}
-                                resizeMode={'contain'}
-                                style={styles.image}
-                            />
-                            <TouchableOpacity onPress={onPress}>
-                                <Text>Press here to onboard</Text>
-                            </TouchableOpacity>
-                            {initialUrl ? (
-                                <Text>Cheking in {initialUrl} ...</Text>
-                            ) : null}
-                        </View>
-                    );
-                }}
+                render={() => setInitialScreen()}
             />
             <Route path="/about" component={About} />
             <Route path="/chat" component={Chat} />
