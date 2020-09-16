@@ -1,4 +1,4 @@
-import { KeysManager, SCP } from "@secretarium/connector";
+import { KeysManager, SCP } from '@secretarium/connector';
 import { Moai } from 'global';
 
 interface SecretariumGatewayConfig {
@@ -7,11 +7,11 @@ interface SecretariumGatewayConfig {
         endpoint: string;
         name: string;
     }>;
-};
+}
 
 interface SecretariumClusterConfig {
     [cluster: string]: SecretariumGatewayConfig;
-};
+}
 
 type SecretariumHandler = {
     connector: SCP;
@@ -142,6 +142,6 @@ if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM
     (window as any)['sfxCommand'] = (dcApp: string, command: string, args?: any, id?: string) => {
         secretariumHandler.request(dcApp, command, args ?? {}, id ?? `${Math.random()}`);
     };
-};
+}
 
 export default secretariumHandler;
