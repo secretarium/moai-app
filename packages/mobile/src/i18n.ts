@@ -12,4 +12,4 @@ export const NextI18N = new NextI18Next({
     localePath: path.resolve('./public/static/locales')
 });
 
-export default NextI18N as typeof NextI18N;
+export default NextI18N;
