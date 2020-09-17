@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import Conversation from './Conversation';
 import ConversationList from './ConversationList';
-import styles from '../../styles/chat';
+import styles from './styles';
 import { DesktopOrTablet, Mobile } from '../../Breakpoints';
 
 const Chat: React.FC = () => {

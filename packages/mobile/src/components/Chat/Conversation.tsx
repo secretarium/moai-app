@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { DesktopOrTablet, Mobile } from '../../Breakpoints';
-import styles from '../../styles/chat';
+import styles from './styles';
 import MessageBubble from '../../components/MessageBubble/MessageBubble';
 
 const Conversation: React.FC = () => {

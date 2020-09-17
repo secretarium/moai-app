@@ -3,10 +3,13 @@ import { useSelector } from 'react-redux';
 import * as Linking from 'expo-linking';
 import { Route, Switch } from './ReactRouter';
 import About from './About';
+import Home from './components/Home';
 import Chat from './components/Chat';
+import Scanner from './components/Scanner';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { AppState } from './reducers/index';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -68,13 +71,14 @@ const App: React.FC = () => {
 
     return (
         <Switch>
+            <Route exact path="/" component={Home} />
             <Route
-                exact
-                path="/"
+                path="/onboarding"
                 render={() => setInitialScreen()}
             />
             <Route path="/about" component={About} />
             <Route path="/chat" component={Chat} />
+            <Route path="/scanner" component={Scanner} />
         </Switch>
     );
 };
