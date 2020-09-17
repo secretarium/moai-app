@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch } from './ReactRouter';
 import Home from './Home';
 import About from './About';
-import Chat from './pages/Chat/Chat';
-import Scanner from './pages/Scanner/Scanner';
+import Chat from './components/Chat';
+import Scanner from './components/Scanner';
 
 const App: React.FC = () => (
     <Switch>
@@ -13,4 +13,5 @@ const App: React.FC = () => (
         <Route path="/scanner" component={Scanner} />
     </Switch>
 );
+
 export default App;
