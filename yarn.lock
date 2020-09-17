@@ -4346,6 +4346,7 @@ __metadata:
     react: 16.13.1
     react-dom: 16.13.1
     react-native: "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz"
+    react-native-appearance: 0.3.4
     react-native-onboarding-swiper: 1.1.4
     react-native-screens: 2.10.1
     react-native-web: 0.13.12
@@ -23846,7 +23847,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-native-appearance@npm:~0.3.3":
+"react-native-appearance@npm:0.3.4, react-native-appearance@npm:~0.3.3":
   version: 0.3.4
   resolution: "react-native-appearance@npm:0.3.4"
   dependencies:
