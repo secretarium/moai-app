@@ -8,9 +8,10 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles';
 
-const Home: React.FC = () => {
+const Scanned: React.FC = () => {
     const [fontIsLoaded] = useFonts({
-        'Poppins-Regular': require('../../assets/fonts/Poppins-Regular.ttf')
+        'Poppins-Regular': require('../../assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf')
     });
 
     // Color theme
@@ -20,6 +21,9 @@ const Home: React.FC = () => {
     const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
     const themeLogoStyle = colorScheme === 'light' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
     const themeStatusBarStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
+
+    // Bold font
+    const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     if (!fontIsLoaded) {
         return <AppLoading />;
@@ -42,15 +46,22 @@ const Home: React.FC = () => {
                     />
                     <Link to={'/scanner'} style={styles.pinButton} underlayColor='transparent'>
                         <Image
-                            source={require('../../assets/pin-default.png')}
+                            source={require('../../assets/pin-success.png')}
                             resizeMode={'contain'}
                             style={styles.pin}
                         />
                     </Link>
                 </View>
-            </SafeAreaView>
+                <View style={styles.messageContainer} >
+                    <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>
+                        <Bold>How NHS Test and Trace will contact you?</Bold>{'\n'}{'\n'}
+                        You will be contacted via messaging, directly inside of Moai!{'\n'}{'\n'}
+                        You'll be asked to sign in to the NHS Test and Trace contact tracing website at https://contact-tracingphe.gov.uk
+                    </Text>
+                </View>
+            </SafeAreaView >
         );
     }
 };
 
-export default Home;
+export default Scanned;

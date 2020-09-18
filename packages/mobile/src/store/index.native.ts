@@ -12,7 +12,6 @@ const persistConfig = {
     storage: AsyncStorage,
     version: 0,
     migrate: (state) => {
-        console.log('Migration running...');
         return Promise.resolve(state);
     }
 };

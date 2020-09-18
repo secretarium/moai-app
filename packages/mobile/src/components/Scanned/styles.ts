@@ -38,5 +38,16 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 20
+    },
+    messageContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: 20
+    },
+    messageText: {
+        borderRadius: 10,
+        padding: 10,
+        width: '80%',
+        overflow: 'hidden'
     }
 });

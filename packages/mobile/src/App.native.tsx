@@ -4,6 +4,7 @@ import * as Linking from 'expo-linking';
 import { Route, Switch } from './ReactRouter';
 import About from './About';
 import Home from './components/Home';
+import Scanned from './components/Scanned';
 import Chat from './components/Chat';
 import Scanner from './components/Scanner';
 import { View, Text, Image, StyleSheet } from 'react-native';
@@ -79,6 +80,7 @@ const App: React.FC = () => {
             <Route path="/about" component={About} />
             <Route path="/chat" component={Chat} />
             <Route path="/scanner" component={Scanner} />
+            <Route path="/scanned" component={Scanned} />
         </Switch>
     );
 };

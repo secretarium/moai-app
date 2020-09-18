@@ -12,7 +12,6 @@ const persistConfig = {
     storage: storage,
     version: 0,
     migrate: (state) => {
-        console.log('Migration running...');
         return Promise.resolve(state);
     }
 };

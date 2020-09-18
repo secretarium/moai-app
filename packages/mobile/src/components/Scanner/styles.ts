@@ -1,14 +1,13 @@
-import { StyleSheet, StatusBar, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-const window = Dimensions.get('window');
+const screen = Dimensions.get('screen');
 
 export default StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%',
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+        height: '100%'
     },
     scanAgain: {
         position: 'absolute',
@@ -33,13 +32,15 @@ export default StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        backgroundColor: '#00b0ee'
+        backgroundColor: '#00b0ee',
+        paddingTop: 15
     },
     cameraView: {
-        borderRadius: window.width,
-        width: window.width * 2,
-        height: window.width * 2,
-        bottom: (-window.width * 13) / 16,
+        borderTopLeftRadius: screen.width,
+        borderTopRightRadius: screen.width,
+        width: screen.width + 50,
+        height: '100%',
+        top: 220,
         position: 'absolute',
         overflow: 'hidden'
     },
