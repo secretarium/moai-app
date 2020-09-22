@@ -43,3 +43,7 @@ buck-out/
 # Expo
 .expo/*
 web-build/
+
+# Licenses and Disclaimer
+./public/licenses.json
+./public/disclaimer.txt

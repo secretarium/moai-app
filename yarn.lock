@@ -4244,6 +4244,7 @@ __metadata:
     expo-constants: 9.2.0
     expo-linking: 1.0.3
     expo-yarn-workspaces: 1.2.1
+    fs-extra: 9.0.1
     jest: 26.4.2
     jest-expo: 38.0.2
     license-checker: 25.0.1
@@ -13850,6 +13851,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fs-extra@npm:9.0.1, fs-extra@npm:^9.0.0":
+  version: 9.0.1
+  resolution: "fs-extra@npm:9.0.1"
+  dependencies:
+    at-least-node: ^1.0.0
+    graceful-fs: ^4.2.0
+    jsonfile: ^6.0.1
+    universalify: ^1.0.0
+  checksum: 8f6d1b5a27e5b3ed06bb8d19be1bcb92637007ac17dce4f904fdb25a4bcf9e4c63c4a0a57d030be03cb367f4df0a65ea7bd7bff269c18fb578e454ea2c786d12
+  languageName: node
+  linkType: hard
+
 "fs-extra@npm:^0.30.0":
   version: 0.30.0
   resolution: "fs-extra@npm:0.30.0"
@@ -13904,18 +13917,6 @@ __metadata:
     jsonfile: ^4.0.0
     universalify: ^0.1.0
   checksum: 5ff9fbf68bbf2b9887721eb1ea298a04b510b6f79190c61db892daf35919bc58df68d0e632df33294c38ace3e508e5e329fa6a4b26513c0e883e38ae9eb98fbb
-  languageName: node
-  linkType: hard
-
-"fs-extra@npm:^9.0.0":
-  version: 9.0.1
-  resolution: "fs-extra@npm:9.0.1"
-  dependencies:
-    at-least-node: ^1.0.0
-    graceful-fs: ^4.2.0
-    jsonfile: ^6.0.1
-    universalify: ^1.0.0
-  checksum: 8f6d1b5a27e5b3ed06bb8d19be1bcb92637007ac17dce4f904fdb25a4bcf9e4c63c4a0a57d030be03cb367f4df0a65ea7bd7bff269c18fb578e454ea2c786d12
   languageName: node
   linkType: hard
 

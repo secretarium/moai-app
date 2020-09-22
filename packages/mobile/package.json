@@ -14,7 +14,8 @@
         "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
         "lint:fix": "yarn run lint --fix",
         "storybook": "start-storybook -p 6006",
-        "licenses": "yarn license-checker --no-progress --non-interactive --json --production > ./public/licenses.json"
+        "licenses": "license-checker --production --json > ./public/licenses.json",
+        "disclaimer": "node disclaimerGenerator.js"
     },
     "dependencies": {
         "@expo/match-media": "0.0.0-beta.2",
@@ -57,6 +58,7 @@
         "@types/react-router-dom": "5.1.5",
         "@types/react-router-native": "5.1.0",
         "expo-yarn-workspaces": "1.2.1",
+        "fs-extra": "9.0.1",
         "jest": "26.4.2",
         "jest-expo": "38.0.2",
         "license-checker": "25.0.1",
