@@ -1,9 +1,11 @@
 const { withExpo } = require('@expo/next-adapter');
 const { nextI18NextRewrites } = require('next-i18next/rewrites');
+const withFonts = require('next-fonts');
+const withImages = require('next-images');
 const localeSubpaths = {};
 
 module.exports = {
-    ...withExpo({
+    ...withExpo(withImages(withFonts({
         projectRoot: __dirname,
         webpack: (config) => {
             config.module.rules.unshift({
@@ -15,7 +17,7 @@ module.exports = {
             });
             return config;
         }
-    }),
+    }))),
     reactStrictMode: true,
     rewrites: async () => nextI18NextRewrites(localeSubpaths),
     publicRuntimeConfig: {
