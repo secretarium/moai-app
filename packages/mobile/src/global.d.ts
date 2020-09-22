@@ -12,11 +12,6 @@ declare namespace Moai {
         unsubscribe?: boolean;
     }
 
-    interface Uint8Array extends Uint8ArrayConstructor {
-        secFromBase64(key: string, url?: boolean): Uint8Array;
-        secToBase64(url?: boolean);
-    }
-
     interface RequestFactory {
         (command: QueryCommand & ActionTypeDecoration, args?: { [key: string]: any }, subscribe?: boolean, ticker?: (index: number, error?: boolean) => any): (handlers?: QueryHandlers) => (dispatch: Dispatch) => Promise<AnyAction>;
     }

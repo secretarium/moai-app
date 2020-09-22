@@ -1,5 +1,4 @@
-import { KeysManager, SCP } from '@secretarium/connector';
-import { Moai } from 'global';
+import { Key, SCP, Transaction } from '@secretarium/moai-connect';
 
 interface SecretariumGatewayConfig {
     key: string;
@@ -13,25 +12,13 @@ interface SecretariumClusterConfig {
     [cluster: string]: SecretariumGatewayConfig;
 }
 
-type SecretariumHandler = {
-    connector: SCP;
-    initialize: () => void;
-    createDeviceKey: () => Promise<any>;
-    use: (keyPair: Moai.KeyPair, password: string) => Promise<any>;
-    connect: () => Promise<any>;
-    disconnect: () => Promise<any>;
-    request: (dcApp: string, command: string, args: any, id?: string) => Promise<any>;
-};
-
 const handlerStore: {
-    keysManager: any;
-    currentConnection: any;
-    currentKeyPair: any;
+    currentConnection: SCP;
+    currentKey: Key;
     clusters: SecretariumClusterConfig;
 } = {
-    keysManager: new KeysManager(),
     currentConnection: new SCP(),
-    currentKeyPair: undefined,
+    currentKey: undefined,
     clusters: {}
 };
 
@@ -68,40 +55,29 @@ const printClusterInfo = () => {
     console.table(printableConfig);
 };
 
-const secretariumHandler: SecretariumHandler = {
-    connector: SCP(),
-    initialize: () => {
+const secretariumHandler = {
+    connector: new SCP(),
+    initialize: (): void => {
         handlerStore.clusters = (process?.env?.REACT_APP_SECRETARIUM_GATEWAYS ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         printClusterInfo();
     },
-    createDeviceKey: () =>
+    createDeviceKey: (): Promise<Key> =>
         new Promise((resolve, reject) => {
-            handlerStore.keysManager
-                .createKey('device-key')
-                .then((keyPair: any) => {
-                    handlerStore.currentKeyPair = keyPair;
-                    resolve(keyPair);
+            Key.createKey()
+                .then((key) => {
+                    handlerStore.currentKey = key;
+                    resolve(key);
                 })
                 .catch((e: any) => reject(e));
         }),
-    use: (keyPair, password) =>
-        new Promise((resolve, reject) => {
-            handlerStore.keysManager
-                .decryptKey(Object.assign({}, keyPair), password)
-                .then((r: any) => {
-                    handlerStore.currentKeyPair = r;
-                    resolve(r);
-                })
-                .catch((e: any) => reject(e));
-        }),
-    connect: () =>
+    connect: (): Promise<any> =>
         new Promise((resolve, reject) => {
             const cluster = Object.entries<SecretariumGatewayConfig>(handlerStore.clusters)?.[0];
             const endpoint = cluster?.[1]?.gateways?.[0]?.endpoint;
             if (cluster && endpoint) {
                 handlerStore.currentConnection
                     .reset()
-                    .connect(endpoint, (handlerStore.currentKeyPair as any)?.cryptoKey, (Uint8Array as Moai.Uint8Array).secFromBase64(cluster?.[1]?.key, true))
+                    .connect(endpoint, handlerStore.currentKey, cluster?.[1]?.key)
                     .then(() => {
                         resolve({
                             cluster: cluster?.[0],
@@ -114,12 +90,12 @@ const secretariumHandler: SecretariumHandler = {
                 reject('Cluster not configured.');
             }
         }),
-    disconnect: () =>
+    disconnect: (): Promise<void> =>
         new Promise(resolve => {
             handlerStore?.currentConnection?.close?.();
             resolve();
         }),
-    request: (dcApp, command, args, id) =>
+    request: (dcApp: string, command: string, args: Record<string, unknown>, id?: string): Promise<Transaction> =>
         new Promise((resolve, reject) => {
             if (handlerStore.currentConnection) {
                 const queryHandle = handlerStore.currentConnection.newTx(dcApp, command, id, args);
@@ -131,7 +107,7 @@ const secretariumHandler: SecretariumHandler = {
 };
 
 if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM_GATEWAYS_OVERWRITABLE === 'true') && window) {
-    (window as any)['sfxCluster'] = (config: string | {}) => {
+    (window as any)['sfxCluster'] = (config: string | Record<string, any>) => {
         if (typeof config === 'string') {
             handlerStore.clusters = config.split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         } else {

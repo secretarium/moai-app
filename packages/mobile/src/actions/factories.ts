@@ -1,18 +1,13 @@
-import { Moai } from 'global';
+import Moai from '../global';
 import secretariumHandler from '../utils/secretariumHandler';
-import {
-    SECRETARIUM_TRANSACTION_EXECUTED,
-    SECRETARIUM_TRANSACTION_PROPOSED,
-    SECRETARIUM_TRANSACTION_ACKNOWLEDGED,
-    SECRETARIUM_TRANSACTION_COMMITED
-} from './types';
+import { actionTypes } from './constants';
 
 const subscriptionMap: { [key: string]: () => void } = {};
 const responseTimes: { [key: string]: { q?: number; e?: number; r?: number }[] } = {};
 
 export const requestFactory: Moai.RequestFactory = (command, args = {}, subscribe, ticker) => handlers => dispatch =>
     new Promise(resolve => {
-        let tick = 0;     // changing let to const on autosave
+        let tick = 0;
 
         dispatch({
             type: command.REQUEST
@@ -49,7 +44,7 @@ export const requestFactory: Moai.RequestFactory = (command, args = {}, subscrib
                     .onAcknowledged(() => {
                         if (handlers?.onAcknowledged) {
                             dispatch({
-                                type: SECRETARIUM_TRANSACTION_ACKNOWLEDGED,
+                                type: actionTypes.SECRETARIUM_TRANSACTION_ACKNOWLEDGED,
                                 ...(handlers.onAcknowledged() ?? {})
                             });
                         }
@@ -57,7 +52,7 @@ export const requestFactory: Moai.RequestFactory = (command, args = {}, subscrib
                     .onProposed(() => {
                         if (handlers?.onProposed) {
                             dispatch({
-                                type: SECRETARIUM_TRANSACTION_PROPOSED,
+                                type: actionTypes.SECRETARIUM_TRANSACTION_PROPOSED,
                                 ...(handlers.onProposed() ?? {})
                             });
                         }
@@ -65,7 +60,7 @@ export const requestFactory: Moai.RequestFactory = (command, args = {}, subscrib
                     .onCommitted(() => {
                         if (handlers?.onCommitted) {
                             dispatch({
-                                type: SECRETARIUM_TRANSACTION_COMMITED,
+                                type: actionTypes.SECRETARIUM_TRANSACTION_COMMITED,
                                 ...(handlers.onCommitted() ?? {})
                             });
                         }
@@ -74,7 +69,7 @@ export const requestFactory: Moai.RequestFactory = (command, args = {}, subscrib
                         responseTimes[requestId].push({ e: new Date().getTime() });
                         if (handlers?.onResult) {
                             dispatch({
-                                type: SECRETARIUM_TRANSACTION_EXECUTED,
+                                type: actionTypes.SECRETARIUM_TRANSACTION_EXECUTED,
                                 ...(handlers?.onExecuted?.() ?? {})
                             });
                         } else {
@@ -132,7 +127,7 @@ export const requestFactory: Moai.RequestFactory = (command, args = {}, subscrib
                     .send();
             })
             .catch((error: any) => {
-                const outcome = handlers?.onError?.(error) ?? { error : `Oops! The server replied: ${error}` };
+                const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
                 if (subscribe && !outcome.unsubscribe) {
                     dispatch({
                         type: command.FAILURE,
