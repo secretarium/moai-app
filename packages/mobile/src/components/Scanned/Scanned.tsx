@@ -6,7 +6,7 @@ import { AppLoading } from 'expo';
 import { Link } from '../../ReactRouter';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import styles from './styles';
+import { styles, commonStyles } from './styles';
 
 const Scanned: React.FC = () => {
     const [fontIsLoaded] = useFonts({
@@ -16,7 +16,7 @@ const Scanned: React.FC = () => {
 
     // Color theme
     const colorScheme = useColorScheme();
-    const themeContainerStyle = colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
+    const themeContainerStyle = colorScheme === 'light' ? commonStyles.lightContainer : commonStyles.darkContainer;
     const themeColorStyle = colorScheme === 'light' ? '#E8E8E8' : '#404040';
     const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
     const themeLogoStyle = colorScheme === 'light' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
@@ -29,26 +29,26 @@ const Scanned: React.FC = () => {
         return <AppLoading />;
     } else {
         return (
-            <SafeAreaView style={[styles.container, themeContainerStyle]}>
+            <SafeAreaView style={[commonStyles.container, themeContainerStyle]}>
                 <StatusBar barStyle={themeStatusBarStyle} />
-                <Link to={'/chat'} style={styles.topLeftButton} underlayColor='transparent'>
+                <Link to={'/chat'} style={commonStyles.topLeftButton} underlayColor='transparent'>
                     <Entypo name="chat" size={40} color={themeColorStyle} />
                 </Link>
-                <Link to={'/about'} style={styles.topRightButton} underlayColor='transparent'>
+                <Link to={'/about'} style={commonStyles.topRightButton} underlayColor='transparent'>
                     <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />
                 </Link>
-                <View style={styles.main}>
+                <View style={commonStyles.main}>
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Tap to scan</Text>
                     <Image
                         source={themeLogoStyle}
                         resizeMode={'contain'}
-                        style={styles.logo}
+                        style={commonStyles.logo}
                     />
-                    <Link to={'/scanner'} style={styles.pinButton} underlayColor='transparent'>
+                    <Link to={'/scanner'} style={commonStyles.pinButton} underlayColor='transparent'>
                         <Image
                             source={require('../../assets/pin-success.png')}
                             resizeMode={'contain'}
-                            style={styles.pin}
+                            style={commonStyles.pin}
                         />
                     </Link>
                 </View>
