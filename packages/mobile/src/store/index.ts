@@ -1,29 +1,47 @@
 import { createStore, applyMiddleware } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
+import { connect, useSelector as useSelectorBase } from 'react-redux';
+import { persistStore, persistReducer, WebStorage } from 'redux-persist';
+import { AsyncStorageStatic } from '@react-native-community/async-storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
-import storage from 'redux-persist/lib/storage';
-import { rootReducer } from '../reducers';
-import thunk from 'redux-thunk';
+import { fromJS, Record as ImmutableRecord } from 'immutable';
+import storage from './storage';
+import rootReducer from '../reducers';
+import dispatchMiddleware from './dispatchMiddleware';
 
-// Persistence layer configuration
 const persistConfig = {
     key: 'moai',
-    storage: storage,
+    storage: (storage as WebStorage | AsyncStorageStatic),
     version: 0,
     migrate: (state) => {
         return Promise.resolve(state);
     }
 };
 
-// Middlewares
-const middlewares = [thunk, createLogger()];
-
+const middlewares = [dispatchMiddleware, createLogger()];
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-const store = createStore(
-    persistedReducer,
-    composeWithDevTools(applyMiddleware(...middlewares))
-);
-const persistor = persistStore(store);
+const immutableStateReducer = (state: any, ownProps: any) => fromJS(persistedReducer(state?.toJS ? state.toJS() : state, ownProps));
 
-export { store, persistor };
+const store = createStore(immutableStateReducer, composeWithDevTools(applyMiddleware(...middlewares)));
+const persistor = persistStore(store);
+const withState: Moai.StateCurry<typeof rootReducer> = () => (propsMapper, component) => {
+
+    const connector = connect(
+        (state: any, ownProps: any) => ({
+            ...(propsMapper ? state.toJS ? propsMapper(state.toJS(), ownProps) : propsMapper(state, ownProps) : {}),
+            ...ownProps
+        })
+    );
+
+    return connector(component as React.FC);
+};
+
+// const useSelector: Moai.StateSelector = (stateTransform) => useSelectorBase((state: any) => state?.toJS ? stateTransform(state?.toJS()) : stateTransform(state));
+const useSelector: Moai.StateSelector = (selector, equalityFn) => useSelectorBase<ImmutableRecord<Moai.State>, any>((state) => selector(state?.toJS()), equalityFn);
+
+export {
+    store,
+    persistor,
+    withState,
+    useSelector
+};

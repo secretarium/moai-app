@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { onboardingReducer } from './onboardingReducer';
-import { scanningReducer } from './scanningReducer';
+import { system } from './system';
 
-export const rootReducer = combineReducers({
-    onboarding: onboardingReducer,
-    scannedCode: scanningReducer
+const reducers = combineReducers({
+    system
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export default reducers;

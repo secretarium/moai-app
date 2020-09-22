@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { withState } from './store';
 import * as Linking from 'expo-linking';
 import { Route, Switch } from './ReactRouter';
 import About from './About';
@@ -8,8 +8,8 @@ import Scanned from './components/Scanned';
 import Chat from './components/Chat';
 import Scanner from './components/Scanner';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { AppState } from './reducers/index';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
+import { generateLocalKey } from './actions';
 
 
 const styles = StyleSheet.create({
@@ -28,15 +28,22 @@ const styles = StyleSheet.create({
     }
 });
 
-const App: React.FC = () => {
-    const [initialUrl, setInitialUrl] = useState<string>();
-    const { onboardUser } = useSelector((state: AppState) => state.onboarding);
+const App = withState()((s) => ({
+    localKey: s.system.localKey,
+    isFirstUserStart: s.system.isFirstUserStart
+}), ({ dispatch, localKey, isFirstUserStart }) => {
+
+    const [initialUrl, setInitialUrl] = useState<string>(undefined);
+    const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
+    const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
 
     const parseUrl = useCallback((url: string | null | undefined) => {
+
         const comps = url ? url.split('/').slice(-2) : undefined;
         if (comps?.length === 2 && comps[0] === 'check')
             setInitialUrl(comps[1]);
-        else setInitialUrl(undefined);
+        else
+            setInitialUrl(null);
     }, []);
 
     useEffect(() => {
@@ -44,45 +51,57 @@ const App: React.FC = () => {
             Linking.getInitialURL().then((url) => {
                 parseUrl(url);
             });
-
             Linking.addEventListener('url', ({ url }) => {
                 parseUrl(url);
             });
+            setHasParsedInitialURL(false);
         }
     }, [initialUrl, parseUrl]);
 
-    const setInitialScreen = () => {
-        if (onboardUser === true) {
-            return <OnboardingScreen />;
-        } else {
-            return <View style={styles.container} >
-                <Image
-                    source={require('./assets/logo.png')}
-                    resizeMode={'contain'}
-                    style={styles.image}
-                />
-                {
-                    initialUrl ? (
-                        <Text>Cheking in {initialUrl} ...</Text>
-                    ) : null
-                }
-            </View>;
+    useEffect(() => {
+        if (!hasRequestedLocalKey) {
+            dispatch(generateLocalKey());
+            setHasRequestedLocalKey(true);
         }
-    };
+    }, [dispatch, hasRequestedLocalKey]);
+
+    if (!localKey)
+        return <>
+            <Text>Generating a key ...</Text>
+        </>;
+
+    if (!hasParsedInitialURL)
+        return <>
+            <Text>Checking loading url ...</Text>
+        </>;
 
     return (
-        <Switch>
-            <Route exact path="/" component={Home} />
-            <Route
-                path="/onboarding"
-                render={() => setInitialScreen()}
-            />
-            <Route path="/about" component={About} />
-            <Route path="/chat" component={Chat} />
-            <Route path="/scanner" component={Scanner} />
-            <Route path="/scanned" component={Scanned} />
-        </Switch>
+        <>
+            <Switch>
+                <Route path="/home" component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/chat" component={Chat} />
+                <Route path="/scanner" component={Scanner} />
+                <Route path="/scanned" component={Scanned} />
+                <Route render={() => {
+                    if (isFirstUserStart)
+                        return <OnboardingScreen />;
+                    return <View style={styles.container} >
+                        <Image
+                            source={require('./assets/logo.png')}
+                            resizeMode={'contain'}
+                            style={styles.image}
+                        />
+                        {
+                            initialUrl ? (
+                                <Text>Cheking in {initialUrl} ...</Text>
+                            ) : null
+                        }
+                    </View>;
+                }} />
+            </Switch>
+        </>
     );
-};
+});
 
 export default App;

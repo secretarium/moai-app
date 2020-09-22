@@ -4298,6 +4298,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@secretarium/moai-connect@workspace:packages/connect":
+  version: 0.0.0-use.local
+  resolution: "@secretarium/moai-connect@workspace:packages/connect"
+  languageName: unknown
+  linkType: soft
+
 "@secretarium/moai-expo@workspace:packages/mobile":
   version: 0.0.0-use.local
   resolution: "@secretarium/moai-expo@workspace:packages/mobile"
@@ -4309,6 +4315,7 @@ __metadata:
     "@expo/vector-icons": 10.2.1
     "@expo/webpack-config": 0.12.29
     "@react-native-community/async-storage": 1.12.0
+    "@secretarium/moai-connect": "workspace:packages/connect"
     "@storybook/addon-actions": 6.0.21
     "@storybook/addon-links": 6.0.21
     "@storybook/addons": 6.0.21
@@ -4329,6 +4336,7 @@ __metadata:
     "@types/react-router-dom": 5.1.5
     "@types/react-router-native": 5.1.0
     "@types/redux-logger": 3.0.8
+    deepmerge: 4.2.2
     expo: 38.0.10
     expo-asset: 8.2.0
     expo-barcode-scanner: 8.2.1
@@ -4340,6 +4348,7 @@ __metadata:
     expo-optimize: 0.1.47
     expo-yarn-workspaces: 1.2.1
     i18next: 19.7.0
+    immutable: 4.0.0-rc.12
     jest: 26.4.2
     jest-expo: 38.0.2
     next: 9.5.3
@@ -4359,7 +4368,6 @@ __metadata:
     redux-devtools-extension: 2.13.8
     redux-logger: 3.0.6
     redux-persist: 6.0.0
-    redux-thunk: 2.3.0
     resize-observer-polyfill: 1.5.1
     setimmediate: 1.0.5
     sharp-cli: 1.14.1
@@ -11355,6 +11363,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deepmerge@npm:4.2.2, deepmerge@npm:^4.2.2":
+  version: 4.2.2
+  resolution: "deepmerge@npm:4.2.2"
+  checksum: 09ee6274c554d8d04c2310d65edc84306e72d92ebe67f5c90dd5b1659de75f9a435083bda0e5ba5a9380e15809245b924534234172cf123f3f89eb22152678d8
+  languageName: node
+  linkType: hard
+
 "deepmerge@npm:^1.3.0":
   version: 1.5.2
   resolution: "deepmerge@npm:1.5.2"
@@ -11373,13 +11388,6 @@ __metadata:
   version: 3.3.0
   resolution: "deepmerge@npm:3.3.0"
   checksum: b3d85feb6b949cea07cfc8d3fd9eca0aa48165a87c5e9ab67ce7e69cfb08217ed657f7ef657e7c057ae7e966447b97db17d75e6ef15f567b73a1dda663ed2db6
-  languageName: node
-  linkType: hard
-
-"deepmerge@npm:^4.2.2":
-  version: 4.2.2
-  resolution: "deepmerge@npm:4.2.2"
-  checksum: 09ee6274c554d8d04c2310d65edc84306e72d92ebe67f5c90dd5b1659de75f9a435083bda0e5ba5a9380e15809245b924534234172cf123f3f89eb22152678d8
   languageName: node
   linkType: hard
 
@@ -15879,6 +15887,13 @@ fsevents@^1.2.7:
   version: 1.10.0
   resolution: "immer@npm:1.10.0"
   checksum: ddad212860a3f61cf60f49213dfe66e9a1e6e5be8fc948989cabfef64b2a01e3586b06830d201c87352807c1b8701d291128111a399b0bd1710a75f59e8ad4e7
+  languageName: node
+  linkType: hard
+
+"immutable@npm:4.0.0-rc.12":
+  version: 4.0.0-rc.12
+  resolution: "immutable@npm:4.0.0-rc.12"
+  checksum: dd696a80c86258df783279fd977eca7fd6ee08f219ee42aeb9218299d06200db0354ecf2c7867902522fa0b7073024a25bb89e585b4f901da812c10556af4c78
   languageName: node
   linkType: hard
 
@@ -24440,13 +24455,6 @@ fsevents@^1.2.7:
   peerDependencies:
     redux: ">4.0.0"
   checksum: 524ad48ded44bd4f9fcc617c952812c7b44975753befce2483f8b237938e32101e831e395007a5eea27079f653dbc9aa46fa5ec4c328c9cf4cf7718099ccbe5b
-  languageName: node
-  linkType: hard
-
-"redux-thunk@npm:2.3.0":
-  version: 2.3.0
-  resolution: "redux-thunk@npm:2.3.0"
-  checksum: dde893dac6b3fbe88af698e6a2f3ca3d554e7f958f9700db64ee3d825e0b5fe1949c3dc30abe5c84b0fb27a07b3fd909c671efe60cd6d022b874b28619d866b7
   languageName: node
   linkType: hard
 
