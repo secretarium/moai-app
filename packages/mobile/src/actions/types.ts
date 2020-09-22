@@ -1,1 +1,0 @@
-export const SHOW_ONBOARDING = 'SHOW_ONBOARDING';
