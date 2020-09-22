@@ -3,10 +3,14 @@ import { withState } from './store';
 import * as Linking from 'expo-linking';
 import { Route, Switch } from './ReactRouter';
 import About from './About';
+import Home from './components/Home';
+import Scanned from './components/Scanned';
 import Chat from './components/Chat';
+import Scanner from './components/Scanner';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -74,8 +78,11 @@ const App = withState()((s) => ({
     return (
         <>
             <Switch>
+                <Route path="/home" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/chat" component={Chat} />
+                <Route path="/scanner" component={Scanner} />
+                <Route path="/scanned" component={Scanned} />
                 <Route render={() => {
                     if (isFirstUserStart)
                         return <OnboardingScreen />;

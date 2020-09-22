@@ -4343,6 +4343,7 @@ __metadata:
     expo-camera: 8.3.1
     expo-cli: 3.27.4
     expo-constants: 9.2.0
+    expo-font: 8.2.2
     expo-linking: 1.0.3
     expo-optimize: 0.1.47
     expo-yarn-workspaces: 1.2.1
@@ -4355,6 +4356,7 @@ __metadata:
     react: 16.13.1
     react-dom: 16.13.1
     react-native: "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz"
+    react-native-appearance: 0.3.4
     react-native-onboarding-swiper: 1.1.4
     react-native-screens: 2.10.1
     react-native-web: 0.13.12
@@ -13303,7 +13305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-font@npm:~8.2.1":
+"expo-font@npm:8.2.2, expo-font@npm:~8.2.1":
   version: 8.2.2
   resolution: "expo-font@npm:8.2.2"
   dependencies:
@@ -23861,7 +23863,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-native-appearance@npm:~0.3.3":
+"react-native-appearance@npm:0.3.4, react-native-appearance@npm:~0.3.3":
   version: 0.3.4
   resolution: "react-native-appearance@npm:0.3.4"
   dependencies:

@@ -4,6 +4,7 @@ const config = {
     icon: './assets/icon.png',
     version: '0.0.1',
     slug: 'moai-confidential-test-and-trace',
+    userInterfaceStyle: 'automatic',
     ios: {
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.app',

@@ -1,15 +1,19 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { AppearanceProvider } from 'react-native-appearance';
+import { Provider as ReduxProvider } from 'react-redux';
 import { Router } from './ReactRouter';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 
 const Providers: React.FC = ({ children }) => (
-    <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-            <Router>{children}</Router>
-        </PersistGate>
-    </Provider>
+    <AppearanceProvider>
+        <ReduxProvider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <Router>{children}</Router>
+            </PersistGate>
+        </ReduxProvider>
+    </AppearanceProvider>
 );
+
 
 export default Providers;
