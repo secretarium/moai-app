@@ -112,5 +112,11 @@ declare namespace Moai {
     };
 }
 
+declare module 'react-router-dom' {
+    interface LinkProps {
+        underlayColor?: string
+    }
+}
+
 export = Moai;
 export as namespace Moai;

@@ -2,10 +2,28 @@
 
 exports[`<Providers /> has 1 child 1`] = `
 <div
-  className="css-text-901oao"
-  dir="auto"
-  onClick={[Function]}
+  className="css-view-1dbjc4n"
+  style={
+    Object {
+      "WebkitBoxFlex": 1,
+      "WebkitFlexBasis": "0%",
+      "WebkitFlexGrow": 1,
+      "WebkitFlexShrink": 1,
+      "flexBasis": "0%",
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "msFlexNegative": 1,
+      "msFlexPositive": 1,
+      "msFlexPreferredSize": "0%",
+    }
+  }
 >
-  Test
+  <div
+    className="css-text-901oao"
+    dir="auto"
+    onClick={[Function]}
+  >
+    Test
+  </div>
 </div>
 `;
