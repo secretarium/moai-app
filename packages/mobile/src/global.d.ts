@@ -103,7 +103,7 @@ declare namespace Moai {
         localConfiguration: SystemConfiguration;
         localKey?: KeyPair;
         currentConnection?: SystemConnection;
-        isFirstUserStart: boolean;
+        showOnboarding: boolean;
         log: SystemLog;
     };
 

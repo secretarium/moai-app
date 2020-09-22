@@ -8,7 +8,7 @@ export const initialState: System = {
     localConfiguration: {
         theme: 'auto'
     },
-    isFirstUserStart: false,
+    showOnboarding: true,
     log: []
 };
 
@@ -41,6 +41,12 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
             return {
                 ...state,
                 localKey: payload
+            };
+        }
+        case actionTypes.MOAI_SHOW_ONBOARDING: {
+            return {
+                ...state,
+                showOnboarding: payload
             };
         }
         case actionTypes.SECRETARIUM_CONNECT_SUCCESSFUL:

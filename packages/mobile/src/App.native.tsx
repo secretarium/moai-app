@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
-import { Route, Switch } from './ReactRouter';
+import { Redirect, Route, Switch } from './ReactRouter';
 import About from './About';
 import Home from './components/Home';
 import Scanned from './components/Scanned';
@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
 
 const App = withState()((s) => ({
     localKey: s.system.localKey,
-    isFirstUserStart: s.system.isFirstUserStart
-}), ({ dispatch, localKey, isFirstUserStart }) => {
+    showOnboarding: s.system.showOnboarding
+}), ({ dispatch, localKey, showOnboarding }) => {
 
     const [initialUrl, setInitialUrl] = useState<string>(undefined);
     const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
@@ -54,7 +54,7 @@ const App = withState()((s) => ({
             Linking.addEventListener('url', ({ url }) => {
                 parseUrl(url);
             });
-            setHasParsedInitialURL(false);
+            setHasParsedInitialURL(true);
         }
     }, [initialUrl, parseUrl]);
 
@@ -75,29 +75,29 @@ const App = withState()((s) => ({
             <Text>Checking loading url ...</Text>
         </>;
 
+    if (initialUrl)
+        return <View style={styles.container} >
+            <Image
+                source={require('./assets/logo.png')}
+                resizeMode={'contain'}
+                style={styles.image}
+            />
+            <Text>Cheking in {initialUrl} ...</Text>
+        </View>;
+
     return (
         <>
             <Switch>
+                <Route path="/onboarding" component={OnboardingScreen} />
                 <Route path="/home" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/chat" component={Chat} />
                 <Route path="/scanner" component={Scanner} />
                 <Route path="/scanned" component={Scanned} />
                 <Route render={() => {
-                    if (isFirstUserStart)
-                        return <OnboardingScreen />;
-                    return <View style={styles.container} >
-                        <Image
-                            source={require('./assets/logo.png')}
-                            resizeMode={'contain'}
-                            style={styles.image}
-                        />
-                        {
-                            initialUrl ? (
-                                <Text>Cheking in {initialUrl} ...</Text>
-                            ) : null
-                        }
-                    </View>;
+                    if (showOnboarding)
+                        return <Redirect to="/onboarding" />;
+                    return <Redirect to="/home" />;
                 }} />
             </Switch>
         </>
