@@ -5423,9 +5423,6 @@ var msrCrypto = function () {
         };
 
         msrcryptoCbc.exportKey = function (p) {
-
-            console.log('PLOP >>>', p);
-
             if (p.format === 'jwk') {
                 return {
                     type: 'keyExport',

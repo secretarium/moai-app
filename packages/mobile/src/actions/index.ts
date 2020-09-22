@@ -6,4 +6,7 @@ export const generateLocalKey = (): Moai.FunctionAction => (dispatch) =>
         .then((key) => dispatch({
             type: actionTypes.MOAI_SAVE_LOCAL_KEY,
             payload: key
-        }));
+        }))
+        .catch((error) => {
+            console.error('generateLocalKey', error);
+        });

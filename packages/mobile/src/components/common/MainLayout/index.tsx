@@ -10,8 +10,8 @@ import { commonStyles } from '../../commonStyles';
 
 const MainLayout: React.FC = ({ children }) => {
     const [fontIsLoaded] = useFonts({
-        'Poppins-Regular': require('../../assets/fonts/Poppins-Regular.ttf'),
-        'Poppins-Bold': require('../../assets/fonts/Poppins-Bold.ttf')
+        'Poppins-Regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-Bold': require('../../../assets/fonts/Poppins-Bold.ttf')
     });
 
     // Color theme

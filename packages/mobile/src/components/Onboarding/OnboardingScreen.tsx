@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import Onboarding from 'react-native-onboarding-swiper';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
+import { Redirect } from '../../ReactRouter';
 
 const OnboardingScreen = withState()(
     null,
     ({ dispatch }) => {
 
+        const [showOnboarding, setShowOnboarding] = useState(true);
+
         const onDone = () => {
             dispatch({ type: actionTypes.MOAI_SHOW_ONBOARDING, payload: false });
+            setShowOnboarding(false);
         };
+
+        if (!showOnboarding)
+            return <Redirect to="/home" />;
 
         return (
             <Onboarding
+                showSkip={false}
                 onDone={onDone}
                 pages={[
                     {

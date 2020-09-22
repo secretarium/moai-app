@@ -75,9 +75,6 @@ const config = {
         image: './assets/logo.png',
         resizeMode: 'contain',
         backgroundColor: '#ffffff'
-    },
-    experiments: {
-        redesignedLogBox: true
     }
 };
 
