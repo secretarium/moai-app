@@ -38,8 +38,9 @@ const Scanner = withState()(
         const handleBarCodeScanned = ({ type, data }) => {
             setScanned(true);
             dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: data });
+            dispatch({ type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER });
             setRedirect(true);
-            alert(`Code with type ${type} and data ${data} has been scanned!`);
+            //alert(`Code with type ${type} and data ${data} has been scanned!`);
         };
 
         if (permission === null) {

@@ -11,23 +11,25 @@ const Home: React.FC = () => {
     const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
     const themeLogoStyle = colorScheme === 'light' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
-    return <MainLayout>
-        <View style={commonStyles.main}>
-            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Tap to scan</Text>
-            <Image
-                source={themeLogoStyle}
-                resizeMode={'contain'}
-                style={commonStyles.logo}
-            />
-            <Link to={'/scanner'} style={commonStyles.pinButton} underlayColor='transparent'>
+    return (
+        <MainLayout>
+            <View style={commonStyles.main}>
+                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Tap to scan</Text>
                 <Image
-                    source={require('../../assets/pin-default.png')}
+                    source={themeLogoStyle}
                     resizeMode={'contain'}
-                    style={commonStyles.pin}
+                    style={commonStyles.logo}
                 />
-            </Link>
-        </View>
-    </MainLayout>;
+                <Link to={'/scanner'} style={commonStyles.pinButton} underlayColor='transparent'>
+                    <Image
+                        source={require('../../assets/pin-default.png')}
+                        resizeMode={'contain'}
+                        style={commonStyles.pin}
+                    />
+                </Link>
+            </View>
+        </MainLayout>
+    );
 };
 
 export default Home;

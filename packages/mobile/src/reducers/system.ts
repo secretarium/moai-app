@@ -9,6 +9,7 @@ export const initialState: System = {
         theme: 'auto'
     },
     showOnboarding: true,
+    scanCounter: 0,
     log: []
 };
 
@@ -47,6 +48,12 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
             return {
                 ...state,
                 showOnboarding: payload
+            };
+        }
+        case actionTypes.MOAI_INCREMENT_SCAN_COUNTER: {
+            return {
+                ...state,
+                scanCounter: state.scanCounter + 1
             };
         }
         case actionTypes.SECRETARIUM_CONNECT_SUCCESSFUL:
