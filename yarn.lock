@@ -4602,6 +4602,7 @@ __metadata:
     react-dom: 16.13.1
     react-native: "https://github.com/expo/react-native/archive/sdk-39.0.0.tar.gz"
     react-native-appearance: ~0.3.3
+    react-native-modal: 11.5.6
     react-native-onboarding-swiper: 1.1.4
     react-native-screens: ~2.10.1
     react-native-web: ~0.13.7
@@ -24302,6 +24303,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-native-animatable@npm:1.3.3":
+  version: 1.3.3
+  resolution: "react-native-animatable@npm:1.3.3"
+  dependencies:
+    prop-types: ^15.7.2
+  checksum: 1727b355f6565551a306110cafbea641e4ce076c16e6a567ff904484c0a22aa719294e16bc25477c71e75c8767ed9a02056d963d7c5fb29d222ae5d350995c37
+  languageName: node
+  linkType: hard
+
 "react-native-appearance@npm:~0.3.3":
   version: 0.3.4
   resolution: "react-native-appearance@npm:0.3.4"
@@ -24310,6 +24320,19 @@ fsevents@^1.2.7:
     invariant: ^2.2.4
     use-subscription: ^1.0.0
   checksum: 3caea7ec8a191cb15de94110ccf9b683a3fa6e493509d17888648e5c92f697c530571f1346337b00ae9949a8ed94a4f13b830e2dc17c44e7f4c0ff98d9072fd2
+  languageName: node
+  linkType: hard
+
+"react-native-modal@npm:11.5.6":
+  version: 11.5.6
+  resolution: "react-native-modal@npm:11.5.6"
+  dependencies:
+    prop-types: ^15.6.2
+    react-native-animatable: 1.3.3
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 9d080077dca06990243d973f000ef9ada0e1ed74241e5dd78929cd1c7235c0177d2dcf56d6cf388c46c46cf4d6158ffea36858e27083c97088374b4ada7fa2ca
   languageName: node
   linkType: hard
 

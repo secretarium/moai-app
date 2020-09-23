@@ -104,6 +104,7 @@ declare namespace Moai {
         localKey?: KeyPair;
         currentConnection?: SystemConnection;
         showOnboarding: boolean;
+        scanCounter: number;
         log: SystemLog;
     };
 
