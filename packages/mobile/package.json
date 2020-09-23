@@ -76,7 +76,7 @@
         "@stryker-mutator/typescript": "3.3.1",
         "@svgr/webpack": "5.4.0",
         "@types/anymatch": "1.3.1",
-        "@types/jest": "26.0.13",
+        "@types/jest": "26.0.14",
         "@types/react": "~16.9.35",
         "@types/react-dom": "16.9.8",
         "@types/react-native": "~0.63.2",
