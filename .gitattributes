@@ -1,6 +1,7 @@
 # .gitattributes
 * text=auto
 * text eol=lf
+*.ttf binary
 *.png binary
 *.jpg binary
 
