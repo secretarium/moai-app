@@ -4,19 +4,34 @@ const config = {
     icon: './assets/icon.png',
     version: '0.0.1',
     slug: 'moai-confidential-test-and-trace',
+    userInterfaceStyle: 'automatic',
     ios: {
+        icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.app',
-        associatedDomains: ['applinks:moaiapp.com']
+        associatedDomains: [
+            'applinks:moaiapp.com',
+            'applinks:moai-app.com'
+        ]
     },
     android: {
+        icon: './assets/android/icon.png',
         package: 'com.secretarium.moai.app',
+        permissions: [
+            'CAMERA'
+        ],
         intentFilters: [
             {
+                autoVerify: true,
                 action: 'VIEW',
                 data: [
                     {
                         scheme: 'https',
                         host: '*.moaiapp.com',
+                        pathPrefix: '/check'
+                    },
+                    {
+                        scheme: 'https',
+                        host: '*.moai-app.com',
                         pathPrefix: '/check'
                     }
                 ],
@@ -27,6 +42,9 @@ const config = {
             }
         ]
     },
+    web: {
+        favicon: './assets/android/icon.png'
+    },
     packagerOpts: {
         config: 'metro.config.js',
         sourceExts: [
@@ -34,6 +52,14 @@ const config = {
             'native.jsx',
             'native.ts',
             'native.js',
+            'android.tsx',
+            'android.jsx',
+            'android.ts',
+            'android.js',
+            'ios.tsx',
+            'ios.jsx',
+            'ios.ts',
+            'ios.js',
             'jsx',
             'js',
             'json',

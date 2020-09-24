@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { withState } from './store';
 import * as Linking from 'expo-linking';
-import { Route } from './ReactRouter';
+import { Redirect, Route, Switch } from './ReactRouter';
 import About from './About';
-import Chat from './pages/Chat/Chat';
+import Home from './components/Home';
+import Scanned from './components/Scanned';
+import Chat from './components/Chat';
+import Scanner from './components/Scanner';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { useCallback } from 'react';
+import OnboardingScreen from './components/Onboarding/OnboardingScreen';
+import { generateLocalKey } from './actions';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -22,44 +28,80 @@ const styles = StyleSheet.create({
     }
 });
 
-const App: React.FC = () => {
+const App = withState()((s) => ({
+    localKey: s.system.localKey,
+    showOnboarding: s.system.showOnboarding
+}), ({ dispatch, localKey, showOnboarding }) => {
 
-    const [initialUrl, setInitialUrl] = useState<string>();
+    const [initialUrl, setInitialUrl] = useState<string>(undefined);
+    const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
+    const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
 
     const parseUrl = useCallback((url: string | null | undefined) => {
+
         const comps = url ? url.split('/').slice(-2) : undefined;
         if (comps?.length === 2 && comps[0] === 'check')
             setInitialUrl(comps[1]);
         else
-            setInitialUrl(undefined);
+            setInitialUrl(null);
     }, []);
 
     useEffect(() => {
         if (!initialUrl) {
-
-            Linking.getInitialURL().then(url => {
+            Linking.getInitialURL().then((url) => {
                 parseUrl(url);
             });
-
             Linking.addEventListener('url', ({ url }) => {
                 parseUrl(url);
             });
+            setHasParsedInitialURL(true);
         }
     }, [initialUrl, parseUrl]);
 
+    useEffect(() => {
+        if (!hasRequestedLocalKey) {
+            dispatch(generateLocalKey());
+            setHasRequestedLocalKey(true);
+        }
+    }, [dispatch, hasRequestedLocalKey]);
 
-    return (<>
-        <Route exact path="/" render={() => {
-            return (
-                <View style={styles.container}>
-                    <Image source={require('./assets/logo.png')} resizeMode={'contain'} style={styles.image} />
-                    { initialUrl ? <Text>Cheking in {initialUrl} ...</Text> : null}
-                </View>
-            );
-        }} />
-        <Route path="/about" component={About} />
-        <Route path="/chat" component={Chat} />
-    </>);
-};
+    if (!localKey)
+        return <>
+            <Text>Generating a key ...</Text>
+        </>;
+
+    if (!hasParsedInitialURL)
+        return <>
+            <Text>Checking loading url ...</Text>
+        </>;
+
+    if (initialUrl)
+        return <View style={styles.container} >
+            <Image
+                source={require('./assets/logo.png')}
+                resizeMode={'contain'}
+                style={styles.image}
+            />
+            <Text>Cheking in {initialUrl} ...</Text>
+        </View>;
+
+    return (
+        <>
+            <Switch>
+                <Route path="/onboarding" component={OnboardingScreen} />
+                <Route path="/home" component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/chat" component={Chat} />
+                <Route path="/scanner" component={Scanner} />
+                <Route path="/scanned" component={Scanned} />
+                <Route render={() => {
+                    if (showOnboarding)
+                        return <Redirect to="/onboarding" />;
+                    return <Redirect to="/home" />;
+                }} />
+            </Switch>
+        </>
+    );
+});
 
 export default App;
