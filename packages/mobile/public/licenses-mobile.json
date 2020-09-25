@@ -1,0 +1,284 @@
+{
+    "@babel/core@7.11.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/babel/babel",
+        "licenseUrl": "https://github.com/babel/babel/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "@babel/preset-typescript@7.10.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/babel/babel",
+        "licenseUrl": "https://github.com/babel/babel/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "@jest/types@24.9.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/jest",
+        "licenseUrl": "https://github.com/facebook/jest/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "@react-native-community/cli-platform-android@4.13.0": {
+        "licenses": "MIT",
+        "parents": "react-native"
+    },
+    "@react-native-community/cli-platform-ios@4.13.0": {
+        "licenses": "MIT",
+        "parents": "react-native"
+    },
+    "@secretarium/moai-expo@0.0.1": {
+        "licenses": "UNKNOWN",
+        "parents": "UNDEFINED"
+    },
+    "@storybook/react@6.0.21": {
+        "licenses": "MIT",
+        "repository": "https://github.com/storybookjs/storybook",
+        "licenseUrl": "https://github.com/storybookjs/storybook/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "@types/yargs@13.0.10": {
+        "licenses": "MIT",
+        "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+        "licenseUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "acorn@6.4.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/acornjs/acorn",
+        "licenseUrl": "https://github.com/acornjs/acorn/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "anser@1.4.10": {
+        "licenses": "MIT",
+        "repository": "https://github.com/IonicaBizau/anser",
+        "licenseUrl": "https://github.com/IonicaBizau/anser/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "ansi-regex@3.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chalk/ansi-regex",
+        "licenseUrl": "https://github.com/chalk/ansi-regex/raw/master/license",
+        "parents": "expo"
+    },
+    "ansi-regex@4.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chalk/ansi-regex",
+        "licenseUrl": "https://github.com/chalk/ansi-regex/raw/master/license",
+        "parents": "react-native"
+    },
+    "ansi-styles@3.2.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chalk/ansi-styles",
+        "licenseUrl": "https://github.com/chalk/ansi-styles/raw/master/license",
+        "parents": "expo"
+    },
+    "braces@2.3.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/micromatch/braces",
+        "licenseUrl": "https://github.com/micromatch/braces/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "cacache@12.0.4": {
+        "licenses": "ISC",
+        "repository": "https://github.com/npm/cacache",
+        "licenseUrl": "https://github.com/npm/cacache/raw/master/LICENSE.md",
+        "parents": "@secretarium/moai-expo"
+    },
+    "chalk@3.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chalk/chalk",
+        "licenseUrl": "https://github.com/chalk/chalk/raw/master/license",
+        "parents": "react-native"
+    },
+    "define-property@2.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jonschlinkert/define-property",
+        "licenseUrl": "https://github.com/jonschlinkert/define-property/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "eslint-scope@4.0.3": {
+        "licenses": "BSD-2-Clause",
+        "repository": "https://github.com/eslint/eslint-scope",
+        "licenseUrl": "https://github.com/eslint/eslint-scope/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "expo-linking@1.0.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/expo/expo",
+        "licenseUrl": "https://github.com/expo/expo",
+        "parents": "expo"
+    },
+    "expo@39.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/expo/expo",
+        "licenseUrl": "https://github.com/expo/expo",
+        "parents": "UNDEFINED"
+    },
+    "extend-shallow@2.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jonschlinkert/extend-shallow",
+        "licenseUrl": "https://github.com/jonschlinkert/extend-shallow/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "extend-shallow@3.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jonschlinkert/extend-shallow",
+        "licenseUrl": "https://github.com/jonschlinkert/extend-shallow/raw/master/LICENSE",
+        "parents": "micromatch:@secretarium/moai-expo"
+    },
+    "fill-range@4.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jonschlinkert/fill-range",
+        "licenseUrl": "https://github.com/jonschlinkert/fill-range/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "fs-extra@8.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jprichardson/node-fs-extra",
+        "licenseUrl": "https://github.com/jprichardson/node-fs-extra/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "fs-extra@9.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jprichardson/node-fs-extra",
+        "licenseUrl": "https://github.com/jprichardson/node-fs-extra/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "is-extendable@1.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jonschlinkert/is-extendable",
+        "licenseUrl": "https://github.com/jonschlinkert/is-extendable/raw/master/LICENSE",
+        "parents": "micromatch:@secretarium/moai-expo"
+    },
+    "is-wsl@1.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/sindresorhus/is-wsl",
+        "licenseUrl": "https://github.com/sindresorhus/is-wsl/raw/master/license",
+        "parents": "@secretarium/moai-expo"
+    },
+    "jsonfile@6.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jprichardson/node-jsonfile",
+        "licenseUrl": "https://github.com/jprichardson/node-jsonfile/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "lru-cache@5.1.1": {
+        "licenses": "ISC",
+        "repository": "https://github.com/isaacs/node-lru-cache",
+        "licenseUrl": "https://github.com/isaacs/node-lru-cache/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "metro-babel-register@0.59.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/metro",
+        "licenseUrl": "https://github.com/facebook/metro",
+        "parents": "react-native"
+    },
+    "metro-babel-transformer@0.59.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/metro",
+        "licenseUrl": "https://github.com/facebook/metro",
+        "parents": "react-native"
+    },
+    "metro-react-native-babel-transformer@0.59.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/metro",
+        "licenseUrl": "https://github.com/facebook/metro",
+        "parents": "react-native"
+    },
+    "metro-source-map@0.59.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/metro",
+        "licenseUrl": "https://github.com/facebook/metro",
+        "parents": "react-native"
+    },
+    "metro-symbolicate@0.59.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/metro",
+        "licenseUrl": "https://github.com/facebook/metro",
+        "parents": "react-native"
+    },
+    "micromatch@3.1.10": {
+        "licenses": "MIT",
+        "repository": "https://github.com/micromatch/micromatch",
+        "licenseUrl": "https://github.com/micromatch/micromatch/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "ob1@0.59.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/metro",
+        "licenseUrl": "https://github.com/facebook/metro",
+        "parents": "react-native"
+    },
+    "pretty-format@23.6.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/jest",
+        "licenseUrl": "https://github.com/facebook/jest",
+        "parents": "expo"
+    },
+    "pretty-format@24.9.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/jest",
+        "licenseUrl": "https://github.com/facebook/jest/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "promise@8.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/then/promise",
+        "licenseUrl": "https://github.com/then/promise/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "react-native@0.63.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react-native",
+        "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
+        "parents": "UNDEFINED"
+    },
+    "react-refresh@0.4.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react",
+        "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "schema-utils@1.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/webpack-contrib/schema-utils",
+        "licenseUrl": "https://github.com/webpack-contrib/schema-utils/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "source-map@0.5.7": {
+        "licenses": "BSD-3-Clause",
+        "repository": "http://github.com/mozilla/source-map",
+        "licenseUrl": "http://github.com/mozilla/source-map/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "ssri@6.0.1": {
+        "licenses": "ISC",
+        "repository": "https://github.com/zkat/ssri",
+        "licenseUrl": "https://github.com/zkat/ssri/raw/master/LICENSE.md",
+        "parents": "@secretarium/moai-expo"
+    },
+    "terser-webpack-plugin@1.4.5": {
+        "licenses": "MIT",
+        "repository": "https://github.com/webpack-contrib/terser-webpack-plugin",
+        "licenseUrl": "https://github.com/webpack-contrib/terser-webpack-plugin/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "to-regex-range@2.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/micromatch/to-regex-range",
+        "licenseUrl": "https://github.com/micromatch/to-regex-range/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    },
+    "universalify@0.1.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/RyanZim/universalify",
+        "licenseUrl": "https://github.com/RyanZim/universalify/raw/master/LICENSE",
+        "parents": "react-native"
+    },
+    "webpack@4.44.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/webpack/webpack",
+        "licenseUrl": "https://github.com/webpack/webpack/raw/master/LICENSE",
+        "parents": "@secretarium/moai-expo"
+    }
+}

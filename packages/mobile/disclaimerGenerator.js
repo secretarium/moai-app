@@ -36,7 +36,7 @@ const createDisclaimer = json => {
 
 // Copies each license to the disclaimer file
 const copyLicense = item => {
-    if (!isMarkDown(item.licenseFile)) {
+    if (item.licenseFile && !isMarkDown(item.licenseFile)) {
         try {
             const stream = fse.createWriteStream(file, { flags: 'a' });
             const licenseFile = fse.readFileSync(`${item.licenseFile}`, 'utf8');
@@ -49,15 +49,16 @@ const copyLicense = item => {
 
 // Checks if there is a readme file instead of license
 const isMarkDown = filename => {
-    const pathArray = filename.split('/');
-    const extension = pathArray[pathArray.length - 1];
-    if (
-        (extension.toUpperCase() === 'README.MD') ||
-        (extension.toUpperCase() === 'README.MARKDOWN')
-    ) {
-        return true;
-    } else {
-        return false;
+    if (filename) {
+        const pathArray = filename.split('/');
+        const extension = pathArray[pathArray.length - 1];
+        if (
+            (extension.toUpperCase() === 'README.MD') ||
+            (extension.toUpperCase() === 'README.MARKDOWN')
+        ) {
+            return true;
+        }
     }
+    return false;
 };
 
