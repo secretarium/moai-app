@@ -27,7 +27,6 @@ export default StyleSheet.create({
         flexWrap: 'wrap'
     },
     name: {
-        fontWeight: 'bold',
         fontSize: 16
     },
     text: {

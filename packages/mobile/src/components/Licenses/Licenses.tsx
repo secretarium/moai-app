@@ -1,16 +1,20 @@
 import React from 'react';
-import { SafeAreaView, Text, FlatList, TouchableOpacity, View, Linking, StatusBar } from 'react-native';
+import { SafeAreaView, Text, FlatList, TouchableOpacity, View, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
-import { FontAwesome } from '@expo/vector-icons';
 import styles from './styles';
 import { openURL } from 'expo-linking';
 import { commonStyles } from '../commonStyles';
+import NavigationBar from 'react-native-navbar';
+import { Link } from '../../ReactRouter';
+import { Entypo } from '@expo/vector-icons';
+
 
 const Licenses: React.FC = () => {
     // Color theme
     const colorScheme = useColorScheme();
     const themeContainerStyle = colorScheme === 'light' ? commonStyles.lightContainer : commonStyles.darkContainer;
     const themeColorStyle = colorScheme === 'light' ? '#E8E8E8' : '#404040';
+    const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
     const themeStatusBarStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
 
     const licensesData = require('../../../public/licenses-mobile.json');
@@ -43,27 +47,38 @@ const Licenses: React.FC = () => {
     return (
         <SafeAreaView style={[commonStyles.container, themeContainerStyle]}>
             <StatusBar barStyle={themeStatusBarStyle} />
+            <NavigationBar
+                style={themeContainerStyle}
+                leftButton={
+                    <Link to={'/'} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                        <Entypo name="chevron-left" color={themeTextStyle} size={30} />
+                    </Link>}
+                title={
+                    <Text style={{ fontFamily: 'Poppins-Bold', fontSize: 20, color: themeTextStyle }}>
+                        Licenses
+                    </Text>
+                }
+                statusBar={{ hidden: true }} />
             <FlatList
                 data={licenses}
                 renderItem={({ item }) => (
                     <View>
                         <View style={styles.cardShadow}>
-                            <View style={styles.card}>
+                            <View style={[styles.card, { backgroundColor: themeColorStyle }]}>
                                 <TouchableOpacity
                                     underlayColor={'#eeeeee'}
                                     style={styles.item}
                                     onPress={() => item.licenseUrl && openURL(item.licenseUrl)}>
                                     <View style={{ maxWidth: '90%' }}>
-                                        <Text style={styles.name}>{item.name}</Text>
-                                        <Text style={styles.text}>{item.licenses}</Text>
-                                        <Text style={styles.text}>{item.version}</Text>
+                                        <Text style={[styles.name, { fontFamily: 'Poppins-Bold', color: themeTextStyle }]}>{item.name}</Text>
+                                        <Text style={[styles.text, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{item.licenses}</Text>
+                                        <Text style={[styles.text, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{item.version}</Text>
                                     </View>
-                                    <FontAwesome
+                                    <Entypo
+                                        name="chevron-right"
                                         style={{ alignSelf: 'center' }}
-                                        color={'#34495e'}
-                                        size={16}
-                                        name={'chevron-right'}
-                                    />
+                                        color={themeTextStyle}
+                                        size={24} />
                                 </TouchableOpacity>
                             </View>
                         </View>

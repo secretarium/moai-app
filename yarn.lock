@@ -4416,7 +4416,7 @@ __metadata:
     i18next: 19.7.0
     immutable: 4.0.0-rc.12
     jest: 26.4.2
-    jest-expo: ^39.0.0
+    jest-expo: 39.0.0
     license-checker: 25.0.1
     next: 9.5.3
     next-fonts: 1.4.0
@@ -4428,6 +4428,7 @@ __metadata:
     react-native: "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz"
     react-native-appearance: 0.3.4
     react-native-modal: 11.5.6
+    react-native-navbar: 2.1.0
     react-native-onboarding-swiper: 1.1.4
     react-native-screens: 2.11.0
     react-native-web: 0.13.13
@@ -17556,7 +17557,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-expo@npm:^39.0.0":
+"jest-expo@npm:39.0.0":
   version: 39.0.0
   resolution: "jest-expo@npm:39.0.0"
   dependencies:
@@ -24354,6 +24355,15 @@ fsevents@^1.2.7:
     react: "*"
     react-native: "*"
   checksum: 9d080077dca06990243d973f000ef9ada0e1ed74241e5dd78929cd1c7235c0177d2dcf56d6cf388c46c46cf4d6158ffea36858e27083c97088374b4ada7fa2ca
+  languageName: node
+  linkType: hard
+
+"react-native-navbar@npm:2.1.0":
+  version: 2.1.0
+  resolution: "react-native-navbar@npm:2.1.0"
+  dependencies:
+    prop-types: ^15.5.10
+  checksum: 34cd619aa13b68a672f33afc7fce46500b2c7b9953042d6e2a61068633fd4ee748a805df0eb7bc26fdb1708d1d027a421b92984194ab2e81f186b8d7b2aafe48
   languageName: node
   linkType: hard
 

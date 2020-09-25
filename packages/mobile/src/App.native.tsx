@@ -11,7 +11,6 @@ import Licenses from './components/Licenses';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
-import { AppLoading } from 'expo';
 import { useFonts } from 'expo-font';
 
 
@@ -94,12 +93,12 @@ const App = withState()((s) => ({
         </View>;
 
     if (!fontsLoaded) {
-        return <AppLoading />;
+        return <Text>Loading fonts...</Text>;
     } else {
         return (
             <>
                 <Switch>
-                    <Route exact path="/" component={Licenses} />
+                    <Route path="/licenses" component={Licenses} />
                     <Route path="/onboarding" component={OnboardingScreen} />
                     <Route path="/home" component={Home} />
                     <Route path="/about" component={About} />

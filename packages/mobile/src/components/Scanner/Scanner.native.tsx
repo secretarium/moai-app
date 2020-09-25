@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, TouchableOpacity, SafeAreaView, View, Image, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Link, Redirect } from '../../ReactRouter';
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
 import { useFonts } from 'expo-font';
@@ -75,8 +75,12 @@ const Scanner = withState()(
                         />
                     </View>
                     <TouchableOpacity style={styles.roundedButton} onPress={() => { setScanned(false); }}>
-                        <Link to={'/'}>
-                            <AntDesign name="back" size={30} color={themeTextStyle} />
+                        <Link to={'/'} underlayColor='white'>
+                            <Entypo
+                                name="chevron-left"
+                                style={{ alignSelf: 'center' }}
+                                color={themeTextStyle}
+                                size={30} />
                         </Link>
                     </TouchableOpacity>
                 </SafeAreaView>

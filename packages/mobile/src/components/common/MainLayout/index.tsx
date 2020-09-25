@@ -1,40 +1,48 @@
 import React from 'react';
-import { SafeAreaView, StatusBar, Text } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
-import { useFonts } from 'expo-font';
-//import { AppLoading } from 'expo';
 import { Link } from '../../../ReactRouter';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { commonStyles } from '../../commonStyles';
+import NavigationBar from 'react-native-navbar';
 
-const MainLayout: React.FC = ({ children }) => {
-    const [fontsLoaded] = useFonts({
-        'Poppins-Regular': require('../../../assets/fonts/Poppins-Regular.ttf'),
-        'Poppins-Bold': require('../../../assets/fonts/Poppins-Bold.ttf')
-    });
+interface Props {
+    children: React.ReactNode;
+    scanned: boolean;
+}
 
+const MainLayout: React.FC<Props> = (props) => {
     // Color theme
     const colorScheme = useColorScheme();
     const themeContainerStyle = colorScheme === 'light' ? commonStyles.lightContainer : commonStyles.darkContainer;
     const themeColorStyle = colorScheme === 'light' ? '#E8E8E8' : '#404040';
     const themeStatusBarStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
 
-    if (!fontsLoaded)
-        return <Text>LOADING...</Text>;
-    else
-        return (
-            <SafeAreaView style={[commonStyles.container, themeContainerStyle]}>
-                <StatusBar barStyle={themeStatusBarStyle} />
-                <Link to={'/chat'} style={commonStyles.topLeftButton} underlayColor='transparent'>
-                    <Entypo name="chat" size={40} color={themeColorStyle} />
-                </Link>
-                <Link to={'/about'} style={commonStyles.topRightButton} underlayColor='transparent'>
-                    <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />
-                </Link>
-                {children}
-            </SafeAreaView>
-        );
+    return (
+        <SafeAreaView style={[commonStyles.container, themeContainerStyle]}>
+            <StatusBar barStyle={themeStatusBarStyle} />
+            <NavigationBar
+                style={themeContainerStyle}
+                leftButton={(props.scanned === true) ?
+                    (
+                        <Link to={'/'} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                            <Entypo name="chevron-left" color={themeColorStyle} size={30} />
+                        </Link>
+
+                    ) : (
+                        <Link to={'/chat'} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                            <Entypo name="chat" size={40} color={themeColorStyle} />
+                        </Link>
+                    )}
+                rightButton={
+                    <Link to={'/licenses'} style={commonStyles.topRightButton} underlayColor='transparent'>
+                        <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />
+                    </Link>}
+                statusBar={{ hidden: true }} />
+            {props.children}
+        </SafeAreaView >
+    );
 };
 
 export default MainLayout;

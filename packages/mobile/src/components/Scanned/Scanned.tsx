@@ -24,7 +24,7 @@ const Scanned = withState()((s) => ({
     };
 
     return (
-        <MainLayout>
+        <MainLayout scanned={true}>
             <Modal isVisible={showModal}>
                 <View style={[styles.modalContainer, { backgroundColor: themeColorStyle }]}>
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>
@@ -34,8 +34,7 @@ const Scanned = withState()((s) => ({
                 </View>
             </Modal>
             <View style={commonStyles.main}>
-                {console.log(showModal)}
-                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Success !</Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Success!</Text>
                 <Image
                     source={themeLogoStyle}
                     resizeMode={'contain'}
