@@ -70,7 +70,7 @@ const Scanner = withState()(
                         <Camera
                             zoom={0}
                             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                            barCodeScannerSettings={{ barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr] }}
+                            barCodeScannerSettings={{ barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr, BarCodeScanner.Constants.BarCodeType.code128] }}
                             style={[StyleSheet.absoluteFillObject]}
                         />
                     </View>

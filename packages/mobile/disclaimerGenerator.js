@@ -11,20 +11,20 @@ licenseChecker.init(
         production: true,
         excludePrivatePackages: true
     },
-    (err, package) => {
+    (err, packageJson) => {
         if (err) {
             console.error(err);
         } else {
-            createDisclaimer(package);
+            createDisclaimer(packageJson);
         }
     }
 );
 
 // Generates license disclaimer
-const createDisclaimer = json => {
+const createDisclaimer = packageJson => {
     const licenses = [];
-    Object.keys(json).forEach((key) => {
-        let obj = json[key];
+    Object.keys(packageJson).forEach((key) => {
+        let obj = packageJson[key];
         obj.module = key;
         licenses.push(obj);
     });

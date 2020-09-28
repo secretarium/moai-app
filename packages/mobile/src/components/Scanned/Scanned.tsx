@@ -12,7 +12,7 @@ const Scanned = withState()((s) => ({
     scanCounter: s.system.scanCounter
 }), ({ scanCounter }) => {
 
-    const [showModal, setShowModal] = useState<boolean>(scanCounter === 1 || scanCounter === 7 || scanCounter === 40);
+    const [showModal, setShowModal] = useState<boolean>(scanCounter === 1 || scanCounter === 5 || scanCounter === 15);
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme === 'light' ? '#E8E8E8' : '#404040';
     const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';

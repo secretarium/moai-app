@@ -31,14 +31,14 @@ const Licenses: React.FC = () => {
         return [name, version];
     };
 
-    const licenses = Object.keys(licensesData).map(key => {
+    const getLicenses = Object.keys(licensesData).map(key => {
         const { licenses, ...license } = licensesData[key];
         const [name, version] = getNameAndVersion(key);
 
         return {
             key,
             name,
-            licenses: licenses.slice(0, 405),
+            licenses,
             version,
             ...license
         };
@@ -60,7 +60,7 @@ const Licenses: React.FC = () => {
                 }
                 statusBar={{ hidden: true }} />
             <FlatList
-                data={licenses}
+                data={getLicenses}
                 renderItem={({ item }) => (
                     <View>
                         <View style={styles.cardShadow}>
