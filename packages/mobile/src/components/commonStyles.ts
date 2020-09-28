@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Appearance } from 'react-native-appearance';
 
 const isDark = Appearance.getColorScheme() === 'dark';
@@ -8,6 +8,9 @@ export const commonStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: isDark ? '#1b1b1b' : '#ffffff',
         fontFamily: 'Poppins-Regular'
+    },
+    navbarBackground: {
+        backgroundColor: isDark ? '#1b1b1b' : '#ffffff'
     },
     container: {
         flex: 1
@@ -19,7 +22,8 @@ export const commonStyles = StyleSheet.create({
     },
     pin: {
         height: '80%',
-        width: '100%'
+        width: '100%',
+        bottom: 10
     },
     pinButton: {
         height: 250,
@@ -27,14 +31,12 @@ export const commonStyles = StyleSheet.create({
         paddingTop: 40
     },
     topLeftButton: {
-        position: 'absolute',
         left: 15,
-        top: Platform.OS === 'android' ? 10 : 30
+        top: 10
     },
     topRightButton: {
-        position: 'absolute',
         right: 15,
-        top: Platform.OS === 'android' ? 10 : 30
+        top: 10
     },
     main: {
         alignItems: 'center',

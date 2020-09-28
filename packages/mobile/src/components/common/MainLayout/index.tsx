@@ -6,18 +6,22 @@ import { Link } from '../../../ReactRouter';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { commonStyles } from '../../commonStyles';
+import NavigationBar from 'react-native-navbar';
+
 
 type MainLayoutProps = {
     backgroundColor?: string;
     statusBarStyle?: 'dark-content' | 'light-content';
     withNavigation?: boolean;
+    scanned?: boolean;
 };
 
 const MainLayout: React.FC<MainLayoutProps> = ({
     children,
     withNavigation = true,
     backgroundColor,
-    statusBarStyle
+    statusBarStyle,
+    scanned
 }) => {
 
     const [fontsLoaded] = useFonts({
@@ -37,14 +41,27 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     else
         composition = <>
             {withNavigation
-                ? <>
-                    <Link to={'/chat'} style={commonStyles.topLeftButton} underlayColor='transparent'>
-                        <Entypo name="chat" size={40} color={themeColorStyle} />
-                    </Link>
-                    <Link to={'/about'} style={commonStyles.topRightButton} underlayColor='transparent'>
-                        <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />
-                    </Link>
-                </>
+                ? <NavigationBar
+                    style={{
+                        ...commonStyles.navbarBackground,
+                        ...(backgroundColor ? { backgroundColor } : {})
+                    }}
+                    leftButton={(scanned === true) ?
+                        (
+                            <Link to={'/'} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                                <Entypo name="chevron-left" color={themeColorStyle} size={30} />
+                            </Link>
+
+                        ) : (
+                            <Link to={'/chat'} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                                <Entypo name="chat" size={40} color={themeColorStyle} />
+                            </Link>
+                        )}
+                    rightButton={
+                        <Link to={'/licenses'} style={commonStyles.topRightButton} underlayColor='transparent'>
+                            <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />
+                        </Link>}
+                    statusBar={{ hidden: true }} />
                 : null}
             {children}
         </>;

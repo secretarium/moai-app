@@ -20,7 +20,11 @@
         "test:mutation": "stryker run stryker.config.js",
         "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
         "lint:fix": "yarn run lint --fix",
-        "storybook": "start-storybook -p 6006"
+        "storybook": "start-storybook -p 6006",
+        "licenses": "license-checker --production --json > ./public/licenses.json",
+        "licenses-mobile": "npm-license-crawler --production --json ./public/licenses-mobile.json",
+        "disclaimer": "node disclaimerGenerator.js",
+        "postinstall": "yarn run licenses && yarn run disclaimer && yarn run licenses-mobile"
     },
     "dependencies": {
         "@expo/match-media": "0.0.0-beta.2",
@@ -47,6 +51,7 @@
         "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
         "react-native-appearance": "0.3.4",
         "react-native-modal": "11.5.6",
+        "react-native-navbar": "2.1.0",
         "react-native-onboarding-swiper": "1.1.4",
         "react-native-screens": "2.11.0",
         "react-native-web": "0.13.14",
@@ -80,6 +85,7 @@
         "@types/react": "16.9.49",
         "@types/react-dom": "16.9.8",
         "@types/react-native": "0.63.21",
+        "@types/react-native-navbar": "2.1.2",
         "@types/react-redux": "7.1.9",
         "@types/react-router": "5.1.8",
         "@types/react-router-dom": "5.1.5",
@@ -87,8 +93,11 @@
         "expo-cli": "3.27.10",
         "expo-optimize": "0.1.53",
         "expo-yarn-workspaces": "1.2.1",
+        "fs-extra": "9.0.1",
         "jest": "26.4.2",
         "jest-expo": "39.0.0",
+        "license-checker": "25.0.1",
+        "npm-license-crawler": "0.2.1",
         "redux-devtools-extension": "2.13.8",
         "sharp-cli": "1.14.1",
         "typescript": "4.0.3"

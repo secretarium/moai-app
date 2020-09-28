@@ -38,7 +38,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ color }) => {
                     </a>
                 </div>
                 <div>
-                    <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded hover:border-transparent mt-4 lg:mt-0">Download</a>
+                    <a href="#download" className="inline-block text-sm px-4 py-2 leading-none border rounded hover:border-transparent mt-4 lg:mt-0">Download</a>
                 </div>
             </div>
         </nav >

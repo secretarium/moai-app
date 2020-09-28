@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Link, Redirect } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout';
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
 import { actionTypes } from '../../actions/constants';
@@ -29,7 +29,7 @@ const Scanner = withState()(
             })();
         }, []);
 
-        const handleBarCodeScanned = ({ type, data }) => {
+        const handleBarCodeScanned = ({ type: __unused__type, data }) => {
             setScanned(true);
             dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: data });
             dispatch({ type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER });
@@ -42,7 +42,7 @@ const Scanner = withState()(
         if (permission === null)
             composition = <Text>Requesting for camera permission...</Text>;
         else if (permission === false)
-            composition = <Text>No access to camera...</Text>;
+            composition = <Text>No access to camera</Text>;
         else if (redirect === true)
             composition = <Redirect to={'/scanned'} />;
         else
@@ -65,7 +65,7 @@ const Scanner = withState()(
                 </View>
                 <TouchableOpacity style={styles.roundedButton} onPress={() => { setScanned(false); }}>
                     <Link to={'/'}>
-                        <AntDesign name="back" size={30} />
+                        <Entypo name="chevron-left" style={{ alignSelf: 'center' }} size={30} />
                     </Link>
                 </TouchableOpacity>
             </>;

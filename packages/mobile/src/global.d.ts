@@ -119,5 +119,11 @@ declare module 'react-router-dom' {
     }
 }
 
+declare module 'react-native-web' {
+    interface TouchableOpacity {
+        underlayColor?: string
+    }
+}
+
 export = Moai;
 export as namespace Moai;
