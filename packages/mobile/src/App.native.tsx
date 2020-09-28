@@ -7,9 +7,11 @@ import Home from './components/Home';
 import Scanned from './components/Scanned';
 import Chat from './components/Chat';
 import Scanner from './components/Scanner';
+import Licenses from './components/Licenses';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
+import { useFonts } from 'expo-font';
 
 
 const styles = StyleSheet.create({
@@ -36,6 +38,11 @@ const App = withState()((s) => ({
     const [initialUrl, setInitialUrl] = useState<string>(undefined);
     const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
     const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
+
+    const [fontsLoaded] = useFonts({
+        'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
+    });
 
     const parseUrl = useCallback((url: string | null | undefined) => {
 
@@ -85,23 +92,28 @@ const App = withState()((s) => ({
             <Text>Cheking in {initialUrl} ...</Text>
         </View>;
 
-    return (
-        <>
-            <Switch>
-                <Route path="/onboarding" component={OnboardingScreen} />
-                <Route path="/home" component={Home} />
-                <Route path="/about" component={About} />
-                <Route path="/chat" component={Chat} />
-                <Route path="/scanner" component={Scanner} />
-                <Route path="/scanned" component={Scanned} />
-                <Route render={() => {
-                    if (showOnboarding)
-                        return <Redirect to="/onboarding" />;
-                    return <Redirect to="/home" />;
-                }} />
-            </Switch>
-        </>
-    );
+    if (!fontsLoaded) {
+        return <Text>Loading fonts...</Text>;
+    } else {
+        return (
+            <>
+                <Switch>
+                    <Route path="/licenses" component={Licenses} />
+                    <Route path="/onboarding" component={OnboardingScreen} />
+                    <Route path="/home" component={Home} />
+                    <Route path="/about" component={About} />
+                    <Route path="/chat" component={Chat} />
+                    <Route path="/scanner" component={Scanner} />
+                    <Route path="/scanned" component={Scanned} />
+                    <Route render={() => {
+                        if (showOnboarding)
+                            return <Redirect to="/onboarding" />;
+                        return <Redirect to="/home" />;
+                    }} />
+                </Switch>
+            </>
+        );
+    }
 });
 
 export default App;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, TouchableOpacity, SafeAreaView, View, Image, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Link, Redirect } from '../../ReactRouter';
-import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
 import { useFonts } from 'expo-font';
@@ -35,7 +35,7 @@ const Scanner = withState()(
             })();
         }, []);
 
-        const handleBarCodeScanned = ({ type, data }) => {
+        const handleBarCodeScanned = ({ __unused__type, data }) => {
             setScanned(true);
             dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: data });
             dispatch({ type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER });
@@ -70,13 +70,17 @@ const Scanner = withState()(
                         <Camera
                             zoom={0}
                             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                            barCodeScannerSettings={{ barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr] }}
+                            barCodeScannerSettings={{ barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr, BarCodeScanner.Constants.BarCodeType.code128] }}
                             style={[StyleSheet.absoluteFillObject]}
                         />
                     </View>
                     <TouchableOpacity style={styles.roundedButton} onPress={() => { setScanned(false); }}>
-                        <Link to={'/'}>
-                            <AntDesign name="back" size={30} color={themeTextStyle} />
+                        <Link to={'/'} underlayColor='white'>
+                            <Entypo
+                                name="chevron-left"
+                                style={{ alignSelf: 'center' }}
+                                color={themeTextStyle}
+                                size={30} />
                         </Link>
                     </TouchableOpacity>
                 </SafeAreaView>

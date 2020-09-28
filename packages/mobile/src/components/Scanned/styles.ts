@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 export { commonStyles } from '../commonStyles';
 
 export const styles = StyleSheet.create({
     messageContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        bottom: 20
+        bottom: Platform.OS === 'android' ? 10 : 20
     },
     messageText: {
         borderRadius: 10,

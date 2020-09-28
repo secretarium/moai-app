@@ -44,6 +44,10 @@ buck-out/
 .expo/*
 web-build/
 
+# Licenses and Disclaimer
+public/licenses.json
+public/licenses-mobile.json
+public/disclaimer.txt
 # @generated: @expo/next-adapter@2.1.29
 /.expo/*
 # Expo Web
