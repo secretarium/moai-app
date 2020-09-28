@@ -20,7 +20,8 @@ const Scanner = withState()(
 
         // Color theme
         const colorScheme = useColorScheme();
-        const themeLogoStyle = colorScheme === 'light' ? require('../../assets/logo-white.png') : require('../../assets/logo.png');
+        const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'white' : 'black';
+        const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo-white.png') : require('../../assets/logo.png');
 
         useEffect(() => {
             (async () => {
@@ -48,7 +49,7 @@ const Scanner = withState()(
         else
             composition = <>
                 <View style={styles.curvedView}>
-                    <Text style={{ fontSize: 24 }}>Scanning...</Text>
+                    <Text style={{ fontSize: 24, color: themeTextStyle }}>Scanning...</Text>
                     <Image
                         source={themeLogoStyle}
                         resizeMode={'contain'}
@@ -59,13 +60,13 @@ const Scanner = withState()(
                     <Camera
                         zoom={0}
                         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-                        barCodeScannerSettings={{ barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr] }}
+                        barCodeScannerSettings={{ barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr, BarCodeScanner.Constants.BarCodeType.code128] }}
                         style={[StyleSheet.absoluteFillObject]}
                     />
                 </View>
                 <TouchableOpacity style={styles.roundedButton} onPress={() => { setScanned(false); }}>
                     <Link to={'/'}>
-                        <Entypo name="chevron-left" style={{ alignSelf: 'center' }} size={30} />
+                        <Entypo name="chevron-left" style={{ alignSelf: 'center', color: themeTextStyle }} size={30} />
                     </Link>
                 </TouchableOpacity>
             </>;

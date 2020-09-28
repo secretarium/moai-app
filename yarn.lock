@@ -4396,7 +4396,6 @@ __metadata:
     "@types/react": 16.9.49
     "@types/react-dom": 16.9.8
     "@types/react-native": 0.63.22
-    "@types/react-native-navbar": 2.1.2
     "@types/react-redux": 7.1.9
     "@types/react-router": 5.1.8
     "@types/react-router-dom": 5.1.5
@@ -4429,7 +4428,6 @@ __metadata:
     react-native: "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz"
     react-native-appearance: 0.3.4
     react-native-modal: 11.5.6
-    react-native-navbar: 2.1.0
     react-native-onboarding-swiper: 1.1.4
     react-native-screens: 2.11.0
     react-native-web: 0.13.14
@@ -6048,25 +6046,6 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: c9f68c92872a2e45e7f33508321fc4e515732fcf00732ad6078bb99a2cf052c3fd8c478a721030bf2eb7e71b3173e55b702be003d5ac240bfa40947b7a7384d3
-  languageName: node
-  linkType: hard
-
-"@types/react-native-navbar@npm:2.1.2":
-  version: 2.1.2
-  resolution: "@types/react-native-navbar@npm:2.1.2"
-  dependencies:
-    "@types/react": "*"
-    "@types/react-native": "*"
-  checksum: 8894d0d3c0e6e95f43686fe25e3ee8cb4c05402e1e8559e3771345639fd029694ac0b15a10f30efd4f5f18d55165387e845000c74514b83392bc68ffcd1e5d0c
-  languageName: node
-  linkType: hard
-
-"@types/react-native@npm:*":
-  version: 0.63.21
-  resolution: "@types/react-native@npm:0.63.21"
-  dependencies:
-    "@types/react": "*"
-  checksum: b85a1536eae8fa7fd48707acac83004a0e1b1ce7965f03f07749855c043ddfc720439449c18cd63289c0fab7e3d9c25c2dab63ce39976dac2ea5c26f784cf43e
   languageName: node
   linkType: hard
 
@@ -24404,15 +24383,6 @@ fsevents@^1.2.7:
     react: "*"
     react-native: "*"
   checksum: 9d080077dca06990243d973f000ef9ada0e1ed74241e5dd78929cd1c7235c0177d2dcf56d6cf388c46c46cf4d6158ffea36858e27083c97088374b4ada7fa2ca
-  languageName: node
-  linkType: hard
-
-"react-native-navbar@npm:2.1.0":
-  version: 2.1.0
-  resolution: "react-native-navbar@npm:2.1.0"
-  dependencies:
-    prop-types: ^15.5.10
-  checksum: 34cd619aa13b68a672f33afc7fce46500b2c7b9953042d6e2a61068633fd4ee748a805df0eb7bc26fdb1708d1d027a421b92984194ab2e81f186b8d7b2aafe48
   languageName: node
   linkType: hard
 

@@ -14,9 +14,9 @@ const Scanned = withState()((s) => ({
 
     const [showModal, setShowModal] = useState<boolean>(scanCounter === 1 || scanCounter === 5 || scanCounter === 15);
     const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme === 'light' ? '#E8E8E8' : '#404040';
-    const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
-    const themeLogoStyle = colorScheme === 'light' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
+    const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
+    const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
+    const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     const hideModal = () => {
@@ -24,7 +24,7 @@ const Scanned = withState()((s) => ({
     };
 
     return (
-        <MainLayout scanned={true}>
+        <MainLayout showGoBack={true}>
             <Modal isVisible={showModal}>
                 <View style={[styles.modalContainer, { backgroundColor: themeColorStyle }]}>
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>

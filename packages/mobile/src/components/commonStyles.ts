@@ -30,6 +30,12 @@ export const commonStyles = StyleSheet.create({
         width: 200,
         paddingTop: 40
     },
+    navigation: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        paddingBottom: 15
+    },
     topLeftButton: {
         left: 15,
         top: 10
@@ -40,7 +46,6 @@ export const commonStyles = StyleSheet.create({
     },
     main: {
         alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 20
+        justifyContent: 'center'
     }
 });
