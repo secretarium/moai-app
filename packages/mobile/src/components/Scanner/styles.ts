@@ -3,6 +3,10 @@ import { StyleSheet, Dimensions } from 'react-native';
 const screen = Dimensions.get('screen');
 
 export default StyleSheet.create({
+    parentContainer: {
+        flex: 1,
+        backgroundColor: '#00b0ee'
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
