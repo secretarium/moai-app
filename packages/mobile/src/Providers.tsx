@@ -4,14 +4,17 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { Router } from './ReactRouter';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
+import FontLoader from './FontLoader';
 
 const Providers: React.FC = ({ children }) => (
     <AppearanceProvider>
-        <ReduxProvider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <Router>{children}</Router>
-            </PersistGate>
-        </ReduxProvider>
+        <FontLoader>
+            <ReduxProvider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Router>{children}</Router>
+                </PersistGate>
+            </ReduxProvider>
+        </FontLoader>
     </AppearanceProvider>
 );
 

@@ -45,23 +45,13 @@ export function toBase64(src: Uint8Array, urlSafeMode = false): string {
     return urlSafeMode ? x.replace(/\+/g, '-').replace(/\//g, '_') : x;
 }
 
+export function fromBase64(enc: string): string {
+    return String.fromCodePoint(...crypto.fromBase64(enc));
+}
+
 const byteToHex = (new Array(256)).map(n => n.toString(16).padStart(2, '0'));
 export function toHex(src: Uint8Array, delimiter = ''): string {
     return src.map(n => byteToHex[n]).join(delimiter);
-}
-
-export function toBytes(s: string, base64 = false): Uint8Array {
-    if (base64) {
-        const x = /[-_]/.test(s) ? s.replace(/\\-/g, '+').replace(/\\_/g, '/') : s;
-        return new Uint8Array(atob(x).split('').map(function (c) { return c.charCodeAt(0); }));
-    }
-    else {
-        const buf = new Uint8Array(s.length);
-        for (let i = 0, l = s.length; i < l; i++) {
-            buf[i] = s.charCodeAt(i);
-        }
-        return buf;
-    }
 }
 
 export function getRandomBytes(size = 32): Uint8Array {
