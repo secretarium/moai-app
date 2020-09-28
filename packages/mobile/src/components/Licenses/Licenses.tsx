@@ -39,7 +39,7 @@ const Licenses: React.FC = () => {
     });
 
     return (
-        <MainLayout withNavigation={true}>
+        <MainLayout scanned={true} withNavigation={true}>
             <FlatList
                 data={getLicenses}
                 renderItem={({ item }) => (
