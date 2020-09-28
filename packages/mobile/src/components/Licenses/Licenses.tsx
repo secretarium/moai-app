@@ -7,7 +7,7 @@ import { commonStyles } from '../commonStyles';
 import NavigationBar from 'react-native-navbar';
 import { Link } from '../../ReactRouter';
 import { Entypo } from '@expo/vector-icons';
-
+import licensesData from '../../../public/licenses-mobile.json';
 
 const Licenses: React.FC = () => {
     // Color theme
@@ -16,8 +16,6 @@ const Licenses: React.FC = () => {
     const themeColorStyle = colorScheme === 'light' ? '#E8E8E8' : '#404040';
     const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
     const themeStatusBarStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
-
-    const licensesData = require('../../../public/licenses-mobile.json');
 
     const getNameAndVersion = (key) => {
         let name;

@@ -35,7 +35,7 @@ const Scanner = withState()(
             })();
         }, []);
 
-        const handleBarCodeScanned = ({ type, data }) => {
+        const handleBarCodeScanned = ({ __unused__type, data }) => {
             setScanned(true);
             dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: data });
             dispatch({ type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER });

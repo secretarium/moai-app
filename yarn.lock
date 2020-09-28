@@ -4396,6 +4396,7 @@ __metadata:
     "@types/react": 16.9.49
     "@types/react-dom": 16.9.8
     "@types/react-native": 0.63.20
+    "@types/react-native-navbar": 2.1.2
     "@types/react-redux": 7.1.9
     "@types/react-router": 5.1.8
     "@types/react-router-dom": 5.1.5
@@ -6050,7 +6051,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:0.63.20":
+"@types/react-native-navbar@npm:2.1.2":
+  version: 2.1.2
+  resolution: "@types/react-native-navbar@npm:2.1.2"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-native": "*"
+  checksum: 8894d0d3c0e6e95f43686fe25e3ee8cb4c05402e1e8559e3771345639fd029694ac0b15a10f30efd4f5f18d55165387e845000c74514b83392bc68ffcd1e5d0c
+  languageName: node
+  linkType: hard
+
+"@types/react-native@npm:*, @types/react-native@npm:0.63.20":
   version: 0.63.20
   resolution: "@types/react-native@npm:0.63.20"
   dependencies:
