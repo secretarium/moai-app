@@ -1,5 +1,6 @@
 import { AnyAction as ReduxAnyAction } from 'redux';
 import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
+import { Key } from '../../connect/src';
 
 declare namespace Moai {
     interface FunctionAction {
@@ -19,15 +20,6 @@ declare namespace Moai {
     interface Dispatch {
         (action: AnyAction | Promise<AnyAction> | FunctionAction): Promise<AnyAction>;
     }
-
-    type KeyPair = {
-        id: string;
-        version?: string;
-        name: string;
-        iv: string;
-        salt: string;
-        encryptedKeyPair: string;
-    };
 
     type QueryCommand = {
         application: string;
@@ -101,7 +93,7 @@ declare namespace Moai {
     type System = {
         version: string;
         localConfiguration: SystemConfiguration;
-        localKey?: KeyPair;
+        localKey?: Key;
         currentConnection?: SystemConnection;
         showOnboarding: boolean;
         scanCounter: number;

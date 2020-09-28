@@ -6,6 +6,7 @@ import { openURL } from 'expo-linking';
 import { Entypo } from '@expo/vector-icons';
 import licensesData from '../../../public/licenses-mobile.json';
 import MainLayout from '../../components/common/MainLayout';
+import { version as packageVersion } from '../../../package.json';
 
 const Licenses: React.FC = () => {
     // Color theme
@@ -40,6 +41,26 @@ const Licenses: React.FC = () => {
 
     return (
         <MainLayout showGoBack={true} withNavigation={true}>
+            <View style={{
+                paddingVertical: 30,
+                paddingHorizontal: 15
+            }}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
+                    About Moai
+                </Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 20, paddingBottom: 15 }}>
+                    v{packageVersion}
+                </Text>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 20, paddingBottom: 15 }}>
+                    Third-Party Notice &amp; Credits
+                </Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, paddingBottom: 20 }}>
+                    Moai incroporates components from the projects listed below. The original copyright notices and the licenses under which Secretarium Ltd. received such components are set forth below for informational purposes. Secretarium Ltd. reserves all rights not expressly granted herein, whether by implication, estoppel or otherwise.
+                </Text>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>
+                    List of top-level dependencies
+                </Text>
+            </View>
             <FlatList
                 data={getLicenses}
                 renderItem={({ item }) => (
