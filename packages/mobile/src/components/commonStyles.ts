@@ -1,14 +1,16 @@
 import { StyleSheet, Platform } from 'react-native';
+import { Appearance } from 'react-native-appearance';
+
+const isDark = Appearance.getColorScheme() === 'dark';
 
 export const commonStyles = StyleSheet.create({
+    applicationBackground: {
+        flex: 1,
+        backgroundColor: isDark ? '#1b1b1b' : '#ffffff',
+        fontFamily: 'Poppins-Regular'
+    },
     container: {
         flex: 1
-    },
-    lightContainer: {
-        backgroundColor: '#fff'
-    },
-    darkContainer: {
-        backgroundColor: '#1b1b1b'
     },
     logo: {
         height: '20%',
@@ -38,16 +40,5 @@ export const commonStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 20
-    },
-    messageContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        bottom: 20
-    },
-    messageText: {
-        borderRadius: 10,
-        padding: 10,
-        width: '80%',
-        overflow: 'hidden'
     }
 });
