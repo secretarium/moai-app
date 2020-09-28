@@ -11,8 +11,8 @@ import { version as packageVersion } from '../../../package.json';
 const Licenses: React.FC = () => {
     // Color theme
     const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme === 'light' ? '#E8E8E8' : '#404040';
-    const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
+    const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
+    const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
 
     const getNameAndVersion = (key) => {
         let name;
@@ -40,7 +40,7 @@ const Licenses: React.FC = () => {
     });
 
     return (
-        <MainLayout scanned={true} withNavigation={true}>
+        <MainLayout showGoBack={true} withNavigation={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15

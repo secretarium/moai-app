@@ -42,7 +42,7 @@ export default StyleSheet.create({
     cameraView: {
         borderTopLeftRadius: screen.width,
         borderTopRightRadius: screen.width,
-        width: screen.width + 50,
+        width: screen.width,
         height: '100%',
         top: 220,
         position: 'absolute',

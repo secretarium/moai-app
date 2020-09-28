@@ -1,16 +1,16 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 export { commonStyles } from '../commonStyles';
 
 export const styles = StyleSheet.create({
     messageContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        bottom: Platform.OS === 'android' ? 10 : 20
+        bottom: 60
     },
     messageText: {
         borderRadius: 10,
         padding: 10,
-        width: '80%',
+        width: '85%',
         overflow: 'hidden'
     },
     modalContainer: {

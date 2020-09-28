@@ -9,11 +9,11 @@ import { commonStyles } from './styles';
 const Home: React.FC = () => {
     // Color theme
     const colorScheme = useColorScheme();
-    const themeTextStyle = colorScheme === 'light' ? 'black' : 'white';
-    const themeLogoStyle = colorScheme === 'light' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
+    const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
+    const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
     return (
-        <MainLayout scanned={false}>
+        <MainLayout showGoBack={false}>
             <View style={commonStyles.main}>
                 <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Tap to scan</Text>
                 <Image
