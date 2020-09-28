@@ -23,7 +23,7 @@ exports[`<Providers /> has 1 child 1`] = `
     dir="auto"
     onClick={[Function]}
   >
-    Test
+    Loading...
   </div>
 </div>
 `;

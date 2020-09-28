@@ -19,15 +19,11 @@ exports[`<App /> has 1 child 1`] = `
   }
 >
   <div
-    className="css-view-1dbjc4n"
+    className="css-text-901oao"
+    dir="auto"
+    onClick={[Function]}
   >
-    <div
-      className="css-text-901oao"
-      dir="auto"
-      onClick={[Function]}
-    >
-      Home
-    </div>
+    Loading...
   </div>
 </div>
 `;
