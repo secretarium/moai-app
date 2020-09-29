@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Image, Button } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Link, Redirect } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout';
@@ -11,6 +11,10 @@ import { withState } from '../../store';
 import styles from './styles';
 import { SCP, Constants } from '../../../../connect/src';
 import { parseCode, Sources, ParsedCode } from './dataParser';
+import Modal from 'react-native-modal';
+import { commonStyles } from '../commonStyles';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 const scp = new SCP();
 const isDev = process.env.NODE_ENV === 'development';
@@ -28,11 +32,18 @@ const Scanner = withState()(
         const [redirect, setRedirect] = useState(false);
         const [venuInfo, setVenuInfo] = useState<ParsedCode>();
         const [error, setError] = useState<string>();
+        const [showModal, setShowModal] = useState<boolean>(false);
 
         // Color theme
         const colorScheme = useColorScheme();
         const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'white' : 'black';
+        const themeModalStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
         const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo-white.png') : require('../../assets/logo.png');
+        const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
+
+        const hideModal = () => {
+            setShowModal(false);
+        };
 
         useEffect(() => {
             (async () => {
@@ -72,6 +83,7 @@ const Scanner = withState()(
                     setError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
                     setVenuInfo(undefined);
                     setIsConnected(false);
+                    setShowModal(true);
                 });
                 query.send?.()
                     .catch((error) => {
@@ -79,6 +91,7 @@ const Scanner = withState()(
                         setError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
                         setVenuInfo(undefined);
                         setIsConnected(false);
+                        setShowModal(true);
                     });
             }
         }, [dispatch, isConnected, venuInfo]);
@@ -91,6 +104,8 @@ const Scanner = withState()(
                 setIsCommitting(true);
             } else {
                 setError('Sorry, we were not able to recognise this QRCode');
+                setShowModal(true);
+                setHasScanned(false);
             }
         };
 
@@ -127,13 +142,22 @@ const Scanner = withState()(
                 </View>
                 <TouchableOpacity style={styles.roundedButton} onPress={() => { setHasScanned(false); }}>
                     <Link to={'/'}>
-                        <Entypo name="chevron-left" style={{ alignSelf: 'center', color: themeTextStyle }} size={30} />
+                        <Entypo name='chevron-left' style={{ alignSelf: 'center', color: themeTextStyle }} size={30} />
                     </Link>
                 </TouchableOpacity>
             </>;
 
         return (
             <MainLayout backgroundColor='#00b0ee' withNavigation={false}>
+                <Modal isVisible={showModal}>
+                    <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
+                        <MaterialIcons name='error' size={84} color={themeModalStyle} />
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
+                            {error}
+                        </Text>
+                        <Button title='Close' onPress={hideModal} />
+                    </View>
+                </Modal>
                 {composition}
             </MainLayout>
         );

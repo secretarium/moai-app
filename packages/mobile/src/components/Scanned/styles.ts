@@ -12,11 +12,5 @@ export const styles = StyleSheet.create({
         padding: 10,
         width: '85%',
         overflow: 'hidden'
-    },
-    modalContainer: {
-        margin: 20,
-        borderRadius: 20,
-        padding: 20,
-        alignItems: 'center'
     }
 });
