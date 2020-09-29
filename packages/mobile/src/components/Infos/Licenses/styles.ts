@@ -5,7 +5,6 @@ export default StyleSheet.create({
         borderRadius: 4,
         overflow: 'hidden',
         flexDirection: 'row',
-        backgroundColor: 'white',
         alignItems: 'center'
     },
     cardShadow: {
