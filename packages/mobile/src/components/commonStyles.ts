@@ -47,5 +47,12 @@ export const commonStyles = StyleSheet.create({
     main: {
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    modalContainer: {
+        margin: 20,
+        borderRadius: 20,
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });

@@ -26,7 +26,7 @@ const Scanned = withState()((s) => ({
     return (
         <MainLayout showGoBack={true}>
             <Modal isVisible={showModal}>
-                <View style={[styles.modalContainer, { backgroundColor: themeColorStyle }]}>
+                <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>
                         Hi there! Remember to use the Moai App to scan the barcode, after getting tested for the coronavirus!
                     </Text>

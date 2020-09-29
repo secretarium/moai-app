@@ -7,7 +7,10 @@ import Home from './components/Home';
 import Scanned from './components/Scanned';
 import Chat from './components/Chat';
 import Scanner from './components/Scanner';
-import Licenses from './components/Licenses';
+import Keys from './components/Infos/Keys/Keys';
+import Notices from './components/Infos/Notices/Notices';
+import Licenses from './components/Infos/Licenses';
+import Infos from './components/Infos';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
@@ -98,6 +101,9 @@ const App = withState()((s) => ({
         return (
             <>
                 <Switch>
+                    <Route path="/notices" component={Notices} />
+                    <Route path="/keys" component={Keys} />
+                    <Route path="/infos" component={Infos} />
                     <Route path="/licenses" component={Licenses} />
                     <Route path="/onboarding" component={OnboardingScreen} />
                     <Route path="/home" component={Home} />
