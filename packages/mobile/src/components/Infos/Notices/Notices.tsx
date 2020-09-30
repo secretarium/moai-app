@@ -4,6 +4,7 @@ import { Asset } from 'expo-asset';
 import { View, Text, ScrollView } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import MainLayout from '../../common/MainLayout/index';
+import disclaimerPath from '../../../../public/disclaimer.txt';
 
 
 const Notices: React.FC = () => {
@@ -16,7 +17,7 @@ const Notices: React.FC = () => {
     useEffect(() => {
         const fetchDisclaimer = async () => {
             try {
-                const disclaimerFile = Asset.fromModule(require('../../../../public/disclaimer.txt'));
+                const disclaimerFile = Asset.fromModule(disclaimerPath);
                 await disclaimerFile.downloadAsync();
                 const data = await FileSystem.readAsStringAsync(disclaimerFile.localUri);
                 setDisclaimer(data);
