@@ -10,7 +10,7 @@ const Keys: React.FC = () => {
     const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
 
     return (
-        <MainLayout showGoBack={true} withNavigation={true}>
+        <MainLayout goBackRoute={'/infos'} showGoBack={true} withNavigation={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15

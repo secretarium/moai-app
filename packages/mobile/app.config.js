@@ -65,7 +65,8 @@ const config = {
             'js',
             'json',
             'ts',
-            'tsx'
+            'tsx',
+            'txt'
         ]
     },
     loading: {

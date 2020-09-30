@@ -12,6 +12,7 @@ type MainLayoutProps = {
     statusBarStyle?: 'dark-content' | 'light-content';
     withNavigation?: boolean;
     showGoBack?: boolean;
+    goBackRoute?: string;
 };
 
 const MainLayout: React.FC<MainLayoutProps> = ({
@@ -19,7 +20,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     withNavigation = true,
     backgroundColor,
     statusBarStyle,
-    showGoBack
+    showGoBack,
+    goBackRoute
 }) => {
 
     // Color theme
@@ -38,7 +40,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                     ? <View style={commonStyles.navigation}>
                         {(showGoBack === true) ?
                             (
-                                <Link to={'/'} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                                <Link to={`${goBackRoute}`} style={commonStyles.topLeftButton} underlayColor='transparent'>
                                     <Entypo name="chevron-left" color={themeColorStyle} size={30} />
                                 </Link>
                             ) : (
