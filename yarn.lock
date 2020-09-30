@@ -4408,6 +4408,7 @@ __metadata:
     expo-camera: 9.0.0
     expo-cli: 3.27.10
     expo-constants: 9.2.0
+    expo-file-system: 9.2.0
     expo-font: 8.3.0
     expo-linking: 1.0.4
     expo-optimize: 0.1.53
@@ -13434,7 +13435,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-file-system@npm:~9.2.0":
+"expo-file-system@npm:9.2.0, expo-file-system@npm:~9.2.0":
   version: 9.2.0
   resolution: "expo-file-system@npm:9.2.0"
   dependencies:

@@ -4,9 +4,9 @@ import { useColorScheme } from 'react-native-appearance';
 import styles from './styles';
 import { openURL } from 'expo-linking';
 import { Entypo } from '@expo/vector-icons';
-import licensesData from '../../../public/licenses-mobile.json';
-import MainLayout from '../../components/common/MainLayout';
-import { version as packageVersion } from '../../../package.json';
+import licensesData from '../../../../public/licenses-mobile.json';
+import MainLayout from '../../common/MainLayout';
+import { version as packageVersion } from '../../../../package.json';
 
 const Licenses: React.FC = () => {
     // Color theme
