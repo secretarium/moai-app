@@ -40,7 +40,7 @@ const Licenses: React.FC = () => {
     });
 
     return (
-        <MainLayout showGoBack={true} withNavigation={true}>
+        <MainLayout goBackRoute={'/infos'} showGoBack={true} withNavigation={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15

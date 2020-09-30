@@ -14,6 +14,9 @@ const config = merge(baseConfig, {
                 keep_fnames: true
             }
         }
+    },
+    resolver: {
+        assetExts: ['txt', 'ttf', 'png']
     }
 }, {
     isMergeableObject: isPlainObject
