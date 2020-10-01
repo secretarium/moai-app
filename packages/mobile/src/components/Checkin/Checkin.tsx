@@ -30,6 +30,7 @@ const Checkin = withState<RouteComponentProps<{
         const [redirect, setRedirect] = useState(false);
         const [venuInfo, setVenuInfo] = useState<ParsedCode>({
             source: Sources.MOAI,
+            type: '255',
             ...match.params
         });
         const [pageError, setPageError] = useState<string>();

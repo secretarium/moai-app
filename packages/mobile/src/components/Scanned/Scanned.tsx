@@ -44,16 +44,17 @@ const Scanned = withState()((s) => ({
                         style={commonStyles.pin}
                     />
                 </View>
-                <TouchableOpacity onPress={() => history.push('/')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Home</Text>
-                </TouchableOpacity>
             </View>
             <View style={styles.messageContainer} >
                 <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>
-                    <Bold>How NHS Test and Trace will contact you?</Bold>{'\n'}{'\n'}
-                        You will be contacted via messaging, directly inside of Moai!{'\n'}{'\n'}
-                        You'll be asked to sign in to the NHS Test and Trace contact tracing website at https://contact-tracingphe.gov.uk
+                    <Bold>How will NHS Test and Trace contact you?</Bold>{'\n'}{'\n'}
+                        You will be contacted via messaging, directly inside of Moai!
                 </Text>
+            </View>
+            <View style={styles.homeButtonContainer} >
+                <TouchableOpacity onPress={() => history.push('/')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Go back</Text>
+                </TouchableOpacity>
             </View>
         </MainLayout>
     );
