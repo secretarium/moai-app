@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image, Button, Modal } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Image, Button } from 'react-native';
+import Modal from 'react-native-modal';
 import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout';
@@ -32,7 +33,7 @@ const Scanner: React.FC = () => {
             setShowModal(false);
             setVenuInfo(parsedCode);
         } else {
-            setError('Sorry, we were not able to recognise this QRCode');
+            setError('Sorry, we were unable to recognise this QRCode');
             setShowModal(true);
             setVenuInfo(undefined);
         }
@@ -86,7 +87,7 @@ const Scanner: React.FC = () => {
 
     return (
         <MainLayout backgroundColor='#00b0ee' withNavigation={false}>
-            <Modal visible={showModal}>
+            <Modal isVisible={showModal}>
                 <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
                     <MaterialIcons name='error' size={84} color={themeModalStyle} />
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
