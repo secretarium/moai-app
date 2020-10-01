@@ -6,7 +6,7 @@ import MainLayout from '../common/MainLayout';
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
-import styles from './styles';
+import { styles } from './styles';
 import { parseCode, Sources, ParsedCode } from '../Checkin/dataParser';
 import { Redirect } from 'react-router';
 import { commonStyles } from '../commonStyles';

@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const screen = Dimensions.get('screen');
 
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
     logo: {
         height: '20%',
         width: '50%'

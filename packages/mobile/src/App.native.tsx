@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
-import * as SplashScreen from 'expo-splash-screen';
 import { Redirect, Route, Switch } from './ReactRouter';
 import About from './About';
 import Home from './components/Home';
@@ -16,14 +15,14 @@ import Infos from './components/Infos';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
 import { useFonts } from 'expo-font';
+import { styles } from './styles';
+import { View, Image } from 'react-native';
 
 const App = withState()(
     null,
     ({ dispatch }) => {
 
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
-        const [isSplashHidden, setIsSplashHidden] = useState(false);
-        const [isLoadingComplete, setLoadingComplete] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
 
@@ -40,21 +39,6 @@ const App = withState()(
             else
                 setInitialUrl(null);
         }, []);
-
-        useEffect(() => {
-            if (hasParsedInitialURL && hasRequestedLocalKey && fontsLoaded) {
-                SplashScreen.hideAsync().then(() => {
-                    setLoadingComplete(true);
-                }).catch(() => {
-                    // Do nothing
-                });
-            } else if (!isSplashHidden)
-                SplashScreen.preventAutoHideAsync().then(() => {
-                    setIsSplashHidden(true);
-                }).catch(() => {
-                    // Do nothing
-                });
-        }, [fontsLoaded, hasParsedInitialURL, hasRequestedLocalKey, isSplashHidden]);
 
         useEffect(() => {
             if (!initialUrl) {
@@ -75,8 +59,10 @@ const App = withState()(
             }
         }, [dispatch, hasRequestedLocalKey]);
 
-        if (!isLoadingComplete)
-            return null;
+        if (!fontsLoaded || !hasRequestedLocalKey || !hasParsedInitialURL)
+            return <View style={styles.container}>
+                <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
+            </View>;
 
         if (initialUrl)
             return <Redirect to={`/checkin/${initialUrl}`} />;
