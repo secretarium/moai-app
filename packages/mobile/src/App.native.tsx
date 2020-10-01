@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Scanned from './components/Scanned';
 import Chat from './components/Chat';
 import Scanner from './components/Scanner';
+import MoaiScanner from './components/MoaiScanner';
 import Keys from './components/Infos/Keys';
 import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
@@ -81,9 +82,7 @@ const App = withState()((s) => ({
         </>;
 
     if (!hasParsedInitialURL)
-        return <>
-            <Text>Checking loading url ...</Text>
-        </>;
+        return <Redirect to="/checkin/:venueType?/:venueID?" />;
 
     if (initialUrl)
         return <View style={styles.container} >
@@ -101,6 +100,7 @@ const App = withState()((s) => ({
         return (
             <>
                 <Switch>
+                    <Route path="/checkin/:venueType?/:venueID?" component={MoaiScanner} />
                     <Route path="/notices" component={Notices} />
                     <Route path="/keys" component={Keys} />
                     <Route path="/infos" component={Infos} />
@@ -112,8 +112,8 @@ const App = withState()((s) => ({
                     <Route path="/scanner" component={Scanner} />
                     <Route path="/scanned" component={Scanned} />
                     <Route render={() => {
-                        if (showOnboarding)
-                            return <Redirect to="/onboarding" />;
+                        // if (showOnboarding)
+                        //     return <Redirect to="/onboarding" />;
                         return <Redirect to="/home" />;
                     }} />
                 </Switch>
