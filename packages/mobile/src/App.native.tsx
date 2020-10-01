@@ -112,8 +112,8 @@ const App = withState()((s) => ({
                     <Route path="/scanner" component={Scanner} />
                     <Route path="/scanned" component={Scanned} />
                     <Route render={() => {
-                        if (showOnboarding)
-                            return <Redirect to="/onboarding" />;
+                        // if (showOnboarding)
+                        //     return <Redirect to="/onboarding" />;
                         return <Redirect to="/home" />;
                     }} />
                 </Switch>
