@@ -1,0 +1,2 @@
+export { commonStyles } from '../commonStyles';
+

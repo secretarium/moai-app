@@ -2218,6 +2218,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo/configure-splash-screen@npm:0.2.0":
+  version: 0.2.0
+  resolution: "@expo/configure-splash-screen@npm:0.2.0"
+  dependencies:
+    "@react-native-community/cli-platform-android": ^4.10.0
+    "@react-native-community/cli-platform-ios": ^4.10.0
+    color-string: ^1.5.3
+    commander: ^5.1.0
+    core-js: ^3.6.5
+    deep-equal: ^2.0.3
+    fs-extra: ^9.0.0
+    lodash: ^4.17.15
+    pngjs: ^5.0.0
+    xcode: ^3.0.0
+    xml-js: ^1.6.11
+  peerDependencies:
+    expo-splash-screen: "*"
+  bin:
+    configure-splash-screen: build/index-cli.js
+    expo-splash-screen: build/index-cli.js
+  checksum: 34e19936246c2f5bf177ad1077b2f548ee40d636c5bc9255b4f339117782d5b408e5029d68d7cbc6056a05dbac019c655dede5e18d46d240f5a425298890b87c
+  languageName: node
+  linkType: hard
+
 "@expo/configure-splash-screen@npm:0.2.1":
   version: 0.2.1
   resolution: "@expo/configure-splash-screen@npm:0.2.1"
@@ -4412,6 +4436,7 @@ __metadata:
     expo-font: 8.3.0
     expo-linking: 1.0.4
     expo-optimize: 0.1.55
+    expo-splash-screen: 0.6.2
     expo-yarn-workspaces: 1.2.1
     fs-extra: 9.0.1
     i18next: 19.7.0
@@ -13555,6 +13580,15 @@ __metadata:
   dependencies:
     "@expo/configure-splash-screen": 0.1.13
   checksum: ea411b5af997f0d1f1bead15b1594bba95a7e070683082337400a061d5b0af15e5decd1bfe6e6843a53e1ac0b66eef4041d634134859db5b926c4a7f95130ce4
+  languageName: node
+  linkType: hard
+
+"expo-splash-screen@npm:0.6.2":
+  version: 0.6.2
+  resolution: "expo-splash-screen@npm:0.6.2"
+  dependencies:
+    "@expo/configure-splash-screen": 0.2.0
+  checksum: cad61f396f3a153c1f93041c4faea5d4451623bf6e87adadf25e29464aa0f36c5a1e3e28fab7d195961a2865d8101e5de83673e7d271b435c51fc8607f5fcf4e
   languageName: node
   linkType: hard
 

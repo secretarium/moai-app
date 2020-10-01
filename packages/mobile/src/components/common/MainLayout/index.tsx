@@ -40,9 +40,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                     ? <View style={commonStyles.navigation}>
                         {(showGoBack === true) ?
                             (
-                                <Link to={`${goBackRoute}`} style={commonStyles.topLeftButton} underlayColor='transparent'>
-                                    <Entypo name="chevron-left" color={themeColorStyle} size={30} />
-                                </Link>
+                                <>
+                                    <Link to={`${goBackRoute}`} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                                        <Entypo name="chevron-left" color={themeColorStyle} size={30} />
+                                    </Link>
+                                    <Link to={'/infos'} component={TouchableOpacity} disabled={true} style={commonStyles.topRightButton} underlayColor='transparent'>
+                                        <MaterialCommunityIcons name="information" size={40} color={commonStyles.applicationBackground.backgroundColor} />
+                                    </Link>
+                                </>
                             ) : (
                                 <>
                                     <Link to={'/chat'} component={TouchableOpacity} disabled={true} style={commonStyles.topLeftButton} underlayColor='transparent'>
