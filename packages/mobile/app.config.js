@@ -74,9 +74,12 @@ const config = {
         hideExponentText: false
     },
     splash: {
-        image: './assets/logo.png',
+        image: './assets/splash.png',
         resizeMode: 'contain',
-        backgroundColor: '#ffffff'
+        backgroundColor: '#eb7473'
+    },
+    experiments: {
+        turboModules: true
     }
 };
 
