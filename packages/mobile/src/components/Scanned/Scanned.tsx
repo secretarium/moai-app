@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { Text, Image, View, Button } from 'react-native';
+import { Text, Image, View, Button, TouchableOpacity } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { withState } from '../../store';
-import { Link } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout';
 import { styles, commonStyles } from './styles';
 import Modal from 'react-native-modal';
+import { useHistory } from 'react-router';
 
 
 const Scanned = withState()((s) => ({
     scanCounter: s.system.scanCounter
 }), ({ scanCounter }) => {
 
+    const history = useHistory();
     const [showModal, setShowModal] = useState<boolean>(scanCounter === 1 || scanCounter === 5 || scanCounter === 15);
     const colorScheme = useColorScheme();
     const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
@@ -36,13 +37,16 @@ const Scanned = withState()((s) => ({
                     resizeMode={'contain'}
                     style={commonStyles.logo}
                 />
-                <Link to={'/scanner'} style={commonStyles.pinButton} underlayColor='transparent'>
+                <View style={commonStyles.pinButton}>
                     <Image
                         source={require('../../assets/pin-success.png')}
                         resizeMode={'contain'}
                         style={commonStyles.pin}
                     />
-                </Link>
+                </View>
+                <TouchableOpacity onPress={() => history.push('/')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Home</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.messageContainer} >
                 <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>

@@ -12,5 +12,13 @@ export const styles = StyleSheet.create({
         padding: 10,
         width: '85%',
         overflow: 'hidden'
+    },
+    homeButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 25, padding: 10,
+        backgroundColor: 'white',
+        width: '25%',
+        bottom: 45
     }
 });

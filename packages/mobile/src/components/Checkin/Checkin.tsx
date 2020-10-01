@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
-import { Link, Redirect } from '../../ReactRouter';
+import { Redirect } from '../../ReactRouter';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
 import { SCP, Key, Constants } from '../../../../connect/src';
@@ -97,19 +97,19 @@ const Checkin = withState<RouteComponentProps<{
             composition =
                 <>
                     <View style={commonStyles.main}>
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Checkin in...</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Checking in...</Text>
                         <Image
                             source={themeLogoStyle}
                             resizeMode={'contain'}
                             style={commonStyles.logo}
                         />
-                        <Link to={'/scanner'} style={commonStyles.pinButton} underlayColor='transparent'>
+                        <View style={commonStyles.pinButton}>
                             <Image
                                 source={require('../../assets/pin-checkin.png')}
                                 resizeMode={'contain'}
                                 style={commonStyles.pin}
                             />
-                        </Link>
+                        </View>
                     </View>
                 </>;
 
