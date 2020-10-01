@@ -2,7 +2,7 @@ const config = {
     name: 'Moai',
     description: 'An app for Confidential Track and Trace',
     icon: './assets/icon.png',
-    version: '0.0.1',
+    version: '0.0.2',
     orientation: 'portrait',
     slug: 'moai-confidential-test-and-trace',
     userInterfaceStyle: 'automatic',
