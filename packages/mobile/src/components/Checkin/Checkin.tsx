@@ -4,10 +4,10 @@ import { useColorScheme } from 'react-native-appearance';
 import { Link, Redirect } from '../../ReactRouter';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
-import { SCP, Constants } from '../../../../connect/src';
+import { SCP, Key, Constants } from '../../../../connect/src';
 import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
-import { styles, commonStyles } from './styles';
+import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
@@ -45,12 +45,14 @@ const Checkin = withState<RouteComponentProps<{
         useEffect(() => {
             async function connectBackend() {
                 if (localKey && scp.state === Constants.ConnectionState.closed) {
-                    scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', localKey, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
-                        setIsConnected(true);
-                    }).catch((error) => {
-                        setError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                        setIsConnected(false);
-                        console.error(error);
+                    Key.importKey(localKey.exportableKey).then((key) => {
+                        scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', key, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
+                            setIsConnected(true);
+                        }).catch((error) => {
+                            setError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
+                            setIsConnected(false);
+                            console.error(error);
+                        });
                     });
                 }
                 else if (scp.state === Constants.ConnectionState.secure)

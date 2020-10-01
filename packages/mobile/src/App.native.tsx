@@ -58,7 +58,7 @@ const App = withState()(
         }, [initialUrl, parseUrl]);
 
         useEffect(() => {
-            if (!hasRequestedLocalKey) {
+            if (!localKey && !hasRequestedLocalKey) {
                 dispatch(generateLocalKey()).then(() => {
                     setHasRequestedLocalKey(true);
                 });
