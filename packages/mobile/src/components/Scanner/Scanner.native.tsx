@@ -67,7 +67,7 @@ const Scanner: React.FC = () => {
             <View style={styles.cameraView}>
                 <Camera
                     zoom={0}
-                    onBarCodeScanned={venuInfo ? undefined : handleBarCodeScanned}
+                    onBarCodeScanned={handleBarCodeScanned}
                     barCodeScannerSettings={{
                         barCodeTypes: [
                             BarCodeScanner.Constants.BarCodeType.qr,
