@@ -19,10 +19,6 @@ const Scanned = withState()((s) => ({
     const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
-    const hideModal = () => {
-        setShowModal(false);
-    };
-
     return (
         <MainLayout showGoBack={true}>
             <Modal isVisible={showModal}>
@@ -30,7 +26,7 @@ const Scanned = withState()((s) => ({
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>
                         Hi there! Remember to use the Moai App to scan the barcode, after getting tested for the coronavirus!
                     </Text>
-                    <Button title="Got it!" onPress={hideModal} />
+                    <Button title="Got it!" onPress={() => setShowModal(false)} />
                 </View>
             </Modal>
             <View style={commonStyles.main}>

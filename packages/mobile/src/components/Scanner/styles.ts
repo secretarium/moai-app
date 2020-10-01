@@ -1,15 +1,27 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const screen = Dimensions.get('screen');
 
 export default StyleSheet.create({
-    parentContainer: {
-        flex: 1,
-        backgroundColor: '#00b0ee'
+    logo: {
+        height: '20%',
+        width: '50%'
     },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
+    curvedView: {
         alignItems: 'center',
-        height: '100%'
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#00b0ee',
+        paddingTop: 15
+    },
+    cameraView: {
+        borderTopLeftRadius: screen.width,
+        borderTopRightRadius: screen.width,
+        width: screen.width,
+        height: '100%',
+        top: 220,
+        position: 'absolute',
+        overflow: 'hidden'
     },
     scanAgain: {
         position: 'absolute',

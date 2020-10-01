@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { Text, StyleSheet, View, Button, Image } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Redirect } from '../../ReactRouter';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Camera } from 'expo-camera';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
-import styles from './styles';
 import { SCP, Constants } from '../../../../connect/src';
-import { parseCode, Sources, ParsedCode } from './dataParser';
+import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from '../commonStyles';
 import { MaterialIcons } from '@expo/vector-icons';
+import { RouteComponentProps } from 'react-router';
 
 const scp = new SCP();
 const isDev = process.env.NODE_ENV === 'development';
 
-const MoaiScanner = withState()(
+const Checkin = withState<RouteComponentProps<{
+    venue: string;
+    source?: string;
+    type?: string
+}>>()(
     (s) => ({
         localKey: s.system.localKey
     }),
-    ({ dispatch, localKey }) => {
+    ({ dispatch, localKey, match }) => {
 
-        const [hasPermission, setHasPermission] = useState<boolean>(null);
-        const [hasScanned, setHasScanned] = useState(false);
         const [isConnected, setIsConnected] = useState(false);
-        const [isCommitting, setIsCommitting] = useState(false);
         const [redirect, setRedirect] = useState(false);
-        const [venuInfo, setVenuInfo] = useState<ParsedCode>();
+        const [venuInfo, setVenuInfo] = useState<ParsedCode>({
+            source: Sources.MOAI,
+            ...match.params
+        });
         const [error, setError] = useState<string>();
         const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -36,22 +38,10 @@ const MoaiScanner = withState()(
         const themeModalStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
         const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
         const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'white' : 'black';
-        const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo-white.png') : require('../../assets/logo.png');
-
-        const hideModal = () => {
-            setShowModal(false);
-        };
-
-        useEffect(() => {
-            (async () => {
-                const { status } = await Camera.requestPermissionsAsync();
-                setHasPermission(status === 'granted');
-            })();
-        }, []);
 
         useEffect(() => {
             async function connectBackend() {
-                if (localKey && scp.state === Constants.ConnectionState.closed && isCommitting) {
+                if (localKey && scp.state === Constants.ConnectionState.closed) {
                     scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', localKey, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
                         setIsConnected(true);
                     }).catch((error) => {
@@ -60,11 +50,11 @@ const MoaiScanner = withState()(
                         console.error(error);
                     });
                 }
-                else if (scp.state === Constants.ConnectionState.secure && isCommitting)
+                else if (scp.state === Constants.ConnectionState.secure)
                     setIsConnected(false);
             }
             connectBackend();
-        }, [localKey, isCommitting, error]);
+        }, [localKey, error]);
 
         useEffect(() => {
             if (isConnected && venuInfo) {
@@ -93,50 +83,15 @@ const MoaiScanner = withState()(
             }
         }, [dispatch, isConnected, venuInfo]);
 
-        const handleBarCodeScanned = (code) => {
-            setHasScanned(true);
-            const parsedCode = parseCode(code);
-            if (parsedCode.source !== Sources.INVALID) {
-                setVenuInfo(parsedCode);
-                setIsCommitting(true);
-            } else {
-                setError('Sorry, we were not able to recognise this QRCode');
-                setShowModal(true);
-                setHasScanned(false);
-            }
-        };
-
         let composition;
 
-        if (hasPermission === null)
-            composition = <Text>Requesting for camera permission...</Text>;
-        else if (hasPermission === false)
-            composition = <Text>No access to camera</Text>;
-        else if (redirect === true)
+        if (redirect === true)
             composition = <Redirect to={'/scanned'} />;
         else
             composition =
                 <>
-                    <View style={styles.curvedView}>
-                        <Text style={{ fontSize: 24, color: themeTextStyle, paddingTop: 30 }}>Scanning...</Text>
-                        <Image
-                            source={themeLogoStyle}
-                            resizeMode={'contain'}
-                            style={styles.logo}
-                        />
-                    </View>
-                    <View style={styles.cameraView}>
-                        <Camera
-                            zoom={0}
-                            onBarCodeScanned={hasScanned ? undefined : handleBarCodeScanned}
-                            barCodeScannerSettings={{
-                                barCodeTypes: [
-                                    BarCodeScanner.Constants.BarCodeType.qr,
-                                    BarCodeScanner.Constants.BarCodeType.code128
-                                ]
-                            }}
-                            style={[StyleSheet.absoluteFillObject]}
-                        />
+                    <View>
+                        <Text style={{ fontSize: 24, color: themeTextStyle, paddingTop: 30 }}>Checking in...</Text>
                     </View>
                 </>;
 
@@ -148,7 +103,7 @@ const MoaiScanner = withState()(
                         <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
                             {error}
                         </Text>
-                        <Button title='Close' onPress={hideModal} />
+                        <Button title='Close' onPress={() => setShowModal(false)} />
                     </View>
                 </Modal>
                 {composition}
@@ -157,4 +112,4 @@ const MoaiScanner = withState()(
     }
 );
 
-export default MoaiScanner;
+export default Checkin;
