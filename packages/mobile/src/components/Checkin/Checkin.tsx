@@ -56,10 +56,11 @@ const Checkin = withState<RouteComponentProps<{
                     });
                 }
                 else if (scp.state === Constants.ConnectionState.secure)
-                    setIsConnected(false);
+                    setIsConnected(true);
             }
-            connectBackend();
-        }, [localKey, error]);
+            if (!isConnected)
+                connectBackend();
+        }, [localKey, isConnected, error]);
 
         useEffect(() => {
             if (isConnected && venuInfo) {
