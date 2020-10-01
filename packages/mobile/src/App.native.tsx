@@ -16,15 +16,20 @@ import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
-import { View, Image } from 'react-native';
+import { AppState, View, Image } from 'react-native';
+import { useHistory } from 'react-router';
 
 const App = withState()(
-    null,
-    ({ dispatch }) => {
+    (s) => ({
+        localKey: s.system.localKey
+    }),
+    ({ dispatch, localKey }) => {
 
+        const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
+        const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -54,10 +59,24 @@ const App = withState()(
 
         useEffect(() => {
             if (!hasRequestedLocalKey) {
-                dispatch(generateLocalKey());
+                dispatch(generateLocalKey()).then(() => {
+                    setHasRequestedLocalKey(true);
+                });
+            } else
                 setHasRequestedLocalKey(true);
+        }, [dispatch, hasRequestedLocalKey, localKey]);
+
+        const handleAppStateChange = useCallback((nextAppState: string) => {
+            if (nextAppState === 'active')
+                history.push('/');
+        }, [history]);
+
+        useEffect(() => {
+            if (!hasPluggedStateChange) {
+                AppState.addEventListener('change', handleAppStateChange);
+                setHasPluggedStateChange(true);
             }
-        }, [dispatch, hasRequestedLocalKey]);
+        }, [handleAppStateChange, hasPluggedStateChange]);
 
         if (!fontsLoaded || !hasRequestedLocalKey || !hasParsedInitialURL)
             return <View style={styles.container}>
