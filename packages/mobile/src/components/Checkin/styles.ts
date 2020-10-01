@@ -1,6 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
+export { commonStyles } from '../commonStyles';
 
-const screen = Dimensions.get('screen');
-
-export default StyleSheet.create({
+export const styles = StyleSheet.create({
 });

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
-import { Redirect } from '../../ReactRouter';
+import { Link, Redirect } from '../../ReactRouter';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
 import { SCP, Constants } from '../../../../connect/src';
 import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
-import { commonStyles } from '../commonStyles';
+import { styles, commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, useHistory } from 'react-router';
+import MainLayout from '../common/MainLayout';
 
 const scp = new SCP();
 const isDev = process.env.NODE_ENV === 'development';
@@ -24,6 +25,7 @@ const Checkin = withState<RouteComponentProps<{
     }),
     ({ dispatch, localKey, match }) => {
 
+        const history = useHistory();
         const [isConnected, setIsConnected] = useState(false);
         const [redirect, setRedirect] = useState(false);
         const [venuInfo, setVenuInfo] = useState<ParsedCode>({
@@ -37,7 +39,8 @@ const Checkin = withState<RouteComponentProps<{
         const colorScheme = useColorScheme();
         const themeModalStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
         const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
-        const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'white' : 'black';
+        const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
+        const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
         useEffect(() => {
             async function connectBackend() {
@@ -90,24 +93,36 @@ const Checkin = withState<RouteComponentProps<{
         else
             composition =
                 <>
-                    <View>
-                        <Text style={{ fontSize: 24, color: themeTextStyle, paddingTop: 30 }}>Checking in...</Text>
+                    <View style={commonStyles.main}>
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Checkin in...</Text>
+                        <Image
+                            source={themeLogoStyle}
+                            resizeMode={'contain'}
+                            style={commonStyles.logo}
+                        />
+                        <Link to={'/scanner'} style={commonStyles.pinButton} underlayColor='transparent'>
+                            <Image
+                                source={require('../../assets/pin-checkin.png')}
+                                resizeMode={'contain'}
+                                style={commonStyles.pin}
+                            />
+                        </Link>
                     </View>
                 </>;
 
         return (
-            <>
+            <MainLayout showGoBack={false}>
                 <Modal isVisible={showModal}>
                     <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
                         <MaterialIcons name='error' size={84} color={themeModalStyle} />
                         <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
                             {error}
                         </Text>
-                        <Button title='Close' onPress={() => setShowModal(false)} />
+                        <Button title='Close' onPress={() => history.push('/')} />
                     </View>
                 </Modal>
                 {composition}
-            </>
+            </MainLayout>
         );
     }
 );
