@@ -68,7 +68,7 @@
         "@babel/core": "7.11.6",
         "@babel/preset-typescript": "7.10.4",
         "@expo/next-adapter": "2.1.36",
-        "@expo/webpack-config": "0.12.35",
+        "@expo/webpack-config": "0.12.37",
         "@storybook/addon-actions": "6.0.22",
         "@storybook/addon-links": "6.0.22",
         "@storybook/addons": "6.0.22",
