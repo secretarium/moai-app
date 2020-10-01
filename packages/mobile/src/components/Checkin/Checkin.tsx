@@ -32,7 +32,7 @@ const Checkin = withState<RouteComponentProps<{
             source: Sources.MOAI,
             ...match.params
         });
-        const [error, setError] = useState<string>();
+        const [pageError, setPageError] = useState<string>();
         const [showModal, setShowModal] = useState<boolean>(false);
 
         // Color theme
@@ -49,7 +49,7 @@ const Checkin = withState<RouteComponentProps<{
                         scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', key, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
                             setIsConnected(true);
                         }).catch((error) => {
-                            setError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
+                            setPageError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
                             setIsConnected(false);
                             console.error(error);
                         });
@@ -60,7 +60,7 @@ const Checkin = withState<RouteComponentProps<{
             }
             if (!isConnected)
                 connectBackend();
-        }, [localKey, isConnected, error]);
+        }, [localKey, isConnected, pageError]);
 
         useEffect(() => {
             if (isConnected && venuInfo) {
@@ -73,7 +73,7 @@ const Checkin = withState<RouteComponentProps<{
                 });
                 query.onError?.((error: any) => {
                     console.error('Error', error);
-                    setError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
+                    setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
                     setVenuInfo(undefined);
                     setIsConnected(false);
                     setShowModal(true);
@@ -81,7 +81,7 @@ const Checkin = withState<RouteComponentProps<{
                 query.send?.()
                     .catch((error) => {
                         console.error('Error', error);
-                        setError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
+                        setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
                         setVenuInfo(undefined);
                         setIsConnected(false);
                         setShowModal(true);
@@ -119,7 +119,7 @@ const Checkin = withState<RouteComponentProps<{
                     <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
                         <MaterialIcons name='error' size={84} color={themeModalStyle} />
                         <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
-                            {error}
+                            {pageError}
                         </Text>
                         <Button title='Close' onPress={() => history.push('/')} />
                     </View>
