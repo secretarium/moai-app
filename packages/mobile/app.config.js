@@ -7,7 +7,7 @@ const config = {
     slug: 'moai-confidential-test-and-trace',
     userInterfaceStyle: 'automatic',
     ios: {
-        buildNumber: 2,
+        buildNumber: '2',
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.app',
         associatedDomains: [
