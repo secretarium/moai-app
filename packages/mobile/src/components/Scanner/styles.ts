@@ -41,5 +41,26 @@ export const styles = StyleSheet.create({
     text: {
         color: 'white',
         fontSize: 25
+    },
+    messageContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 30
+    },
+    messageText: {
+        borderRadius: 10,
+        padding: 15,
+        width: '85%',
+        overflow: 'hidden',
+        backgroundColor: '#203864'
+    },
+    settingsButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+        padding: 10,
+        width: '85%',
+        backgroundColor: '#203864',
+        top: 15
     }
 });
