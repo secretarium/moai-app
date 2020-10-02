@@ -58,6 +58,11 @@ const App = withState()(
         }, [initialUrl, parseUrl]);
 
         useEffect(() => {
+            if (initialUrl)
+                history.push(`/checkin/${initialUrl}`);
+        }, [initialUrl, history]);
+
+        useEffect(() => {
             if (!localKey && !hasRequestedLocalKey) {
                 dispatch(generateLocalKey()).then(() => {
                     setHasRequestedLocalKey(true);
@@ -82,9 +87,6 @@ const App = withState()(
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
-
-        if (initialUrl)
-            return <Redirect to={`/checkin/${initialUrl}`} />;
 
         return (
             <>
