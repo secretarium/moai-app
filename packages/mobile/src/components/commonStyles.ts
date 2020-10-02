@@ -45,6 +45,7 @@ export const commonStyles = StyleSheet.create({
         top: 10
     },
     main: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
