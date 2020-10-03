@@ -1,11 +1,16 @@
 const config = {
     name: 'Moai',
     description: 'An app for Confidential Track and Trace',
-    icon: './assets/icon.png',
     version: '0.0.2',
-    orientation: 'portrait',
     slug: 'moai-confidential-test-and-trace',
+    icon: './assets/icon.png',
+    splash: {
+        image: './assets/splash.png',
+        resizeMode: 'contain',
+        backgroundColor: '#eb7473'
+    },
     userInterfaceStyle: 'automatic',
+    orientation: 'portrait',
     ios: {
         buildNumber: '2',
         icon: './assets/ios/icon.png',
@@ -70,15 +75,6 @@ const config = {
             'tsx',
             'txt'
         ]
-    },
-    loading: {
-        icon: './assets/logo.png',
-        hideExponentText: false
-    },
-    splash: {
-        image: './assets/splash.png',
-        resizeMode: 'contain',
-        backgroundColor: '#eb7473'
     },
     experiments: {
         turboModules: true
