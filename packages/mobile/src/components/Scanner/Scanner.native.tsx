@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image, Button } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Image, Button, Linking } from 'react-native';
 import Modal from 'react-native-modal';
 import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../ReactRouter';
@@ -54,7 +54,17 @@ const Scanner: React.FC = () => {
     if (hasPermission === null)
         composition = <Text>Requesting for camera permission...</Text>;
     else if (hasPermission === false)
-        composition = <Text>No access to camera</Text>;
+        composition = <>
+            <View style={styles.messageContainer} >
+                <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: 'white' }]}>
+                    It looks like your privacy settings are preventing us from accessing your camera. Without camera access you will not be able to use the app for scanning.
+                    You can change your settings, by tapping the button below. It will redirect you to your Settings app. Then you need to select Moai app from the list of applications and turn the Camera access on.
+                </Text>
+                <TouchableOpacity onPress={() => Linking.openSettings()} style={styles.settingsButton}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: 'white' }}>Go to settings</Text>
+                </TouchableOpacity>
+            </View>
+        </>;
     else
         composition = <>
             <View style={styles.curvedView}>
