@@ -1,6 +1,6 @@
 {
     "name": "@secretarium/moai",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "private": true,
     "description": "Privacy preserving QRCode based checking application",
     "repository": "https://github.com/secretarium/moai-app",
@@ -13,9 +13,13 @@
     "packman": "yarn@2.1.1",
     "scripts": {
         "lint": "yarn workspaces foreach run lint",
+        "lint:fix": "yarn workspaces foreach run lint:fix",
         "start": "yarn workspaces foreach run start",
         "web": "yarn workspace @secretarium/moai-expo web",
+        "android": "yarn workspace @secretarium/moai-expo android",
+        "ios": "yarn workspace @secretarium/moai-expo ios",
         "test": "yarn workspaces foreach run test",
+        "test:mutation": "yarn workspaces foreach run test:mutation",
         "preinstall": "node ./scripts/hintYarn.js",
         "postinstall": "cd ./packages/mobile && expo-yarn-workspaces postinstall",
         "release": "release-it"
@@ -30,21 +34,23 @@
         ]
     },
     "devDependencies": {
-        "@commitlint/config-conventional": "9.1.2",
-        "@release-it/conventional-changelog": "1.1.4",
-        "@typescript-eslint/eslint-plugin": "3.10.1",
-        "@typescript-eslint/parser": "3.10.1",
-        "commitlint": "9.1.2",
-        "eslint": "7.7.0",
+        "@commitlint/config-conventional": "11.0.0",
+        "@release-it/conventional-changelog": "2.0.0",
+        "@typescript-eslint/eslint-plugin": "4.3.0",
+        "@typescript-eslint/parser": "4.3.0",
+        "commitlint": "11.0.0",
+        "eslint": "7.10.0",
         "eslint-config-react-app": "5.2.1",
+        "eslint-config-recommended": "4.1.0",
         "eslint-plugin-flowtype": "5.2.0",
-        "eslint-plugin-import": "2.22.0",
-        "eslint-plugin-jest": "23.20.0",
+        "eslint-plugin-import": "2.22.1",
+        "eslint-plugin-jest": "24.0.2",
         "eslint-plugin-jsx-a11y": "6.3.1",
-        "eslint-plugin-react": "7.20.6",
-        "eslint-plugin-react-hooks": "4.1.0",
-        "husky": "4.2.5",
-        "release-it": "13.7.0"
+        "eslint-plugin-react": "7.21.3",
+        "eslint-plugin-react-hooks": "4.1.2",
+        "expo-yarn-workspaces": "1.2.1",
+        "husky": "4.3.0",
+        "release-it": "14.0.3"
     },
     "resolutions": {
         "@types/react": "16.9.48"

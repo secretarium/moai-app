@@ -2,13 +2,13 @@ import { storiesOf } from '@storybook/react-native';
 import { Welcome } from '@storybook/react/demo';
 
 export default {
-    title: 'Welcome',
+    title: 'Welcome'
 };
 
-export const toStorybook = () => Welcome;
+export const toStorybook = (): typeof Welcome => Welcome;
 
 toStorybook.story = {
-    name: 'to Storybook',
+    name: 'to Storybook'
 };
 
 // On-Device Register

@@ -1,0 +1,7 @@
+{
+    "name": "@secretarium/moai-connect",
+    "version": "0.1.12",
+    "description": "Secretarium Moai to server connector",
+    "private": true,
+    "main": "./src/secretarium.ts"
+}

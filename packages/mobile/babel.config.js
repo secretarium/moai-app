@@ -2,9 +2,9 @@ module.exports = function (api) {
     api.cache(true);
     return {
         presets: [
-            'babel-preset-expo',
+            '@expo/next-adapter/babel',
             ['@babel/preset-env', { targets: { node: 'current' } }],
             '@babel/preset-typescript'
-        ],
+        ]
     };
 };

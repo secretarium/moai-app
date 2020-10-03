@@ -1,17 +1,17 @@
-var defaultPlugins = [
-    '@typescript-eslint/eslint-plugin',
+const defaultPlugins = [
+    '@typescript-eslint',
     'import',
     'jest',
     'react',
     'react-hooks'
 ];
-var defaultEnv = {
+const defaultEnv = {
     es6: true
 };
-var defaultGlobals = {
+const defaultGlobals = {
 
 };
-var defaultRules = {
+const javascriptDefaultRules = {
     'indent': [
         'error',
         4,
@@ -26,6 +26,9 @@ var defaultRules = {
         'warn',
         { argsIgnorePattern: '^__unused' }
     ],
+    'no-unused-expressions': [
+        'error'
+    ],
     'quotes': [
         'error',
         'single'
@@ -37,19 +40,47 @@ var defaultRules = {
     'semi': [
         'error',
         'always'
-    ],
-    '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^__unused' }
     ]
 };
 
-var javascriptExtensions = [
+const typescriptDefaultRules = {
+    '@typescript-eslint/indent': [
+        'error',
+        4,
+        { SwitchCase: 1 }
+    ],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^__unused' }
+    ],
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': [
+        'error'
+    ],
+    'quote-props': [
+        'error',
+        'consistent-as-needed'
+    ],
+    'quotes': 'off',
+    '@typescript-eslint/quotes': [
+        'error',
+        'single'
+    ],
+    'semi': 'off',
+    '@typescript-eslint/semi': [
+        'error',
+        'always'
+    ]
+};
+
+
+const javascriptExtensions = [
     'react-app',
     'eslint:recommended'
 ];
 
-var typescriptExtensions = javascriptExtensions.concat([
+const typescriptExtensions = javascriptExtensions.concat([
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended'
 ]);
@@ -69,7 +100,7 @@ module.exports = {
     },
     globals: defaultGlobals,
     plugins: defaultPlugins,
-    rules: defaultRules,
+    rules: javascriptDefaultRules,
     overrides: [
         {
             files: [
@@ -90,7 +121,7 @@ module.exports = {
                 SharedArrayBuffer: 'readonly'
             },
             extends: typescriptExtensions,
-            rules: defaultRules
+            rules: typescriptDefaultRules
         },
         {
             files: [
@@ -103,7 +134,7 @@ module.exports = {
                 'jest/globals': true
             }),
             extends: javascriptExtensions,
-            rules: defaultRules
+            rules: javascriptDefaultRules
         },
         {
             files: [
@@ -120,7 +151,7 @@ module.exports = {
                 SharedArrayBuffer: 'readonly'
             },
             extends: typescriptExtensions,
-            rules: defaultRules
+            rules: typescriptDefaultRules
         }
     ]
 };

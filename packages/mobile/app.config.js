@@ -1,36 +1,84 @@
 const config = {
-    name: "Moai",
-    description: "An app for Confidential Track and Trace",
-    icon: "https://github.com/expo/expo/blob/master/templates/expo-template-blank/assets/icon.png?raw=true",
-    version: "0.0.1",
-    slug: "moai-confidential-test-and-trace",
+    name: 'Moai',
+    description: 'An app for Confidential Track and Trace',
+    version: '0.0.2',
+    slug: 'moai-confidential-test-and-trace',
+    icon: './assets/icon.png',
+    splash: {
+        image: './assets/splash.png',
+        resizeMode: 'contain',
+        backgroundColor: '#eb7473'
+    },
+    userInterfaceStyle: 'automatic',
+    orientation: 'portrait',
     ios: {
-        bundleIdentifier: "com.secretarium.moai.app"
-    },
-    android: {
-        package: "com.secretarium.moai.app"
-    },
-    packagerOpts: {
-        config: "metro.config.js",
-        sourceExts: [
-            "native.tsx",
-            "native.jsx",
-            "native.ts",
-            "native.js",
-            "jsx",
-            "js",
-            "json",
-            "ts",
-            "tsx",
-            "graphql",
-            "gql"
+        buildNumber: '2',
+        icon: './assets/ios/icon.png',
+        bundleIdentifier: 'com.secretarium.moai.app',
+        associatedDomains: [
+            'applinks:moaiapp.com',
+            'applinks:moai-app.com'
         ]
     },
-    splash: {
-        image: "https://github.com/expo/expo/blob/master/templates/expo-template-blank/assets/splash.png?raw=true",
-        resizeMode: "contain",
-        backgroundColor: "#ffffff",
+    android: {
+        versionCode: 2,
+        icon: './assets/android/icon.png',
+        package: 'com.secretarium.moai.app',
+        permissions: [
+            'CAMERA'
+        ],
+        intentFilters: [
+            {
+                autoVerify: true,
+                action: 'VIEW',
+                data: [
+                    {
+                        scheme: 'https',
+                        host: '*.moaiapp.com',
+                        pathPrefix: '/check'
+                    },
+                    {
+                        scheme: 'https',
+                        host: '*.moai-app.com',
+                        pathPrefix: '/check'
+                    }
+                ],
+                category: [
+                    'BROWSABLE',
+                    'DEFAULT'
+                ]
+            }
+        ]
     },
+    web: {
+        favicon: './assets/android/icon.png'
+    },
+    packagerOpts: {
+        config: 'metro.config.js',
+        sourceExts: [
+            'native.tsx',
+            'native.jsx',
+            'native.ts',
+            'native.js',
+            'android.tsx',
+            'android.jsx',
+            'android.ts',
+            'android.js',
+            'ios.tsx',
+            'ios.jsx',
+            'ios.ts',
+            'ios.js',
+            'jsx',
+            'js',
+            'json',
+            'ts',
+            'tsx',
+            'txt'
+        ]
+    },
+    experiments: {
+        turboModules: true
+    }
 };
 
 module.exports = config;
