@@ -26,9 +26,9 @@ const App = withState()(
     ({ dispatch, localKey }) => {
 
         // const history = useHistory();
-        // const [initialUrl, setInitialUrl] = useState<string>(undefined);
+        const [initialUrl, setInitialUrl] = useState<string>(undefined);
         // const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
-        // const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
+        const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(true);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
@@ -39,30 +39,30 @@ const App = withState()(
         //     'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
         // });
 
-        // const parseUrl = useCallback((url: string | null | undefined) => {
+        const parseUrl = useCallback((url: string | null | undefined) => {
 
-        //     const comps = url ? url.split('/').slice(-2) : undefined;
-        //     if (comps?.length === 2 && comps[0] === 'check')
-        //         setInitialUrl(comps[1]);
-        //     else
-        //         setInitialUrl(null);
-        // }, []);
+            const comps = url ? url.split('/').slice(-2) : undefined;
+            if (comps?.length === 2 && comps[0] === 'check')
+                setInitialUrl(comps[1]);
+            else
+                setInitialUrl(null);
+        }, []);
 
-        // useEffect(() => {
-        //     if (!initialUrl && !hasRequestedInitialURL) {
-        //         setHasRequestedInitialURL(true);
-        //         Linking.getInitialURL().then((url) => {
-        //             setHasParsedInitialURL(true);
-        //             parseUrl(url);
-        //         }).catch((error) => {
-        //             setHasParsedInitialURL(true);
-        //             console.error('URL Parsing', error);
-        //         });
-        //         Linking.addEventListener('url', ({ url }) => {
-        //             parseUrl(url);
-        //         });
-        //     }
-        // }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
+        useEffect(() => {
+            if (!initialUrl && !hasRequestedInitialURL) {
+                setHasRequestedInitialURL(true);
+                Linking.getInitialURL().then((url) => {
+                    setHasParsedInitialURL(true);
+                    parseUrl(url);
+                }).catch((error) => {
+                    setHasParsedInitialURL(true);
+                    console.error('URL Parsing', error);
+                });
+                Linking.addEventListener('url', ({ url }) => {
+                    parseUrl(url);
+                });
+            }
+        }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
 
         // useEffect(() => {
         //     if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
