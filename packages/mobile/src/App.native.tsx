@@ -16,7 +16,7 @@ import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
-import { AppState, View, Image } from 'react-native';
+import { /* AppState,*/ View, Image } from 'react-native';
 import { useHistory } from 'react-router';
 
 const App = withState()(
@@ -29,7 +29,7 @@ const App = withState()(
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
-        const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
+        // const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -71,17 +71,17 @@ const App = withState()(
                 setHasRequestedLocalKey(true);
         }, [dispatch, hasRequestedLocalKey, localKey]);
 
-        const handleAppStateChange = useCallback((nextAppState: string) => {
-            if (nextAppState === 'active')
-                history.push('/');
-        }, [history]);
+        // const handleAppStateChange = useCallback((nextAppState: string) => {
+        //     if (nextAppState === 'active')
+        //         history.push('/');
+        // }, [history]);
 
-        useEffect(() => {
-            if (!hasPluggedStateChange) {
-                AppState.addEventListener('change', handleAppStateChange);
-                setHasPluggedStateChange(true);
-            }
-        }, [handleAppStateChange, hasPluggedStateChange]);
+        // useEffect(() => {
+        //     if (!hasPluggedStateChange) {
+        //         AppState.addEventListener('change', handleAppStateChange);
+        //         setHasPluggedStateChange(true);
+        //     }
+        // }, [handleAppStateChange, hasPluggedStateChange]);
 
         if (!fontsLoaded || !hasRequestedLocalKey || !hasParsedInitialURL)
             return <View style={styles.container}>
