@@ -38,10 +38,10 @@ const Checkin = withState<RouteComponentProps<{
 
         // Color theme
         const colorScheme = useColorScheme();
-        const themeModalStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
-        const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
-        const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
-        const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
+        const themeModalStyle = colorScheme !== 'dark' ? 'black' : 'white';
+        const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
+        const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+        const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
         useEffect(() => {
             async function connectBackend() {
