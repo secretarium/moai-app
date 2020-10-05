@@ -25,9 +25,9 @@ const App = withState()(
     }),
     ({ dispatch, localKey }) => {
 
-        // const history = useHistory();
+        const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
-        // const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
+        const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(true);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
@@ -64,12 +64,12 @@ const App = withState()(
             }
         }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
 
-        // useEffect(() => {
-        //     if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
-        //         history.push(`/checkin/${initialUrl}`);
-        //         setPastInitialUrl(initialUrl);
-        //     }
-        // }, [initialUrl, history, pastInitialUrl]);
+        useEffect(() => {
+            if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
+                history.push(`/checkin/${initialUrl}`);
+                setPastInitialUrl(initialUrl);
+            }
+        }, [initialUrl, history, pastInitialUrl]);
 
         useEffect(() => {
             if (!localKey && !hasRequestedLocalKey) {
