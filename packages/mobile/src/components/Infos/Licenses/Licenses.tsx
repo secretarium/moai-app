@@ -11,8 +11,8 @@ import { version as packageVersion } from '../../../../package.json';
 const Licenses: React.FC = () => {
     // Color theme
     const colorScheme = useColorScheme();
-    const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
-    const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
+    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
+    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
 
     const getNameAndVersion = (key) => {
         let name;

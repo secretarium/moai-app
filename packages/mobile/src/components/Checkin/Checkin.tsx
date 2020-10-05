@@ -26,6 +26,7 @@ const Checkin = withState<RouteComponentProps<{
     ({ dispatch, localKey, match }) => {
 
         const history = useHistory();
+        const [isConnecting, setIsConnecting] = useState(false);
         const [isConnected, setIsConnected] = useState(false);
         const [redirect, setRedirect] = useState(false);
         const [venuInfo, setVenuInfo] = useState<ParsedCode>({
@@ -38,10 +39,10 @@ const Checkin = withState<RouteComponentProps<{
 
         // Color theme
         const colorScheme = useColorScheme();
-        const themeModalStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
-        const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#404040';
-        const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
-        const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
+        const themeModalStyle = colorScheme !== 'dark' ? 'black' : 'white';
+        const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
+        const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+        const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
         useEffect(() => {
             async function connectBackend() {
@@ -49,19 +50,25 @@ const Checkin = withState<RouteComponentProps<{
                     Key.importKey(localKey.exportableKey).then((key) => {
                         scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', key, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
                             setIsConnected(true);
+                            setIsConnecting(false);
                         }).catch((error) => {
                             setPageError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
                             setIsConnected(false);
-                            console.error(error);
+                            setIsConnecting(false);
+                            console.error('Connection error:', error);
                         });
                     });
                 }
-                else if (scp.state === Constants.ConnectionState.secure)
+                else if (scp.state === Constants.ConnectionState.secure) {
                     setIsConnected(true);
+                    setIsConnecting(false);
+                }
             }
-            if (!isConnected)
+            if (!isConnected && !isConnecting) {
+                setIsConnecting(true);
                 connectBackend();
-        }, [localKey, isConnected, pageError]);
+            }
+        }, [localKey, isConnected, pageError, isConnecting]);
 
         useEffect(() => {
             if (isConnected && venuInfo) {
