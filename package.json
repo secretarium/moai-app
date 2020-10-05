@@ -1,6 +1,6 @@
 {
     "name": "@secretarium/moai",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "private": true,
     "description": "Privacy preserving QRCode based checking application",
     "repository": "https://github.com/secretarium/moai-app",
@@ -51,9 +51,6 @@
         "expo-yarn-workspaces": "1.2.1",
         "husky": "4.3.0",
         "release-it": "14.0.3"
-    },
-    "resolutions": {
-        "@types/react": "16.9.48"
     },
     "husky": {
         "hooks": {
