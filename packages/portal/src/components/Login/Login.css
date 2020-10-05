@@ -1,0 +1,11 @@
+@import '../../assets/fonts.css';
+@import '~antd/dist/antd.css';
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
