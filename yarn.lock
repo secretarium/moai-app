@@ -4246,6 +4246,7 @@ __metadata:
     "@types/react": 16.9.50
     "@types/react-dom": 16.9.8
     "@types/react-native": 0.63.23
+    "@types/react-native-onboarding-swiper": 1.1.0
     "@types/react-redux": 7.1.9
     "@types/react-router": 5.1.8
     "@types/react-router-dom": 5.1.5
@@ -5884,7 +5885,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-native@npm:0.63.23":
+"@types/react-native-onboarding-swiper@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@types/react-native-onboarding-swiper@npm:1.1.0"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-native": "*"
+  checksum: 87602f215a21f10ac979275bcce4ae16830c107120a3646196c1a217fc027bc107bbb3ea0d88df3acaf30c32c0940de777820128c8174189afe227cfc109bcd8
+  languageName: node
+  linkType: hard
+
+"@types/react-native@npm:*, @types/react-native@npm:0.63.23":
   version: 0.63.23
   resolution: "@types/react-native@npm:0.63.23"
   dependencies:
