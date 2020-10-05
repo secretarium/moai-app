@@ -1,6 +1,6 @@
 {
     "name": "@secretarium/moai-locales",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "private": true,
     "description": "Internationalisation for Moai",
     "scripts": {
