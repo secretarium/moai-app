@@ -34,10 +34,10 @@ const App = withState()(
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         // const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
 
-        const [fontsLoaded] = useFonts({
-            'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
-            'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
-        });
+        // const [fontsLoaded] = useFonts({
+        //     'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+        //     'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
+        // });
 
         // const parseUrl = useCallback((url: string | null | undefined) => {
 
@@ -99,7 +99,7 @@ const App = withState()(
         //     }
         // }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL)
+        if (!hasObtainedLocalKey || !hasParsedInitialURL)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
