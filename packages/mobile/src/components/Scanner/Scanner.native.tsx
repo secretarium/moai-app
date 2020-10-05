@@ -81,8 +81,8 @@ const Scanner: React.FC = () => {
                     onBarCodeScanned={handleBarCodeScanned}
                     barCodeScannerSettings={{
                         barCodeTypes: [
-                            BarCodeScanner.Constants.BarCodeType.qr,
-                            BarCodeScanner.Constants.BarCodeType.code128
+                            BarCodeScanner.Constants.BarCodeType.qr
+                            // BarCodeScanner.Constants.BarCodeType.code128
                         ]
                     }}
                     style={[StyleSheet.absoluteFillObject]}
