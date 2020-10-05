@@ -4,7 +4,10 @@ export enum Protocol {
 }
 
 export enum State {
-    connecting, open, closing, closed
+    connecting,
+    open,
+    closing,
+    closed
 }
 
 type EventHandler<T = Event> = (event: T) => void;
