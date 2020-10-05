@@ -16,7 +16,7 @@ import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
-import { /* AppState,*/ View, Image } from 'react-native';
+import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
 
 const App = withState()(
@@ -27,9 +27,12 @@ const App = withState()(
 
         const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
+        const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
+        const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
-        // const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
+        const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
+        const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -46,44 +49,57 @@ const App = withState()(
         }, []);
 
         useEffect(() => {
-            if (!initialUrl) {
+            if (!initialUrl && !hasRequestedInitialURL) {
+                setHasRequestedInitialURL(true);
                 Linking.getInitialURL().then((url) => {
+                    setHasParsedInitialURL(true);
                     parseUrl(url);
+                }).catch((error) => {
+                    setHasParsedInitialURL(true);
+                    console.error('URL Parsing', error);
                 });
                 Linking.addEventListener('url', ({ url }) => {
                     parseUrl(url);
                 });
-                setHasParsedInitialURL(true);
             }
-        }, [initialUrl, parseUrl]);
+        }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
 
         useEffect(() => {
-            if (initialUrl)
+            if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
                 history.push(`/checkin/${initialUrl}`);
-        }, [initialUrl, history]);
+                setPastInitialUrl(initialUrl);
+            }
+        }, [initialUrl, history, pastInitialUrl]);
 
         useEffect(() => {
             if (!localKey && !hasRequestedLocalKey) {
-                dispatch(generateLocalKey()).then(() => {
-                    setHasRequestedLocalKey(true);
-                });
-            } else
                 setHasRequestedLocalKey(true);
+                dispatch(generateLocalKey()).then(() => {
+                    setHasObtainedLocalKey(true);
+                });
+            } else if (localKey) {
+                setHasRequestedLocalKey(true);
+                setHasObtainedLocalKey(true);
+            }
         }, [dispatch, hasRequestedLocalKey, localKey]);
 
-        // const handleAppStateChange = useCallback((nextAppState: string) => {
-        //     if (nextAppState === 'active')
-        //         history.push('/');
-        // }, [history]);
+        const handleAppStateChange = useCallback((nextAppState: string) => {
+            if (nextAppState === 'active') {
+                setHasRequestedInitialURL(false);
+                if (!initialUrl && history.location.pathname.slice(0, 8) === '/scanner') {
+                    history.push('/');
+                }
+            }
+        }, [history, initialUrl]);
 
-        // useEffect(() => {
-        //     if (!hasPluggedStateChange) {
-        //         AppState.addEventListener('change', handleAppStateChange);
-        //         setHasPluggedStateChange(true);
-        //     }
-        // }, [handleAppStateChange, hasPluggedStateChange]);
+        useEffect(() => {
+            if (!hasPluggedStateChange) {
+                AppState.addEventListener('change', handleAppStateChange);
+                setHasPluggedStateChange(true);
+            }
+        }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasRequestedLocalKey || !hasParsedInitialURL)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;

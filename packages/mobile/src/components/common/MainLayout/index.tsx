@@ -26,8 +26,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 
     // Color theme
     const colorScheme = useColorScheme();
-    const themeColorStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? '#D3D3D3' : '#888888';
-    const themeStatusBarStyle = colorScheme === 'light' ? 'dark-content' : 'light-content';
+    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#888888';
+    const themeStatusBarStyle = colorScheme !== 'dark' ? 'dark-content' : 'light-content';
 
     return (
         <View style={{

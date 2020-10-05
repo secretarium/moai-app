@@ -18,7 +18,7 @@ const persistConfig = {
     }
 };
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development' && false;
 const middlewares = isDev ? [dispatchMiddleware, createLogger({
     collapsed: true
 })] : [dispatchMiddleware];

@@ -12,7 +12,7 @@ const Notices: React.FC = () => {
 
     // Color theme
     const colorScheme = useColorScheme();
-    const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
+    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
 
     useEffect(() => {
         const fetchDisclaimer = async () => {
