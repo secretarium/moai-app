@@ -21,9 +21,10 @@ const Checkin = withState<RouteComponentProps<{
     type?: string
 }>>()(
     (s) => ({
-        localKey: s.system.localKey
+        localKey: s.system.localKey,
+        scanCounter: s.system.scanCounter
     }),
-    ({ dispatch, localKey, match }) => {
+    ({ dispatch, localKey, scanCounter, match }) => {
 
         const history = useHistory();
         const [isConnecting, setIsConnecting] = useState(false);
@@ -106,6 +107,8 @@ const Checkin = withState<RouteComponentProps<{
                 <>
                     <View style={commonStyles.main}>
                         <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Checking in...</Text>
+                        {/* TODO: Remove the following for production */}
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 10, color: themeTextStyle, top: 55 }}>{scanCounter}:{venuInfo.venue ?? ''}</Text>
                         <Image
                             source={themeLogoStyle}
                             resizeMode={'contain'}
