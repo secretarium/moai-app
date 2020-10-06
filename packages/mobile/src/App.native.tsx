@@ -16,7 +16,7 @@ import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
 import { styles } from './styles';
 import { Text, View, Image } from 'react-native';
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 const App = withState()(
     (s) => ({
@@ -24,9 +24,10 @@ const App = withState()(
     }),
     ({ dispatch, localKey }) => {
 
-        // const history = useHistory();
+        const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
+        const [error, setError] = useState<any>();
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(true);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
@@ -60,10 +61,14 @@ const App = withState()(
 
         useEffect(() => {
             if ((pastInitialUrl && initialUrl && initialUrl !== pastInitialUrl) || (!pastInitialUrl && initialUrl)) {
-                // history.push(`/checkin/${initialUrl}`);
+                try {
+                    history.push(`/checkin/${initialUrl}`);
+                } catch (e) {
+                    setError(e);
+                }
                 setPastInitialUrl(initialUrl);
             }
-        }, [initialUrl, pastInitialUrl]);
+        }, [history, initialUrl, pastInitialUrl]);
 
         useEffect(() => {
             if (!localKey && !hasRequestedLocalKey) {
@@ -108,7 +113,8 @@ const App = withState()(
                         hasObtainedLocalKey,
                         hasParsedInitialURL,
                         pastInitialUrl,
-                        initialUrl
+                        initialUrl,
+                        error
                     }, null, 4)}</Text>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
@@ -129,7 +135,8 @@ const App = withState()(
                             hasObtainedLocalKey,
                             hasParsedInitialURL,
                             pastInitialUrl,
-                            initialUrl
+                            initialUrl,
+                            error
                         }, null, 4)}</Text>
                 </View>
                 <Switch>
