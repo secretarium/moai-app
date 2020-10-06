@@ -59,7 +59,7 @@ const App = withState()(
         }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
 
         useEffect(() => {
-            if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
+            if ((pastInitialUrl && initialUrl && initialUrl !== pastInitialUrl) || (!pastInitialUrl && initialUrl)) {
                 history.push(`/checkin/${initialUrl}`);
                 setPastInitialUrl(initialUrl);
             }
