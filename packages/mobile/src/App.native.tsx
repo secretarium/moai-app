@@ -80,7 +80,7 @@ const App = withState()(
         const handleAppStateChange = (nextAppState: AppStateStatus) => {
             if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
                 setInitialUrl(undefined);
-                setHasParsedInitialURL(false);
+                // setHasParsedInitialURL(false);
                 setHasRequestedInitialURL(false);
                 // if (!initialUrl && history.location.pathname.slice(0, 8) === '/scanner') {
                 //     history.push('/');
