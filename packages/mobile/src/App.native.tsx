@@ -14,10 +14,9 @@ import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey } from './actions';
-import { useFonts } from 'expo-font';
 import { styles } from './styles';
-import { AppState, View, Image } from 'react-native';
-import { useHistory } from 'react-router';
+import { Text, View, Image } from 'react-native';
+// import { useHistory } from 'react-router';
 
 const App = withState()(
     (s) => ({
@@ -27,17 +26,12 @@ const App = withState()(
 
         // const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
-        // const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
+        const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(true);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         // const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
-
-        // const [fontsLoaded] = useFonts({
-        //     'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
-        //     'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
-        // });
 
         const parseUrl = useCallback((url: string | null | undefined) => {
 
@@ -64,12 +58,12 @@ const App = withState()(
             }
         }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
 
-        // useEffect(() => {
-        //     if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
-        //         history.push(`/checkin/${initialUrl}`);
-        //         setPastInitialUrl(initialUrl);
-        //     }
-        // }, [initialUrl, history, pastInitialUrl]);
+        useEffect(() => {
+            if ((pastInitialUrl && initialUrl && initialUrl !== pastInitialUrl) || (!pastInitialUrl && initialUrl)) {
+                // history.push(`/checkin/${initialUrl}`);
+                setPastInitialUrl(initialUrl);
+            }
+        }, [initialUrl, pastInitialUrl]);
 
         useEffect(() => {
             if (!localKey && !hasRequestedLocalKey) {
@@ -101,11 +95,43 @@ const App = withState()(
 
         if (!hasObtainedLocalKey || !hasParsedInitialURL)
             return <View style={styles.container}>
+                <Text>...</Text>
+                <Text>...</Text>
+                <Text>...</Text>
+                <Text>...</Text>
+                <Text
+                    style={{
+                        color: 'grey'
+                    }} >{JSON.stringify({
+                        hasRequestedLocalKey,
+                        hasRequestedInitialURL,
+                        hasObtainedLocalKey,
+                        hasParsedInitialURL,
+                        pastInitialUrl,
+                        initialUrl
+                    }, null, 4)}</Text>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
 
         return (
             <>
+                <View>
+                    <Text>...</Text>
+                    <Text>...</Text>
+                    <Text>...</Text>
+                    <Text>...</Text>
+                    <Text
+                        style={{
+                            color: 'grey'
+                        }} >{JSON.stringify({
+                            hasRequestedLocalKey,
+                            hasRequestedInitialURL,
+                            hasObtainedLocalKey,
+                            hasParsedInitialURL,
+                            pastInitialUrl,
+                            initialUrl
+                        }, null, 4)}</Text>
+                </View>
                 <Switch>
                     <Route path="/notices" component={Notices} />
                     <Route path="/keys" component={Keys} />
