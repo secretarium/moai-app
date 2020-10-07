@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tags",
+  "info": {
+    "name": "Tags"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "regex": "[a-z0-9 -]"
+    },
+    "posts": {
+      "collection": "post",
+      "via": "tags",
+      "dominant": true
+    }
+  }
+}

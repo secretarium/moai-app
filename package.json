@@ -14,7 +14,9 @@
     "scripts": {
         "lint": "yarn workspaces foreach run lint",
         "lint:fix": "yarn workspaces foreach run lint:fix",
+        "dockerize": "docker build -t secretarium/moai-website .",
         "start": "yarn workspaces foreach run start",
+        "dev:website": "yarn workspaces foreach -p -i --include @secretarium/moai-strapi --include @secretarium/moai-www run dev",
         "web": "yarn workspace @secretarium/moai-expo web",
         "android": "yarn workspace @secretarium/moai-expo android",
         "ios": "yarn workspace @secretarium/moai-expo ios",
@@ -36,21 +38,21 @@
     "devDependencies": {
         "@commitlint/config-conventional": "11.0.0",
         "@release-it/conventional-changelog": "2.0.0",
-        "@typescript-eslint/eslint-plugin": "4.3.0",
-        "@typescript-eslint/parser": "4.3.0",
+        "@typescript-eslint/eslint-plugin": "4.4.0",
+        "@typescript-eslint/parser": "4.4.0",
         "commitlint": "11.0.0",
         "eslint": "7.10.0",
         "eslint-config-react-app": "5.2.1",
         "eslint-config-recommended": "4.1.0",
         "eslint-plugin-flowtype": "5.2.0",
         "eslint-plugin-import": "2.22.1",
-        "eslint-plugin-jest": "24.0.2",
+        "eslint-plugin-jest": "24.1.0",
         "eslint-plugin-jsx-a11y": "6.3.1",
         "eslint-plugin-react": "7.21.3",
         "eslint-plugin-react-hooks": "4.1.2",
         "expo-yarn-workspaces": "1.2.1",
         "husky": "4.3.0",
-        "release-it": "14.0.3"
+        "release-it": "14.0.4"
     },
     "husky": {
         "hooks": {

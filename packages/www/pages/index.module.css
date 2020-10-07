@@ -1,0 +1,46 @@
+.secImgContainer {
+    width: 100%;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.secImgFixedHeight {
+    height: 15rem;
+}
+
+.secImgTechStack {
+    background: url('../public/assets/images/figure_technology.svg') no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-height: 25rem;
+    max-height: 25rem;
+}
+
+.secImgScaling {
+    background: url('../public/assets/images/figure_scale.png') no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-height: 25rem;
+    max-height: 25rem;
+}
+
+.secImgMap {
+    background: url('../public/assets/images/figure_map.png') no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 25rem;
+    max-height: 25rem;
+}
+
+.companyLogo {
+    height: 3rem;
+}
+
+.secImgContainer img, .companyLogo img {
+    max-height: 100%;
+    width: auto;
+}
+.companyLogo img {
+    height: 100%;
+}

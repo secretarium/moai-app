@@ -1,0 +1,118 @@
+@import 'layout-styles.module.css';
+
+.navBarWrapper {
+    height: 100%;
+    background-color: #fff;
+}
+
+.navBar {
+    height: 100%;
+    line-height: 5.5rem;
+    transition: line-height 300ms ease-in-out;
+}
+
+.navBar nav {
+    height: 8rem;
+}
+
+.navBar img {
+    height: 3rem;
+    display: inline-block;
+    transition: height 300ms ease-in-out;
+}
+
+.navBar a {
+    font-family: 'Comfortaa';
+}
+
+.fixedToggle .navBar {
+    line-height: 7rem;
+}
+
+.fixedToggle .navBar img {
+    height: 3.5rem;
+}
+
+.logoWrapper {
+    overflow: hidden;
+}
+
+.plate {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+}
+
+.plate:hover {
+    cursor: pointer;
+}
+
+.burger {
+    width: 1.5rem;
+    height: 2px;
+    background: #000;
+    border-radius: 1px;
+    transition: all .25s ease-in-out;
+}
+
+.burger::before,
+.burger::after {
+    content: '';
+    position: absolute;
+    width: 1.5rem;
+    height: 2px;
+    background: #000;
+    border-radius: 1px;
+    transition: all .25s ease-in-out;
+}
+
+.burger::before {
+    transform: translateY(-0.5rem);
+}
+
+.burger::after {
+    transform: translateY(0.5rem);
+}
+
+.burger.open {
+    background: transparent;
+    box-shadow: none;
+}
+
+.burger.open::before {
+  transform: rotate(45deg);
+}
+
+.burger.open::after  {
+  transform: rotate(-45deg);
+}
+
+.menuPanelShadow {    
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 30rem) {
+
+    .navBar, .fixedToggle .navBar {
+        line-height: 5.5rem;
+    }
+
+    .navBar img, .fixedToggle .navBar img {
+        height: 3rem;
+    }
+}
+
+@media (max-width: 20rem) {
+    .logoWrapper {
+        width: 3rem;
+    }
+    
+    .navBar img, .fixedToggle .navBar img {
+        max-width: unset;
+    }
+}

@@ -1,0 +1,70 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write you own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Root styles */
+
+@font-face {
+  font-family: Poppins;
+  src: url('../public/assets/webfonts/PoppinsRegular.eot'); /* IE9 Compat Modes */
+  src: url('../public/assets/webfonts/PoppinsRegular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../public/assets/webfonts/PoppinsRegular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../public/assets/webfonts/PoppinsRegular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../public/assets/webfonts/PoppinsRegular.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: Comfortaa;
+  src: url('../public/assets/webfonts/ComfortaaRegular.eot'); /* IE9 Compat Modes */
+  src: url('../public/assets/webfonts/ComfortaaRegular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../public/assets/webfonts/ComfortaaRegular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../public/assets/webfonts/ComfortaaRegular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../public/assets/webfonts/ComfortaaRegular.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+
+html {
+    font-size: 13px;
+    font-family: 'Poppins';
+}
+
+h1, h2, h3 {
+    font-family: 'Comfortaa';
+}
+
+/* Page progress bar */
+@import '~nprogress/nprogress.css';
+
+#nprogress .bar {
+    background: #FC5753;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px #FC5753, 0 0 5px #FC5753;
+}
+
+#nprogress .spinner {
+    top: 2.7rem;
+}
+
+#nprogress .spinner-icon {
+
+    border-top-color: #FC5753;
+    border-left-color: #FC5753;
+}
+
+@media (max-width: 30rem) {
+
+    #nprogress .spinner {
+        visibility: hidden;
+    }
+}
