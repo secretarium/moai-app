@@ -11,9 +11,8 @@ const Legal: React.FC = () => {
                 <title>Moai Privacy Notice</title>
             </Head>
             <Container>
-
-                <PostTitle>Privacy Policy</PostTitle>
-                <section id="legal" className="mb-20">
+                <section id="legal" className="mb-20 px-8">
+                    <PostTitle>Privacy Policy</PostTitle>
                     <p className="text-lg leading-9 pb-10">
                         Your privacy is literally our main concern, so here is everything you need to know about the way your personal information is collected and used when you interact with the Moai website.
                     </p>

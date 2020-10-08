@@ -23,7 +23,9 @@ const NavBar: React.FC<NavBarProps> = ({ fixedToggle }) => {
             <Link href="/blog">
                 <a className="block mt-4 md:inline md:mt-0 mr-12 duration-200 transition-colors hover:text-accent-2">Blog</a>
             </Link>
-            <a href="#contact" className="block mt-4 md:inline md:mt-0 duration-200 transition-colors text-white bg-accent-1 rounded-full px-8 py-4" onClick={() => setIsExpanded(false)}>Get Moai</a>
+            <Link href="/#register">
+                <a className="block mt-4 md:inline md:mt-0 duration-200 transition-colors text-white bg-accent-1 rounded-full px-8 py-4" onClick={() => setIsExpanded(false)}>Get Moai</a>
+            </Link>
         </div>
     );
 

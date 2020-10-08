@@ -94,20 +94,20 @@ const QRCodeGenerator: React.FC = () => {
         composition = <span>{error}</span>;
     else if (!hasShownNotice)
         composition = <>
-            <p>Before we start here are some things you must know:</p>
-            <h4>Each QR code should only be displayed at one location</h4>
-            <p>For contact tracing to be effective, it is important that each QR code you generate is only used in one place. You can print a single QR code more than once if you want to display it in more than one place at your location (for example at different entrances).</p>
-            <h4>If you have more than one location, you’ll get separate QR codes</h4>
-            <p>You will get a separate PDF file for every location; each will contain a unique QR code. Please name your PDF files as soon as you download them so you can keep track of which QR code is displayed at which location.</p>
-            <h4>In case of damage, reprint or generate a new code</h4>
-            <p>If your QR code gets damaged, you can reprint the original PDF. Don’t worry if you forget to save it, you can always generate a new QR code instead. Just remember, if you are using the same code in multiple places at one location, make sure to replace all of them.</p>
-            <button className="btn" onClick={() => setHasShownNotice(true)}>I understand</button>
+            <p className="text-lg leading-9 pb-10">Before we start here are some things you must know:</p>
+            <h4 className="text-2xl lg:text-3xl tracking-tighter">Each QR code should only be displayed at one location</h4>
+            <p className="text-lg leading-9 pb-10">For contact tracing to be effective, it is important that each QR code you generate is only used in one place. You can print a single QR code more than once if you want to display it in more than one place at your location (for example at different entrances).</p>
+            <h4 className="text-2xl lg:text-3xl tracking-tighter">If you have more than one location, you’ll get separate QR codes</h4>
+            <p className="text-lg leading-9 pb-10">You will get a separate PDF file for every location; each will contain a unique QR code. Please name your PDF files as soon as you download them so you can keep track of which QR code is displayed at which location.</p>
+            <h4 className="text-2xl lg:text-3xl tracking-tighter">In case of damage, reprint or generate a new code</h4>
+            <p className="text-lg leading-9 pb-10">If your QR code gets damaged, you can reprint the original PDF. Don’t worry if you forget to save it, you can always generate a new QR code instead. Just remember, if you are using the same code in multiple places at one location, make sure to replace all of them.</p>
+            <button className="bg-white mt-8 py-3 px-8 text-lg rounded-full text-accent-2 border border-accent-2 inline-block" onClick={() => setHasShownNotice(true)}>I understand</button>
         </>;
     else if (locationType === -1)
         composition = <>
-            <h4>What kind of location do you need a QRcode for ?</h4>
-            <select value={locationType} onChange={(event) => setLocationType(parseInt(event.currentTarget.value))}>
-                <option key={'none'} value={-1}>-</option>
+            <h4 className="text-2xl lg:text-3xl tracking-tighter pb-10">What kind of location do you need a QRcode for ?</h4>
+            <select className="py-3 px-8 text-lg rounded-full border border-gray-700" value={locationType} onChange={(event) => setLocationType(parseInt(event.currentTarget.value))}>
+                <option key={'none'} value={-1}>Select the type of venue</option>
                 {locationTypes.map((name, index) => <option key={index} value={index}>{name}</option>)}
             </select>
         </>;
@@ -124,10 +124,10 @@ const QRCodeGenerator: React.FC = () => {
         composition = <div>Connecting to Moai...</div>;
     else if (qrCode)
         composition = <>
-            <h4>Here is a QRCode for your {locationTypes[locationType].toLocaleLowerCase()}!</h4>
+            <h4 className="text-2xl lg:text-3xl tracking-tighter">Here is a QRCode for your {locationTypes[locationType].toLocaleLowerCase()}!</h4>
             <br />
             <br />
-            <div dangerouslySetInnerHTML={{
+            <div className="inline-block" dangerouslySetInnerHTML={{
                 __html: new QRCode({
                     content: `https://moai-app.com/check/${qrCode}`,
                     padding: 0,
@@ -137,7 +137,9 @@ const QRCodeGenerator: React.FC = () => {
             <br />
             <br />
             <Link href={`/pdf/${qrCode}`}>
-                <a target="_blank" className="btn dl-pdf">Download a PDF version</a>
+                <a target="_blank" className="bg-white mt-8 py-3 px-8 text-lg rounded-full text-blue-900 border border-blue-900 inline-block">
+                    Download a PDF version
+                </a>
             </Link>
         </>;
     else

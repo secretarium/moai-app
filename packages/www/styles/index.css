@@ -45,21 +45,21 @@ h1, h2, h3 {
 @import '~nprogress/nprogress.css';
 
 #nprogress .bar {
-    background: #FC5753;
+    background: #1ca8e1;
 }
 
 #nprogress .peg {
-    box-shadow: 0 0 10px #FC5753, 0 0 5px #FC5753;
+    box-shadow: 0 0 10px #1ca8e1, 0 0 5px #1ca8e1;
 }
 
 #nprogress .spinner {
-    top: 2.7rem;
+    top: 3rem;
 }
 
 #nprogress .spinner-icon {
 
-    border-top-color: #FC5753;
-    border-left-color: #FC5753;
+    border-top-color: #1ca8e1;
+    border-left-color: #1ca8e1;
 }
 
 @media (max-width: 30rem) {

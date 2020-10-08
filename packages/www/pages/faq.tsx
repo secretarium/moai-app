@@ -12,8 +12,8 @@ const FAQ: React.FC = () => {
                     <title>Moai FAQ</title>
                 </Head>
                 <Container>
-                    <PostTitle>Frequently Asked Questions</PostTitle>
-                    <section id="legal" className="mb-20">
+                    <section id="legal" className="mb-20  px-8">
+                        <PostTitle>Frequently Asked Questions</PostTitle>
                         <h4 className="text-2xl lg:text-3xl tracking-tighter">Is Moai made by NHS?</h4>
                         <p className="text-lg leading-9 pb-10">
                             Moai has been built by Secretarium, a London-based deep-tech startup specialising in data security. The project was funded by UK Research and Innovation, a public body of the government that directs research into innovation.

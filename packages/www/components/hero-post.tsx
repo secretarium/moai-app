@@ -32,7 +32,7 @@ const HeroPost: React.FC<HeroPostProps> = ({
             </div>
             <div className="md:grid md:grid-cols-2 gap-16 lg:gap-32 mb-20 md:mb-28">
                 <div>
-                    <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
+                    <h3 className="mb-4 text-3xl lg:text-5xl leading-tight">
                         <Link as={`/blog/posts/${slug}`} href="/blog/posts/[slug]">
                             <a className="hover:underline">{title}</a>
                         </Link>

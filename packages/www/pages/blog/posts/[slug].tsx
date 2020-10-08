@@ -25,13 +25,13 @@ const Post: React.FC<PostProps> = ({ post, preview }) => {
     return (
         <Layout preview={preview}>
             <Container>
-                {router.isFallback
-                    ? (
-                        <PostTitle>Loading…</PostTitle>
-                    )
-                    : (
-                        <>
-                            <article className="mb-32">
+                <article className="mb-32 p-8">
+                    {router.isFallback
+                        ? (
+                            <PostTitle>Loading…</PostTitle>
+                        )
+                        : (
+                            <>
                                 <Head>
                                     <title>
                                         {post.title} | Moai Blog
@@ -46,9 +46,9 @@ const Post: React.FC<PostProps> = ({ post, preview }) => {
                                     author={post.author}
                                 />
                                 <PostBody content={post.content} />
-                            </article>
-                        </>
-                    )}
+                            </>
+                        )}
+                </article>
             </Container>
         </Layout>
     );

@@ -22,19 +22,21 @@ const Index: React.FC<IndexProps> = ({ allPosts }) => {
                 <title>Moai Blog</title>
             </Head>
             <Container>
-                <PostTitle>Latest</PostTitle>
-                {heroPost && (
-                    <HeroPost
-                        title={heroPost.title}
-                        coverImage={heroPost.coverImage.url}
-                        date={heroPost.date}
-                        tags={heroPost.tags}
-                        author={heroPost.author}
-                        slug={heroPost.slug}
-                        excerpt={heroPost.excerpt}
-                    />
-                )}
-                {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+                <section className="px-8">
+                    <PostTitle>Latest</PostTitle>
+                    {heroPost && (
+                        <HeroPost
+                            title={heroPost.title}
+                            coverImage={heroPost.coverImage.url}
+                            date={heroPost.date}
+                            tags={heroPost.tags}
+                            author={heroPost.author}
+                            slug={heroPost.slug}
+                            excerpt={heroPost.excerpt}
+                        />
+                    )}
+                    {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+                </section>
             </Container>
         </Layout>
     );
