@@ -1,19 +1,20 @@
 # Start base stage
-FROM node:lts-alpine AS base
+FROM node:lts AS base
 WORKDIR /app
 COPY . .
-RUN yarn install --pure-lockfile --no-progress --prod
+RUN yarn install > /install.log || true
+RUN mv /tmp /toto
 
 # Start build stage
 FROM base AS build
 WORKDIR /app
-RUN yarn install --pure-lockfile --no-progress
+RUN yarn install
 ENV NODE_ENV=production
 RUN yarn build
 RUN cd packages/www && ./node_modules/.bin/next telemetry disable
 
 # Start production construction stage
-FROM node:lts-alpine AS production
+FROM node:lts AS production
 WORKDIR /app
 RUN echo "export PATH=$PATH:./node_modules/.bin" > /etc/environment
 
