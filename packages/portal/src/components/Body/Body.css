@@ -1,0 +1,21 @@
+@import '../../assets/fonts.css';
+
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+    list-style: none;
+    word-wrap: normal;
+    white-space: normal;
+    font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to left, #e95c59 0%, #cc3752 100%);
+    display: grid;
+    place-items: center;
+}

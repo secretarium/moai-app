@@ -4,6 +4,9 @@
         "baseUrl": "./src",
         "outDir": "./dist",
         "target": "es5",
+        "lib": [
+            "ES2015"
+        ],
         "allowJs": true,
         "strict": false,
         "forceConsistentCasingInFileNames": true,
@@ -14,9 +17,8 @@
     },
     "include": [
         "index.d.ts",
-        "next-env.d.ts",
         "src/*.ts",
-        "src/*.tsx", "src/App.tsx", "src/__tests__/App.test.tsx"
+        "src/*.tsx"
     ],
     "exclude": [
         "node_modules"

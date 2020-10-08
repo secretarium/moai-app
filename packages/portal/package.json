@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
+        "@ant-design/icons": "4.2.2",
         "@secretarium/moai-connect": "workspace:packages/connect",
         "antd": "4.6.6",
         "deepmerge": "4.2.2",
@@ -33,10 +34,11 @@
     "scripts": {
         "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
         "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
-        "test": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts test"
+        "test": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts test",
+        "lint": "eslint --ext .ts,.tsx,.js,.jsx ."
     },
     "eslintConfig": {
-        "extends": "react-app"
+        "extends": "../../eslint.config.js"
     },
     "browserslist": {
         "production": [

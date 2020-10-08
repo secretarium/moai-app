@@ -61,8 +61,7 @@ const secretariumHandler = {
         handlerStore.clusters = (process?.env?.REACT_APP_SECRETARIUM_GATEWAYS ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         printClusterInfo();
     },
-    // needs changing
-    createDeviceKey: (): Promise<Key> =>
+    createKey: (): Promise<Key> =>
         new Promise((resolve, reject) => {
             Key.createKey()
                 .then((key) => {

@@ -145,7 +145,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:^4.2.1, @ant-design/icons@npm:^4.2.2":
+"@ant-design/icons@npm:4.2.2, @ant-design/icons@npm:^4.2.1, @ant-design/icons@npm:^4.2.2":
   version: 4.2.2
   resolution: "@ant-design/icons@npm:4.2.2"
   dependencies:
@@ -4695,6 +4695,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@secretarium/moai-portal@workspace:packages/portal"
   dependencies:
+    "@ant-design/icons": 4.2.2
     "@secretarium/moai-connect": "workspace:packages/connect"
     "@testing-library/jest-dom": 4.2.4
     "@testing-library/react": 9.3.2

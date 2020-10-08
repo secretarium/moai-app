@@ -1,0 +1,84 @@
+.messages {
+    display: flex;
+    flex-direction: column;
+    flex: 0.75;
+    border-radius: 0 5px 5px 0;
+}
+
+.messages-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #203864;
+    border-left: 1px solid #E9EBEE;
+    border-radius: 0 5px 0 0;
+}
+
+.messages-header-info {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.messages-header-info > h2 {
+    font-size: 18px;
+    color: #fff;
+}
+
+.messages-body {
+    flex: 1;
+    padding: 30px;
+    overflow: auto;
+}
+
+.message-bubble {
+    position: relative;
+    font-size: 15px;
+    padding: 10px;
+    background-color: #E9EBEE;
+    border-radius: 15px;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.message-name {
+    position: absolute;
+    top: -15px;
+    font-weight: 800;
+    font-size: x-small;
+}
+
+.message-sender {
+    margin-left: auto;
+    background-color: #00b0ee;
+}
+
+.message-timestamp {
+    margin-left: 10px;
+    font-size: xx-small;
+}
+
+.messages-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: #203864;
+    border-radius: 0 0 5px 0;
+}
+
+.messages-footer > form {
+    flex: 1;
+    display: flex;
+    margin-left: 15px;
+}
+
+.messages-footer > form > input {
+    flex: 1;
+    border-radius: 30px;
+    border: none;
+    padding: 8px;
+}
+
+.messages-footer > form > button {
+    display: none
+}
