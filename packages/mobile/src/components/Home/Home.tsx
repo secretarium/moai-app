@@ -9,8 +9,8 @@ import { commonStyles } from './styles';
 const Home: React.FC = () => {
     // Color theme
     const colorScheme = useColorScheme();
-    const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
-    const themeLogoStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
+    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+    const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
     return (
         <MainLayout showGoBack={false}>

@@ -7,7 +7,7 @@ import MainLayout from '../../common/MainLayout/index';
 const Keys: React.FC = () => {
     // Color theme
     const colorScheme = useColorScheme();
-    const themeTextStyle = (colorScheme === 'light') || (colorScheme === 'no-preference') ? 'black' : 'white';
+    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
 
     return (
         <MainLayout goBackRoute={'/infos'} showGoBack={true} withNavigation={true}>
