@@ -20,6 +20,9 @@ const NavBar: React.FC<NavBarProps> = ({ fixedToggle }) => {
             <Link href="/faq">
                 <a className="block mt-4 md:inline md:mt-0 mr-12 duration-200 transition-colors hover:text-accent-2">FAQ</a>
             </Link>
+            <Link href="/about">
+                <a className="block mt-4 md:inline md:mt-0 mr-12 duration-200 transition-colors hover:text-accent-2">About us</a>
+            </Link>
             <Link href="/blog">
                 <a className="block mt-4 md:inline md:mt-0 mr-12 duration-200 transition-colors hover:text-accent-2">Blog</a>
             </Link>
