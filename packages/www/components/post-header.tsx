@@ -6,7 +6,7 @@ import PostTitle from './post-title';
 import Author from '../types/author';
 import Link from 'next/link';
 
-type Props = {
+type PostHeaderProps = {
     title: string
     coverImage: string
     date: string
@@ -14,7 +14,13 @@ type Props = {
     author: Author
 };
 
-const PostHeader = ({ title, coverImage, date, tags, author }: Props) => {
+const PostHeader: React.FC<PostHeaderProps> = ({
+    title,
+    coverImage,
+    date,
+    tags,
+    author
+}) => {
     return (
         <>
             <PostTitle>{title}</PostTitle>

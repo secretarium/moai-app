@@ -4,7 +4,7 @@ import Head from 'next/head';
 import PostTitle from '../components/post-title';
 import Container from '../components/container';
 
-const Legal = () => {
+const FAQ: React.FC = () => {
     return (
         <>
             <Layout>
@@ -86,4 +86,4 @@ const Legal = () => {
     );
 };
 
-export default Legal;
+export default FAQ;

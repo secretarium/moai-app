@@ -4,7 +4,7 @@ import { useColorScheme } from 'react-native-appearance';
 import { Redirect } from '../../ReactRouter';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
-import { SCP, Key, Constants } from '../../../../connect/src';
+import { SCP, Key, Constants } from '@secretarium/moai-connect/src';
 import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';

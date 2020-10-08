@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 
-const Meta = () => {
+const Meta: React.FC = () => {
     return (
         <Head>
             <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=v0.0.1" />

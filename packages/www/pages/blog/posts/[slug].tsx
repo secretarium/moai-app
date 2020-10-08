@@ -11,13 +11,13 @@ import Head from 'next/head';
 import markdownToHtml from '../../../lib/markdownToHtml';
 import PostType from '../../../types/post';
 
-type Props = {
+type PostProps = {
     post: PostType
     morePosts: PostType[]
     preview?: boolean
 };
 
-const Post = ({ post, morePosts, preview }: Props) => {
+const Post: React.FC<PostProps> = ({ post, preview }) => {
     const router = useRouter();
     if (!router.isFallback && !post?.slug) {
         return <ErrorPage statusCode={404} />;

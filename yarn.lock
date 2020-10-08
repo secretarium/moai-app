@@ -4845,6 +4845,7 @@ __metadata:
     "@fortawesome/free-brands-svg-icons": 5.15.1
     "@fortawesome/react-fontawesome": 0.1.11
     "@next/bundle-analyzer": 9.5.3
+    "@secretarium/moai-connect": "workspace:packages/connect"
     "@types/classnames": 2.2.10
     "@types/html-pdf": 2.1.2
     "@types/jest": 26.0.14

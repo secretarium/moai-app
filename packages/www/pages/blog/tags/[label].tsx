@@ -9,12 +9,12 @@ import Head from 'next/head';
 import PostType from '../../../types/post';
 import PostPreview from '../../../components/post-preview';
 
-type Props = {
+type TagProps = {
     tag: string;
     posts: PostType[]
 };
 
-const Tag = ({ tag, posts }: Props) => {
+const Tag: React.FC<TagProps> = ({ tag, posts }) => {
     const router = useRouter();
     if (!router.isFallback && !tag) {
         return <ErrorPage statusCode={404} />;

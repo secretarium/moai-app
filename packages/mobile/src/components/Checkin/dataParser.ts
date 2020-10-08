@@ -1,6 +1,6 @@
 import { BarCodeScanningResult } from 'expo-camera';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Utils } from '../../../../connect/src';
+import { Utils } from '@secretarium/moai-connect/src';
 
 export type ParsedCode = {
     source: string;

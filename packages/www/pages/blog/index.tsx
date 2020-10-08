@@ -8,11 +8,11 @@ import Head from 'next/head';
 import Post from '../../types/post';
 import PostTitle from '../../components/post-title';
 
-type Props = {
+type IndexProps = {
     allPosts: Post[]
 };
 
-const Index = ({ allPosts }: Props) => {
+const Index: React.FC<IndexProps> = ({ allPosts }) => {
     const heroPost = allPosts[0];
     const morePosts = allPosts.slice(1);
 

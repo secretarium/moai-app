@@ -5,7 +5,7 @@ import CoverImage from './cover-image';
 import Link from 'next/link';
 import Author from '../types/author';
 
-type Props = {
+type PostPreviewProps = {
     title: string
     coverImage: string
     date: string
@@ -15,7 +15,7 @@ type Props = {
     slug: string
 };
 
-const PostPreview = ({
+const PostPreview: React.FC<PostPreviewProps> = ({
     title,
     coverImage,
     date,
@@ -23,7 +23,7 @@ const PostPreview = ({
     excerpt,
     author,
     slug
-}: Props) => {
+}) => {
     return (
         <div>
             <div className="mb-5" style={{

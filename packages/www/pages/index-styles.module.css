@@ -1,0 +1,22 @@
+.bannerImageContainer {
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.bannerImageContainer img {
+    display: block;
+    position: absolute;
+    max-width: 500px;
+}
+
+.bannerImageOne {
+    left: -1rem;
+    top: 2.5rem;
+}
+
+.bannerImageTwo {
+    left: 20rem;
+    top: -3rem;
+}

@@ -2,11 +2,11 @@ import React from 'react';
 import Container from './container';
 import cn from 'classnames';
 
-type Props = {
+type AlertProps = {
     preview?: boolean
 };
 
-const Alert = ({ preview }: Props) => {
+const Alert: React.FC<AlertProps> = ({ preview }) => {
     return (
         <Container>
             {preview ? (

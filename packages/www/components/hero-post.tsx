@@ -5,7 +5,7 @@ import CoverImage from './cover-image';
 import Link from 'next/link';
 import Author from '../types/author';
 
-type Props = {
+type HeroPostProps = {
     title: string
     coverImage: string
     date: string
@@ -15,7 +15,7 @@ type Props = {
     slug: string
 };
 
-const HeroPost = ({
+const HeroPost: React.FC<HeroPostProps> = ({
     title,
     coverImage,
     date,
@@ -23,7 +23,7 @@ const HeroPost = ({
     excerpt,
     author,
     slug
-}: Props) => {
+}) => {
 
     return (
         <section>

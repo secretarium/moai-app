@@ -15,8 +15,10 @@ Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     return <AnimatePresence exitBeforeEnter>
         <Component {...pageProps} />
     </AnimatePresence>;
-}
+};
+
+export default App;

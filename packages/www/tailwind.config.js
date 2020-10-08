@@ -4,7 +4,8 @@ module.exports = {
         extend: {
             colors: {
                 'accent-1': '#1ca8e1',
-                'accent-2': '#e95c59'
+                'accent-2': '#e95c59',
+                'gray-100': '#fafafa'
             },
             spacing: {
                 28: '4rem'
@@ -16,10 +17,10 @@ module.exports = {
                 tight: 1.2
             },
             fontSize: {
-                '5xl': '1.5rem',
-                '6xl': '2.1rem',
-                '7xl': '3.5rem',
-                '8xl': '4.25rem'
+                // '5xl': '1.5rem',
+                // '6xl': '2.1rem',
+                // '7xl': '3.5rem',
+                // '8xl': '4.25rem'
             },
             fontFamily: {
                 sans: 'Poppins, -apple-system, "Helvetica Neue", "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'

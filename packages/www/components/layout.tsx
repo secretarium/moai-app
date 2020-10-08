@@ -9,9 +9,8 @@ import layoutStyles from './layout-styles.module.css';
 import { useState, useEffect } from 'react';
 import ReactGA from 'react-ga';
 
-type Props = {
+type LayoutProps = {
     preview?: boolean
-    children: React.ReactNode
 };
 
 const cyrb53 = function (str: string, seed = 0) {
@@ -27,7 +26,7 @@ const cyrb53 = function (str: string, seed = 0) {
     return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
-const Layout = ({ preview, children }: Props) => {
+const Layout: React.FC<LayoutProps> = ({ preview, children }) => {
 
     const [fixedToggle, setFixedToggle] = useState(false);
     const [hasInitAnalytics, setHasInitAnalytics] = useState(false);
@@ -36,7 +35,7 @@ const Layout = ({ preview, children }: Props) => {
         if (!hasInitAnalytics) {
 
             const validityInterval = Math.round(new Date().getTime() / 1000 / 3600 / 24 / 4);
-            const clientIdSource = 'com.secretarium.marker;' + window.location.host + ';' + navigator.userAgent + ';' + navigator.language + ';' + validityInterval;
+            const clientIdSource = 'com.secretarium.moai.marker;' + window.location.host + ';' + navigator.userAgent + ';' + navigator.language + ';' + validityInterval;
             let clientId;
             try {
                 clientId = cyrb53(clientIdSource).toString(16);
@@ -53,7 +52,7 @@ const Layout = ({ preview, children }: Props) => {
             setHasInitAnalytics(true);
         }
         ReactGA.pageview(window.location.pathname + window.location.search);
-    });
+    }, [hasInitAnalytics]);
 
     return (
         <>

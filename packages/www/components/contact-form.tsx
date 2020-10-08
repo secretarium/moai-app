@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormEvent, useState } from 'react';
 
-const ContactForm = () => {
+const ContactForm: React.FC = () => {
 
     const [email, setEmail] = useState<string>('');
     const [description, setDescription] = useState<string>('');

@@ -1,11 +1,11 @@
 import React from 'react';
 import { parseISO, format } from 'date-fns';
 
-type Props = {
+type DateFormaterProps = {
     dateString: string
 };
 
-const DateFormater = ({ dateString }: Props) => {
+const DateFormater: React.FC<DateFormaterProps> = ({ dateString }) => {
     const date = parseISO(dateString);
     return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>;
 };

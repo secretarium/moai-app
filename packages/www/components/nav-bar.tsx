@@ -30,7 +30,7 @@ const NavBar: React.FC<NavBarProps> = ({ fixedToggle }) => {
     return (
         <div className={`${navBarStyles.navBarWrapper} ${fixedToggle ? '' : navBarStyles.fixedToggle}`}>
             <div className={`container mx-auto px-5 md:text-center ${navBarStyles.navBar}`}>
-                <nav className="flex items-center justify-between flex-wrap">
+                <nav className="flex items-center justify-between flex-wrap px-8">
                     <Link href="/">
                         <a className={`flex items-center flex-shrink-0 text-white mr-6 ${navBarStyles.logoWrapper}`}>
                             <img src={logo} alt="Secretarium" className=" inline-block" />
