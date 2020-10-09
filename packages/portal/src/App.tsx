@@ -43,12 +43,15 @@ import { Route, Switch } from 'react-router-dom';
 import Providers from './Providers';
 import Chat from './components/Chat';
 import Body from './components/Body';
+import Login from './components/Login';
+
 
 const App: React.FC = () => (
     <Providers>
         <Body>
             <Switch>
-                <Route exact path="/" component={Chat} />
+                <Route exact path="/" component={Login} />
+                <Route path="/chat" component={Chat} />
             </Switch>
         </Body>
     </Providers>

@@ -6,7 +6,7 @@ import Messages from './Messages';
 
 const Chat: React.FC = () => {
     return (
-        <div className="container">
+        <div className="container-chat">
             <Sidebar />
             <Messages />
         </div>
