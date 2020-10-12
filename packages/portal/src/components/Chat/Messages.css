@@ -77,6 +77,7 @@
     border-radius: 30px;
     border: none;
     padding: 8px;
+    outline: none;
 }
 
 .messages-footer > form > button {

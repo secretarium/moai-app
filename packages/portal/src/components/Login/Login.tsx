@@ -1,44 +1,9 @@
 import React from 'react';
-// import { withState } from '../../store';
-// import { SCP, Key, Constants } from '@secretarium/moai-connect';
 import './Login.css';
-import { Button, Input, Form } from 'antd';
+import { Button, Input, Form, Divider } from 'antd';
+import { version as packageVersion } from '../../../package.json';
 
-// const scp = new SCP();
-// const isDev = process.env.NODE_ENV === 'development';
 
-// const Login = withState()(
-//     (s) => ({
-//         localKey: s.system.localKey
-//     }),
-//     ({ dispatch, localKey }) => {
-
-//         const [isConnected, setIsConnected] = useState(false);
-//         const [isLoggingIn, setIsLoggingIn] = useState(false);
-//         const [isRegistering, setIsRegistering] = useState(false);
-//         const [isNew, setIsNew] = useState(false);
-//         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
-
-//         useEffect(() => {
-//             async function connectBackend() {
-//                 if (localKey && scp.state === Constants.ConnectionState.closed) {
-//                     Key.importKey(localKey.exportableKey).then((key) => {
-//                         scp.connect('wss://future-url', key, 'knownTrustedKey').then(() => {
-//                             setIsConnected(true);
-//                         }).catch((error) => {
-//                             setErrorMessage(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-//                             setIsConnected(false);
-//                             console.error(error);
-//                         });
-//                     });
-//                 } else if (scp.state === Constants.ConnectionState.secure) {
-//                     setIsConnected(true);
-//                 }
-//             }
-//             if (!isConnected) {
-//                 connectBackend();
-//             }
-//         }, [localKey, isConnected, errorMessage]);
 const Login: React.FC = () => {
 
     const onFinish = values => {
@@ -78,8 +43,16 @@ const Login: React.FC = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            <Divider style={{ width: '70%', minWidth: '70%' }} />
+            <span>
+                Moai © {new Date().getFullYear()} - Powered by{' '}
+                <a href="https://secretarium.com" rel="noopener noreferrer" target="_blank">
+                    Secretarium
+                </a> - <em>{`v${packageVersion}`}</em>
+            </span>
         </div>
     );
 };
+
 
 export default Login;

@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState, MouseEvent, ChangeEvent } from 'react';
 import './Messages.css';
 import MoreOutlined from '@ant-design/icons/MoreOutlined';
 import SendOutlined from '@ant-design/icons/SendOutlined';
 
 
 const Messages: React.FC = () => {
+    const [message, setMessage] = useState('');
+
+    const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        console.log('you sent the following message: ', message);
+        setMessage('');
+    };
+
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setMessage(e.target.value);
+    };
+
     return (
         <div className="messages">
             <div className="messages-header">
@@ -27,8 +39,8 @@ const Messages: React.FC = () => {
             </div>
             <div className="messages-footer">
                 <form>
-                    <input type="text" placeholder="Type a new message" />
-                    <button type="submit">Send message</button>
+                    <input value={message} onChange={onChange} type="text" placeholder="Type a new message" />
+                    <button onClick={onClick} type="submit">Send message</button>
                 </form>
                 <SendOutlined style={{ fontSize: '24px', color: 'white', padding: '10px' }} />
             </div>
