@@ -1,4 +1,4 @@
-import { Key, SCP, Transaction } from '@secretarium/moai-connect';
+import { Key, SCP, Transaction } from '@secretarium/connector';
 
 interface SecretariumGatewayConfig {
     key: string;
@@ -51,7 +51,7 @@ const printClusterInfo = () => {
         });
     });
 
-    console.info('SFX now using the following cluster configuration');
+    console.info('Moai now using the following cluster configuration');
     console.table(printableConfig);
 };
 
