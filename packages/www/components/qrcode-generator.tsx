@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Key, SCP, Constants } from '../connect/src';
+import { Key, SCP, Constants } from '@secretarium/connector';
 import QRCode from 'qrcode-svg';
 import Link from 'next/link';
 

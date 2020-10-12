@@ -2,6 +2,7 @@
 FROM node:lts AS base
 WORKDIR /app
 COPY . .
+RUN mkdir -p packages/mobile
 RUN yarn install > /install.log || true
 RUN mv /tmp /toto
 
