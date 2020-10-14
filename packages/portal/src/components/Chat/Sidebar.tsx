@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
             <div className="search">
                 <div className="search-container">
                     <SearchOutlined style={{ fontSize: '24px', color: 'gray', padding: '10px' }} />
-                    <input placeholder="Search..." type="text" />
+                    <input placeholder="Search..." type="text" style={{ outline: 'none', border: 'none' }} />
                 </div>
             </div>
             <div className="chats">
