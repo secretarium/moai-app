@@ -1,5 +1,6 @@
-import { actionTypes } from './constants';
+import { actionTypes, commands } from './constants';
 import secretariumHandler from '../utils/secretariumHandler';
+//import { requestFactory } from './factories';
 
 export const generateLocalKey = (): MoaiPortal.FunctionAction => (dispatch) => {
     secretariumHandler.createKey()
@@ -29,16 +30,17 @@ export const sendMessage = (message: MoaiPortal.Message): MoaiPortal.FunctionAct
     });
 };
 
-export const receiveMessage = (message: MoaiPortal.Message): MoaiPortal.FunctionAction => (dispatch) => {
-    dispatch({
-        type: actionTypes.MOAI_PORTAL_RECEIVE_MESSAGE,
-        payload: message
-    });
-};
-
-export const getChats = (chats: any): MoaiPortal.FunctionAction => (dispatch) => {
-    dispatch({
-        type: actionTypes.MOAI_PORTAL_CHAT_LIST,
-        payload: chats
-    });
-};
+// export const getChats = (): MoaiPortal.FunctionAction => (dispatch, getState) => {
+//     dispatch(requestFactory(commands.MOAI_PORTAL_GET_CONTACTS, undefined, true)({
+//         onResult: result => {
+//             const state = getState();
+//             const chatList = state.principal.contacts || [];
+//             return {
+//                 payload: {
+//                     result,
+//                     chatList
+//                 }
+//             };
+//         }
+//     }));
+// };

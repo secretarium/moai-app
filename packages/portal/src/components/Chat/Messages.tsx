@@ -2,6 +2,7 @@ import React, { useState, MouseEvent, ChangeEvent } from 'react';
 import './Messages.css';
 import MoreOutlined from '@ant-design/icons/MoreOutlined';
 import SendOutlined from '@ant-design/icons/SendOutlined';
+import Message from './Message';
 
 
 const Messages: React.FC = () => {
@@ -26,16 +27,8 @@ const Messages: React.FC = () => {
                 <MoreOutlined style={{ fontSize: '26px', color: '#fff' }} />
             </div>
             <div className="messages-body">
-                <p className="message-bubble">
-                    <span className="message-name">nhs worker</span>
-                    First message
-                    <span className="message-timestamp">1:23 pm</span>
-                </p>
-                <p className="message-bubble message-sender">
-                    <span className="message-name">nhs worker</span>
-                    First message
-                    <span className="message-timestamp">1:23 pm</span>
-                </p>
+                <Message username="ID 1234" message="Hello there" timestamp="1:23 pm" isSender={false} />
+                <Message username="nhs worker" message="Hi" timestamp="1:24 pm" isSender={true} />
             </div>
             <div className="messages-footer">
                 <form>

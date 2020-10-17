@@ -1,4 +1,4 @@
-.sidebarChats {
+.sidebarChatList {
     display: flex;
     align-items: center;
     padding: 15px;
@@ -7,15 +7,15 @@
     color: #fff
 }
 
-.sidebarChats:hover {
+.sidebarChatList:hover {
     background-color: #203864;
 }
 
-.sidebarChats-info {
+.sidebarChatList-info {
     margin-left: 15px;
 }
 
-.sidebarChats-info > h2 {
+.sidebarChatList-info > h2 {
     font-size: 18px;
     color: #fff;
 }

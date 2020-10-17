@@ -99,11 +99,13 @@ declare namespace MoaiPortal {
 
     type Principal = {
         isConnected: boolean;
+        isFetching: boolean;
+        contacts?: Contact[];
         localKey?: Key;
     };
 
-    type MessageList = {
-        [id: number]: Message
+    type Contact = {
+        id: number
     };
 
     type Messages = {

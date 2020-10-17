@@ -3,7 +3,7 @@ import './Sidebar.css';
 import MoreOutlined from '@ant-design/icons/MoreOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
-import SidebarChats from './SidebarChats';
+import SidebarChatList from './SidebarChatList';
 
 
 const Sidebar: React.FC = () => {
@@ -20,7 +20,7 @@ const Sidebar: React.FC = () => {
                 </div>
             </div>
             <div className="chats">
-                <SidebarChats />
+                <SidebarChatList />
             </div>
         </div>
     );

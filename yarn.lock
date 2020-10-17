@@ -4600,6 +4600,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@secretarium/connector@npm:0.4.0":
+  version: 0.4.0
+  resolution: "@secretarium/connector@npm:0.4.0"
+  checksum: 1ec3f7d55e4b9c58a3deda709eea00b5b28e215912453592934f9c7196dcae6dd332dcd3f56a6d1052d4e9c9dbae18dd3f6059a7d81d8c1aafe3dc9225626420
+  languageName: node
+  linkType: hard
+
 "@secretarium/moai-connect@workspace:packages/connect":
   version: 0.0.0-use.local
   resolution: "@secretarium/moai-connect@workspace:packages/connect"
@@ -4697,7 +4704,7 @@ __metadata:
   resolution: "@secretarium/moai-portal@workspace:packages/portal"
   dependencies:
     "@ant-design/icons": 4.2.2
-    "@secretarium/moai-connect": "workspace:packages/connect"
+    "@secretarium/connector": 0.4.0
     "@testing-library/jest-dom": 4.2.4
     "@testing-library/react": 9.3.2
     "@testing-library/user-event": 7.1.2
