@@ -1,15 +1,16 @@
 import React from 'react';
 import './Chat.css';
-import Sidebar from './Sidebar';
 import Messages from './Messages';
+import ContactsBar from './ContactsBar';
+import Menu from '../Menu';
 
 
 const Chat: React.FC = () => {
     return (
-        <div className="container-chat">
-            <Sidebar />
+        <>
+            <ContactsBar />
             <Messages />
-        </div>
+        </>
     );
 };
 

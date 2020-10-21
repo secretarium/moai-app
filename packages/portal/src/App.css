@@ -1,4 +1,4 @@
-.container-chat {
+.container {
     display: flex;
     height: 80vh;
     width: 80vw;
@@ -7,12 +7,8 @@
 }
 
 @media (max-width: 1200px) {
-    .container-chat {
+    .container {
         height: 100vh;
         width: 100vw;
     }
 }
-
-
-
-

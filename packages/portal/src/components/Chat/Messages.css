@@ -1,16 +1,17 @@
 .messages {
     display: flex;
     flex-direction: column;
-    flex: 0.75;
+    background-color: #fff;
+    flex: 0.65;
     border-radius: 0 5px 5px 0;
+    margin-left: 5px;
 }
 
 .messages-header {
-    padding: 20px;
+    padding: 15px;
     display: flex;
     align-items: center;
-    background-color: #203864;
-    border-left: 1px solid #E9EBEE;
+    background-color: #f4f7f9;
     border-radius: 0 5px 0 0;
 }
 
@@ -21,7 +22,7 @@
 
 .messages-header-info > h2 {
     font-size: 18px;
-    color: #fff;
+    color: #203864;
 }
 
 .messages-body {
@@ -35,8 +36,10 @@
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    background-color: #203864;
+    background-color: #fff;
     border-radius: 0 0 5px 0;
+    border-top: 2px solid #dee8ee;
+    margin: 20px 40px 20px 40px;
 }
 
 .messages-footer > form {
@@ -47,7 +50,6 @@
 
 .messages-footer > form > input {
     flex: 1;
-    border-radius: 30px;
     border: none;
     padding: 8px;
     outline: none;
