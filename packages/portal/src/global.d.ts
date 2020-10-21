@@ -93,14 +93,43 @@ declare namespace MoaiPortal {
     type System = {
         version: string;
         localConfiguration: SystemConfiguration;
-        localKey?: Key;
         currentConnection?: SystemConnection;
         log: SystemLog;
     };
 
+    type Principal = {
+        isConnected: boolean;
+        isFetching: boolean;
+        contacts?: Contact[];
+        localKey?: Key;
+    };
+
+    type Contact = {
+        id: number
+    };
+
+    type Messages = {
+        messageList: MessageList
+    };
+
     type State = {
         system: System;
+        principal: Principal;
+        messages: Messages;
     };
+
+    type Message = {
+        message: string,
+        user_ID: number,
+        timestamp: number,
+        seen: MessageSeen
+    };
+
+    type MessageSeen = {
+        seen: boolean,
+        timestamp: number
+    };
+
 }
 
 declare module 'react-router-dom' {

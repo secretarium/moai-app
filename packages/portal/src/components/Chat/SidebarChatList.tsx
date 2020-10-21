@@ -1,13 +1,13 @@
 import React from 'react';
-import './SidebarChats.css';
+import './SidebarChatList.css';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 
 
-const SidebarChats: React.FC = () => {
+const SidebarChatList: React.FC = () => {
     return (
-        <div className="sidebarChats">
+        <div className="sidebarChatList">
             <UserOutlined style={{ fontSize: '30px', color: '#fff' }} />
-            <div className="sidebarChats-info">
+            <div className="sidebarChatList-info">
                 <h2>ID number</h2>
                 <p>Last message...</p>
             </div>
@@ -15,4 +15,4 @@ const SidebarChats: React.FC = () => {
     );
 };
 
-export default SidebarChats;
+export default SidebarChatList;
