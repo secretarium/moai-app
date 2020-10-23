@@ -20,11 +20,11 @@ const Menu: React.FC = () => {
                     <i className="fas fa-comments fa-2x" style={{ color: '#d7d8da', paddingRight: '15px' }} />
                     Chat
                 </Link>
-                <Link className="option" to={'/search'} style={{ color: '#d7d8da' }}>
+                <Link className="option" to={'/search/barcode'} style={{ color: '#d7d8da' }}>
                     <i className="fas fa-barcode fa-2x" style={{ color: '#d7d8da', paddingRight: '15px' }} />
                     Search Barcode
                 </Link>
-                <Link className="option" to={'/search'} style={{ color: '#d7d8da' }}>
+                <Link className="option" to={'/search/qrcode'} style={{ color: '#d7d8da' }}>
                     <i className="fas fa-qrcode fa-2x" style={{ color: '#d7d8da', paddingRight: '20px' }} />
                     Search QRCode
                 </Link>

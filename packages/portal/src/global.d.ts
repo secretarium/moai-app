@@ -100,34 +100,29 @@ declare namespace MoaiPortal {
     type Principal = {
         isConnected: boolean;
         isFetching: boolean;
-        contacts?: Contact[];
         localKey?: Key;
     };
 
-    type Contact = {
-        id: number
+    type Conversation = {
+        id: number,
+        endpoint: string,
+        token: number
     };
 
-    type Messages = {
-        messageList: MessageList
+    type User = {
+        [id: number]
+    };
+
+    type Message = {
+        time: number,
+        text: string,
+        sender: number,
+        hasRead: [User, User]
     };
 
     type State = {
         system: System;
         principal: Principal;
-        messages: Messages;
-    };
-
-    type Message = {
-        message: string,
-        user_ID: number,
-        timestamp: number,
-        seen: MessageSeen
-    };
-
-    type MessageSeen = {
-        seen: boolean,
-        timestamp: number
     };
 
 }

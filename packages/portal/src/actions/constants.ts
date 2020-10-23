@@ -1,16 +1,17 @@
 let actionMarker = 0;
 
 const commandsPrototype = {
-    MOAI: { application: 'moai', command: 'update-user' },
-    MOAI_PORTAL_GET_CONTACTS: { application: 'moai', command: 'get-contacts' },
+    MOAI_GET_CONVERSATIONS: { application: 'moai', command: 'get-conversations' },
+    MOAI_CREATE_CONVERSATION: { application: 'moai', command: 'create-conversation' },
+    MOAI_GET_CONVERSATION: { application: 'moai', command: 'get-conversation' },
+    MOAI_GET_LAST_MESSAGE: { application: 'moai', command: 'get-last-message' },
+    MOAI_SEND_MESSAGE: { application: 'moai', command: 'send-message' },
+    MOAI_MARK_AS_READ: { application: 'moai', command: 'mark-as-read' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
 const actionPrototypes = {
     MOAI_PORTAL_SAVE_LOCAL_KEY: 'MOAI_PORTAL_SAVE_LOCAL_KEY',
-    MOAI_PORTAL_SEND_MESSAGE: 'MOAI_PORTAL_SEND_MESSAGE',
-    MOAI_PORTAL_RECEIVE_MESSAGE: 'MOAI_PORTAL_RECEIVE_MESSAGE',
-    MOAI_PORTAL_GET_CHATS: 'MOAI_PORTAL_GET_CHATS',
     SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: 'SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED',
     SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL: 'SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL',
     SECRETARIUM_CONNECT_CONFIGURATION_FAILED: 'SECRETARIUM_CONNECT_CONFIGURATION_FAILED',

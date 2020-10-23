@@ -1,6 +1,6 @@
 import { actionTypes, commands } from './constants';
 import secretariumHandler from '../utils/secretariumHandler';
-//import { requestFactory } from './factories';
+import { requestFactory } from './factories';
 
 export const generateLocalKey = (): MoaiPortal.FunctionAction => (dispatch) => {
     secretariumHandler.createKey()
@@ -13,34 +13,76 @@ export const generateLocalKey = (): MoaiPortal.FunctionAction => (dispatch) => {
         });
 };
 
-export const registerNewUser = (values: any): MoaiPortal.FunctionAction => (dispatch) => {
-    dispatch({
-        type: actionTypes.PDATA_NEW_USER_SUCCESSFUL,
-        payload: {
-            email: values?.email?.trim().toLowerCase(),
-            password: values?.password
+export const getConversations = (): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch(
+        requestFactory(commands.MOAI_GET_CONVERSATIONS)({
+            onResult: result => {
+                return {
+                    payload: {
+                        result  // for now
+                    }
+                };
+            }
+        })
+    );
+};
+
+export const createConversation = (pseudo: string) => {
+    requestFactory(commands.MOAI_CREATE_CONVERSATION, { pseudo: pseudo })({
+        onResult: result => {
+            return {
+                payload: {
+                    result // for now
+                }
+            };
         }
     });
 };
 
-export const sendMessage = (message: MoaiPortal.Message): MoaiPortal.FunctionAction => (dispatch) => {
-    dispatch({
-        type: actionTypes.MOAI_PORTAL_SEND_MESSAGE,
-        payload: message
-    });
+export const getConversation = (id: number, token: number): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch(
+        requestFactory(commands.MOAI_GET_CONVERSATION, { id: id, token: token })({
+            onResult: result => {
+                return {
+                    payload: {
+                        result  // for now
+                    }
+                };
+            }
+        })
+    );
 };
 
-// export const getChats = (): MoaiPortal.FunctionAction => (dispatch, getState) => {
-//     dispatch(requestFactory(commands.MOAI_PORTAL_GET_CONTACTS, undefined, true)({
-//         onResult: result => {
-//             const state = getState();
-//             const chatList = state.principal.contacts || [];
-//             return {
-//                 payload: {
-//                     result,
-//                     chatList
-//                 }
-//             };
-//         }
-//     }));
-// };
+export const getLastMessage = (id: number, token: number): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch(
+        requestFactory(commands.MOAI_GET_LAST_MESSAGE, { id: id, token: token })({
+            onResult: result => {
+                return {
+                    payload: {
+                        result  // for now
+                    }
+                };
+            }
+        })
+    );
+};
+
+export const sendMessage = (id: number, token: number, text: string): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch(
+        requestFactory(commands.MOAI_SEND_MESSAGE, { id: id, token: token, text: text })({
+            onExecuted: () => ({
+                payload: { message: text }
+            })
+        })
+    );
+};
+
+export const markRead = (id: number, token: number, index: number): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch(
+        requestFactory(commands.MOAI_MARK_AS_READ, { id: id, token: token, index: index })({
+            onExecuted: () => ({
+                payload: {}
+            })
+        })
+    );
+};
