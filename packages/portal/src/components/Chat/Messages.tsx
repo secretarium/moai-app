@@ -14,7 +14,7 @@ interface ParamTypes {
 
 const Messages: React.FC = () => {
     const { id } = useParams<ParamTypes>();
-
+    console.log(id);
     const [isConnected, setIsConnected] = useState(false);
     const [fetchedConversation, setFetchedConversation] = useState(false);
     const [token, setToken] = useState();
@@ -61,29 +61,42 @@ const Messages: React.FC = () => {
         setMessage(e.target.value);
     };
 
-    return (
-        <div className="messages">
-            <div className="messages-header">
-                <div className="messages-header-info">
-                    <h2>ID number {id}</h2>
+    // eslint-disable-next-line prefer-const
+    let composition = null;
+    if (id === undefined)
+        composition =
+            <div className="messages-no-chat">
+                <h1>Start chatting</h1>
+            </div>;
+    else
+        composition =
+            <>
+                <div className="messages-header">
+                    <div className="messages-header-info">
+                        <h2>ID number {id}</h2>
+                    </div>
+                    <MoreOutlined style={{ fontSize: '26px', color: '#203864' }} />
                 </div>
-                <MoreOutlined style={{ fontSize: '26px', color: '#203864' }} />
-            </div>
-            <div className="messages-body">
-                <Message username="ID 1234" message="Lorem ipsum dolor sit amet,
+                <div className="messages-body">
+                    <Message username="ID 1234" message="Lorem ipsum dolor sit amet,
                 consectetur adipiscing elit. Phasellus a commodo sem, et mattis neque.
                 Suspendisse at arcu mauris. Pellentesque ac dapibus libero. Donec vitae
                 nunc mauris. Ut posuere odio ac nisi tincidunt, sit amet faucibus lorem finibus." timestamp="1:23 pm" isSender={false} />
-                <Message username="nhs worker" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a commodo sem, et mattis neque."
-                    timestamp="1:24 pm" isSender={true} />
-            </div>
-            <div className="messages-footer">
-                <form>
-                    <input value={message} onChange={onChange} type="text" placeholder="Type a new message..." />
-                    <button onClick={onClick} type="submit">Send message</button>
-                </form>
-                <i className="fas fa-paper-plane fa-2x" style={{ color: '#1ca8e1', padding: '10px' }} />
-            </div>
+                    <Message username="nhs worker" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a commodo sem, et mattis neque."
+                        timestamp="1:24 pm" isSender={true} />
+                </div>
+                <div className="messages-footer">
+                    <form>
+                        <input value={message} onChange={onChange} type="text" placeholder="Type a new message..." />
+                        <button onClick={onClick} type="submit">Send message</button>
+                    </form>
+                    <i className="fas fa-paper-plane fa-2x" style={{ color: '#1ca8e1', padding: '10px' }} />
+                </div>
+            </>;
+
+    return (
+        <div className="messages">
+            {composition}
         </div>
     );
 };

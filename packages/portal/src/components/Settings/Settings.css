@@ -1,0 +1,10 @@
+.container-settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0.85;
+    background-color: #fff;
+    margin-left: 5px;
+    border-radius: 0 5px 5px 0;
+}

@@ -28,7 +28,7 @@ const Menu: React.FC = () => {
                     <i className="fas fa-qrcode fa-2x" style={{ color: '#d7d8da', paddingRight: '20px' }} />
                     Search QRCode
                 </Link>
-                <Link className="option" to={'/'} style={{ color: '#d7d8da' }}>
+                <Link className="option" to={'/settings'} style={{ color: '#d7d8da' }}>
                     <i className="fas fa-cog fa-2x" style={{ color: '#d7d8da', paddingRight: '15px' }} />
                     Settings
                 </Link>

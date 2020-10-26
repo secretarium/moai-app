@@ -7,6 +7,7 @@ import Body from './components/Body';
 import SearchCode from './components/SearchCode';
 import Home from './components/Home';
 import Menu from './components/Menu';
+import Settings from './components/Settings';
 import { NotLoggedIn, LoggedIn } from './components/Login/LoginStatusSwitch';
 import './App.css';
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
                             <Route exact path="/" component={Home} />
                             <Route path="/search/:code?" component={SearchCode} />
                             <Route path="/chat/:id?" component={Chat} />
+                            <Route path="/settings" component={Settings} />
                         </Switch>
                     </div>
                 </LoggedIn>

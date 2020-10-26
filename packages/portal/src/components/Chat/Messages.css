@@ -58,3 +58,14 @@
 .messages-footer > form > button {
     display: none
 }
+
+.messages-no-chat {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.messages-no-chat > h1 {
+    color: #203864;
+}
