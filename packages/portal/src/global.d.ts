@@ -104,20 +104,20 @@ declare namespace MoaiPortal {
     };
 
     type Conversation = {
-        id: number,
-        endpoint: string,
-        token: number
+        id: number;
+        endpoint: string;
+        token: number;
     };
 
     type User = {
-        [id: number]
+        [id: number];
     };
 
     type Message = {
-        time: number,
-        text: string,
-        sender: number,
-        hasRead: [User, User]
+        time: number;
+        text: string;
+        sender: number;
+        hasRead: [User, User];
     };
 
     type State = {
@@ -129,7 +129,7 @@ declare namespace MoaiPortal {
 
 declare module 'react-router-dom' {
     interface LinkProps {
-        underlayColor?: string
+        underlayColor?: string;
     }
 }
 
