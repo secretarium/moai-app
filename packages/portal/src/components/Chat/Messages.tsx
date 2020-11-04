@@ -1,59 +1,58 @@
 import React, { useState, useEffect, MouseEvent, ChangeEvent } from 'react';
-import { Key, SCP, Constants } from '@secretarium/connector';
 import './Messages.css';
 import MoreOutlined from '@ant-design/icons/MoreOutlined';
 import Message from './Message';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
+import { withState } from '../../store';
+import { getConversation, sendMessage } from 'actions/secretarium';
 
-const scp = new SCP();
-const isDev = process.env.NODE_ENV === 'development';
 
 interface ParamTypes {
     id: string;
 }
 
-const Messages: React.FC = () => {
+interface LocationTypes {
+    token: number
+}
+
+const Messages = withState()((s) => ({
+    messages: s.conversations.messages
+}), ({ messages, dispatch }) => {
+
     const { id } = useParams<ParamTypes>();
-    console.log(id);
-    const [isConnected, setIsConnected] = useState(false);
+    const location = useLocation<LocationTypes>();
     const [fetchedConversation, setFetchedConversation] = useState(false);
-    const [token, setToken] = useState();
-    const [pageError, setPageError] = useState<string>();
+    const [token, setToken] = useState<number | undefined>();
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        console.log(id);
-        if (isConnected && fetchedConversation) {
-            const query = scp.newQuery('moai', 'get-conversation', `${Date.now()}`, {
-                id: id,
-                token: token
-            });
-            query.onResult?.(() => {
-                // some dispatch actions
-                setFetchedConversation(true);
-            });
-            query.onError?.((error: any) => {
-                console.error('Error', error);
-                setPageError(isDev ? `Query error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                setIsConnected(false);
-            });
-            query.send?.()
-                .catch((error) => {
-                    console.error('Error', error);
-                    setPageError(isDev ? `Query error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                    setIsConnected(false);
-                });
+        if (location.state !== undefined) {
+            const convoToken = location.state.token;
+            setToken(convoToken);
+        } else {
+            setToken(null);
         }
-    });
+    }, [location.state]);
+
+    useEffect(() => {
+        if (fetchedConversation === false) {
+            setFetchedConversation(true);
+            dispatch(getConversation(parseInt(id), token));
+        }
+    }, [fetchedConversation, dispatch, id, token]);
+
+    useEffect(() => {
+        console.log('SWITCHEDDDD');
+        setFetchedConversation(true);
+        dispatch(getConversation(parseInt(id), token));
+    }, [dispatch, id, token]);
 
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         console.log('you sent the following message: ', message);
-        const transaction = scp.newTx('moai', 'send-message', `${Date.now()}`, {
-            id: id,
-            token: token,
-            text: message
-        });
+        dispatch(sendMessage(parseInt(id), token, message));
+        setFetchedConversation(false);
+        console.log(messages.messageList);
         setMessage('');
     };
 
@@ -73,17 +72,17 @@ const Messages: React.FC = () => {
             <>
                 <div className="messages-header">
                     <div className="messages-header-info">
-                        <h2>ID number {id}</h2>
+                        <h2>Conversation ID {id} | User ID {messages.users.idB}</h2>
                     </div>
                     <MoreOutlined style={{ fontSize: '26px', color: '#203864' }} />
                 </div>
                 <div className="messages-body">
-                    <Message username="ID 1234" message="Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Phasellus a commodo sem, et mattis neque.
-                Suspendisse at arcu mauris. Pellentesque ac dapibus libero. Donec vitae
-                nunc mauris. Ut posuere odio ac nisi tincidunt, sit amet faucibus lorem finibus." timestamp="1:23 pm" isSender={false} />
-                    <Message username="nhs worker" message="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus a commodo sem, et mattis neque."
-                        timestamp="1:24 pm" isSender={true} />
+                    {messages.messageList.map((message) => {
+                        if (message.sender === messages.myself)
+                            return <Message username={`User ID ${messages.myself}`} message={message.text} timestamp={`${message.time} pm`} isSender={true} />;
+                        else
+                            return <Message username={`User ID ${messages.users.idB}`} message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
+                    })}
                 </div>
                 <div className="messages-footer">
                     <form>
@@ -99,6 +98,6 @@ const Messages: React.FC = () => {
             {composition}
         </div>
     );
-};
+});
 
 export default Messages;

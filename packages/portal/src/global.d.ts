@@ -109,20 +109,33 @@ declare namespace MoaiPortal {
         token: number;
     };
 
-    type User = {
-        [id: number];
+    type Conversations = {
+        isFetching: boolean;
+        conversationList: Conversation[];
+        messages: Messages;
+    };
+
+    type Messages = {
+        id: number;
+        users: {
+            idA: number,
+            idB: number
+        };
+        myself: number;
+        messageList: Message[];
     };
 
     type Message = {
         time: number;
         text: string;
         sender: number;
-        hasRead: [User, User];
+        hasRead: [number, number];
     };
 
     type State = {
         system: System;
         principal: Principal;
+        conversations: Conversations
     };
 
 }

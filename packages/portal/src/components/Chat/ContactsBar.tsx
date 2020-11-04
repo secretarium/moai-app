@@ -1,37 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Key, SCP, Constants } from '@secretarium/connector';
 import './ContactsBar.css';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import Contact from './Contact';
+import { withState } from '../../store';
+import { getConversations } from 'actions/secretarium';
 
-const scp = new SCP();
-const isDev = process.env.NODE_ENV === 'development';
 
-const ContactsBar: React.FC = () => {
-    const [isConnected, setIsConnected] = useState(false);
+const ContactsBar = withState()((s) => ({
+    conversationList: s.conversations.conversationList
+}), ({ conversationList, dispatch }) => {
+
     const [fetchedContacts, setFetchedContacts] = useState(false);
-    const [pageError, setPageError] = useState<string>();
 
     useEffect(() => {
-        if (isConnected && fetchedContacts) {
-            const query = scp.newQuery('moai', 'get-conversations', `${Date.now()}`, {});
-            query.onResult?.(() => {
-                // some dispatch actions
-                setFetchedContacts(true);
-            });
-            query.onError?.((error: any) => {
-                console.error('Error', error);
-                setPageError(isDev ? `Query error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                setIsConnected(false);
-            });
-            query.send?.()
-                .catch((error) => {
-                    console.error('Error', error);
-                    setPageError(isDev ? `Query error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                    setIsConnected(false);
-                });
+        if (fetchedContacts === false) {
+            setFetchedContacts(true);
+            dispatch(getConversations);
+            console.log(conversationList);
         }
-    });
+    }, [dispatch, fetchedContacts]);
 
     return (
         <div className="contacts-bar">
@@ -42,11 +29,12 @@ const ContactsBar: React.FC = () => {
                 </div>
             </div>
             <div className="chats">
-                <Contact conversationID={123} />
-                <Contact conversationID={456} />
+                {conversationList.map((convo) =>
+                    <Contact conversationID={convo.id} token={convo.token} />
+                )}
             </div>
         </div>
     );
-};
+});
 
 export default ContactsBar;
