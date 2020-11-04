@@ -118,8 +118,8 @@ declare namespace MoaiPortal {
     type Messages = {
         id: number;
         users: {
-            idA: number,
-            idB: number
+            idA: number;
+            idB: number;
         };
         myself: number;
         messageList: Message[];
@@ -135,7 +135,7 @@ declare namespace MoaiPortal {
     type State = {
         system: System;
         principal: Principal;
-        conversations: Conversations
+        conversations: Conversations;
     };
 
 }

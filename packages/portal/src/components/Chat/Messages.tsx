@@ -12,7 +12,7 @@ interface ParamTypes {
 }
 
 interface LocationTypes {
-    token: number
+    token: number;
 }
 
 const Messages = withState()((s) => ({
