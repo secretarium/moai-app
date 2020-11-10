@@ -1,41 +1,33 @@
-.contacts-bar {
+.settings-bar {
     display: flex;
     flex-direction: column;
     flex: 0.25;
     background-color: #f4f7f9;
     margin-left: 8px;
+    font-size: 16px;
 }
 
-.search {
+.settings-bar-header {
     display: flex;
     align-items: center;
     margin: 0px 20px 10px 20px;
     height: 90px;
     border-bottom: 2px solid #dee8ee;
+    font-size: 22px;
 }
 
-.search-container {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 20px;
-    border: 3px solid #dfe0e2;
-    height: 35px;
-    width: 100%;
-}
-
-.search-container > input {
-    border: none;
-    margin-left: 10px;
-}
-
-.chats {
+.settings-bar-pages {
     flex: 1;
     background-color: #f4f7f9;
     overflow: auto;
     border-radius: 0 0 0 15px;
 }
 
-::placeholder {
-    color: #dfe0e2;
+.settings-page {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 2px solid #dee8ee;
+    color: #000;
+    margin: 20px;
 }

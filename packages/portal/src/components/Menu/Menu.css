@@ -1,9 +1,12 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    flex: 0.15;
-    background-color: #fff;
-    border-radius: 5px 0 0 5px;
+    flex: 0.20;
+    min-width: 220px;
+    max-width: 220px;
+    background-color: #2F323E;
+    border-radius: 15px 0 0 15px;
+    font-size: 16px;
 }
 
 .header {
@@ -12,21 +15,23 @@
     flex: 0.05;
     justify-content: space-between;
     padding: 20px;
-    border-radius: 5px 0 0 0;
+    border-radius: 15px 0 0 0;
+    height: 90px;
+    font-size: 22px;
 }
 
 .options {
     flex: 0.8;
-    color: #d7d8da;
+    color: #716F6F;
     font-weight: bold;
-    padding: 20px;
+    padding: 25px;
 }
 
 .option {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
+    padding-bottom: 15px;
 }
 
 .logout {
@@ -35,7 +40,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    color: '#203864';
+    font-size: 22px;
+    color: '#fff';
     margin: 15px;
+}
+
+@media (max-width: 1200px) {
+    .sidebar, .header {
+        border-radius: 0px;
+    }
 }

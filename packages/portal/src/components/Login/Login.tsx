@@ -24,7 +24,7 @@ const Login = withState()(
                 email: values.email,
                 password: values.password
             });
-            history.push('/chat');
+            history.push('/home');
         };
 
         return (

@@ -10,11 +10,11 @@
     width: 40vw;
     background-color: #fff;
     box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .container-login > h1 {
-    color: #203864;
+    color: #000;
 }
 
 @media (max-width: 1200px) {

@@ -1,6 +1,8 @@
 import React from 'react';
 import './Contact.css';
 import { Link } from 'react-router-dom';
+import MoaiPin from '../../assets/moai-pin.png';
+
 
 
 interface Props {
@@ -15,9 +17,9 @@ const Contact: React.FC<Props> = ({ conversationID, token }) => {
                 pathname: `/chat/${conversationID}`,
                 state: { token: token }
             }}>
-                <i className="fas fa-user-circle fa-3x" style={{ color: '#203864' }} />
+                <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', paddingRight: '10px' }} />
                 <div className="contact-info">
-                    <h2>Conversation ID {conversationID}</h2>
+                    <h2>ID {conversationID}</h2>
                     <p>Last message...</p>
                 </div>
             </Link>

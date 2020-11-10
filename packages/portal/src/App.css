@@ -1,9 +1,8 @@
 .container {
     display: flex;
-    height: 80vh;
-    width: 80vw;
-    box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7);
-    border-radius: 5px;
+    height: 85vh;
+    width: 85vw;
+    border-radius: 15px;
 }
 
 @media (max-width: 1200px) {

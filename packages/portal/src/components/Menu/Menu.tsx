@@ -1,41 +1,40 @@
 import React from 'react';
 import './Menu.css';
-import MoreOutlined from '@ant-design/icons/MoreOutlined';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import NHS from '../../assets/nhs.png';
 
 
 const Menu: React.FC = () => {
     return (
         <div className="sidebar">
             <div className="header">
-                <i className="fas fa-user-circle fa-3x" style={{ color: '#203864' }} />
-                <MoreOutlined style={{ fontSize: '38px', color: '#203864' }} />
+                <img src={NHS} alt="NHS logo" style={{ width: '64px', height: 'auto', paddingRight: '10px' }} />
             </div>
             <div className="options">
-                <Link className="option" to={'/'} style={{ color: '#d7d8da' }}>
-                    <i className="fas fa-home fa-2x" style={{ color: '#d7d8da', paddingRight: '15px' }} />
+                <NavLink exact className="option" to={'/'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <i className="fas fa-home fa-lg" style={{ paddingRight: '10px' }} />
                     Home
-                </Link>
-                <Link className="option" to={'/chat'} style={{ color: '#d7d8da' }}>
-                    <i className="fas fa-comments fa-2x" style={{ color: '#d7d8da', paddingRight: '15px' }} />
+                </NavLink>
+                <NavLink className="option" to={'/chat'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <i className="fas fa-comments fa-lg" style={{ paddingRight: '10px' }} />
                     Chat
-                </Link>
-                <Link className="option" to={'/search/barcode'} style={{ color: '#d7d8da' }}>
-                    <i className="fas fa-barcode fa-2x" style={{ color: '#d7d8da', paddingRight: '15px' }} />
-                    Search Barcode
-                </Link>
-                <Link className="option" to={'/search/qrcode'} style={{ color: '#d7d8da' }}>
-                    <i className="fas fa-qrcode fa-2x" style={{ color: '#d7d8da', paddingRight: '20px' }} />
-                    Search QRCode
-                </Link>
-                <Link className="option" to={'/settings'} style={{ color: '#d7d8da' }}>
-                    <i className="fas fa-cog fa-2x" style={{ color: '#d7d8da', paddingRight: '15px' }} />
+                </NavLink>
+                <NavLink className="option" to={'/search/barcode'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <i className="fas fa-barcode fa-lg" style={{ paddingRight: '10px' }} />
+                    Search Test ID
+                </NavLink>
+                <NavLink className="option" to={'/search/qrcode'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <i className="fas fa-qrcode fa-lg" style={{ paddingRight: '13px' }} />
+                    Search Venue Code
+                </NavLink>
+                <NavLink className="option" to={'/settings'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <i className="fas fa-cog fa-lg" style={{ paddingRight: '10px' }} />
                     Settings
-                </Link>
+                </NavLink>
             </div>
-            <Link className="logout" to={'/'} style={{ color: '#203864' }}>
-                <i className="fas fa-sign-out-alt fa-2x" style={{ color: '#1ca8e1', paddingRight: '15px' }} /> Logout
-            </Link>
+            <NavLink className="logout" to={'/'} style={{ color: '#fff' }}>
+                <i className="fas fa-sign-out-alt fa-2x" style={{ color: '#25A9E1', paddingRight: '15px' }} /> Logout
+            </NavLink>
         </div>
     );
 };

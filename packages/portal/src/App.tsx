@@ -26,7 +26,7 @@ const App: React.FC = () => {
                             <Route exact path="/" component={Home} />
                             <Route path="/search/:code?" component={SearchCode} />
                             <Route path="/chat/:id?" component={Chat} />
-                            <Route path="/settings" component={Settings} />
+                            <Route path="/settings/:setting?" component={Settings} />
                         </Switch>
                     </div>
                 </LoggedIn>

@@ -15,7 +15,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background: linear-gradient(to left, #e95c59 0%, #cc3752 100%);
+    background: #F9C5BB;
     display: grid;
     place-items: center;
 }

@@ -5,6 +5,12 @@
     align-items: center;
     flex: 0.85;
     background-color: #fff;
-    margin-left: 5px;
-    border-radius: 0 5px 5px 0;
+    margin-left: 8px;
+    border-radius: 0 15px 15px 0;
+}
+
+@media (max-width: 1200px) {
+    .container-settings {
+        border-radius: 0px;
+    }
 }

@@ -18,7 +18,7 @@ const ContactsBar = withState()((s) => ({
             dispatch(getConversations);
             console.log(conversationList);
         }
-    }, [dispatch, fetchedContacts]);
+    }, [dispatch, fetchedContacts, conversationList]);
 
     return (
         <div className="contacts-bar">

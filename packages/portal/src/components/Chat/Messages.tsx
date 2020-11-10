@@ -1,6 +1,5 @@
 import React, { useState, useEffect, MouseEvent, ChangeEvent } from 'react';
 import './Messages.css';
-import MoreOutlined from '@ant-design/icons/MoreOutlined';
 import Message from './Message';
 import { useParams, useLocation } from 'react-router-dom';
 import { withState } from '../../store';
@@ -25,14 +24,14 @@ const Messages = withState()((s) => ({
     const [token, setToken] = useState<number | undefined>();
     const [message, setMessage] = useState('');
 
-    useEffect(() => {
-        if (location.state !== undefined) {
-            const convoToken = location.state.token;
-            setToken(convoToken);
-        } else {
-            setToken(null);
-        }
-    }, [location.state]);
+    // useEffect(() => {
+    //     if (location.state !== undefined) {
+    //         const convoToken = location.state.token;
+    //         setToken(convoToken);
+    //     } else {
+    //         setToken(null);
+    //     }
+    // }, [location.state]);
 
     useEffect(() => {
         if (fetchedConversation === false) {
@@ -72,9 +71,8 @@ const Messages = withState()((s) => ({
             <>
                 <div className="messages-header">
                     <div className="messages-header-info">
-                        <h2>Conversation ID {id} | User ID {messages.users.idB}</h2>
+                        Conversation ID {id} | User ID {messages.users.idB}
                     </div>
-                    <MoreOutlined style={{ fontSize: '26px', color: '#203864' }} />
                 </div>
                 <div className="messages-body">
                     {messages.messageList.map((message) => {
@@ -89,7 +87,7 @@ const Messages = withState()((s) => ({
                         <input value={message} onChange={onChange} type="text" placeholder="Type a new message..." />
                         <button onClick={onClick} type="submit">Send message</button>
                     </form>
-                    <i className="fas fa-paper-plane fa-2x" style={{ color: '#1ca8e1', padding: '10px' }} />
+                    <i className="fas fa-paper-plane fa-2x" style={{ color: '#25A9E1', padding: '10px' }} />
                 </div>
             </>;
 

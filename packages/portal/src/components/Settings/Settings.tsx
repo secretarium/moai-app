@@ -1,11 +1,36 @@
 import React from 'react';
-import './Settings.css';
+import FAQ from './FAQ';
+import Notifications from './Notifications';
+import Legal from './Legal';
+import ContactUs from './ContactUs';
+import SettingsMenu from './SettingsMenu';
+import { useParams } from 'react-router-dom';
+
+
+interface ParamTypes {
+    setting: string;
+}
 
 const Settings: React.FC = () => {
+    const { setting } = useParams<ParamTypes>();
+
+    // eslint-disable-next-line prefer-const
+    let composition = null;
+    if (setting === undefined || setting === 'faq') {
+        composition = <FAQ />;
+    } else if (setting === 'notifications') {
+        composition = <Notifications />;
+    } else if (setting === 'contact') {
+        composition = <ContactUs />;
+    } else if (setting === 'legal') {
+        composition = <Legal />;
+    }
+
     return (
-        <div className="container-settings">
-            Settings
-        </div>
+        <>
+            <SettingsMenu />
+            {composition}
+        </>
     );
 };
 
