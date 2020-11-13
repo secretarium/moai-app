@@ -17,7 +17,7 @@ const Contact: React.FC<Props> = ({ conversationID, token }) => {
                 pathname: `/chat/${conversationID}`,
                 state: { token: token }
             }}>
-                <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', paddingRight: '10px' }} />
+                <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginBottom: '15px' }} />
                 <div className="contact-info">
                     <h2>ID {conversationID}</h2>
                     <p>Last message...</p>

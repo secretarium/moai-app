@@ -7,7 +7,7 @@ const Notifications: React.FC = () => {
     return (
         <div className="setting-page">
             <div className="setting-page-header">
-                <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', paddingRight: '10px' }} />
+                <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginRight: '10px' }} />
                 Notifications
             </div>
         </div>

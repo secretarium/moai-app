@@ -13,8 +13,6 @@
     display: flex;
     align-items: center;
     flex: 0.05;
-    justify-content: space-between;
-    padding: 20px;
     border-radius: 15px 0 0 0;
     height: 90px;
     font-size: 22px;

@@ -2,13 +2,14 @@ import React from 'react';
 import './Menu.css';
 import { NavLink } from 'react-router-dom';
 import NHS from '../../assets/nhs.png';
+import Logout from '../../assets/logout.png';
 
 
 const Menu: React.FC = () => {
     return (
         <div className="sidebar">
             <div className="header">
-                <img src={NHS} alt="NHS logo" style={{ width: '64px', height: 'auto', paddingRight: '10px' }} />
+                <img src={NHS} alt="NHS logo" style={{ width: '64px', height: 'auto', marginLeft: '25px', marginTop: '10px' }} />
             </div>
             <div className="options">
                 <NavLink exact className="option" to={'/'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
@@ -33,7 +34,7 @@ const Menu: React.FC = () => {
                 </NavLink>
             </div>
             <NavLink className="logout" to={'/'} style={{ color: '#fff' }}>
-                <i className="fas fa-sign-out-alt fa-2x" style={{ color: '#25A9E1', paddingRight: '15px' }} /> Logout
+                <img src={Logout} alt="logout" style={{ width: '58px', height: 'auto', marginRight: '15px' }} /> Logout
             </NavLink>
         </div>
     );

@@ -4,6 +4,7 @@ import Message from './Message';
 import { useParams, useLocation } from 'react-router-dom';
 import { withState } from '../../store';
 import { getConversation, sendMessage } from 'actions/secretarium';
+import MoaiPin from '../../assets/moai-pin.png';
 
 
 interface ParamTypes {
@@ -70,6 +71,7 @@ const Messages = withState()((s) => ({
         composition =
             <>
                 <div className="messages-header">
+                    <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto' }} />
                     <div className="messages-header-info">
                         Conversation ID {id} | User ID {messages.users.idB}
                     </div>
