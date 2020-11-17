@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@ant-design/icons": "4.2.2",
-        "@secretarium/connector": "0.5.1",
+        "@secretarium/connector": "0.6.1",
         "antd": "4.6.6",
         "deepmerge": "4.2.2",
         "immutable": "4.0.0-rc.12",

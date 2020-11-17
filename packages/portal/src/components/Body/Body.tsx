@@ -17,11 +17,16 @@ const Body = withState()(
                 setHasRequestedLocalKey(true);
                 dispatch(generateLocalKey()).then(() => {
                     setHasObtainedLocalKey(true);
+                    console.log(localKey);
                 });
             } else if (localKey) {
                 setHasObtainedLocalKey(true);
+                dispatch(generateLocalKey()).then(() => {
+                    setHasObtainedLocalKey(true);
+                    console.log(localKey);
+                });
             }
-        }, [dispatch, hasRequestedLocalKey, localKey]);
+        }, []);
 
         if (!hasObtainedLocalKey)
             return <div>Loading local key...</div>;

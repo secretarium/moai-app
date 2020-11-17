@@ -3,9 +3,14 @@ import './Menu.css';
 import { NavLink } from 'react-router-dom';
 import NHS from '../../assets/nhs.png';
 import Logout from '../../assets/logout.png';
+import { disconnect } from '../../actions/secretarium';
+import { useDispatch } from 'react-redux';
 
 
 const Menu: React.FC = () => {
+
+    const dispatch = useDispatch();
+
     return (
         <div className="sidebar">
             <div className="header">
@@ -33,7 +38,7 @@ const Menu: React.FC = () => {
                     Settings
                 </NavLink>
             </div>
-            <NavLink className="logout" to={'/'} style={{ color: '#fff' }}>
+            <NavLink className="logout" to={'/'} onClick={() => dispatch(disconnect())} style={{ color: '#fff' }}>
                 <img src={Logout} alt="logout" style={{ width: '58px', height: 'auto', marginRight: '15px' }} /> Logout
             </NavLink>
         </div>

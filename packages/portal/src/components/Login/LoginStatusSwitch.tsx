@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { withState } from '../../store';
 
-export const NotLoggedIn: React.FC = ({ children }) => {
-    const [isConnected, setIsConnected] = useState(true);
+
+export const NotLoggedIn = withState()((s) => ({
+    isConnected: s.principal.isConnected
+}), ({ children, isConnected }) => {
     if (isConnected)
         return null;
     else
         return <>{children}</>;
-};
+});
 
-export const LoggedIn: React.FC = ({ children }) => {
-    const [isConnected, setIsConnected] = useState(true);
+export const LoggedIn = withState()((s) => ({
+    isConnected: s.principal.isConnected
+}), ({ children, isConnected }) => {
     if (isConnected)
         return <>{children}</>;
     else
         return null;
-};
+});

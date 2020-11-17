@@ -37,14 +37,16 @@ const Messages = withState()((s) => ({
     useEffect(() => {
         if (fetchedConversation === false) {
             setFetchedConversation(true);
-            dispatch(getConversation(parseInt(id), token));
+            dispatch(getConversation('s6bbPIcMPpkkXg0cBrdH3rMSTchDu4umHwNafQk4JR8', 'rl3rgi4NcZkpAEcacZnQ2VuOfJ0FxAqCRaKB_SwdZoQ='));
+            console.log(messages);
         }
     }, [fetchedConversation, dispatch, id, token]);
 
     useEffect(() => {
         console.log('SWITCHEDDDD');
         setFetchedConversation(true);
-        dispatch(getConversation(parseInt(id), token));
+        dispatch(getConversation('s6bbPIcMPpkkXg0cBrdH3rMSTchDu4umHwNafQk4JR8', 'rl3rgi4NcZkpAEcacZnQ2VuOfJ0FxAqCRaKB_SwdZoQ='));
+        console.log(messages);
     }, [dispatch, id, token]);
 
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -52,7 +54,7 @@ const Messages = withState()((s) => ({
         console.log('you sent the following message: ', message);
         dispatch(sendMessage(parseInt(id), token, message));
         setFetchedConversation(false);
-        console.log(messages.messageList);
+        console.log(messages);
         setMessage('');
     };
 

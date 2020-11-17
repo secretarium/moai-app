@@ -100,7 +100,10 @@ declare namespace MoaiPortal {
     type Principal = {
         isConnected: boolean;
         isFetching: boolean;
+        isVerified: boolean | undefined;
         localKey?: Key;
+        emailVerificationAttempt?: number;
+        validationEmailError?: string;
     };
 
     type Conversation = {

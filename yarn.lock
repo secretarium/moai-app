@@ -4600,10 +4600,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@secretarium/connector@npm:0.5.1":
-  version: 0.5.1
-  resolution: "@secretarium/connector@npm:0.5.1"
-  checksum: b7de985e007bb96b568577d66b7be4477ec657505e70531236a3cc33c1ed7efc62387356eb6dca233c600631ce41d9651085dcb7557cc3ef523441cad8ecb706
+"@secretarium/connector@npm:0.6.1":
+  version: 0.6.1
+  resolution: "@secretarium/connector@npm:0.6.1"
+  checksum: 67e1919f6805fcb5e89d83b66080a0ed559b81aca71b405a9b8d007522284c11151a97cb5f69f5c5ba85c56b92a47b39f30e8212cfa6feddd4d634f7c7cde938
   languageName: node
   linkType: hard
 
@@ -4704,7 +4704,7 @@ __metadata:
   resolution: "@secretarium/moai-portal@workspace:packages/portal"
   dependencies:
     "@ant-design/icons": 4.2.2
-    "@secretarium/connector": 0.5.1
+    "@secretarium/connector": 0.6.1
     "@testing-library/jest-dom": 4.2.4
     "@testing-library/react": 9.3.2
     "@testing-library/user-event": 7.1.2
