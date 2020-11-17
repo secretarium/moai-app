@@ -15,18 +15,16 @@ const Body = withState()(
         useEffect(() => {
             if (!localKey && !hasRequestedLocalKey) {
                 setHasRequestedLocalKey(true);
-                dispatch(generateLocalKey()).then(() => {
-                    setHasObtainedLocalKey(true);
-                    console.log(localKey);
-                });
+                dispatch(generateLocalKey())
+                    .then(() => {
+                        setHasObtainedLocalKey(true);
+                        console.log(localKey);
+                    })
+                    .catch((error) => console.error(error));
             } else if (localKey) {
                 setHasObtainedLocalKey(true);
-                dispatch(generateLocalKey()).then(() => {
-                    setHasObtainedLocalKey(true);
-                    console.log(localKey);
-                });
             }
-        }, []);
+        }, [localKey, dispatch, hasRequestedLocalKey]);
 
         if (!hasObtainedLocalKey)
             return <div>Loading local key...</div>;
