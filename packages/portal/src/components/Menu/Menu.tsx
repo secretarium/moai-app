@@ -3,7 +3,7 @@ import './Menu.css';
 import { NavLink } from 'react-router-dom';
 import NHS from '../../assets/nhs.png';
 import Logout from '../../assets/logout.png';
-import { disconnect } from '../../actions/secretarium';
+import { disconnect } from '../../actions';
 import { useDispatch } from 'react-redux';
 
 
@@ -25,11 +25,11 @@ const Menu: React.FC = () => {
                     <i className="fas fa-comments fa-lg" style={{ paddingRight: '10px' }} />
                     Chat
                 </NavLink>
-                <NavLink className="option" to={'/search/barcode'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                <NavLink className="option" to={'/search/tested'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
                     <i className="fas fa-barcode fa-lg" style={{ paddingRight: '10px' }} />
                     Search Test ID
                 </NavLink>
-                <NavLink className="option" to={'/search/qrcode'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                <NavLink className="option" to={'/search/exposed'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
                     <i className="fas fa-qrcode fa-lg" style={{ paddingRight: '13px' }} />
                     Search Venue Code
                 </NavLink>

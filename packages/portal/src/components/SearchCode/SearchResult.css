@@ -36,7 +36,7 @@
     width: 50%;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .search-result-button:nth-child(2n + 1) {

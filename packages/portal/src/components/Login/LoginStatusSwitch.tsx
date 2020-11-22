@@ -3,7 +3,7 @@ import { withState } from '../../store';
 
 
 export const NotLoggedIn = withState()((s) => ({
-    isConnected: s.principal.isConnected
+    isConnected: s.tracer.isConnected
 }), ({ children, isConnected }) => {
     if (isConnected)
         return null;
@@ -12,7 +12,7 @@ export const NotLoggedIn = withState()((s) => ({
 });
 
 export const LoggedIn = withState()((s) => ({
-    isConnected: s.principal.isConnected
+    isConnected: s.tracer.isConnected
 }), ({ children, isConnected }) => {
     if (isConnected)
         return <>{children}</>;

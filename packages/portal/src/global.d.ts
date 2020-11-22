@@ -1,6 +1,7 @@
 import { AnyAction as ReduxAnyAction } from 'redux';
 import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
-import { Key } from '@secretarium/moai-connect';
+import { EncryptedKeyPair } from '@secretarium/connector';
+
 
 declare namespace MoaiPortal {
     interface FunctionAction {
@@ -97,13 +98,28 @@ declare namespace MoaiPortal {
         log: SystemLog;
     };
 
-    type Principal = {
+    type Vault = {
+        email: string | null;
+        keyPair: EncryptedKeyPair | null;
+    };
+
+    type Tracer = {
         isConnected: boolean;
         isFetching: boolean;
         isVerified: boolean | undefined;
-        localKey?: Key;
         emailVerificationAttempt?: number;
         validationEmailError?: string;
+    };
+
+    type SearchResults = {
+        isFetching: boolean;
+        tested: User;
+        exposed: User[];
+    };
+
+    type User = {
+        userId: string;
+        time: number;
     };
 
     type Conversation = {
@@ -137,8 +153,10 @@ declare namespace MoaiPortal {
 
     type State = {
         system: System;
-        principal: Principal;
+        tracer: Tracer;
         conversations: Conversations;
+        searchResults: SearchResults;
+        vault: Vault;
     };
 
 }

@@ -1,23 +1,24 @@
-import { Principal, StoreComponent } from '../global';
+import { Tracer, StoreComponent } from '../global';
 import { actionTypes, commands } from '../actions/constants';
 
-export const initialState: Principal = {
+export const initialState: Tracer = {
     isConnected: false,
     isFetching: false,
     isVerified: undefined
 };
 
-export const principal: StoreComponent<Principal> = (state = initialState, { type, payload, error }) => {
+export const tracer: StoreComponent<Tracer> = (state = initialState, { type, payload, error }) => {
     switch (type) {
-        case actionTypes.MOAI_PORTAL_SAVE_LOCAL_KEY: {
+        case 'persist/REHYDRATE': {
             return {
-                ...state,
-                localKey: payload
+                ...initialState
             };
         }
         case actionTypes.MOAI_PORTAL_LOGOUT: {
             return {
-                ...initialState
+                ...state,
+                isConnected: false,
+                isFetching: false
             };
         }
         case commands.MOAI_REGISTER_TRACER.SUCCESS: {

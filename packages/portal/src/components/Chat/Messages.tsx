@@ -3,7 +3,7 @@ import './Messages.css';
 import Message from './Message';
 import { useParams, useLocation } from 'react-router-dom';
 import { withState } from '../../store';
-import { getConversation, sendMessage } from 'actions/secretarium';
+import { getConversation, sendMessage } from '../../actions';
 import MoaiPin from '../../assets/moai-pin.png';
 
 

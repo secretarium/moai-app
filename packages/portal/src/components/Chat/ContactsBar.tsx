@@ -3,7 +3,7 @@ import './ContactsBar.css';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import Contact from './Contact';
 import { withState } from '../../store';
-import { getConversations } from 'actions/secretarium';
+import { getConversations } from '../../actions';
 
 
 const ContactsBar = withState()((s) => ({
