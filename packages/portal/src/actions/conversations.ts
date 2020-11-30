@@ -3,7 +3,7 @@ import { requestFactory } from './factories';
 
 
 export const getConversations = (): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_CONVERSATIONS)({
+    requestFactory(commands.MOAI_GET_CONVERSATIONS, { max: 10, cursor: 0 })({
         onResult: result => {
             return {
                 payload: {
@@ -24,8 +24,8 @@ export const getConversation = (address: string, token: string): MoaiPortal.Func
         }
     });
 
-export const createConversation = (pseudo: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_CREATE_CONVERSATION, { pseudo: pseudo })({
+export const createConversation = (title: string, name: string, userId: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_CREATE_CONVERSATION, { title: title, name: name, userId: userId })({
         onResult: result => {
             return {
                 payload: {
@@ -35,8 +35,8 @@ export const createConversation = (pseudo: string): MoaiPortal.FunctionAction =>
         }
     });
 
-export const getLastMessage = (id: number, token: number): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_LAST_MESSAGE, { id: id, token: token })({
+export const getLastMessage = (address: string, token: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_GET_LAST_MESSAGE, { address: address, token: token })({
         onResult: result => {
             return {
                 payload: {
@@ -46,10 +46,10 @@ export const getLastMessage = (id: number, token: number): MoaiPortal.FunctionAc
         }
     });
 
-export const sendMessage = (id: number, token: number, text: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_SEND_MESSAGE, { id: id, token: token, text: text })({
+export const sendMessage = (address: string, token: string, message: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_SEND_MESSAGE, { address: address, token: token, message: message })({
         onExecuted: () => ({
-            payload: { message: text }
+            payload: { message }
         })
     });
 

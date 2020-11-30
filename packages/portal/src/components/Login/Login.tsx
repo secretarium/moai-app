@@ -3,7 +3,6 @@ import './Login.css';
 import { Button, Input, Form, Divider, Alert } from 'antd';
 import { version as packageVersion } from '../../../package.json';
 import { withState } from '../../store';
-import { useHistory } from 'react-router-dom';
 import Hand from '../../assets/hand.png';
 import MoaiLogo from '../../assets/moai-logo.png';
 import { connect, verifyTracer, register } from '../../actions';
@@ -11,54 +10,43 @@ import { connect, verifyTracer, register } from '../../actions';
 
 const Login = withState()(
     (s) => ({
-        isVerified: s.tracer.isVerified,
-        validationEmailError: s.tracer.validationEmailError,
+        validationError: s.tracer.validationError,
+        loginError: s.tracer.loginError,
         keyPair: s.vault.keyPair
     }),
-    ({ dispatch, validationEmailError, isVerified, keyPair }) => {
+    ({ dispatch, validationError, loginError, keyPair }) => {
 
-        const history = useHistory();
         const [codeSent, setCodeSent] = useState(false);
         const [currentKey] = useState(keyPair);
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
-        const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
-        const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         const [password, setPassword] = useState<string>();
         const [email, setEmail] = useState<string>();
+        const [isEmitting, setIsEmitting] = useState(false);
+        const [isValidating, setIsValidating] = useState(false);
+        const [isLoggingIn, setIsLoggingIn] = useState(false);
 
         useEffect(() => {
-            if (validationEmailError) {
-                setErrorMessage(validationEmailError);
+            if (validationError && errorMessage !== validationError) {
+                setIsEmitting(false);
+                setIsValidating(false);
+                setErrorMessage(validationError);
             }
 
-            if (isVerified === true) {
-                history.push('/');
-            } else if (isVerified === false) {
-                setErrorMessage('An error occurred');
+            if (loginError && errorMessage !== loginError) {
+                setIsEmitting(false);
+                setIsLoggingIn(false);
+                setErrorMessage(loginError);
             }
 
-            console.log(keyPair);
-            console.log(currentKey);
-
-            // if (!localKey && !hasRequestedLocalKey) {
-            //     setHasRequestedLocalKey(true);
-            //     dispatch(generateLocalKey())
-            //         .then(() => {
-            //             setHasObtainedLocalKey(true);
-            //             console.log(localKey);
-            //         })
-            //         .catch((error) => console.error(error));
-            // } else if (localKey) {
-            //     console.log(localKey);
-            //     setHasObtainedLocalKey(true);
-            // }
-        }, [validationEmailError, isVerified, history, keyPair, currentKey, dispatch, hasRequestedLocalKey]);
+        }, [validationError, errorMessage, loginError]);
 
         const onFinishFailed = errorInfo => {
             console.log('Failed:', errorInfo);
         };
 
-        const validateRegister = (values: any): void => {
+        const handleValidate = (values: any): void => {
+            setIsValidating(true);
+            setErrorMessage(undefined);
             dispatch(verifyTracer(values.code));
         };
 
@@ -71,6 +59,8 @@ const Login = withState()(
         };
 
         const handleLogin = (values: any): void => {
+            setIsLoggingIn(true);
+            setErrorMessage(undefined);
             dispatch(connect(currentKey, values.email, values.password));
         };
 
@@ -78,13 +68,13 @@ const Login = withState()(
         let composition = null;
         if (codeSent === true) {
             composition =
-                <Form className="form" name="registration" onFinish={validateRegister} onFinishFailed={onFinishFailed}>
+                <Form className="form" name="registration" onFinish={handleValidate} onFinishFailed={onFinishFailed}>
                     <Form.Item name="code" rules={[{ required: true, message: 'Please input the verification code!' }]}>
                         <Input placeholder="Verification Code" />
                     </Form.Item>
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" style={{ backgroundColor: '#00b0ee', borderRadius: '30px', width: '120px' }}>
-                            Verify Code
+                        <Button type="primary" htmlType="submit" loading={isValidating} style={{ backgroundColor: '#00b0ee', borderRadius: '30px', width: '120px' }}>
+                            Verify Email
                         </Button>
                     </Form.Item>
                 </Form>;
@@ -95,10 +85,10 @@ const Login = withState()(
                         <Input placeholder="Email Address" />
                     </Form.Item>
                     <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
-                        <Input placeholder="Password" />
+                        <Input.Password placeholder="Password" />
                     </Form.Item>
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" style={{ backgroundColor: '#00b0ee', borderRadius: '30px', width: '120px' }}>
+                        <Button type="primary" htmlType="submit" loading={isLoggingIn} style={{ backgroundColor: '#00b0ee', borderRadius: '30px', width: '120px' }}>
                             Connect
                         </Button>
                     </Form.Item>
@@ -133,8 +123,6 @@ const Login = withState()(
                 </Form>;
         }
 
-        // if (!hasObtainedLocalKey)
-        //     return <div>Loading local key...</div>;
 
         return (
             <div className="container-main">

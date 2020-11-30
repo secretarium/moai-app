@@ -3,13 +3,12 @@ import './SearchResult.css';
 import MoaiPin from '../../assets/moai-pin.png';
 
 
-interface Props {
-    code: string;
+type Props = {
     userId: string;
     time: number;
-}
+};
 
-const SearchResult: React.FC<Props> = ({ code, userId, time }) => {
+const SearchResult: React.FC<Props> = ({ userId, time }) => {
 
     const toDateTime = (timestamp) => {
         const d = new Date(timestamp / 1000000),
@@ -19,10 +18,6 @@ const SearchResult: React.FC<Props> = ({ code, userId, time }) => {
             h = d.getHours(),
             mi = d.getMinutes(),
             s = d.getSeconds();
-        console.log(d);
-        console.log(dd);
-        const t = new Date(1995, 11, 17, 3, 24, 0);
-        console.log(t.getTime());
         return (dd < 10 ? '0' : '') + dd + '.' + (m < 10 ? '0' : '') + m + '.' + y + ' - ' + (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi;
     };
 
@@ -35,7 +30,7 @@ const SearchResult: React.FC<Props> = ({ code, userId, time }) => {
             <div className="search-result-body">
                 User ID: {userId}
                 <br></br>Time: {toDateTime(time)}
-                <br></br>Barcode references: {code}
+                <br></br>Barcode references: 0
             </div>
             <div className="search-result-footer">
                 <div className="search-result-button">

@@ -3,8 +3,7 @@ import { actionTypes, commands } from '../actions/constants';
 
 export const initialState: Tracer = {
     isConnected: false,
-    isFetching: false,
-    isVerified: undefined
+    isVerified: false
 };
 
 export const tracer: StoreComponent<Tracer> = (state = initialState, { type, payload, error }) => {
@@ -17,8 +16,26 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
         case actionTypes.MOAI_PORTAL_LOGOUT: {
             return {
                 ...state,
-                isConnected: false,
-                isFetching: false
+                ...payload
+            };
+        }
+        case actionTypes.MOAI_PORTAL_LOGIN: {
+            return {
+                ...state,
+                ...payload
+            };
+        }
+        case commands.MOAI_REGISTER_TRACER.REQUEST: {
+            delete state.loginError;
+            return {
+                ...state
+            };
+        }
+        case commands.MOAI_REGISTER_TRACER.FAILURE:
+        case actionTypes.PDATA_NEW_USER_FAILED: {
+            return {
+                ...state,
+                loginError: error?.message ?? error ?? 'Unknown error occured while registering.'
             };
         }
         case commands.MOAI_REGISTER_TRACER.SUCCESS: {
@@ -28,7 +45,7 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
             };
         }
         case commands.MOAI_VERIFY_TRACER.REQUEST: {
-            delete state.validationEmailError;
+            delete state.validationError;
             return {
                 ...state
             };
@@ -36,17 +53,37 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
         case commands.MOAI_VERIFY_TRACER.FAILURE: {
             return {
                 ...state,
-                isVerified: payload,
-                validationEmailError: error
+                ...payload,
+                validationError: error?.message ?? error ?? 'Unknown error occured while validating.'
             };
         }
         case commands.MOAI_VERIFY_TRACER.SUCCESS: {
             return {
                 ...state,
-                isVerified: payload,
-                isConnected: true
+                ...payload
             };
         }
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED:
+            delete state.loginError;
+            return {
+                ...state
+            };
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL:
+            if (state.isVerified === true) {
+                return {
+                    ...state,
+                    isConnected: true
+                };
+            } else {
+                return {
+                    ...state
+                };
+            }
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED:
+            return {
+                ...state,
+                loginError: error?.message ?? error ?? 'Unknown error occured while loging in.'
+            };
         default:
             return state;
     }

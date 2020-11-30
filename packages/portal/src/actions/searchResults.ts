@@ -2,7 +2,7 @@ import { commands } from './constants';
 import { requestFactory } from './factories';
 
 
-export const getTested = (barcode: number): MoaiPortal.FunctionAction =>
+export const getTested = (barcode: string): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_GET_TESTED, { barcode: barcode })({
         onResult: result => {
             return {
@@ -13,8 +13,8 @@ export const getTested = (barcode: number): MoaiPortal.FunctionAction =>
         }
     });
 
-export const getExposed = (venue: number, time: number): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_EXPOSED, { venue: venue, time: time })({
+export const getExposed = (venue: string, utc: number): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_GET_EXPOSED, { venue: venue, utc: utc })({
         onResult: result => {
             return {
                 payload: {

@@ -78,10 +78,7 @@ const secretariumHandler = {
                     handlerStore.currentKey = key;
                     resolve(key);
                 })
-                .catch((e: any) => {
-                    console.error('fail');
-                    reject(e);
-                });
+                .catch((e: any) => reject(e));
         }),
     connect: (): Promise<any> =>
         new Promise((resolve, reject) => {
@@ -100,6 +97,7 @@ const secretariumHandler = {
                     })
                     .catch((e: any) => reject(e));
             } else {
+                console.error('fail');
                 reject('Cluster not configured.');
             }
         }),

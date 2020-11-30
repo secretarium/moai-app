@@ -21,24 +21,18 @@
     border-bottom: 2px solid #dee8ee;
 }
 
-.search-input-barcode {
+.search-input-code {
     display: flex;
     align-items: center;
     background-color: #fff;
     border-radius: 20px;
     border: 3px solid #dfe0e2;
-    height: 35px;
+    height: 36px;
     width: 30%
 }
 
-.search-input-qrcode {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 20px;
-    border: 3px solid #dfe0e2;
-    height: 35px;
-    width: 30%
+.search-input-code > .ant-input {
+    border-radius: 25px;
 }
 
 .search-input > input {

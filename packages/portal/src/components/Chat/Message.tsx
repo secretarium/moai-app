@@ -1,12 +1,12 @@
 import React from 'react';
 import './Message.css';
 
-interface Props {
+type Props = {
     username: string;
     message: string;
     timestamp: string;
     isSender: boolean;
-}
+};
 
 const Message: React.FC<Props> = ({ username, message, timestamp, isSender }) => {
     return (

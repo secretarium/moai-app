@@ -7,9 +7,9 @@ import SettingsMenu from './SettingsMenu';
 import { useParams } from 'react-router-dom';
 
 
-interface ParamTypes {
+type ParamTypes = {
     setting: string;
-}
+};
 
 const Settings: React.FC = () => {
     const { setting } = useParams<ParamTypes>();

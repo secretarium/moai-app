@@ -20,8 +20,12 @@
     background-color: #fff;
     border-radius: 20px;
     border: 3px solid #dfe0e2;
-    height: 35px;
+    height: 36px;
     width: 100%;
+}
+
+.search-container > .ant-input {
+    border-radius: 25px;
 }
 
 .search-container > input {

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './ContactsBar.css';
-import SearchOutlined from '@ant-design/icons/SearchOutlined';
+import { Input } from 'antd';
 import Contact from './Contact';
 import { withState } from '../../store';
-import { getConversations } from '../../actions';
+
+const { Search } = Input;
 
 
 const ContactsBar = withState()((s) => ({
@@ -13,10 +14,8 @@ const ContactsBar = withState()((s) => ({
     const [fetchedContacts, setFetchedContacts] = useState(false);
 
     useEffect(() => {
-        if (fetchedContacts === false) {
+        if (fetchedContacts === false && conversationList.length > 0) {
             setFetchedContacts(true);
-            dispatch(getConversations);
-            console.log(conversationList);
         }
     }, [dispatch, fetchedContacts, conversationList]);
 
@@ -24,13 +23,12 @@ const ContactsBar = withState()((s) => ({
         <div className="contacts-bar">
             <div className="search">
                 <div className="search-container">
-                    <SearchOutlined style={{ fontSize: '24px', color: '#dfe0e2', padding: '10px' }} />
-                    <input placeholder="Search..." type="text" style={{ outline: 'none', border: 'none' }} />
+                    <Search placeholder="Search..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }} />
                 </div>
             </div>
             <div className="chats">
                 {conversationList.map((convo) =>
-                    <Contact conversationID={convo.id} token={convo.token} />
+                    <Contact key={convo.token} address={convo.address} token={convo.token} />
                 )}
             </div>
         </div>

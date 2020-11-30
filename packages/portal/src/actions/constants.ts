@@ -4,7 +4,7 @@ const commandsPrototype = {
     MOAI_GET_CONVERSATIONS: { application: 'moai', command: 'get-conversations' },
     MOAI_CREATE_CONVERSATION: { application: 'moai', command: 'create-conversation' },
     MOAI_GET_CONVERSATION: { application: 'moai', command: 'conversations-get' },
-    MOAI_GET_LAST_MESSAGE: { application: 'moai', command: 'get-last-message' },
+    MOAI_GET_LAST_MESSAGE: { application: 'moai', command: 'conversations-get-latest-message' },
     MOAI_SEND_MESSAGE: { application: 'moai', command: 'conversations-write-message' },
     MOAI_MARK_AS_READ: { application: 'moai', command: 'mark-as-read' },
     MOAI_REGISTER_TRACER: { application: 'moai', command: 'register-tracer' },
@@ -17,6 +17,7 @@ const commandsPrototype = {
 
 const actionPrototypes = {
     MOAI_PORTAL_LOGOUT: 'MOAI_PORTAL_LOGOUT',
+    MOAI_PORTAL_LOGIN: 'MOAI_PORTAL_LOGIN',
     MOAI_PORTAL_SAVE_LOCAL_KEY: 'MOAI_PORTAL_SAVE_LOCAL_KEY',
     VAULT_COMMIT_LOCAL_KEYS: 'VAULT_COMMIT_LOCAL_KEYS',
     VAULT_REMOVE_LOCAL_KEYS: 'VAULT_REMOVE_LOCAL_KEYS',

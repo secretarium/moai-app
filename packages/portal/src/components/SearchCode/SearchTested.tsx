@@ -1,43 +1,36 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent, KeyboardEvent } from 'react';
+import React from 'react';
 import './SearchCode.css';
-import SearchOutlined from '@ant-design/icons/SearchOutlined';
+import { Input } from 'antd';
 import SearchResult from './SearchResult';
 import { withState } from '../../store';
 import { getTested } from '../../actions';
 
+const { Search } = Input;
 
-const SearchCode = withState()(
+
+const SearchTested = withState()(
     (s) => ({
         tested: s.searchResults.tested
     }),
     ({ dispatch, tested }) => {
 
-        const [barcode, setBarcode] = useState(null);
-
-        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-            setBarcode(e.target.value);
-            console.log(e.target.value);
-        };
-
-        const onKeyPress = (e: FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            dispatch(getTested(barcode));
-        };
 
         return (
             <div className="container-search">
                 <div className="search-header">
-                    <form className="search-input-barcode" onSubmit={onKeyPress}>
-                        <SearchOutlined style={{ fontSize: '24px', color: '#dfe0e2', padding: '10px' }} />
-                        <input placeholder={'Search Test ID...'} type="text" style={{ outline: 'none', border: 'none' }} onChange={onChange} />
-                    </form>
+                    <div className="search-input-code">
+                        <Search placeholder="Search Test ID..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }} onSearch={(value, event) => {
+                            event.preventDefault();
+                            dispatch(getTested(value));
+                        }} />
+                    </div>
                 </div>
                 <div className="results">
-                    {tested ? <SearchResult code={barcode} userId={tested.userId} time={tested.time} /> : 'No result'}
+                    {tested ? <SearchResult userId={tested.userId} time={tested.time} /> : 'No result'}
                 </div>
             </div>
         );
     }
 );
 
-export default SearchCode;
+export default SearchTested;

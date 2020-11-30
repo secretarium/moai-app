@@ -105,10 +105,10 @@ declare namespace MoaiPortal {
 
     type Tracer = {
         isConnected: boolean;
-        isFetching: boolean;
-        isVerified: boolean | undefined;
+        isVerified: boolean;
         emailVerificationAttempt?: number;
-        validationEmailError?: string;
+        validationError?: string;
+        loginError?: string;
     };
 
     type SearchResults = {
@@ -123,32 +123,31 @@ declare namespace MoaiPortal {
     };
 
     type Conversation = {
-        id: number;
-        endpoint: string;
-        token: number;
+        address: string;
+        token: string;
+    };
+
+    type ConversationLastMessage = {
+        datetime: number;
+        sender: number;
+        text: string;
+        received: boolean;
+        read: boolean
+    };
+
+    type Message = {
+        datetime: number;
+        sender: number;
+        text: string;
+        received: number;
+        read: number;
     };
 
     type Conversations = {
         isFetching: boolean;
         conversationList: Conversation[];
-        messages: Messages;
-    };
-
-    type Messages = {
-        id: number;
-        users: {
-            idA: number;
-            idB: number;
-        };
-        myself: number;
-        messageList: Message[];
-    };
-
-    type Message = {
-        time: number;
-        text: string;
-        sender: number;
-        hasRead: [number, number];
+        conversationLastMessageList: ConversationLastMessage[];
+        messages: Message[];
     };
 
     type State = {

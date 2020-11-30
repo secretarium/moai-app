@@ -1,58 +1,64 @@
 import React, { useState, useEffect, MouseEvent, ChangeEvent } from 'react';
 import './Messages.css';
 import Message from './Message';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { withState } from '../../store';
 import { getConversation, sendMessage } from '../../actions';
 import MoaiPin from '../../assets/moai-pin.png';
 
-
-interface ParamTypes {
-    id: string;
-}
-
-interface LocationTypes {
-    token: number;
-}
-
+type ParamTypes = {
+    token: string;
+};
 const Messages = withState()((s) => ({
     messages: s.conversations.messages
 }), ({ messages, dispatch }) => {
 
-    const { id } = useParams<ParamTypes>();
-    const location = useLocation<LocationTypes>();
+    const location = useLocation<MoaiPortal.Conversation>();
+    const { token } = useParams<ParamTypes>();
     const [fetchedConversation, setFetchedConversation] = useState(false);
-    const [token, setToken] = useState<number | undefined>();
+    const [conversation, setConversation] = useState<MoaiPortal.Conversation | undefined>();
     const [message, setMessage] = useState('');
 
-    // useEffect(() => {
-    //     if (location.state !== undefined) {
-    //         const convoToken = location.state.token;
-    //         setToken(convoToken);
-    //     } else {
-    //         setToken(null);
-    //     }
-    // }, [location.state]);
-
     useEffect(() => {
-        if (fetchedConversation === false) {
-            setFetchedConversation(true);
-            dispatch(getConversation('s6bbPIcMPpkkXg0cBrdH3rMSTchDu4umHwNafQk4JR8', 'rl3rgi4NcZkpAEcacZnQ2VuOfJ0FxAqCRaKB_SwdZoQ='));
-            console.log(messages);
+        console.log(conversation);
+        if (location.state !== null && location.state !== undefined) {
+            const convoToken = location.state.token;
+            const convoAddress = location.state.address;
+            setConversation({ address: convoAddress, token: convoToken });
+        } else {
+            setConversation(undefined);
         }
-    }, [fetchedConversation, dispatch, id, token]);
+    }, [location]);
+
+    // useEffect(() => {
+    //     console.log(conversation);
+    //     console.log(fetchedConversation);
+    //     if (fetchedConversation === false && conversation !== undefined) {
+    //         dispatch(getConversation(conversation.address, conversation.token));
+    //         console.log(messages);
+    //         setFetchedConversation(true);
+    //     }
+    // }, [fetchedConversation, dispatch, conversation, messages, location]);
 
     useEffect(() => {
-        console.log('SWITCHEDDDD');
-        setFetchedConversation(true);
-        dispatch(getConversation('s6bbPIcMPpkkXg0cBrdH3rMSTchDu4umHwNafQk4JR8', 'rl3rgi4NcZkpAEcacZnQ2VuOfJ0FxAqCRaKB_SwdZoQ='));
-        console.log(messages);
-    }, [dispatch, id, token]);
+        console.log(token);
+        setFetchedConversation(false);
+    }, [token, location.state]);
+
+    useEffect(() => {
+        console.log(fetchedConversation);
+        if (fetchedConversation === false && conversation !== undefined) {
+            dispatch(getConversation(conversation.address, conversation.token));
+            console.log(messages);
+            console.log('SWITCHEDDDD');
+            setFetchedConversation(true);
+        }
+    }, [fetchedConversation, location, dispatch, conversation, messages]);
 
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         console.log('you sent the following message: ', message);
-        dispatch(sendMessage(parseInt(id), token, message));
+        dispatch(sendMessage(conversation.address, conversation.token, message));
         setFetchedConversation(false);
         console.log(messages);
         setMessage('');
@@ -64,7 +70,7 @@ const Messages = withState()((s) => ({
 
     // eslint-disable-next-line prefer-const
     let composition = null;
-    if (id === undefined)
+    if (location.state === null || location.state === undefined)
         composition =
             <div className="messages-no-chat">
                 <h1>Start chatting</h1>
@@ -75,15 +81,18 @@ const Messages = withState()((s) => ({
                 <div className="messages-header">
                     <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto' }} />
                     <div className="messages-header-info">
-                        Conversation ID {id} | User ID {messages.users.idB}
+                        Conversation ID | User ID
                     </div>
                 </div>
                 <div className="messages-body">
-                    {messages.messageList.map((message) => {
+                    {/* {messages.messageList.map((message) => {
                         if (message.sender === messages.myself)
-                            return <Message username={`User ID ${messages.myself}`} message={message.text} timestamp={`${message.time} pm`} isSender={true} />;
+                            return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={true} />;
                         else
-                            return <Message username={`User ID ${messages.users.idB}`} message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
+                            return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
+                    })} */}
+                    {messages.map((message) => {
+                        return <Message key={message.datetime} username="user id" message={message.text} timestamp="123" isSender={true} />;
                     })}
                 </div>
                 <div className="messages-footer">

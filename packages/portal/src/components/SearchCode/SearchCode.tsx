@@ -2,9 +2,10 @@ import React from 'react';
 import './SearchCode.css';
 import { useParams } from 'react-router-dom';
 
-interface ParamTypes {
+
+type ParamTypes = {
     code: string;
-}
+};
 
 const SearchCode: React.FC = () => {
     const { code } = useParams<ParamTypes>();
