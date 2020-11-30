@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View } from 'react-native';
 import MainLayout from '../common/MainLayout';
 import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
@@ -24,7 +23,7 @@ const Chat: React.FC = () => {
                 user: {
                     _id: 2,
                     name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any'
+                    avatar: require('../../assets/nhs-logo.png')
                 }
             }
         ]);
@@ -90,9 +89,7 @@ const Chat: React.FC = () => {
 
     const renderComposer = (props) => {
         return (
-            <View style={[styles.inputContainer, { backgroundColor: themeColorStyle, borderTopColor: themeColorStyle }]}>
-                <Composer {...props} textInputStyle={{ color: themeTextStyle }} multiline={true} />
-            </View>
+            <Composer {...props} textInputStyle={[styles.inputContainer, { backgroundColor: themeColorStyle, color: themeTextStyle }]} multiline={true} />
         );
     };
 

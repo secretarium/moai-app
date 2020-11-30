@@ -10,13 +10,13 @@ export const styles = StyleSheet.create({
     inputContainer: {
         borderRadius: 15,
         width: '85%',
-        marginBottom: 5,
-        marginTop: 5
+        padding: 10
     },
     sendContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        marginLeft: 15
+        marginLeft: 15,
+        marginRight: 10
     }
 });
