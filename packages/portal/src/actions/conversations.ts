@@ -50,6 +50,9 @@ export const sendMessage = (address: string, token: string, message: string): Mo
     requestFactory(commands.MOAI_SEND_MESSAGE, { address: address, token: token, message: message })({
         onExecuted: () => ({
             payload: { message }
+        }),
+        onError: (error) => ({
+            error: new Error(error)
         })
     });
 

@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
+import { withState } from '../../store';
+import { getLastMessage } from '../../actions';
 
 
-const Home: React.FC = () => {
+const Home = withState()((s) => ({
+    conversationList: s.conversations.conversationList
+}), ({ conversationList, dispatch }) => {
+
+    const [fetchedContacts, setFetchedContacts] = useState(false);
+
+    useEffect(() => {
+        if (fetchedContacts === false && conversationList.length > 0) {
+            setFetchedContacts(true);
+            conversationList.map((convo) => dispatch(getLastMessage(convo.address, convo.token)));
+        }
+    }, [dispatch, fetchedContacts, conversationList]);
+
     return (
         <div className="container-home">
             <h1>Welcome to Moai</h1>
@@ -17,6 +31,6 @@ const Home: React.FC = () => {
             </p>
         </div >
     );
-};
+});
 
 export default Home;

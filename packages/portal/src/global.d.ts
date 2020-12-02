@@ -148,6 +148,8 @@ declare namespace MoaiPortal {
         conversationList: Conversation[];
         conversationLastMessageList: ConversationLastMessage[];
         messages: Message[];
+        newMessage: boolean;
+        messageError?: string;
     };
 
     type State = {

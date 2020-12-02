@@ -4,23 +4,25 @@ import Message from './Message';
 import { useLocation, useParams } from 'react-router-dom';
 import { withState } from '../../store';
 import { getConversation, sendMessage } from '../../actions';
+import { toDateTime } from '../../utils/timeHandler';
 import MoaiPin from '../../assets/moai-pin.png';
 
+
 type ParamTypes = {
-    token: string;
+    address: string;
 };
+
 const Messages = withState()((s) => ({
     messages: s.conversations.messages
 }), ({ messages, dispatch }) => {
 
     const location = useLocation<MoaiPortal.Conversation>();
-    const { token } = useParams<ParamTypes>();
+    const { address } = useParams<ParamTypes>();
     const [fetchedConversation, setFetchedConversation] = useState(false);
     const [conversation, setConversation] = useState<MoaiPortal.Conversation | undefined>();
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        console.log(conversation);
         if (location.state !== null && location.state !== undefined) {
             const convoToken = location.state.token;
             const convoAddress = location.state.address;
@@ -30,27 +32,13 @@ const Messages = withState()((s) => ({
         }
     }, [location]);
 
-    // useEffect(() => {
-    //     console.log(conversation);
-    //     console.log(fetchedConversation);
-    //     if (fetchedConversation === false && conversation !== undefined) {
-    //         dispatch(getConversation(conversation.address, conversation.token));
-    //         console.log(messages);
-    //         setFetchedConversation(true);
-    //     }
-    // }, [fetchedConversation, dispatch, conversation, messages, location]);
-
     useEffect(() => {
-        console.log(token);
         setFetchedConversation(false);
-    }, [token, location.state]);
+    }, [address, location.state]);
 
     useEffect(() => {
-        console.log(fetchedConversation);
         if (fetchedConversation === false && conversation !== undefined) {
             dispatch(getConversation(conversation.address, conversation.token));
-            console.log(messages);
-            console.log('SWITCHEDDDD');
             setFetchedConversation(true);
         }
     }, [fetchedConversation, location, dispatch, conversation, messages]);
@@ -58,9 +46,8 @@ const Messages = withState()((s) => ({
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         console.log('you sent the following message: ', message);
-        dispatch(sendMessage(conversation.address, conversation.token, message));
-        setFetchedConversation(false);
-        console.log(messages);
+        dispatch(sendMessage(conversation.address, conversation.token, message))
+            .then(() => dispatch(getConversation(conversation.address, conversation.token)));
         setMessage('');
     };
 
@@ -91,8 +78,8 @@ const Messages = withState()((s) => ({
                         else
                             return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
                     })} */}
-                    {messages.map((message) => {
-                        return <Message key={message.datetime} username="user id" message={message.text} timestamp="123" isSender={true} />;
+                    {messages.map((message, index) => {
+                        return <Message key={index} username="User ID" message={message.text} timestamp={toDateTime(message.datetime)} isSender={true} />;
                     })}
                 </div>
                 <div className="messages-footer">

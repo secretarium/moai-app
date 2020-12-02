@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './ContactsBar.css';
 import { Input } from 'antd';
 import Contact from './Contact';
@@ -8,16 +8,12 @@ const { Search } = Input;
 
 
 const ContactsBar = withState()((s) => ({
-    conversationList: s.conversations.conversationList
-}), ({ conversationList, dispatch }) => {
+    conversationList: s.conversations.conversationList,
+    messages: s.conversations.messages,
+    conversationLastMessageList: s.conversations.conversationLastMessageList,
+    newMessage: s.conversations.newMessage
+}), ({ conversationList }) => {
 
-    const [fetchedContacts, setFetchedContacts] = useState(false);
-
-    useEffect(() => {
-        if (fetchedContacts === false && conversationList.length > 0) {
-            setFetchedContacts(true);
-        }
-    }, [dispatch, fetchedContacts, conversationList]);
 
     return (
         <div className="contacts-bar">
@@ -27,8 +23,8 @@ const ContactsBar = withState()((s) => ({
                 </div>
             </div>
             <div className="chats">
-                {conversationList.map((convo) =>
-                    <Contact key={convo.token} address={convo.address} token={convo.token} />
+                {conversationList.map((convo, index) =>
+                    <Contact key={index} address={convo.address} token={convo.token} index={index} />
                 )}
             </div>
         </div>

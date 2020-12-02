@@ -1,6 +1,7 @@
 import React from 'react';
 import './SearchResult.css';
 import MoaiPin from '../../assets/moai-pin.png';
+import { toDateTime } from '../../utils/timeHandler';
 
 
 type Props = {
@@ -9,17 +10,6 @@ type Props = {
 };
 
 const SearchResult: React.FC<Props> = ({ userId, time }) => {
-
-    const toDateTime = (timestamp) => {
-        const d = new Date(timestamp / 1000000),
-            dd = d.getDate(),
-            m = d.getMonth() + 1,
-            y = d.getFullYear(),
-            h = d.getHours(),
-            mi = d.getMinutes(),
-            s = d.getSeconds();
-        return (dd < 10 ? '0' : '') + dd + '.' + (m < 10 ? '0' : '') + m + '.' + y + ' - ' + (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi;
-    };
 
     return (
         <div className="search-result-container">

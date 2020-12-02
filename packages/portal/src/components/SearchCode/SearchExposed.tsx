@@ -4,6 +4,7 @@ import { DatePicker, TimePicker, Input } from 'antd';
 import SearchResult from './SearchResult';
 import { withState } from '../../store';
 import { getExposed } from '../../actions';
+import { toTimestamp } from '../../utils/timeHandler';
 
 const { Search } = Input;
 
@@ -16,18 +17,6 @@ const SearchExposed = withState()(
 
         const [date, setDate] = useState<string | undefined>(undefined);
         const [time, setTime] = useState<string | undefined>(undefined);
-
-        const toTimestamp = (date, time) => {
-            console.log(date);
-            console.log(time);
-            const d = date.split('-');
-            const t = time.split(':');
-            const dt = new Date(d[0], d[1], d[2], t[0], t[1], t[2]);
-            console.log(dt);
-            console.log(dt.getTime());
-            return dt.getTime();
-        };
-
 
         return (
             <div className="container-search">
