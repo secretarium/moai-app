@@ -100,8 +100,29 @@ declare namespace Moai {
         log: SystemLog;
     };
 
+    type Conversation = {
+        address: string;
+        token: string;
+    };
+
+    type Message = {
+        datetime: number;
+        sender: number;
+        text: string;
+        received: number;
+        read: number;
+    };
+
+    type Conversations = {
+        isFetching: boolean;
+        conversationList: Conversation[];
+        messages: Message[];
+        messageError?: string;
+    };
+
     type State = {
         system: System;
+        conversations: Conversations;
     };
 }
 

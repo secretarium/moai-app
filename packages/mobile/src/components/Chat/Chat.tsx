@@ -4,10 +4,15 @@ import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
 import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
+import { getConversations, sendMessage } from '../../actions/conversations';
+import { withState } from '../../store';
 
 
-const Chat: React.FC = () => {
-    const [messages, setMessages] = useState([]);
+const Chat = withState()((s) => ({
+    messages: s.conversations.messages
+}), ({ messages, dispatch }) => {
+
+    const [stateMessages, setMessages] = useState([]);
 
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
@@ -29,6 +34,11 @@ const Chat: React.FC = () => {
         ]);
     }, []);
 
+    const onSend = useCallback((messages = []) => {
+        setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
+    }, []);
+
+    // Message Bubble
     const renderBubble = (props) => {
         return (
             <Bubble
@@ -55,6 +65,7 @@ const Chat: React.FC = () => {
         );
     };
 
+    // Message Timestamp
     const renderTime = (props) => {
         return (
             <Time
@@ -73,6 +84,7 @@ const Chat: React.FC = () => {
         );
     };
 
+    // Message Send Button
     const renderSend = (props) => {
         return (
             <Send {...props} containerStyle={styles.sendContainer}>
@@ -81,29 +93,28 @@ const Chat: React.FC = () => {
         );
     };
 
+    // Message Text Input
     const renderInputToolbar = (props) => {
         return (
             <InputToolbar {...props} containerStyle={[styles.footerContainer, { backgroundColor: themeInputStyle, borderTopColor: themeInputStyle }]} />
         );
     };
 
+    // Message Bottom Bar (Text Input + Send Button)
     const renderComposer = (props) => {
         return (
             <Composer {...props} textInputStyle={[styles.inputContainer, { backgroundColor: themeColorStyle, color: themeTextStyle }]} multiline={true} />
         );
     };
 
-    const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
-    }, []);
-
     return (
         <MainLayout showGoBack={true}>
             <GiftedChat
-                messages={messages}
+                messages={stateMessages}
                 onSend={messages => onSend(messages)}
                 user={{
-                    _id: 1
+                    _id: 1,
+                    name: 'Test User'
                 }}
                 renderBubble={renderBubble}
                 renderTime={renderTime}
@@ -112,12 +123,14 @@ const Chat: React.FC = () => {
                 renderInputToolbar={renderInputToolbar}
                 placeholder='Type a new message...'
                 alwaysShowSend
+                showUserAvatar
             // minComposerHeight={28}
             // maxComposerHeight={106}
             // minInputToolbarHeight={50}
             />
+            {console.log(messages)}
         </MainLayout>
     );
-};
+});
 
 export default Chat;

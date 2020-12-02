@@ -2,6 +2,8 @@ let actionMarker = 0;
 
 const commandsPrototype = {
     MOAI: { application: 'moai', command: 'update-user' },
+    MOAI_GET_CONVERSATIONS: { application: 'moai', command: 'get-conversations' },
+    MOAI_SEND_MESSAGE: { application: 'moai', command: 'conversations-write-message' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
