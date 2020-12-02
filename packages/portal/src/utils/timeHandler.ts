@@ -4,7 +4,7 @@ export const toDateTime = (timestamp: number): string => {
         m = d.getMonth() + 1,
         y = d.getFullYear(),
         h = d.getHours(),
-        mi = d.getMinutes()
+        mi = d.getMinutes();
     return (dd < 10 ? '0' : '') + dd + '.' + (m < 10 ? '0' : '') + m + '.' + y + ' - ' + (h < 10 ? '0' : '') + h + ':' + (mi < 10 ? '0' : '') + mi;
 };
 

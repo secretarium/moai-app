@@ -132,7 +132,7 @@ declare namespace MoaiPortal {
         sender: number;
         text: string;
         received: boolean;
-        read: boolean
+        read: boolean;
     };
 
     type Message = {
