@@ -18,6 +18,8 @@ import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
+import { getConversations } from './actions/conversations';
+
 
 const App = withState()(
     (s) => ({
@@ -33,6 +35,7 @@ const App = withState()(
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
+        const [hasFetchedConversation, setHasFetchedConversation] = useState(false);
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -80,6 +83,9 @@ const App = withState()(
             } else if (localKey) {
                 setHasRequestedLocalKey(true);
                 setHasObtainedLocalKey(true);
+                dispatch(getConversations()).then(() => {
+                    setHasFetchedConversation(true);
+                });
             }
         }, [dispatch, hasRequestedLocalKey, localKey]);
 
@@ -99,7 +105,7 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !hasFetchedConversation)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;

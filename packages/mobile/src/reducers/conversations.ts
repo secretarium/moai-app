@@ -14,7 +14,8 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
                 ...initialState
             };
         }
-        case commands.MOAI_GET_CONVERSATIONS.REQUEST: {
+        case commands.MOAI_GET_CONVERSATIONS.REQUEST:
+        case commands.MOAI_GET_CONVERSATION.REQUEST: {
             return {
                 ...state,
                 isFetching: true
@@ -25,6 +26,13 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
                 ...state,
                 isFetching: false,
                 conversationList: payload.result.conversations
+            };
+        }
+        case commands.MOAI_GET_CONVERSATION.SUCCESS: {
+            return {
+                ...state,
+                isFetching: false,
+                messages: payload.result.messages
             };
         }
         case commands.MOAI_SEND_MESSAGE.FAILURE: {

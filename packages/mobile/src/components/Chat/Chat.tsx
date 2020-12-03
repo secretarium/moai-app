@@ -4,13 +4,14 @@ import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
 import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
-import { getConversations, sendMessage } from '../../actions/conversations';
+import { getConversation, sendMessage } from '../../actions/conversations';
 import { withState } from '../../store';
 
 
 const Chat = withState()((s) => ({
-    messages: s.conversations.messages
-}), ({ messages, dispatch }) => {
+    messages: s.conversations.messages,
+    conversationList: s.conversations.conversationList
+}), ({ messages, conversationList, dispatch }) => {
 
     const [stateMessages, setMessages] = useState([]);
 
@@ -20,6 +21,7 @@ const Chat = withState()((s) => ({
     const themeInputStyle = colorScheme !== 'dark' ? '#ffffff' : '#1b1b1b';
 
     useEffect(() => {
+        console.log(conversationList);
         setMessages([
             {
                 _id: 1,
