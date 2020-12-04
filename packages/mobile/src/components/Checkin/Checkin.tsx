@@ -4,13 +4,14 @@ import { useColorScheme } from 'react-native-appearance';
 import { Redirect } from '../../ReactRouter';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
-import { SCP, Key, Constants } from '../../../../connect/src';
+import { SCP, Key, Constants } from '@secretarium/connector';
 import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
+
 
 const scp = new SCP();
 const isDev = process.env.NODE_ENV === 'development';
@@ -47,17 +48,19 @@ const Checkin = withState<RouteComponentProps<{
         useEffect(() => {
             async function connectBackend() {
                 if (localKey && scp.state === Constants.ConnectionState.closed) {
-                    Key.importKey(localKey.exportableKey).then((key) => {
-                        scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', key, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
-                            setIsConnected(true);
-                            setIsConnecting(false);
-                        }).catch((error) => {
-                            setPageError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                            setIsConnected(false);
-                            setIsConnecting(false);
-                            console.error('Connection error:', error);
-                        });
-                    });
+                    Key.importKey(localKey)
+                        .then((key) => {
+                            scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', key, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
+                                setIsConnected(true);
+                                setIsConnecting(false);
+                            }).catch((error) => {
+                                setPageError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
+                                setIsConnected(false);
+                                setIsConnecting(false);
+                                console.error('Connection error:', error);
+                            });
+                        })
+                        .catch((error) => console.error(error));
                 }
                 else if (scp.state === Constants.ConnectionState.secure) {
                     setIsConnected(true);

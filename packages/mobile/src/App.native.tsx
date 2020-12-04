@@ -13,12 +13,11 @@ import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
-import { generateLocalKey } from './actions';
+import { generateLocalKey } from './actions/system';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
-import { getConversations } from './actions/conversations';
 
 
 const App = withState()(
@@ -83,9 +82,6 @@ const App = withState()(
             } else if (localKey) {
                 setHasRequestedLocalKey(true);
                 setHasObtainedLocalKey(true);
-                dispatch(getConversations()).then(() => {
-                    setHasFetchedConversation(true);
-                });
             }
         }, [dispatch, hasRequestedLocalKey, localKey]);
 
@@ -105,7 +101,7 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !hasFetchedConversation)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;

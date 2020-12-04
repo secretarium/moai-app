@@ -4225,6 +4225,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@secretarium/connector@npm:0.8.4":
+  version: 0.8.4
+  resolution: "@secretarium/connector@npm:0.8.4"
+  checksum: 46b286bd8b67027f55b0ac60554a573cad81f0e68c4ca426a653190d9d99912cdf03e74c5f272b9de33bf6ca3cb9dcaee2462028e9fa97f0bb21428615251db6
+  languageName: node
+  linkType: hard
+
 "@secretarium/moai-connect@workspace:packages/connect":
   version: 0.0.0-use.local
   resolution: "@secretarium/moai-connect@workspace:packages/connect"
@@ -4242,6 +4249,7 @@ __metadata:
     "@expo/vector-icons": 10.2.1
     "@expo/webpack-config": 0.12.38
     "@react-native-community/async-storage": 1.12.0
+    "@secretarium/connector": 0.8.4
     "@secretarium/moai-connect": "workspace:packages/connect"
     "@storybook/addon-actions": 6.0.26
     "@storybook/addon-links": 6.0.26
@@ -4283,6 +4291,7 @@ __metadata:
     jest: 26.4.2
     jest-expo: 39.0.0
     license-checker: 25.0.1
+    metro-react-native-babel-preset: 0.64.0
     next: 9.5.3
     next-fonts: 1.4.0
     next-i18next: 6.0.3
@@ -4292,6 +4301,7 @@ __metadata:
     react-dom: 16.13.1
     react-native: "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz"
     react-native-appearance: 0.3.4
+    react-native-dotenv: 2.4.3
     react-native-gifted-chat: 0.16.3
     react-native-modal: 11.5.6
     react-native-onboarding-swiper: 1.1.4
@@ -19818,6 +19828,55 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"metro-react-native-babel-preset@npm:0.64.0":
+  version: 0.64.0
+  resolution: "metro-react-native-babel-preset@npm:0.64.0"
+  dependencies:
+    "@babel/core": ^7.0.0
+    "@babel/plugin-proposal-class-properties": ^7.0.0
+    "@babel/plugin-proposal-export-default-from": ^7.0.0
+    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.0.0
+    "@babel/plugin-proposal-object-rest-spread": ^7.0.0
+    "@babel/plugin-proposal-optional-catch-binding": ^7.0.0
+    "@babel/plugin-proposal-optional-chaining": ^7.0.0
+    "@babel/plugin-syntax-dynamic-import": ^7.0.0
+    "@babel/plugin-syntax-export-default-from": ^7.0.0
+    "@babel/plugin-syntax-flow": ^7.2.0
+    "@babel/plugin-syntax-nullish-coalescing-operator": ^7.0.0
+    "@babel/plugin-syntax-optional-chaining": ^7.0.0
+    "@babel/plugin-transform-arrow-functions": ^7.0.0
+    "@babel/plugin-transform-block-scoping": ^7.0.0
+    "@babel/plugin-transform-classes": ^7.0.0
+    "@babel/plugin-transform-computed-properties": ^7.0.0
+    "@babel/plugin-transform-destructuring": ^7.0.0
+    "@babel/plugin-transform-exponentiation-operator": ^7.0.0
+    "@babel/plugin-transform-flow-strip-types": ^7.0.0
+    "@babel/plugin-transform-for-of": ^7.0.0
+    "@babel/plugin-transform-function-name": ^7.0.0
+    "@babel/plugin-transform-literals": ^7.0.0
+    "@babel/plugin-transform-modules-commonjs": ^7.0.0
+    "@babel/plugin-transform-object-assign": ^7.0.0
+    "@babel/plugin-transform-parameters": ^7.0.0
+    "@babel/plugin-transform-react-display-name": ^7.0.0
+    "@babel/plugin-transform-react-jsx": ^7.0.0
+    "@babel/plugin-transform-react-jsx-self": ^7.0.0
+    "@babel/plugin-transform-react-jsx-source": ^7.0.0
+    "@babel/plugin-transform-regenerator": ^7.0.0
+    "@babel/plugin-transform-runtime": ^7.0.0
+    "@babel/plugin-transform-shorthand-properties": ^7.0.0
+    "@babel/plugin-transform-spread": ^7.0.0
+    "@babel/plugin-transform-sticky-regex": ^7.0.0
+    "@babel/plugin-transform-template-literals": ^7.0.0
+    "@babel/plugin-transform-typescript": ^7.5.0
+    "@babel/plugin-transform-unicode-regex": ^7.0.0
+    "@babel/template": ^7.0.0
+    react-refresh: ^0.4.0
+  peerDependencies:
+    "@babel/core": "*"
+  checksum: 77e2ad9e7e0f00bd207c5e9e91c579e5888d3c4a5562f3a9f14209bcd000c73a0ebb2fb504831e850a18c1e3c56e74d813dff02fb305b30cc5d0c12601192219
+  languageName: node
+  linkType: hard
+
 "metro-react-native-babel-transformer@npm:0.59.0":
   version: 0.59.0
   resolution: "metro-react-native-babel-transformer@npm:0.59.0"
@@ -24063,6 +24122,15 @@ fsevents@^1.2.7:
   version: 2.2.1
   resolution: "react-native-communications@npm:2.2.1"
   checksum: 21595305ac59545711a86eef109c0c188b52aa0b9015cae948f537d1f755fc9f07b0ed28846e707805205e54f9f8f6265b84839ea10592cde6255c1468671f30
+  languageName: node
+  linkType: hard
+
+"react-native-dotenv@npm:2.4.3":
+  version: 2.4.3
+  resolution: "react-native-dotenv@npm:2.4.3"
+  dependencies:
+    dotenv: ^8.0.0
+  checksum: 19142f5cadff77d45e6d7e8496623362e44e4c1a9292fb7cc96ed45b04c5d11c365bd730c8c7383f95710bd679c97fa0b6dfd9dfab3775c227fc312a31e583cc
   languageName: node
   linkType: hard
 

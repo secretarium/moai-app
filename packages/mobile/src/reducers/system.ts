@@ -21,7 +21,6 @@ const systemMigrator: StoreComponentMigrator<System> = (state) => {
 };
 
 export const system: StoreComponent<System> = (state = initialState, { type, payload, workload, error }) => {
-
     switch (type) {
         case 'persist/REHYDRATE': {
             let result;

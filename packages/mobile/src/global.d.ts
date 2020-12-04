@@ -1,6 +1,6 @@
 import { AnyAction as ReduxAnyAction } from 'redux';
 import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
-import { Key } from '../../connect/src';
+import { Key, ClearKeyPair } from '@secretarium/connector';
 
 declare namespace Moai {
     interface FunctionAction {
@@ -93,7 +93,7 @@ declare namespace Moai {
     type System = {
         version: string;
         localConfiguration: SystemConfiguration;
-        localKey?: Key;
+        localKey?: ClearKeyPair;
         currentConnection?: SystemConnection;
         showOnboarding: boolean;
         scanCounter: number;
