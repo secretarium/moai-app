@@ -34,7 +34,7 @@
     "devDependencies": {
         "@stryker-mutator/core": "4.0.0",
         "@stryker-mutator/javascript-mutator": "4.0.0",
-        "@stryker-mutator/jest-runner": "4.0.0",
+        "@stryker-mutator/jest-runner": "4.1.2",
         "@stryker-mutator/typescript": "4.0.0",
         "@types/bcrypt": "3.0.0",
         "@types/cookie-parser": "1.4.2",
