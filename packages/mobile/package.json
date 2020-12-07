@@ -41,7 +41,7 @@
         "expo-font": "8.3.0",
         "expo-linking": "1.0.4",
         "expo-splash-screen": "0.6.2",
-        "i18next": "19.8.2",
+        "i18next": "19.8.4",
         "immutable": "4.0.0-rc.12",
         "next": "9.5.3",
         "next-fonts": "1.4.0",
