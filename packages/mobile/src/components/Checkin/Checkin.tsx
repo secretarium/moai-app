@@ -93,7 +93,6 @@ const Checkin = withState<RouteComponentProps<{
 
         useEffect(() => {
             if (isConnected && venueInfo) {
-                console.log(venueInfo);
                 const query = scp.newTx('moai', 'check-in', `moai-qr-${Date.now()}`, venueInfo);
                 query.onExecuted?.(() => {
                     dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: venueInfo });

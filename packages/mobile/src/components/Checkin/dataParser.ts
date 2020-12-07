@@ -26,7 +26,7 @@ export const parseCode = ({ type, data }: BarCodeScanningResult): ParsedCode => 
                 const comps = data.split('/').slice(-2);
                 if (comps?.length === 2 && comps[0] === 'check')
                     return {
-                        source: Sources.MOAI,
+                        source: 'MOAI',
                         venue: comps[1]
                     };
             }
