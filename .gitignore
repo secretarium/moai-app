@@ -71,6 +71,7 @@ typings/
 # Yarn
 .yarn-integrity
 .yarn
+.yarn 2
 
 # dotenv environment variables file
 .env.local

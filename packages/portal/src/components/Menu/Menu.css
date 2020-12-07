@@ -1,0 +1,50 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    flex: 0.20;
+    min-width: 220px;
+    max-width: 220px;
+    background-color: #2F323E;
+    border-radius: 15px 0 0 15px;
+    font-size: 16px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    flex: 0.05;
+    border-radius: 15px 0 0 0;
+    height: 90px;
+    font-size: 22px;
+}
+
+.options {
+    flex: 0.8;
+    color: #716F6F;
+    font-weight: bold;
+    padding: 25px;
+}
+
+.option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+.logout {
+    display: flex;
+    flex: 0.1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: '#fff';
+    margin: 15px;
+}
+
+@media (max-width: 1200px) {
+    .sidebar, .header {
+        border-radius: 0px;
+    }
+}

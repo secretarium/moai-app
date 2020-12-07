@@ -1,0 +1,16 @@
+.container-settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0.85;
+    background-color: #fff;
+    margin-left: 8px;
+    border-radius: 0 15px 15px 0;
+}
+
+@media (max-width: 1200px) {
+    .container-settings {
+        border-radius: 0px;
+    }
+}
