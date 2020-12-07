@@ -10,7 +10,7 @@
         "url": "https://github.com/secretarium/moai-app/issues"
     },
     "homepage": "https://github.com/secretarium/moai-app#readme",
-    "packman": "yarn@2.1.1",
+    "packman": "yarn@2.4.0",
     "scripts": {
         "lint": "yarn workspaces foreach run lint",
         "lint:fix": "yarn workspaces foreach run lint:fix",
@@ -43,7 +43,7 @@
         "@typescript-eslint/parser": "4.9.0",
         "commitlint": "11.0.0",
         "eslint": "7.15.0",
-        "eslint-config-react-app": "5.2.1",
+        "eslint-config-react-app": "6.0.0",
         "eslint-config-recommended": "4.1.0",
         "eslint-plugin-flowtype": "5.2.0",
         "eslint-plugin-import": "2.22.1",

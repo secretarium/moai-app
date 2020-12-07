@@ -68,7 +68,7 @@ const ContactForm: React.FC = () => {
             </div>
             <div className="md:flex md:items-center pt-4">
                 <div className="md:w-full">
-                    <button className="shadow bg-accent-2 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+                    <button className="shadow bg-accent-2 hover:bg-red-400 focus:ring focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
                         Request information
                     </button>
                     <br />
