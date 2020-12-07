@@ -2,6 +2,7 @@ let actionMarker = 0;
 
 const commandsPrototype = {
     MOAI: { application: 'moai', command: 'update-user' },
+    MOAI_CHECK_IN: { application: 'moai', command: 'check-in'},
     MOAI_GET_CONVERSATIONS: { application: 'moai', command: 'get-conversations' },
     MOAI_GET_CONVERSATION: { application: 'moai', command: 'conversations-get' },
     MOAI_SEND_MESSAGE: { application: 'moai', command: 'conversations-write-message' },

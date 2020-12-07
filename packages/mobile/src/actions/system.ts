@@ -1,6 +1,9 @@
 import secretariumHandler from '../utils/secretariumHandler';
-import { actionTypes } from './constants';
+import { actionTypes, commands } from './constants';
 import { ClearKeyPair } from '@secretarium/connector';
+import { ParsedCode } from '../components/Checkin/dataParser';
+import { requestFactory } from './factories';
+
 
 export const generateLocalKey = (): Moai.FunctionAction => (dispatch) =>
     secretariumHandler.createDeviceKey()
@@ -39,3 +42,21 @@ export const connect = (clearKeyPair: ClearKeyPair): Moai.AnyAction => ({
             });
     }
 });
+
+export const checkIn = (venueInfo: ParsedCode): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_CHECK_IN, { venue: venueInfo })({
+        onExecuted: () => ({
+            workload: dispatch => {
+                dispatch({
+                    type: actionTypes.MOAI_SAVE_QR_CODE,
+                    payload: venueInfo
+                });
+                dispatch({
+                    type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER
+                });
+            }
+        }),
+        onError: (error) => ({
+            error: new Error(error)
+        })
+    });

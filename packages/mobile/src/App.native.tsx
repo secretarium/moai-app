@@ -13,7 +13,7 @@ import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
-import { generateLocalKey } from './actions/system';
+import { generateLocalKey, connect } from './actions/system';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image } from 'react-native';
@@ -84,6 +84,14 @@ const App = withState()(
                 setHasObtainedLocalKey(true);
             }
         }, [dispatch, hasRequestedLocalKey, localKey]);
+
+        // useEffect(() => {
+        //     console.log('connecting1');
+        //     if (hasObtainedLocalKey) {
+        //         dispatch(connect(localKey));
+        //         console.log('connecting2');
+        //     }
+        // }, [dispatch, hasObtainedLocalKey, localKey]);
 
         const handleAppStateChange = useCallback((nextAppState: string) => {
             if (nextAppState === 'active') {

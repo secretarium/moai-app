@@ -11,6 +11,7 @@ import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
+import { checkIn } from '../../actions/system';
 
 
 const scp = new SCP();
@@ -22,15 +23,17 @@ const Checkin = withState<RouteComponentProps<{
     type?: string
 }>>()(
     (s) => ({
-        localKey: s.system.localKey
+        localKey: s.system.localKey,
+        checkInError: s.system.checkInError
+        //isConnected: s.system.isConnected
     }),
-    ({ dispatch, localKey, match }) => {
+    ({ dispatch, localKey, match, checkInError }) => {
 
         const history = useHistory();
         const [isConnecting, setIsConnecting] = useState(false);
         const [isConnected, setIsConnected] = useState(false);
         const [redirect, setRedirect] = useState(false);
-        const [venuInfo, setVenuInfo] = useState<ParsedCode>({
+        const [venueInfo, setVenueInfo] = useState<ParsedCode>({
             source: Sources.MOAI,
             type: null,
             ...match.params
@@ -73,19 +76,34 @@ const Checkin = withState<RouteComponentProps<{
             }
         }, [localKey, isConnected, pageError, isConnecting]);
 
-        useEffect(() => {
-            if (isConnected && venuInfo) {
+        // useEffect(() => {
+        //     if (localKey && isConnected && venueInfo) {
+        //         dispatch(checkIn(venueInfo))
+        //             .then(() => {
+        //                 setRedirect(true);
+        //             })
+        //             .catch((error) => {
+        //                 console.error('checkIn', error);
+        //                 setPageError(checkInError);
+        //                 setShowModal(true);
+        //                 setVenueInfo(undefined);
+        //             });
+        //     }
+        // }, [dispatch, localKey, isConnected, venueInfo, checkInError]);
 
-                const query = scp.newTx('moai', 'check-in', `moai-qr-${Date.now()}`, venuInfo);
+        useEffect(() => {
+            if (isConnected && venueInfo) {
+                console.log(venueInfo);
+                const query = scp.newTx('moai', 'check-in', `moai-qr-${Date.now()}`, venueInfo);
                 query.onExecuted?.(() => {
-                    dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: venuInfo });
+                    dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: venueInfo });
                     dispatch({ type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER });
                     setRedirect(true);
                 });
                 query.onError?.((error: any) => {
                     console.error('Error', error);
                     setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                    setVenuInfo(undefined);
+                    setVenueInfo(undefined);
                     setIsConnected(false);
                     setShowModal(true);
                 });
@@ -93,12 +111,12 @@ const Checkin = withState<RouteComponentProps<{
                     .catch((error) => {
                         console.error('Error', error);
                         setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                        setVenuInfo(undefined);
+                        setVenueInfo(undefined);
                         setIsConnected(false);
                         setShowModal(true);
                     });
             }
-        }, [dispatch, isConnected, venuInfo]);
+        }, [dispatch, isConnected, venueInfo]);
 
         let composition;
 

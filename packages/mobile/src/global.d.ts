@@ -95,6 +95,8 @@ declare namespace Moai {
         localConfiguration: SystemConfiguration;
         localKey?: ClearKeyPair;
         currentConnection?: SystemConnection;
+        checkInError?: string;
+        isConnected: boolean;
         showOnboarding: boolean;
         scanCounter: number;
         log: SystemLog;

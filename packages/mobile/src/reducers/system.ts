@@ -8,6 +8,7 @@ export const initialState: System = {
     localConfiguration: {
         theme: 'auto'
     },
+    isConnected: false,
     showOnboarding: true,
     scanCounter: 0,
     log: []
@@ -55,6 +56,12 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 scanCounter: state.scanCounter + 1
             };
         }
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL: {
+            return {
+                ...state,
+                isConnected: true
+            };
+        }
         case actionTypes.SECRETARIUM_CONNECT_SUCCESSFUL:
             return {
                 ...state,
@@ -92,6 +99,20 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 };
             return {
                 ...state
+            };
+        case commands.MOAI_CHECK_IN.REQUEST:
+            delete state.checkInError;
+            return {
+                ...state
+            };
+        case commands.MOAI_CHECK_IN.SUCCESS:
+            return {
+                ...state
+            };
+        case commands.MOAI_CHECK_IN.FAILURE:
+            return {
+                ...state,
+                checkInError: error?.message ?? error ?? 'Oops, a problem occured'
             };
         case commands.SECRETARIUM_FORCED_DISCONNECT.FAILURE:
             return {
