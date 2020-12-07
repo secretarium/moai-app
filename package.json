@@ -10,7 +10,7 @@
         "url": "https://github.com/secretarium/moai-app/issues"
     },
     "homepage": "https://github.com/secretarium/moai-app#readme",
-    "packman": "yarn@2.1.1",
+    "packman": "yarn@2.4.0",
     "scripts": {
         "lint": "yarn workspaces foreach run lint",
         "lint:fix": "yarn workspaces foreach run lint:fix",
