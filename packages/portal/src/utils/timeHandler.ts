@@ -11,6 +11,6 @@ export const toDateTime = (timestamp: number): string => {
 export const toTimestamp = (date: string, time: string): number => {
     const d = date.split('-');
     const t = time.split(':');
-    const dt = new Date(parseInt(d[0]), parseInt(d[1]), parseInt(d[2]), parseInt(t[0]), parseInt(t[1]), parseInt(t[2]));
-    return dt.getTime();
+    const dt = new Date(parseInt(d[0]), (parseInt(d[1]) - 1), parseInt(d[2]), parseInt(t[0]), parseInt(t[1]), parseInt(t[2]));
+    return dt.getTime() * 1000000;
 };

@@ -64,6 +64,18 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
                 newMessage: true
             };
         }
+        case commands.MOAI_CREATE_CONVERSATION.REQUEST: {
+            return {
+                ...state,
+                isFetching: true
+            };
+        }
+        case commands.MOAI_CREATE_CONVERSATION.SUCCESS: {
+            return {
+                ...state,
+                isFetching: false
+            };
+        }
         default:
             return state;
     }

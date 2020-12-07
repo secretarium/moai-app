@@ -41,10 +41,10 @@ const Contact = withState<ContactProps>()((s) => ({
             }}>
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginBottom: '15px' }} />
                 <div className="contact-info">
-                    <h2>ID</h2>
+                    <h2>ID {address.slice(0, 8)}</h2>
                     {(fetchedInfo === true && conversationLastMessageList[index]) ?
                         <>
-                            {((conversationLastMessageList[index].text).length > 16 ? `${(conversationLastMessageList[index].text).slice(0, 17).trim()}...` : conversationLastMessageList[index].text)}
+                            {conversationLastMessageList[index].text}
                             <p className="contact-info-timestamp">{toDateTime(conversationLastMessageList[index].datetime)}</p>
                         </> :
                         <>

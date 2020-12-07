@@ -35,7 +35,7 @@ const SearchExposed = withState()(
                     </div>
                 </div>
                 <div className="results">
-                    {exposed ? exposed.map(single => <SearchResult userId={single.userId} time={single.time} />) : 'No result'}
+                    {exposed !== null ? exposed.map(single => <SearchResult userId={single.userId} time={single.time} />) : 'No result'}
                 </div>
             </div >
         );

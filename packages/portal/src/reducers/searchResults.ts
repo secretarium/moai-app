@@ -25,7 +25,7 @@ export const searchResults: StoreComponent<SearchResults> = (state = initialStat
             return {
                 ...state,
                 isFetching: false,
-                exposed: payload.result
+                exposed: payload.result.userIds
             };
         }
         default:

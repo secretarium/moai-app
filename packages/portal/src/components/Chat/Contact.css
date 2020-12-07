@@ -9,6 +9,10 @@
 
 .contact-info {
     margin-left: 15px;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .contact-info > h2 {
