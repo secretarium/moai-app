@@ -19,21 +19,16 @@ const Login = withState()(
         const [codeSent, setCodeSent] = useState(false);
         const [currentKey] = useState(keyPair);
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
-        const [password, setPassword] = useState<string>();
-        const [email, setEmail] = useState<string>();
-        const [isEmitting, setIsEmitting] = useState(false);
         const [isValidating, setIsValidating] = useState(false);
         const [isLoggingIn, setIsLoggingIn] = useState(false);
 
         useEffect(() => {
             if (validationError && errorMessage !== validationError) {
-                setIsEmitting(false);
                 setIsValidating(false);
                 setErrorMessage(validationError);
             }
 
             if (loginError && errorMessage !== loginError) {
-                setIsEmitting(false);
                 setIsLoggingIn(false);
                 setErrorMessage(loginError);
             }
@@ -53,8 +48,6 @@ const Login = withState()(
         const handleRegister = (values: any): void => {
             console.log(`Code sent to ${values.email}`);
             setCodeSent(true);
-            setEmail(values.email);
-            setPassword(values.password);
             dispatch(register(values.email, values.password));
         };
 

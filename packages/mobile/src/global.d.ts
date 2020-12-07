@@ -1,6 +1,6 @@
 import { AnyAction as ReduxAnyAction } from 'redux';
 import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
-import { Key } from '../../connect/src';
+import { Key } from '@secretarium/connector';
 
 declare namespace Moai {
     interface FunctionAction {

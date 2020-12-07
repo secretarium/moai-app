@@ -78,8 +78,8 @@ const Messages = withState()((s) => ({
                         else
                             return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
                     })} */}
-                    {messages.map((message, index) => {
-                        return <Message key={index} username="User ID" message={message.text} timestamp={toDateTime(message.datetime)} isSender={true} />;
+                    {messages.map((singleMessage, index) => {
+                        return <Message key={index} username="User ID" message={singleMessage.text} timestamp={toDateTime(singleMessage.datetime)} isSender={true} />;
                     })}
                 </div>
                 <div className="messages-footer">

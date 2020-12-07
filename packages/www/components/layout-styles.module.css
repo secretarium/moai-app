@@ -1,0 +1,25 @@
+.stickyPanel {
+    z-index: 999;
+    position: 'relative';
+    background-color: white;
+}
+
+.stickyPanel > div {
+    height: 8rem;
+    box-shadow: 0 0 0 0 #fff;
+    transition: box-shadow 300ms ease-in-out;
+    transition: height 300ms ease-in-out;
+}
+
+.stickyPanel .stuck {
+    z-index: 999;
+    height: 8rem;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 30rem) {
+
+    .stickyPanel > div {
+        height: 8rem;
+    }
+}

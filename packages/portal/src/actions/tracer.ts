@@ -24,7 +24,7 @@ export const register = (email: string, password: string): MoaiPortal.AnyAction 
             .then((encryptedKeyPair: EncryptedKeyPair) => {
                 dispatch({
                     type: actionTypes.PDATA_NEW_USER_SUCCESSFUL,
-                    workload: (dispatch: MoaiPortal.Dispatch) => {
+                    workload: (dispatch) => {
                         dispatch(
                             connect(encryptedKeyPair, email, password, true)
                         );

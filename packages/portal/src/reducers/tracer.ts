@@ -13,19 +13,8 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
                 ...initialState
             };
         }
-        case actionTypes.MOAI_PORTAL_LOGOUT: {
-            return {
-                ...state,
-                ...payload
-            };
-        }
-        case actionTypes.MOAI_PORTAL_LOGIN: {
-            return {
-                ...state,
-                ...payload
-            };
-        }
-        case commands.MOAI_REGISTER_TRACER.REQUEST: {
+        case commands.MOAI_REGISTER_TRACER.REQUEST:
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: {
             delete state.loginError;
             return {
                 ...state
@@ -57,17 +46,14 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
                 validationError: error?.message ?? error ?? 'Unknown error occured while validating.'
             };
         }
+        case actionTypes.MOAI_PORTAL_LOGOUT:
+        case actionTypes.MOAI_PORTAL_LOGIN:
         case commands.MOAI_VERIFY_TRACER.SUCCESS: {
             return {
                 ...state,
                 ...payload
             };
         }
-        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED:
-            delete state.loginError;
-            return {
-                ...state
-            };
         case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL:
             if (state.isVerified === true) {
                 return {

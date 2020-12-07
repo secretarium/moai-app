@@ -114,6 +114,3 @@ dist
 # Mutation testing
 .stryker-tmp/
 reports
-
-# Project dependent
-lib
