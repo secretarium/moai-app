@@ -31,7 +31,7 @@
         "remark-html": "13.0.1"
     },
     "devDependencies": {
-        "@next/bundle-analyzer": "9.5.3",
+        "@next/bundle-analyzer": "10.0.3",
         "@types/classnames": "2.2.11",
         "@types/html-pdf": "2.2.0",
         "@types/jest": "26.0.16",
