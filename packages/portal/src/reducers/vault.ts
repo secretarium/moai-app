@@ -1,9 +1,9 @@
 import { Vault, StoreComponent, StoreComponentMigrator } from '../global';
 import { actionTypes } from '../actions/constants';
 
+
 export const initialState: Vault = {
-    email: null,
-    keyPair: null
+    keyPairs: []
 };
 
 const vaultMigrator: StoreComponentMigrator<Vault> = (state) => {
@@ -12,11 +12,23 @@ const vaultMigrator: StoreComponentMigrator<Vault> = (state) => {
     };
 };
 
+const extractKeyInfo = (keyPair: MoaiPortal.EncKeyPair) => {
+    switch (keyPair.version) {
+        default:
+            return {
+                version: keyPair.version,
+                iv: keyPair.iv,
+                salt: keyPair.salt,
+                data: keyPair.data
+            };
+    }
+};
+
 export const vault: StoreComponent<Vault> = (state = initialState, { type, payload }) => {
     switch (type) {
         case 'persist/REHYDRATE': {
             let result;
-            if (payload?.vault?.keyPair !== undefined) {
+            if (payload?.vault?.keyPairs !== undefined) {
                 result = vaultMigrator(payload.vault);
             } else {
                 result = state;
@@ -26,14 +38,23 @@ export const vault: StoreComponent<Vault> = (state = initialState, { type, paylo
             };
         }
         case actionTypes.VAULT_COMMIT_LOCAL_KEYS: {
+            const keyPairs = state.keyPairs;
+            if (!keyPairs.some(keyPair => keyPair.name === payload.email)) {
+                keyPairs.push({
+                    name: payload.email,
+                    ...extractKeyInfo(payload.keyPair)
+                });
+            }
             return {
-                email: payload.email,
-                keyPair: payload.keyPair
+                ...state,
+                keyPairs
             };
         }
         case actionTypes.VAULT_REMOVE_LOCAL_KEYS: {
+            const keyPairs = state.keyPairs.filter(keyPair => !keyPair.name.includes(payload.email));
             return {
-                ...state
+                ...state,
+                keyPairs
             };
         }
         default:

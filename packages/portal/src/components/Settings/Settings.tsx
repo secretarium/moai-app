@@ -14,7 +14,6 @@ type ParamTypes = {
 const Settings: React.FC = () => {
     const { setting } = useParams<ParamTypes>();
 
-    // eslint-disable-next-line prefer-const
     let composition = null;
     if (setting === undefined || setting === 'faq') {
         composition = <FAQ />;

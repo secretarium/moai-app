@@ -30,7 +30,7 @@ const SettingsMenu: React.FC = () => {
                 </NavLink>
                 <NavLink className="settings-page" to={'/settings/legal'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#000' }}>
                     <img src={Legal} alt="legal" style={{ width: '50px', height: 'auto', marginRight: '14px', marginBottom: '10px' }} />
-                    Terms & Privacy Policy
+                    Terms &amp; Privacy Policy
                 </NavLink>
             </div>
         </div>

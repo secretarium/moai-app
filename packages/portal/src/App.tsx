@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Providers from './Providers';
 import Login from './components/Login';
 import Chat from './components/Chat';
@@ -18,7 +18,10 @@ const App: React.FC = () => {
         <Providers>
             <Body>
                 <NotLoggedIn>
-                    <Login />
+                    <Switch>
+                        <Route path="/login" component={Login} />
+                        <Route render={() => <Redirect to="/login" />} />
+                    </Switch>
                 </NotLoggedIn>
                 <LoggedIn>
                     <div className="container">
@@ -29,6 +32,7 @@ const App: React.FC = () => {
                             <Route path="/search/exposed" component={SearchExposed} />
                             <Route path="/chat/:id?" component={Chat} />
                             <Route path="/settings/:setting?" component={Settings} />
+                            <Route render={() => <Redirect to="/" />} />
                         </Switch>
                     </div>
                 </LoggedIn>

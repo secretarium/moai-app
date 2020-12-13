@@ -10,9 +10,9 @@ export const addKeys = (keyPair: EncryptedKeyPair, email: string): MoaiPortal.An
     }
 });
 
-export const removeKeys = (keyPairs: EncryptedKeyPair): MoaiPortal.AnyAction => ({
+export const removeKeys = (email: string): MoaiPortal.AnyAction => ({
     type: actionTypes.VAULT_REMOVE_LOCAL_KEYS,
     payload: {
-        keyPairs
+        email
     }
 });

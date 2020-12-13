@@ -5970,6 +5970,8 @@ __metadata:
     cross-env: 7.0.2
     deepmerge: 4.2.2
     immutable: 4.0.0-rc.12
+    license-checker: 25.0.1
+    npm-license-crawler: 0.2.1
     react: 16.13.1
     react-dom: 16.13.1
     react-redux: 7.2.1

@@ -29,6 +29,8 @@
         "@types/react-router-dom": "5.1.5",
         "@types/redux-logger": "3.0.8",
         "cross-env": "7.0.2",
+        "license-checker": "25.0.1",
+        "npm-license-crawler": "0.2.1",
         "typescript": "3.9.5"
     },
     "scripts": {

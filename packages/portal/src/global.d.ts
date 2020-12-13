@@ -98,9 +98,15 @@ declare namespace MoaiPortal {
         log: SystemLog;
     };
 
+    type EncKeyPair = {
+        version: number;
+        iv: string;
+        salt: string;
+        data: string;
+    };
+
     type Vault = {
-        email: string | null;
-        keyPair: EncryptedKeyPair | null;
+        keyPairs: EncryptedKeyPair[];
     };
 
     type Tracer = {
@@ -109,6 +115,7 @@ declare namespace MoaiPortal {
         emailVerificationAttempt?: number;
         validationError?: string;
         loginError?: string;
+        registrationError?: string;
     };
 
     type SearchResults = {

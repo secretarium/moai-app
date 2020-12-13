@@ -7,7 +7,6 @@ import { getConversation, sendMessage } from '../../actions';
 import { toDateTime } from '../../utils/timeHandler';
 import MoaiPin from '../../assets/moai-pin.png';
 
-
 type ParamTypes = {
     address: string;
 };
@@ -55,7 +54,6 @@ const Messages = withState()((s) => ({
         setMessage(e.target.value);
     };
 
-    // eslint-disable-next-line prefer-const
     let composition = null;
     if (location.state === null || location.state === undefined)
         composition =

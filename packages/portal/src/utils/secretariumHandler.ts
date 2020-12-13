@@ -97,7 +97,6 @@ const secretariumHandler = {
                     })
                     .catch((e: any) => reject(e));
             } else {
-                console.error('fail');
                 reject('Cluster not configured.');
             }
         }),
