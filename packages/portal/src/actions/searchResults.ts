@@ -33,3 +33,7 @@ export const getExposed = (venue: string, utc: number): MoaiPortal.FunctionActio
 export const clearSearchErrors = (): MoaiPortal.FunctionAction => (dispatch) => {
     dispatch({ type: actionTypes.MOAI_PORTAL_SEARCH_ERROR_CLEANUP });
 };
+
+export const clearSearchResults = (): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch({ type: actionTypes.MOAI_PORTAL_CLEAR_SEARCH_RESULT });
+};

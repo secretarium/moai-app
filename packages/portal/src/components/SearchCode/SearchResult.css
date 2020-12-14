@@ -2,7 +2,7 @@
     border-radius: 15px;
     border: 2px solid #dfe0e2;
     flex: 0 30%;
-    height: 250px;
+    height: 200px;
     width: 270px;
     margin-bottom: 6%;
 }
@@ -19,7 +19,6 @@
 .search-result-body {
     flex: 0.5;
     padding: 0px 15px 0px 15px;
-    height: 100px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -36,12 +35,12 @@
 .search-result-button {
     display: flex;
     height: 47px;
-    width: 50%;
+    width: 100%;
     justify-content: center;
     align-items: center;
     margin-bottom: 3px;
 }
 
-.search-result-button:nth-child(2n + 1) {
+/* .search-result-button:nth-child(2n + 1) {
     border-right: 2px solid #dfe0e2;
-}
+} */

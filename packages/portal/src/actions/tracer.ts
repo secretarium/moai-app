@@ -45,7 +45,8 @@ export const login = (): MoaiPortal.FunctionAction => (dispatch) => {
         type: actionTypes.MOAI_PORTAL_LOGIN,
         payload: {
             isConnected: true
-        }
+        },
+        workload: dispatch => dispatch(getConversations())
     });
 };
 
@@ -74,7 +75,8 @@ export const verifyTracer = (code: string): MoaiPortal.FunctionAction =>
             payload: {
                 isConnected: true,
                 isVerified: true
-            }
+            },
+            workload: dispatch => dispatch(getConversations())
         }),
         onError: (error) => ({
             payload: {

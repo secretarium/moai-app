@@ -47,9 +47,6 @@ const LoginSignin = withState()(
             setIsLoggingIn(true);
             setErrorMessage(undefined);
             dispatch(connect(currentKey, currentKey.name, values.password));
-            // .then(() => {
-            //      dispatch(getConversations());
-            //  });
         };
 
         const clearErrors = (): void => {

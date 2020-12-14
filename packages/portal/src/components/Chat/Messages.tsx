@@ -66,7 +66,7 @@ const Messages = withState()((s) => ({
                 <div className="messages-header">
                     <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto' }} />
                     <div className="messages-header-info">
-                        Conversation ID | User ID
+                        ID {location.state.address.slice(0, 8)}
                     </div>
                 </div>
                 <div className="messages-body">
@@ -77,7 +77,7 @@ const Messages = withState()((s) => ({
                             return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
                     })} */}
                     {messages.map((singleMessage, index) => {
-                        return <Message key={index} username="User ID" message={singleMessage.text} timestamp={toDateTime(singleMessage.datetime)} isSender={true} />;
+                        return <Message key={index} username="You" /** for now */ message={singleMessage.text} timestamp={toDateTime(singleMessage.datetime)} isSender={true} />;
                     })}
                 </div>
                 <div className="messages-footer">

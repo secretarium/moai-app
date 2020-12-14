@@ -150,6 +150,7 @@ declare namespace MoaiPortal {
         lastMessage: Message[];
         messages: Message[];
         newMessage: boolean;
+        newConversation: Conversation;
         messageError?: string;
     };
 

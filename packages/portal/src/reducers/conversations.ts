@@ -6,7 +6,8 @@ export const initialState: Conversations = {
     conversationList: [],
     lastMessage: [],
     messages: [],
-    newMessage: false
+    newMessage: false,
+    newConversation: null
 };
 
 export const conversations: StoreComponent<Conversations> = (state = initialState, { type, payload, error }) => {
@@ -68,7 +69,8 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
         case commands.MOAI_CREATE_CONVERSATION.SUCCESS: {
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                newConversation: payload.result
             };
         }
         default:

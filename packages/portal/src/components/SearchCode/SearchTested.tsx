@@ -3,7 +3,9 @@ import './SearchCode.css';
 import { Input, Alert } from 'antd';
 import SearchResult from './SearchResult';
 import { withState } from '../../store';
-import { getTested, clearSearchErrors } from '../../actions';
+import { getTested, clearSearchErrors, clearSearchResults } from '../../actions';
+import { useLocation } from 'react-router-dom';
+
 
 const { Search } = Input;
 
@@ -15,8 +17,13 @@ const SearchTested = withState()(
     }),
     ({ dispatch, tested, searchTestedError }) => {
 
+        const location = useLocation();
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
+
+        useEffect(() => {
+            dispatch(clearSearchResults());
+        }, [location, dispatch]);
 
         useEffect(() => {
             if (searchTestedError && errorMessage !== searchTestedError) {

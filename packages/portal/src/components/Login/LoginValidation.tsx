@@ -48,9 +48,6 @@ const LoginValidation = withState()(
             setIsValidating(true);
             setErrorMessage(undefined);
             dispatch(verifyTracer(values.code));
-            // .then(() => {
-            //     dispatch(getConversations());
-            // });
         };
 
         const clearErrors = (): void => {

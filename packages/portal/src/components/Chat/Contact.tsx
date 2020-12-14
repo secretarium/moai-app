@@ -45,7 +45,7 @@ const Contact = withState<ContactProps>()((s) => ({
                     {(fetchedInfo === true && lastMessage[index]) ?
                         <>
                             {lastMessage[index].text}
-                            <p className="contact-info-timestamp">{toDateTime(lastMessage[index].datetime)}</p>
+                            <p className="contact-info-timestamp">{(lastMessage[index].datetime ? toDateTime(lastMessage[index].datetime) : 'New chat')}</p>
                         </> :
                         <>
                             {' '}

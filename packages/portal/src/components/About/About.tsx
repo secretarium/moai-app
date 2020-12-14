@@ -8,7 +8,7 @@ const About: React.FC = () => {
 
     const [hasFetched, setHasFetched] = useState<boolean>(false);
     const [disclaimer, setDisclaimer] = useState<string>('Loading');
-    const [licenses, setLicenses] = useState<any>({ status: 'Loading' });
+    //const [licenses, setLicenses] = useState<any>({ status: 'Loading' });
 
     useEffect(() => {
         if (!hasFetched) {
@@ -16,10 +16,10 @@ const About: React.FC = () => {
                 .then((result) => result.text())
                 .then(text => setDisclaimer(text))
                 .catch(() => setDisclaimer('An error occured'));
-            fetch('/licenses.json')
-                .then((result) => result.json())
-                .then(text => setLicenses(text))
-                .catch(() => setDisclaimer('An error occured'));
+            // fetch('/licenses.json')
+            //     .then((result) => result.json())
+            //     .then(text => setLicenses(text))
+            //     .catch(() => setDisclaimer('An error occured'));
             setHasFetched(true);
         }
     }, [hasFetched]);
@@ -49,9 +49,9 @@ const About: React.FC = () => {
                 <div className="licenses">
                     <ReactMarkdown source={disclaimer} />
                 </div>
-                <h2>List of top-level dependencies</h2>
+                {/* <h2>List of top-level dependencies</h2>
                 {console.log(licenses)}
-                {/* {Object.keys(licenses).map(function (key) {
+                {Object.keys(licenses).map(function (key) {
                     return <div>Key: {key}, Value: {licenses[key]}</div>;
                 })} */}
             </div>

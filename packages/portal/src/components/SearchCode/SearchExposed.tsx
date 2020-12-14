@@ -3,8 +3,10 @@ import './SearchCode.css';
 import { DatePicker, TimePicker, Input, Alert } from 'antd';
 import SearchResult from './SearchResult';
 import { withState } from '../../store';
-import { getExposed, clearSearchErrors } from '../../actions';
+import { getExposed, clearSearchErrors, clearSearchResults } from '../../actions';
 import { toTimestamp } from '../../utils/timeHandler';
+import { useLocation } from 'react-router-dom';
+
 
 const { Search } = Input;
 
@@ -16,10 +18,15 @@ const SearchExposed = withState()(
     }),
     ({ dispatch, exposed, searchExposedError }) => {
 
+        const location = useLocation();
         const [date, setDate] = useState<string | undefined>(undefined);
         const [time, setTime] = useState<string | undefined>(undefined);
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
+
+        useEffect(() => {
+            dispatch(clearSearchResults());
+        }, [location, dispatch]);
 
         useEffect(() => {
             if (searchExposedError && errorMessage !== searchExposedError) {
@@ -28,8 +35,15 @@ const SearchExposed = withState()(
             }
         }, [errorMessage, searchExposedError]);
 
+        useEffect(() => {
+            if (exposed !== null && exposed.length < 1) {
+                setErrorMessage('No results.');
+            }
+        }, [exposed]);
+
         const onSearch = (value: string, event: React.MouseEvent<HTMLElement, MouseEvent> | React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>): void => {
             event.preventDefault();
+            setErrorMessage(undefined);
             if (date === undefined || time === undefined) {
                 setErrorMessage('Please input a date.');
             } else {
@@ -63,7 +77,7 @@ const SearchExposed = withState()(
                 </div>
                 <div className="results">
                     {errorMessage ? <><Alert message={errorMessage} type="error" /><br /></> : null}
-                    {exposed !== null ? exposed.map(single => <SearchResult userId={single.userId} time={single.time} />) : null}
+                    {exposed !== null ? exposed.map(single => <SearchResult key={single.userId} userId={single.userId} time={single.time} />) : null}
                 </div>
             </div >
         );
