@@ -32,12 +32,12 @@ const Menu: React.FC = () => {
                 </NavLink>
                 <NavLink className="option" to={'/search/exposed'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
                     <i className="fas fa-qrcode fa-lg" style={{ paddingRight: '13px' }} />
-                    Search Venue Code
+                    Search Location Code
                 </NavLink>
-                <NavLink className="option" to={'/settings'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                {/* <NavLink className="option" to={'/settings'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
                     <i className="fas fa-cog fa-lg" style={{ paddingRight: '10px' }} />
                     Settings
-                </NavLink>
+                </NavLink> */}
                 <NavLink className="option" to={'/about'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
                     <i className="fas fa-info-circle fa-lg" style={{ paddingRight: '10px' }} />
                     About Moai

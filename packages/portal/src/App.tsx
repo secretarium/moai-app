@@ -8,7 +8,7 @@ import SearchExposed from './components/SearchCode/SearchExposed';
 import SearchTested from './components/SearchCode/SearchTested';
 import Home from './components/Home';
 import Menu from './components/Menu';
-import Settings from './components/Settings';
+//import Settings from './components/Settings';
 import About from './components/About';
 import { NotLoggedIn, LoggedIn } from './components/Login/LoginStatusSwitch';
 import './App.css';
@@ -32,7 +32,7 @@ const App: React.FC = () => {
                             <Route path="/search/tested" component={SearchTested} />
                             <Route path="/search/exposed" component={SearchExposed} />
                             <Route path="/chat/:id?" component={Chat} />
-                            <Route path="/settings/:setting?" component={Settings} />
+                            {/* <Route path="/settings/:setting?" component={Settings} /> */}
                             <Route path="/about" component={About} />
                             <Route render={() => <Redirect to="/" />} />
                         </Switch>
