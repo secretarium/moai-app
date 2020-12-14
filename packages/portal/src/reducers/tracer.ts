@@ -2,7 +2,7 @@ import { Tracer, StoreComponent } from '../global';
 import { actionTypes, commands } from '../actions/constants';
 
 export const initialState: Tracer = {
-    isConnected: false,
+    isConnected: true,  // CHANGE
     isVerified: null
 };
 

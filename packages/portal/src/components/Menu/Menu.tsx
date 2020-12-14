@@ -37,6 +37,10 @@ const Menu: React.FC = () => {
                     <i className="fas fa-cog fa-lg" style={{ paddingRight: '10px' }} />
                     Settings
                 </NavLink>
+                <NavLink className="option" to={'/about'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <i className="fas fa-info-circle fa-lg" style={{ paddingRight: '10px' }} />
+                    About Moai
+                </NavLink>
             </div>
             <NavLink className="logout" to={'/'} onClick={() => dispatch(disconnect())} style={{ color: '#fff' }}>
                 <img src={Logout} alt="logout" style={{ width: '58px', height: 'auto', marginRight: '15px' }} /> Logout

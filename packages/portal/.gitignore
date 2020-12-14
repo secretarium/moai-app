@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Licenses and Disclaimer
+public/licenses.json
+public/disclaimer.txt
