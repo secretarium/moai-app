@@ -21,11 +21,13 @@ const LoginSignin = withState()(
         const history = useHistory();
         const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+        const [errorsClear, setErrorsClear] = useState<boolean>(false);
         const [currentKey] = useState(keyPairs.find(key => key.name === location.state.email));
 
         useEffect(() => {
             if (loginError && errorMessage !== loginError) {
                 setIsLoggingIn(false);
+                setErrorsClear(true);
                 setErrorMessage(loginError);
             }
         }, [errorMessage, loginError]);
@@ -51,8 +53,11 @@ const LoginSignin = withState()(
         };
 
         const clearErrors = (): void => {
-            setErrorMessage(undefined);
-            dispatch(clearTracerErrors());
+            if (errorsClear) {
+                setErrorMessage(undefined);
+                dispatch(clearTracerErrors());
+                setErrorsClear(false);
+            }
         };
 
         return (

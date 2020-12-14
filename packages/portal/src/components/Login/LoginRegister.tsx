@@ -13,6 +13,7 @@ const LoginRegister = withState()(
 
         const history = useHistory();
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+        const [errorsClear, setErrorsClear] = useState<boolean>(false);
         const [isRegistering, setIsRegistering] = useState<boolean>(false);
         const [email, setEmail] = useState<string>();
         const [goToValidate, setGoToValidate] = useState<boolean>(false);
@@ -50,8 +51,11 @@ const LoginRegister = withState()(
         };
 
         const clearErrors = (): void => {
-            setErrorMessage(undefined);
-            dispatch(clearTracerErrors());
+            if (errorsClear) {
+                setErrorMessage(undefined);
+                dispatch(clearTracerErrors());
+                setErrorsClear(false);
+            }
         };
 
         return (

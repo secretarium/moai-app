@@ -21,6 +21,7 @@ const LoginValidation = withState()(
         const location = useLocation<LocationTypes>();
         const history = useHistory();
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+        const [errorsClear, setErrorsClear] = useState<boolean>(false);
         const [isValidating, setIsValidating] = useState(false);
         const [isSendingCode, setIsSendingCode] = useState(false);
         const [currentKey, setCurrentKey] = useState<EncryptedKeyPair | undefined>(keyPairs.find(key => key.name === location.state.email));
@@ -52,8 +53,11 @@ const LoginValidation = withState()(
         };
 
         const clearErrors = (): void => {
-            setErrorMessage(undefined);
-            dispatch(clearTracerErrors());
+            if (errorsClear) {
+                setErrorMessage(undefined);
+                dispatch(clearTracerErrors());
+                setErrorsClear(false);
+            }
         };
 
         const resendCode = (): void => {
