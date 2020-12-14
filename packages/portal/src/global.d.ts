@@ -122,6 +122,8 @@ declare namespace MoaiPortal {
         isFetching: boolean;
         tested: User;
         exposed: User[];
+        searchTestedError?: string;
+        searchExposedError?: string;
     };
 
     type User = {

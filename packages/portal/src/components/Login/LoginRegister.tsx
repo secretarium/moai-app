@@ -19,9 +19,9 @@ const LoginRegister = withState()(
         const [goToValidate, setGoToValidate] = useState<boolean>(false);
 
         useEffect(() => {
-            console.log('registrationError', errorMessage);
             if (registrationError && errorMessage !== registrationError) {
                 setIsRegistering(false);
+                setErrorsClear(true);
                 setErrorMessage(registrationError);
             }
         }, [errorMessage, registrationError]);

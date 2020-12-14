@@ -34,6 +34,11 @@
     border-radius: 25px;
 }
 
+.search-input-code > .ant-picker-focused {
+    border: none;
+    box-shadow: none;
+}
+
 .search-input-code > .ant-picker {
     width: 100%;
     border-radius: 25px;

@@ -33,6 +33,7 @@ const LoginValidation = withState()(
         useEffect(() => {
             if (validationError && errorMessage !== validationError) {
                 setIsValidating(false);
+                setErrorsClear(true);
                 setErrorMessage(validationError);
             }
 
