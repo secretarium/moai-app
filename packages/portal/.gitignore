@@ -25,3 +25,9 @@ yarn-error.log*
 # Licenses and Disclaimer
 public/licenses.json
 public/disclaimer.txt
+# dotenv environment variables file
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+.env.test
