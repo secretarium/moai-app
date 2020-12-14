@@ -1,8 +1,8 @@
 import React from 'react';
 import './Menu.css';
 import { NavLink } from 'react-router-dom';
-import NHS from '../../assets/nhs.png';
 import Logout from '../../assets/logout.png';
+import Logo from '../../assets/logo-white.png';
 import { disconnect } from '../../actions';
 import { useDispatch } from 'react-redux';
 
@@ -14,7 +14,8 @@ const Menu: React.FC = () => {
     return (
         <div className="sidebar">
             <div className="header">
-                <img src={NHS} alt="NHS logo" style={{ width: '64px', height: 'auto', marginLeft: '25px', marginTop: '10px' }} />
+                {/** connection status */}
+                <img src={Logo} alt="moai" style={{ width: '100px', height: 'auto' }} />
             </div>
             <div className="options">
                 <NavLink exact className="option" to={'/'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
@@ -43,7 +44,7 @@ const Menu: React.FC = () => {
                 </NavLink>
             </div>
             <NavLink className="logout" to={'/'} onClick={() => dispatch(disconnect())} style={{ color: '#fff' }}>
-                <img src={Logout} alt="logout" style={{ width: '58px', height: 'auto', marginRight: '15px' }} /> Logout
+                <img src={Logout} alt="logout" style={{ width: '45px', height: 'auto', marginRight: '8px' }} /> Logout
             </NavLink>
         </div>
     );
