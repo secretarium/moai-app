@@ -34,9 +34,15 @@
     border-radius: 25px;
 }
 
+.search-input-code > .ant-picker {
+    width: 100%;
+    border-radius: 25px;
+}
+
 .search-input > input {
     border: none;
     margin-left: 10px;
+    width: 200px;
 }
 
 .results {

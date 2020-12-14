@@ -134,14 +134,6 @@ declare namespace MoaiPortal {
         token: string;
     };
 
-    type ConversationLastMessage = {
-        datetime: number;
-        sender: number;
-        text: string;
-        received: boolean;
-        read: boolean;
-    };
-
     type Message = {
         datetime: number;
         sender: number;
@@ -153,7 +145,7 @@ declare namespace MoaiPortal {
     type Conversations = {
         isFetching: boolean;
         conversationList: Conversation[];
-        conversationLastMessageList: ConversationLastMessage[];
+        lastMessage: Message[];
         messages: Message[];
         newMessage: boolean;
         messageError?: string;

@@ -18,14 +18,16 @@ const SearchExposed = withState()(
         const [date, setDate] = useState<string | undefined>(undefined);
         const [time, setTime] = useState<string | undefined>(undefined);
 
+        const onSearch = (value: string, event: React.MouseEvent<HTMLElement, MouseEvent> | React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>): void => {
+            event.preventDefault();
+            dispatch(getExposed(value, toTimestamp(date, time)));
+        };
+
         return (
             <div className="container-search">
                 <div className="search-header">
                     <div className="search-input-code">
-                        <Search placeholder="Search Venue Code..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }} onSearch={(value, event) => {
-                            event.preventDefault();
-                            dispatch(getExposed(value, toTimestamp(date, time)));
-                        }} />
+                        <Search placeholder="Search Location Code..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }} onSearch={(value, event) => onSearch(value, event)} />
                     </div>
                     <div className="search-input-code">
                         <DatePicker style={{ color: '#dfe0e2', outline: 'none', border: 'none', marginLeft: '10px' }} onChange={(value, dateString) => setDate(dateString)} />
