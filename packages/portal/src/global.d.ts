@@ -98,9 +98,15 @@ declare namespace MoaiPortal {
         log: SystemLog;
     };
 
+    type EncKeyPair = {
+        version: number;
+        iv: string;
+        salt: string;
+        data: string;
+    };
+
     type Vault = {
-        email: string | null;
-        keyPair: EncryptedKeyPair | null;
+        keyPairs: EncryptedKeyPair[];
     };
 
     type Tracer = {
@@ -109,12 +115,15 @@ declare namespace MoaiPortal {
         emailVerificationAttempt?: number;
         validationError?: string;
         loginError?: string;
+        registrationError?: string;
     };
 
     type SearchResults = {
         isFetching: boolean;
         tested: User;
         exposed: User[];
+        searchTestedError?: string;
+        searchExposedError?: string;
     };
 
     type User = {
@@ -125,14 +134,6 @@ declare namespace MoaiPortal {
     type Conversation = {
         address: string;
         token: string;
-    };
-
-    type ConversationLastMessage = {
-        datetime: number;
-        sender: number;
-        text: string;
-        received: boolean;
-        read: boolean;
     };
 
     type Message = {
@@ -146,9 +147,10 @@ declare namespace MoaiPortal {
     type Conversations = {
         isFetching: boolean;
         conversationList: Conversation[];
-        conversationLastMessageList: ConversationLastMessage[];
+        lastMessage: Message[];
         messages: Message[];
         newMessage: boolean;
+        newConversation: Conversation;
         messageError?: string;
     };
 

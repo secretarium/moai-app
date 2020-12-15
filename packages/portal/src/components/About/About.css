@@ -1,0 +1,22 @@
+.container-about {
+    display: flex;
+    flex-direction: column;
+    flex: 0.85;
+    overflow: auto;
+    background-color: #fff;
+    border-radius: 0 15px 15px 0;
+    padding: 20px;
+}
+
+.container-about > h1, h2 {
+    font-weight: bold;
+}
+
+.licenses {
+    display: inline-block;
+    height: 380px;
+    overflow: auto;
+    text-align: justify;
+    padding: 10px;
+    background-color: #ededed;
+}

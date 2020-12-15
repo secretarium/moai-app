@@ -12,6 +12,8 @@ const commandsPrototype = {
     MOAI_REGISTER_TEST_BARCODE: { application: 'moai', command: 'register-test-barcode' },
     MOAI_GET_TESTED: { application: 'moai', command: 'get-tested' },
     MOAI_GET_EXPOSED: { application: 'moai', command: 'get-exposed' },
+    MOAI_CHALLENGE_TRACER: { application: 'moai', command: 'challenge-tracer' },
+    MOAI_GET_TRACER_DETAILS: { application: 'moai', command: 'get-tracer-details' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
@@ -19,6 +21,9 @@ const actionPrototypes = {
     MOAI_PORTAL_LOGOUT: 'MOAI_PORTAL_LOGOUT',
     MOAI_PORTAL_LOGIN: 'MOAI_PORTAL_LOGIN',
     MOAI_PORTAL_SAVE_LOCAL_KEY: 'MOAI_PORTAL_SAVE_LOCAL_KEY',
+    MOAI_PORTAL_TRACER_ERROR_CLEANUP: 'MOAI_PORTAL_TRACER_ERROR_CLEANUP',
+    MOAI_PORTAL_SEARCH_ERROR_CLEANUP: 'MOAI_PORTAL_SEARCH_ERROR_CLEANUP',
+    MOAI_PORTAL_CLEAR_SEARCH_RESULT: 'MOAI_PORTAL_CLEAR_SEARCH_RESULT',
     VAULT_COMMIT_LOCAL_KEYS: 'VAULT_COMMIT_LOCAL_KEYS',
     VAULT_REMOVE_LOCAL_KEYS: 'VAULT_REMOVE_LOCAL_KEYS',
     SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: 'SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED',

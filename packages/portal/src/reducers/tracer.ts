@@ -3,7 +3,7 @@ import { actionTypes, commands } from '../actions/constants';
 
 export const initialState: Tracer = {
     isConnected: false,
-    isVerified: false
+    isVerified: null
 };
 
 export const tracer: StoreComponent<Tracer> = (state = initialState, { type, payload, error }) => {
@@ -14,6 +14,7 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
             };
         }
         case commands.MOAI_REGISTER_TRACER.REQUEST:
+        case actionTypes.PDATA_NEW_USER_REQUESTED:
         case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: {
             delete state.loginError;
             return {
@@ -22,9 +23,15 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
         }
         case commands.MOAI_REGISTER_TRACER.FAILURE:
         case actionTypes.PDATA_NEW_USER_FAILED: {
+            let resultingError: string;
+            if (error?.message === 'your organisation is not whitelisted') {
+                resultingError = 'Sorry, your organisation is not whitelisted.';
+            } else {
+                resultingError = 'Unknown error occured while registering.';
+            }
             return {
                 ...state,
-                loginError: error?.message ?? error ?? 'Unknown error occured while registering.'
+                registrationError: resultingError
             };
         }
         case commands.MOAI_REGISTER_TRACER.SUCCESS: {
@@ -40,10 +47,16 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
             };
         }
         case commands.MOAI_VERIFY_TRACER.FAILURE: {
+            let resultingError: string;
+            if (error?.message === 'Not connected') {
+                resultingError = 'Please enter a valid code.';
+            } else {
+                resultingError = 'Unknown error occured while validating.';
+            }
             return {
                 ...state,
                 ...payload,
-                validationError: error?.message ?? error ?? 'Unknown error occured while validating.'
+                validationError: resultingError
             };
         }
         case actionTypes.MOAI_PORTAL_LOGOUT:
@@ -54,22 +67,43 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
                 ...payload
             };
         }
-        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL:
-            if (state.isVerified === true) {
-                return {
-                    ...state,
-                    isConnected: true
-                };
-            } else {
-                return {
-                    ...state
-                };
-            }
-        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED:
+        case actionTypes.MOAI_PORTAL_TRACER_ERROR_CLEANUP: {
+            delete state.validationError;
+            delete state.loginError;
+            delete state.registrationError;
+            return {
+                ...state
+            };
+        }
+        case commands.MOAI_GET_TRACER_DETAILS.SUCCESS: {
             return {
                 ...state,
-                loginError: error?.message ?? error ?? 'Unknown error occured while loging in.'
+                isVerified: payload.result.verified
             };
+        }
+        case commands.MOAI_GET_TRACER_DETAILS.FAILURE: {
+            return {
+                ...state,
+                isVerified: false
+            };
+        }
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL:
+        case commands.MOAI_CHALLENGE_TRACER:
+            return {
+                ...state
+            };
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED: {
+            let resultingError: string;
+            if (error?.message === 'Can\'t decrypt, Invalid password') {
+                resultingError = 'Please enter a valid password.';
+            } else {
+                resultingError = 'Unknown error occured while logging in.';
+            }
+            return {
+                ...state,
+                loginError: resultingError
+            };
+        }
         default:
             return state;
     }

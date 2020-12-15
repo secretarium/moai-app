@@ -5,7 +5,6 @@
     background-color: #fff;
     flex: 0.85;
     border-radius: 0 15px 15px 0;
-    margin-left: 8px;
 }
 
 .search-header {
@@ -35,9 +34,20 @@
     border-radius: 25px;
 }
 
+.search-input-code > .ant-picker-focused {
+    border: none;
+    box-shadow: none;
+}
+
+.search-input-code > .ant-picker {
+    width: 100%;
+    border-radius: 25px;
+}
+
 .search-input > input {
     border: none;
     margin-left: 10px;
+    width: 200px;
 }
 
 .results {

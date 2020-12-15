@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     flex: 0.20;
-    min-width: 220px;
-    max-width: 220px;
+    min-width: 245px;
+    max-width: 245px;
     background-color: #2F323E;
     border-radius: 15px 0 0 15px;
     font-size: 16px;
@@ -12,17 +12,19 @@
 .header {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex: 0.05;
     border-radius: 15px 0 0 0;
     height: 90px;
     font-size: 22px;
+    padding: 25px;
 }
 
 .options {
     flex: 0.8;
     color: #716F6F;
     font-weight: bold;
-    padding: 25px;
+    padding: 25px 0px 25px 25px;
 }
 
 .option {
@@ -38,7 +40,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 18px;
     color: '#fff';
     margin: 15px;
 }

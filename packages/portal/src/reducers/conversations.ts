@@ -4,9 +4,10 @@ import { commands } from '../actions/constants';
 export const initialState: Conversations = {
     isFetching: true,
     conversationList: [],
-    conversationLastMessageList: [],
+    lastMessage: [],
     messages: [],
-    newMessage: false
+    newMessage: false,
+    newConversation: null
 };
 
 export const conversations: StoreComponent<Conversations> = (state = initialState, { type, payload, error }) => {
@@ -41,12 +42,12 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
         case commands.MOAI_GET_LAST_MESSAGE.REQUEST: {
             return {
                 ...state,
-                conversationLastMessageList: [],
+                lastMessage: [],
                 isFetching: true
             };
         }
         case commands.MOAI_GET_LAST_MESSAGE.SUCCESS: {
-            state.conversationLastMessageList.push(payload.result);
+            state.lastMessage.push(payload.result);
             return {
                 ...state,
                 isFetching: false,
@@ -68,7 +69,8 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
         case commands.MOAI_CREATE_CONVERSATION.SUCCESS: {
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                newConversation: payload.result
             };
         }
         default:

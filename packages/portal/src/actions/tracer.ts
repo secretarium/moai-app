@@ -2,7 +2,7 @@ import { actionTypes, commands } from './constants';
 import secretariumHandler from '../utils/secretariumHandler';
 import { requestFactory } from './factories';
 import { EncryptedKeyPair } from '@secretarium/connector';
-import { addKeys } from './vault';
+import { addKeys, removeKeys } from './vault';
 import { getConversations } from './conversations';
 
 
@@ -44,10 +44,14 @@ export const login = (): MoaiPortal.FunctionAction => (dispatch) => {
     dispatch({
         type: actionTypes.MOAI_PORTAL_LOGIN,
         payload: {
-            isConnected: true,
-            isVerified: true
-        }
+            isConnected: true
+        },
+        workload: dispatch => dispatch(getConversations())
     });
+};
+
+export const clearTracerErrors = (): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch({ type: actionTypes.MOAI_PORTAL_TRACER_ERROR_CLEANUP });
 };
 
 export const registerTracer = (email: string): MoaiPortal.FunctionAction =>
@@ -60,7 +64,8 @@ export const registerTracer = (email: string): MoaiPortal.FunctionAction =>
             };
         },
         onError: (error) => ({
-            error: new Error(error)
+            error: new Error(error),
+            workload: dispatch => dispatch(removeKeys(email))
         })
     });
 
@@ -68,14 +73,43 @@ export const verifyTracer = (code: string): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_VERIFY_TRACER, { code: code })({
         onExecuted: () => ({
             payload: {
-                isVerified: true,
-                isConnected: true
-            }
+                isConnected: true,
+                isVerified: true
+            },
+            workload: dispatch => dispatch(getConversations())
         }),
         onError: (error) => ({
             payload: {
-                isVerified: false
+                isConnected: false
             },
+            error: new Error(error)
+        })
+    });
+
+export const challengeTracer = (): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_CHALLENGE_TRACER, {})({
+        onResult: result => {
+            return {
+                payload: {
+                    result
+                }
+            };
+        },
+        onError: (error) => ({
+            error: new Error(error)
+        })
+    });
+
+export const getTracerDetails = (): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_GET_TRACER_DETAILS, {})({
+        onResult: result => {
+            return {
+                payload: {
+                    result
+                }
+            };
+        },
+        onError: (error) => ({
             error: new Error(error)
         })
     });
@@ -88,22 +122,22 @@ export const connect = (encryptedKeyPair: EncryptedKeyPair, email: string, passw
             .then(() => {
                 secretariumHandler.connect()
                     .then(() => {
-                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL });
-                        if (isRegistering === true) {
+                        dispatch({
+                            type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL,
+                            workload: (dispatch) => {
+                                dispatch(getTracerDetails());
+                            }
+                        });
+                        if (isRegistering) {
                             dispatch(registerTracer(email));
-                        } else {
-                            dispatch(login());
                         }
                     })
-                    .then(() => dispatch(getConversations()))
                     .catch((error) => {
-                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED });
-                        console.error('connect', error);
+                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED, error });
                     });
             })
             .catch((error) => {
-                dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED });
-                console.error('connect', error);
+                dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED, error });
             });
     }
 });
@@ -116,7 +150,8 @@ export const disconnect = (): MoaiPortal.FunctionAction => (dispatch) => {
             dispatch({
                 type: actionTypes.MOAI_PORTAL_LOGOUT,
                 payload: {
-                    isConnected: false
+                    isConnected: false,
+                    isVerified: null
                 }
             });
             dispatch({ type: actionTypes.SECRETARIUM_DISCONNECT_SUCCESSFUL });
@@ -127,5 +162,4 @@ export const disconnect = (): MoaiPortal.FunctionAction => (dispatch) => {
                 error: new Error(error)
             });
         });
-
 };

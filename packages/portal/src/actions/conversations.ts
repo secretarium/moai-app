@@ -30,7 +30,8 @@ export const createConversation = (title: string, name: string, userId: string):
             return {
                 payload: {
                     result
-                }
+                },
+                workload: dispatch => dispatch(getConversations())
             };
         }
     });

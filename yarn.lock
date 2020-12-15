@@ -5969,9 +5969,13 @@ __metadata:
     antd: 4.6.6
     cross-env: 7.0.2
     deepmerge: 4.2.2
+    fs-extra: 9.0.1
     immutable: 4.0.0-rc.12
+    license-checker: 25.0.1
+    npm-license-crawler: 0.2.1
     react: 16.13.1
     react-dom: 16.13.1
+    react-markdown: 5.0.3
     react-redux: 7.2.1
     react-router-dom: 5.2.0
     react-scripts: 3.4.3
@@ -7908,7 +7912,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mdast@npm:^3.0.0":
+"@types/mdast@npm:^3.0.0, @types/mdast@npm:^3.0.3":
   version: 3.0.3
   resolution: "@types/mdast@npm:3.0.3"
   dependencies:
@@ -8482,7 +8486,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/unist@npm:*, @types/unist@npm:^2.0.0, @types/unist@npm:^2.0.2":
+"@types/unist@npm:*, @types/unist@npm:^2.0.0, @types/unist@npm:^2.0.2, @types/unist@npm:^2.0.3":
   version: 2.0.3
   resolution: "@types/unist@npm:2.0.3"
   checksum: 008834b1b4dbd63f8a580579d10ce7310abd26d708984b432a9c9eb6d374d278b20f737ee69a5b88728317517aa7b229682e8dec7fb6cc56c85e03dbc146b476
@@ -14797,6 +14801,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"debug@npm:^4.0.0":
+  version: 4.3.2
+  resolution: "debug@npm:4.3.2"
+  dependencies:
+    ms: 2.1.2
+  peerDependenciesMeta:
+    supports-color:
+      optional: true
+  checksum: 6f2f672e3978c607e3d8a562c00c71e9c4dfe377f25f947895c6c912c26fd9319b6f0ccd856595ba6858309fc9bb6501ba34305755d31ec0ee7ad29933fd24bc
+  languageName: node
+  linkType: hard
+
 "debuglog@npm:^1.0.1":
   version: 1.0.1
   resolution: "debuglog@npm:1.0.1"
@@ -15622,7 +15638,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domhandler@npm:^3.0.0":
+"domhandler@npm:^3.0.0, domhandler@npm:^3.3.0":
   version: 3.3.0
   resolution: "domhandler@npm:3.3.0"
   dependencies:
@@ -15679,6 +15695,17 @@ __metadata:
     domelementtype: ^2.0.1
     domhandler: ^4.0.0
   checksum: 6ca20943efa6828b17ec97d4d28260f199dd16c72bf09ea18bc1c6c1d8049f19e660eef1b8b1645b17ac6370377740090d81319d8afa939e55d25acc58e35949
+  languageName: node
+  linkType: hard
+
+"domutils@npm:^2.4.2":
+  version: 2.4.4
+  resolution: "domutils@npm:2.4.4"
+  dependencies:
+    dom-serializer: ^1.0.1
+    domelementtype: ^2.0.1
+    domhandler: ^4.0.0
+  checksum: cb7efce605d9733bbf8cbc528c630941b4b75fc3d823f9cc9545a5a67aa658d8c2f8c9c20d9c251ba3d9ea14e968d51a8a27b939115028e166359513bf726172
   languageName: node
   linkType: hard
 
@@ -20360,6 +20387,20 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"html-to-react@npm:^1.3.4":
+  version: 1.4.5
+  resolution: "html-to-react@npm:1.4.5"
+  dependencies:
+    domhandler: ^3.3.0
+    htmlparser2: ^5.0
+    lodash.camelcase: ^4.3.0
+    ramda: ^0.27.1
+  peerDependencies:
+    react: ^16.0 || ^17.0
+  checksum: eb82a5335373ccd468ad6d5f5605e9a7377391515378866409d397fc8d00f2b929851c9c4dcfbf90a5119d1911fdc2f16f50cdafbbf2a4cec551a6ec2a12783a
+  languageName: node
+  linkType: hard
+
 "html-void-elements@npm:^1.0.0":
   version: 1.0.5
   resolution: "html-void-elements@npm:1.0.5"
@@ -20461,6 +20502,18 @@ fsevents@~2.1.2:
     inherits: ^2.0.1
     readable-stream: ^3.1.1
   checksum: 508261151315e9ad2be55534cedcc2ce8485254e498c36d1de027d58700daac78f38ac2eba823ef0247dab53cab757a8c51a6be665f0e0df5bdb6448335b3bec
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:^5.0":
+  version: 5.0.1
+  resolution: "htmlparser2@npm:5.0.1"
+  dependencies:
+    domelementtype: ^2.0.1
+    domhandler: ^3.3.0
+    domutils: ^2.4.2
+    entities: ^2.0.0
+  checksum: 2d6edf93f814b821b9ad578d82dc2b57613129096700e28518ded4d47dca2eab67d25a1aa7ebbe9e0ddc9ffd86e2b96647d2182c115670af59485c1a1a469f36
   languageName: node
   linkType: hard
 
@@ -25110,6 +25163,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"lodash.camelcase@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "lodash.camelcase@npm:4.3.0"
+  checksum: 0838e84456d74e484f17f00711249d1c6e8eb02297c9ea65885e3b3b0be25fe2a061f0b93b43bab0d50a8126a703ac599aac769126a77e42961dc9151b8dfed3
+  languageName: node
+  linkType: hard
+
 "lodash.debounce@npm:^4.0.8":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
@@ -25825,6 +25885,15 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"mdast-add-list-metadata@npm:1.0.1":
+  version: 1.0.1
+  resolution: "mdast-add-list-metadata@npm:1.0.1"
+  dependencies:
+    unist-util-visit-parents: 1.1.2
+  checksum: 740c0db1bb53531cc63f9c79e959913aa5bbf6716e5f4c5ecb3bb5e556df3e0b5738b04d529df2c711feaa42058eebfd12b1ba12cfd9948e236e0cdf2c3a1eb2
+  languageName: node
+  linkType: hard
+
 "mdast-util-compact@npm:^2.0.0":
   version: 2.0.1
   resolution: "mdast-util-compact@npm:2.0.1"
@@ -25843,6 +25912,19 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"mdast-util-from-markdown@npm:^0.8.0":
+  version: 0.8.4
+  resolution: "mdast-util-from-markdown@npm:0.8.4"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    mdast-util-to-string: ^2.0.0
+    micromark: ~2.11.0
+    parse-entities: ^2.0.0
+    unist-util-stringify-position: ^2.0.0
+  checksum: e0da3ea8c17c10cb924710ce7cc1b8d904dc0d24988856b4d1bb67648030c96c61ce09e2063b207f8170b6974faede1f0f5992417595d38ef567a38889f4b7a3
+  languageName: node
+  linkType: hard
+
 "mdast-util-to-hast@npm:^10.0.0":
   version: 10.0.1
   resolution: "mdast-util-to-hast@npm:10.0.1"
@@ -25856,6 +25938,13 @@ fsevents@~2.1.2:
     unist-util-position: ^3.0.0
     unist-util-visit: ^2.0.0
   checksum: a290fbbd39bb85e68f7da0771bf5b1ef119362076310e6a3351c9974a13ee08574d7c589151101be02505eb310d90ae3ae00ac5914e06f9f8040bb483115d8c6
+  languageName: node
+  linkType: hard
+
+"mdast-util-to-string@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "mdast-util-to-string@npm:2.0.0"
+  checksum: 7d7a024470668ed7efcabef3b63e8969a497b7ed830ec1e03e67d797f7c8223897b820d7af9581a4013632f786eb91f6d41fb4e8f0ac2875398215618c6195ce
   languageName: node
   linkType: hard
 
@@ -26430,6 +26519,16 @@ fsevents@~2.1.2:
   version: 0.1.1
   resolution: "microevent.ts@npm:0.1.1"
   checksum: 7e36b98b81669a0866f1674bc96adbc0aa12e76d0487624bcfd334293024e3e8c7870b018845d648494ea519de754e559089e9b819e9434fe04b265bd0cf3ab6
+  languageName: node
+  linkType: hard
+
+"micromark@npm:~2.11.0":
+  version: 2.11.2
+  resolution: "micromark@npm:2.11.2"
+  dependencies:
+    debug: ^4.0.0
+    parse-entities: ^2.0.0
+  checksum: 9713c0f4814291ee811793b3b43a4e3e6db73731dfcbd209b23cd43f2ec26cd725c20b3dc03adb6c81f14e73e61f64489d45259e05127ebe40e7c726cdc82c70
   languageName: node
   linkType: hard
 
@@ -31296,6 +31395,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"ramda@npm:^0.27.1":
+  version: 0.27.1
+  resolution: "ramda@npm:0.27.1"
+  checksum: 583cec197e6b334f8c36d72ad0269fda11c002491624dcd43ce0053be2e23ae6c641eb97165780cbfeb46327e5b71f596c63e77fc5e07729cd0a56e7e224968f
+  languageName: node
+  linkType: hard
+
 "random-bytes@npm:~1.0.0":
   version: 1.0.0
   resolution: "random-bytes@npm:1.0.0"
@@ -32382,6 +32488,27 @@ fsevents@~2.1.2:
   peerDependencies:
     react: "*"
   checksum: 8d7686c445da8233968883d9a0f0649adacf0953eb9bdd2fa8155b2d86a61dece9ea1f82217a639610c443fb8d6f57f230c699342c6cee39e932150137d6c825
+  languageName: node
+  linkType: hard
+
+"react-markdown@npm:5.0.3":
+  version: 5.0.3
+  resolution: "react-markdown@npm:5.0.3"
+  dependencies:
+    "@types/mdast": ^3.0.3
+    "@types/unist": ^2.0.3
+    html-to-react: ^1.3.4
+    mdast-add-list-metadata: 1.0.1
+    prop-types: ^15.7.2
+    react-is: ^16.8.6
+    remark-parse: ^9.0.0
+    unified: ^9.0.0
+    unist-util-visit: ^2.0.0
+    xtend: ^4.0.1
+  peerDependencies:
+    "@types/react": ">=16"
+    react: ">=16"
+  checksum: bf22b17e341011732b1003a10ebd3b11b5af241103dc46c1407143ef90fcc515325fecb9c797f2a2ab553089c4f44239e6068e543dfc081a965eabd69d790048
   languageName: node
   linkType: hard
 
@@ -33767,6 +33894,15 @@ fsevents@~2.1.2:
     vfile-location: ^3.0.0
     xtend: ^4.0.1
   checksum: 99a573bd30b32f5ae328325204ff40ca88a8966c94001a89b93bba33a385783b59556f7e1d3af2efe398cb8d3a6a814f13d7e45c732f90e52ab0cd88822ce817
+  languageName: node
+  linkType: hard
+
+"remark-parse@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "remark-parse@npm:9.0.0"
+  dependencies:
+    mdast-util-from-markdown: ^0.8.0
+  checksum: 8d9a33bfdb3102b851ff334c5c1540439f957cbc1d273349dbe4678aab09045f9875f5269dd84547dd98643ceea2e6c1bb51ce868e56970ff9540dc2c7b2fab9
   languageName: node
   linkType: hard
 
@@ -38639,6 +38775,13 @@ typescript@4.0.3:
   dependencies:
     "@types/unist": ^2.0.2
   checksum: 997aa58da0936d9e2d2549268e1232726fcba186c9c224d6816c3b9b68a43c0858e503f7481cf243fcbe9c3b3121bc784bafef6dff802f0775fcba5e9ba13486
+  languageName: node
+  linkType: hard
+
+"unist-util-visit-parents@npm:1.1.2":
+  version: 1.1.2
+  resolution: "unist-util-visit-parents@npm:1.1.2"
+  checksum: 9549207e3664a4ad84654d5640f91fdbf64566ccc55d77b149663a4609f607b00ef14ed1bdfe6f54d21b21b585c3b15e02a324732cbe4c008a37579d21c477b1
   languageName: node
   linkType: hard
 

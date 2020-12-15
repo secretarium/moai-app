@@ -1,4 +1,4 @@
-import { commands } from './constants';
+import { commands, actionTypes } from './constants';
 import { requestFactory } from './factories';
 
 
@@ -10,7 +10,10 @@ export const getTested = (barcode: string): MoaiPortal.FunctionAction =>
                     result
                 }
             };
-        }
+        },
+        onError: (error) => ({
+            error: new Error(error)
+        })
     });
 
 export const getExposed = (venue: string, utc: number): MoaiPortal.FunctionAction =>
@@ -21,5 +24,16 @@ export const getExposed = (venue: string, utc: number): MoaiPortal.FunctionActio
                     result
                 }
             };
-        }
+        },
+        onError: (error) => ({
+            error: new Error(error)
+        })
     });
+
+export const clearSearchErrors = (): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch({ type: actionTypes.MOAI_PORTAL_SEARCH_ERROR_CLEANUP });
+};
+
+export const clearSearchResults = (): MoaiPortal.FunctionAction => (dispatch) => {
+    dispatch({ type: actionTypes.MOAI_PORTAL_CLEAR_SEARCH_RESULT });
+};
