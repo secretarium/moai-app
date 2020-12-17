@@ -11,6 +11,10 @@ const Menu: React.FC = () => {
 
     const dispatch = useDispatch();
 
+    const onClick = (): void => {
+        dispatch(disconnect());
+    };
+
     return (
         <div className="sidebar">
             <div className="header">
@@ -43,7 +47,7 @@ const Menu: React.FC = () => {
                     About Moai
                 </NavLink>
             </div>
-            <NavLink className="logout" to={'/'} onClick={() => dispatch(disconnect())} style={{ color: '#fff' }}>
+            <NavLink className="logout" to={'/'} onClick={onClick} style={{ color: '#fff' }}>
                 <img src={Logout} alt="logout" style={{ width: '45px', height: 'auto', marginRight: '8px' }} /> Logout
             </NavLink>
         </div>
