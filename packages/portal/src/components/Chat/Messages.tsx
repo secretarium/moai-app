@@ -35,6 +35,14 @@ const Messages = withState()((s) => ({
     }, [address, location.state]);
 
     useEffect(() => {
+        const timer = setInterval(() => {
+            dispatch(getConversation(conversation.address, conversation.token));
+        }, 5000);
+
+        return () => clearInterval(timer);
+    });
+
+    useEffect(() => {
         if (fetchedConversation === false && conversation !== undefined) {
             dispatch(getConversation(conversation.address, conversation.token));
             setFetchedConversation(true);
@@ -43,7 +51,10 @@ const Messages = withState()((s) => ({
 
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        dispatch(sendMessage(conversation.address, conversation.token, message));
+        dispatch(sendMessage(conversation.address, conversation.token, message))
+            .then(() => {
+                setFetchedConversation(false);
+            });
         setMessage('');
     };
 
@@ -67,12 +78,6 @@ const Messages = withState()((s) => ({
                     </div>
                 </div>
                 <div className="messages-body">
-                    {/* {messages.messageList.map((message) => {
-                        if (message.sender === messages.myself)
-                            return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={true} />;
-                        else
-                            return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
-                    })} */}
                     {messages.map((singleMessage, index) => {
                         return <Message key={index} message={singleMessage} />;
                     })}
