@@ -47,7 +47,7 @@ const LoginValidation = withState()(
         const handleValidate = (values: any): void => {
             setIsValidating(true);
             setErrorMessage(undefined);
-            dispatch(verifyTracer(values.code));
+            dispatch(verifyTracer(values.code.trim()));
         };
 
         const clearErrors = (): void => {
