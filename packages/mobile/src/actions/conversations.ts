@@ -13,7 +13,7 @@ export const getConversations = (): Moai.FunctionAction =>
     });
 
 export const getConversation = (address: string, token: string): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_GET_CONVERSATION, { address: address, token: token })({
+    requestFactory(commands.MOAI_GET_CONVERSATION, { address: address, token: token }, true)({
         onResult: result => {
             return {
                 payload: {

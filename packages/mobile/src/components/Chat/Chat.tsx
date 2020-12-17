@@ -17,8 +17,7 @@ const Chat = withState()((s) => ({
 }), ({ messages, conversationList, dispatch }) => {
 
     const [stateMessages, setMessages] = useState([]);
-    const [isFetching, setIsFetching] = useState(false);
-    const [hasFetched, setHasFetched] = useState(false);
+    const [hasFetchedConversation, setHasFetchedConversation] = useState(false);
 
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
@@ -26,42 +25,56 @@ const Chat = withState()((s) => ({
     const themeInputStyle = colorScheme !== 'dark' ? '#ffffff' : '#1b1b1b';
 
     useEffect(() => {
-        if (hasFetched) {
-            const msgs = messages.map(message => (
-                {
-                    _id: uuidv4(),
-                    text: message.text,
-                    createdAt: new Date(message.datetime / 1000000),
-                    user: {
-                        _id: message.sender,
-                        avatar: message.sender === 0 ? require('../../assets/moai-pin.png') : null
-                    }
+        const msgs = messages.map(message => (
+            {
+                _id: uuidv4(),
+                text: message.text,
+                createdAt: new Date(message.datetime / 1000000),
+                user: {
+                    _id: message.sender,
+                    avatar: message.sender === 0 ? require('../../assets/moai-pin.png') : null
                 }
-            )).reverse();
-            setMessages(msgs);
-        }
-    }, [hasFetched, messages]);
+            }
+        )).reverse();
+        setMessages(msgs);
+    }, [messages]);
 
     useEffect(() => {
-        async function fetchConversation() {
-            if (conversationList.length > 0) {
-                dispatch(getConversation(conversationList[0].address, conversationList[0].token))
-                    .then(() => {
-                        setHasFetched(true);
-                        setIsFetching(false);
-                    });
-            }
+        const timer = setInterval(() => {
+            dispatch(getConversation(conversationList[0].address, conversationList[0].token));
+        }, 5000);
+
+        return () => clearInterval(timer);
+    });
+
+    // useEffect(() => {
+    //     async function fetchConversation() {
+    //         if (conversationList.length > 0) {
+    //             console.log('GOES HERE');
+    //             dispatch(getConversation(conversationList[0].address, conversationList[0].token))
+    //                 .then(() => {
+    //                     setHasFetched(true);
+    //                     setIsFetching(false);
+    //                 });
+    //         }
+    //     }
+    //     if (!hasFetched && !isFetching) {
+    //         setIsFetching(true);
+    //         fetchConversation();
+    //     }
+    // }, [dispatch, hasFetched, isFetching, conversationList]);
+
+    useEffect(() => {
+        if (hasFetchedConversation === false) {
+            setHasFetchedConversation(true);
+            dispatch(getConversation(conversationList[0].address, conversationList[0].token));
         }
-        if (!hasFetched && !isFetching) {
-            setIsFetching(true);
-            fetchConversation();
-        }
-    }, [dispatch, hasFetched, isFetching, conversationList]);
+    }, [dispatch, hasFetchedConversation, conversationList, messages]);
 
     const onSend = ([message]) => {
         dispatch(sendMessage(conversationList[0].address, conversationList[0].token, message.text))
             .then(() => {
-                setHasFetched(false);
+                setHasFetchedConversation(false);
             });
     };
 
