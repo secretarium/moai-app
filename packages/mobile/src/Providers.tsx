@@ -5,6 +5,9 @@ import { Router } from './ReactRouter';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import FontLoader from './FontLoader';
+import secretariumHandler from './utils/secretariumHandler';
+
+secretariumHandler.initialize();
 
 const Providers: React.FC = ({ children }) => (
     <AppearanceProvider>
