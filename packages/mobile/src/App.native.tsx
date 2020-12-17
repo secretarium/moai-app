@@ -22,19 +22,21 @@ import { useHistory } from 'react-router';
 
 const App = withState()(
     (s) => ({
-        localKey: s.system.localKey
+        localKey: s.system.localKey,
+        isConnected: s.system.isConnected
     }),
-    ({ dispatch, localKey }) => {
+    ({ dispatch, localKey, isConnected }) => {
 
         const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
+        const [isConnecting, setIsConnecting] = useState(false);
+        const [hasConnected, setHasConnected] = useState(isConnected);
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
-        const [hasFetchedConversation, setHasFetchedConversation] = useState(false);
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -85,13 +87,21 @@ const App = withState()(
             }
         }, [dispatch, hasRequestedLocalKey, localKey]);
 
-        // useEffect(() => {
-        //     console.log('connecting1');
-        //     if (hasObtainedLocalKey) {
-        //         dispatch(connect(localKey));
-        //         console.log('connecting2');
-        //     }
-        // }, [dispatch, hasObtainedLocalKey, localKey]);
+        useEffect(() => {
+            async function connectBackend() {
+                if (localKey) {
+                    dispatch(connect(localKey))
+                        .then(() => {
+                            setHasConnected(true);
+                            setIsConnecting(false);
+                        });
+                }
+            }
+            if (!hasConnected && !isConnecting) {
+                setIsConnecting(true);
+                connectBackend();
+            }
+        }, [dispatch, localKey, hasConnected, isConnecting]);
 
         const handleAppStateChange = useCallback((nextAppState: string) => {
             if (nextAppState === 'active') {
@@ -109,7 +119,7 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !hasConnected || isConnecting)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;

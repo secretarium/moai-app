@@ -35,7 +35,8 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
             delete result.currentEphemeral;
             return {
                 ...merge<any>([initialState, result]),
-                log: []
+                log: [],
+                isConnected: false
             };
         }
         case actionTypes.MOAI_SAVE_LOCAL_KEY: {

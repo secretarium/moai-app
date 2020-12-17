@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Redirect } from '../../ReactRouter';
-import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
-import { SCP, Key, Constants } from '@secretarium/connector';
 import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';
@@ -14,24 +12,18 @@ import MainLayout from '../common/MainLayout';
 import { checkIn } from '../../actions/system';
 
 
-const scp = new SCP();
-const isDev = process.env.NODE_ENV === 'development';
-
 const Checkin = withState<RouteComponentProps<{
     venue: string;
     source?: string;
     type?: string
 }>>()(
     (s) => ({
-        localKey: s.system.localKey,
-        checkInError: s.system.checkInError
-        //isConnected: s.system.isConnected
+        checkInError: s.system.checkInError,
+        isConnected: s.system.isConnected
     }),
-    ({ dispatch, localKey, match, checkInError }) => {
+    ({ dispatch, match, checkInError, isConnected }) => {
 
         const history = useHistory();
-        const [isConnecting, setIsConnecting] = useState(false);
-        const [isConnected, setIsConnected] = useState(false);
         const [redirect, setRedirect] = useState(false);
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
             source: Sources.MOAI,
@@ -49,73 +41,22 @@ const Checkin = withState<RouteComponentProps<{
         const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
         useEffect(() => {
-            async function connectBackend() {
-                if (localKey && scp.state === Constants.ConnectionState.closed) {
-                    Key.importKey(localKey)
-                        .then((key) => {
-                            scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', key, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
-                                setIsConnected(true);
-                                setIsConnecting(false);
-                            }).catch((error) => {
-                                setPageError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                                setIsConnected(false);
-                                setIsConnecting(false);
-                                console.error('Connection error:', error);
-                            });
+            async function checkInLocation() {
+                if (isConnected && venueInfo) {
+                    dispatch(checkIn(venueInfo))
+                        .then(() => {
+                            setRedirect(true);
                         })
-                        .catch((error) => console.error(error));
+                        .catch((error) => {
+                            console.error('checkIn', error);
+                            setPageError(checkInError);
+                            setShowModal(true);
+                            setVenueInfo(undefined);
+                        });
                 }
-                else if (scp.state === Constants.ConnectionState.secure) {
-                    setIsConnected(true);
-                    setIsConnecting(false);
-                }
             }
-            if (!isConnected && !isConnecting) {
-                setIsConnecting(true);
-                connectBackend();
-            }
-        }, [localKey, isConnected, pageError, isConnecting]);
-
-        // useEffect(() => {
-        //     if (localKey && isConnected && venueInfo) {
-        //         dispatch(checkIn(venueInfo))
-        //             .then(() => {
-        //                 setRedirect(true);
-        //             })
-        //             .catch((error) => {
-        //                 console.error('checkIn', error);
-        //                 setPageError(checkInError);
-        //                 setShowModal(true);
-        //                 setVenueInfo(undefined);
-        //             });
-        //     }
-        // }, [dispatch, localKey, isConnected, venueInfo, checkInError]);
-
-        useEffect(() => {
-            if (isConnected && venueInfo) {
-                const query = scp.newTx('moai', 'check-in', `moai-qr-${Date.now()}`, venueInfo);
-                query.onExecuted?.(() => {
-                    dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: venueInfo });
-                    dispatch({ type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER });
-                    setRedirect(true);
-                });
-                query.onError?.((error: any) => {
-                    console.error('Error', error);
-                    setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                    setVenueInfo(undefined);
-                    setIsConnected(false);
-                    setShowModal(true);
-                });
-                query.send?.()
-                    .catch((error) => {
-                        console.error('Error', error);
-                        setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                        setVenueInfo(undefined);
-                        setIsConnected(false);
-                        setShowModal(true);
-                    });
-            }
-        }, [dispatch, isConnected, venueInfo]);
+            checkInLocation();
+        }, [dispatch, isConnected, venueInfo, checkInError]);
 
         let composition;
 

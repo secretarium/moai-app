@@ -3,6 +3,7 @@ import { actionTypes, commands } from './constants';
 import { ClearKeyPair } from '@secretarium/connector';
 import { ParsedCode } from '../components/Checkin/dataParser';
 import { requestFactory } from './factories';
+import { getConversations } from './conversations';
 
 
 export const generateLocalKey = (): Moai.FunctionAction => (dispatch) =>
@@ -29,7 +30,10 @@ export const connect = (clearKeyPair: ClearKeyPair): Moai.AnyAction => ({
             .then(() => {
                 secretariumHandler.connect()
                     .then(() => {
-                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL });
+                        dispatch({
+                            type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL,
+                            workload: dispatch => dispatch(getConversations())
+                        });
                     })
                     .catch((error) => {
                         dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED });
@@ -43,13 +47,13 @@ export const connect = (clearKeyPair: ClearKeyPair): Moai.AnyAction => ({
     }
 });
 
-export const checkIn = (venueInfo: ParsedCode): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_CHECK_IN, { venue: venueInfo })({
+export const checkIn = (venue: ParsedCode): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_CHECK_IN, venue)({
         onExecuted: () => ({
             workload: dispatch => {
                 dispatch({
                     type: actionTypes.MOAI_SAVE_QR_CODE,
-                    payload: venueInfo
+                    payload: venue
                 });
                 dispatch({
                     type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER
