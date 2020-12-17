@@ -64,8 +64,8 @@ const LoginSignin = withState()(
                     <Input defaultValue={currentKey?.name} value={currentKey?.name} />
                     <br />
                     <br />
-                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
-                        <Input.Password placeholder="Password" onChange={(): void => clearErrors()} />
+                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]} >
+                        <Input.Password placeholder="Password" onChange={(): void => clearErrors()} autoFocus />
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" loading={isLoggingIn} style={{ backgroundColor: '#00b0ee', width: '120px' }}>

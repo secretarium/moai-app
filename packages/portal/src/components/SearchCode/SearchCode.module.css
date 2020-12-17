@@ -1,4 +1,5 @@
 .containerSearch {
+    grid-area: sub / sub / content / content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,16 +31,21 @@
     width: 30%
 }
 
-.searchInputCode > div[class*=ant-input] {
+.searchInputCode span[class*=ant-input-group-addon], .searchInputCode button[class*=ant-input-search-button] {
+    background: none;
+    border: none;
+}
+
+.searchInputCode input[class*=ant-input] {
     border-radius: 25px;
 }
 
-.searchInputCode > div[class*=ant-picker-focused] {
+.searchInputCode div[class*=ant-picker-focused] {
     border: none;
     box-shadow: none;
 }
 
-.searchInputCode > div[class*=ant-picker] {
+.searchInputCode div[class*=ant-picker] {
     width: 100%;
     border-radius: 25px;
 }
