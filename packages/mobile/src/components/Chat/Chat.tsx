@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { Text, View, Button } from 'react-native';
 import 'react-native-get-random-values';
+import Modal from 'react-native-modal';
 import { v4 as uuidv4 } from 'uuid';
 import MainLayout from '../common/MainLayout';
+import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
 import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
-import { getConversation, sendMessage } from '../../actions/conversations';
+import { getConversation, sendMessage, getConversations } from '../../actions/conversations';
 import { withState } from '../../store';
+import { useHistory } from 'react-router';
+import { commonStyles } from '../commonStyles';
 
 
 const Chat = withState()((s) => ({
@@ -16,8 +21,12 @@ const Chat = withState()((s) => ({
     conversation: s.conversations.conversation
 }), ({ messages, conversationList, dispatch }) => {
 
+    const history = useHistory();
     const [stateMessages, setMessages] = useState([]);
     const [hasFetchedConversation, setHasFetchedConversation] = useState(false);
+    const [hasFetchedConversations, setHasFetchedConversations] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [error, setError] = useState<string>();
 
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
@@ -41,41 +50,42 @@ const Chat = withState()((s) => ({
 
     useEffect(() => {
         const timer = setInterval(() => {
-            dispatch(getConversation(conversationList[0].address, conversationList[0].token));
+            conversationList.length > 0 ?? dispatch(getConversation(conversationList[0].address, conversationList[0].token));
         }, 5000);
 
         return () => clearInterval(timer);
     });
 
-    // useEffect(() => {
-    //     async function fetchConversation() {
-    //         if (conversationList.length > 0) {
-    //             console.log('GOES HERE');
-    //             dispatch(getConversation(conversationList[0].address, conversationList[0].token))
-    //                 .then(() => {
-    //                     setHasFetched(true);
-    //                     setIsFetching(false);
-    //                 });
-    //         }
-    //     }
-    //     if (!hasFetched && !isFetching) {
-    //         setIsFetching(true);
-    //         fetchConversation();
-    //     }
-    // }, [dispatch, hasFetched, isFetching, conversationList]);
+    useEffect(() => {
+        async function fetchConversations() {
+            dispatch(getConversations())
+                .then(() => {
+                    setHasFetchedConversations(true);
+                });
+        }
+        if (!hasFetchedConversations && conversationList.length === 0) {
+            fetchConversations();
+        }
+    }, [dispatch, hasFetchedConversations, conversationList]);
 
     useEffect(() => {
-        if (hasFetchedConversation === false) {
+        if (conversationList.length === 0) {
+            setError('No one has contacted you.');
+            setShowModal(true);
+        }
+        if (hasFetchedConversation === false && conversationList[0]) {
             setHasFetchedConversation(true);
             dispatch(getConversation(conversationList[0].address, conversationList[0].token));
         }
-    }, [dispatch, hasFetchedConversation, conversationList, messages]);
+    }, [dispatch, hasFetchedConversation, conversationList, messages, history]);
 
     const onSend = ([message]) => {
-        dispatch(sendMessage(conversationList[0].address, conversationList[0].token, message.text))
-            .then(() => {
-                setHasFetchedConversation(false);
-            });
+        if (conversationList.length !== 0) {
+            dispatch(sendMessage(conversationList[0].address, conversationList[0].token, message.text))
+                .then(() => {
+                    setHasFetchedConversation(false);
+                });
+        }
     };
 
     // Message Bubble
@@ -149,6 +159,15 @@ const Chat = withState()((s) => ({
 
     return (
         <MainLayout showGoBack={true}>
+            <Modal isVisible={showModal}>
+                <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
+                    <MaterialIcons name='error' size={84} color={themeTextStyle} />
+                    <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>
+                        {error}
+                    </Text>
+                    <Button title='Close' onPress={() => history.push('/')} />
+                </View>
+            </Modal>
             <GiftedChat
                 messages={stateMessages}
                 onSend={messages => onSend(messages)}
