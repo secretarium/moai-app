@@ -1,19 +1,17 @@
 import React from 'react';
 import './Message.css';
+import { toDateTime } from '../../utils/timeHandler';
 
 type Props = {
-    username: string;
-    message: string;
-    timestamp: string;
-    isSender: boolean;
+    message: MoaiPortal.Message
 };
 
-const Message: React.FC<Props> = ({ username, message, timestamp, isSender }) => {
+const Message: React.FC<Props> = ({ message }) => {
     return (
-        <p className={`message-bubble ${isSender && 'message-sender'}`}>
-            <span className="message-name">{username}</span>
-            {message}
-            <span className="message-timestamp">{timestamp}</span>
+        <p className={`message-bubble ${message.sender === 0 && 'message-sender'}`}>
+            <span className="message-name">{message.sender === 0 ? 'You' : 'Moai User'}</span>
+            {message.text}
+            <span className="message-timestamp">{toDateTime(message.datetime)}</span>
         </p>
     );
 };
