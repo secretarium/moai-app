@@ -118,6 +118,7 @@ declare namespace Moai {
     type Conversations = {
         isFetching: boolean;
         conversationList: Conversation[];
+        conversation: Conversation;
         messages: Message[];
         messageError?: string;
     };

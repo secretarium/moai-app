@@ -4,6 +4,7 @@ import { commands } from '../actions/constants';
 export const initialState: Conversations = {
     isFetching: true,
     conversationList: [],
+    conversation: null,
     messages: []
 };
 
@@ -32,6 +33,7 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
             return {
                 ...state,
                 isFetching: false,
+                conversation: payload.result,
                 messages: payload.result.messages
             };
         }

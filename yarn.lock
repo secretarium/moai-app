@@ -4302,6 +4302,7 @@ __metadata:
     react-native: "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz"
     react-native-appearance: 0.3.4
     react-native-dotenv: 2.4.3
+    react-native-get-random-values: 1.5.0
     react-native-gifted-chat: 0.16.3
     react-native-modal: 11.5.6
     react-native-onboarding-swiper: 1.1.4
@@ -4319,6 +4320,7 @@ __metadata:
     setimmediate: 1.0.5
     sharp-cli: 1.14.1
     typescript: 4.0.3
+    uuid: 8.3.2
   languageName: unknown
   linkType: soft
 
@@ -13533,6 +13535,13 @@ __metadata:
     parse-node-version: ^1.0.0
     time-stamp: ^1.0.0
   checksum: 391a5a02eecc949d6f923d86452e45a3aab5f1fcc7845c5dcdc129f125d72801a56a12b03aff75f41f929e124a8b37daddb484558b11416ab42421560c2334df
+  languageName: node
+  linkType: hard
+
+"fast-base64-decode@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "fast-base64-decode@npm:1.0.0"
+  checksum: 5d9a119626ef28529ffe6e658a012f09cd297868c051e5e1d955b1c61feffb491f4817ccd8156698f3808c883c4e8d1c0061284c189e386e01f1ade78e87deec
   languageName: node
   linkType: hard
 
@@ -24134,6 +24143,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-native-get-random-values@npm:1.5.0":
+  version: 1.5.0
+  resolution: "react-native-get-random-values@npm:1.5.0"
+  dependencies:
+    fast-base64-decode: ^1.0.0
+  peerDependencies:
+    react-native: ">=0.56"
+  checksum: a9e745d013900044a4d474cade0d7b70895b54252bee13a09d4d8a21ab3f69d56d8122f418f78cb55d8e53bfc46cb918da341f03d7376cb23ac19b72f665ec1d
+  languageName: node
+  linkType: hard
+
 "react-native-gifted-chat@npm:0.16.3":
   version: 0.16.3
   resolution: "react-native-gifted-chat@npm:0.16.3"
@@ -28988,6 +29008,15 @@ typescript@4.0.3:
   bin:
     uuid: dist/bin/uuid
   checksum: 1fea37713b2bc4a6e6a01270adf631edd09c9aea8410be3ac22a46a5e6cd94e02bb0adbfaf4c00ef76a97527d080f5cac8598c611693d16f0863a9083f2dea07
+  languageName: node
+  linkType: hard
+
+"uuid@npm:8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: cc56ef811703f81bc06e1de26188d4a1fee9cfbc359ce261baa663aa82e3ff0b701edbbb83521b6e15f76fed47f157055cb811d97d42e3d2878027110a0003bf
   languageName: node
   linkType: hard
 

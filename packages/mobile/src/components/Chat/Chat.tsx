@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 import MainLayout from '../common/MainLayout';
 import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
@@ -10,10 +12,13 @@ import { withState } from '../../store';
 
 const Chat = withState()((s) => ({
     messages: s.conversations.messages,
-    conversationList: s.conversations.conversationList
+    conversationList: s.conversations.conversationList,
+    conversation: s.conversations.conversation
 }), ({ messages, conversationList, dispatch }) => {
 
     const [stateMessages, setMessages] = useState([]);
+    const [isFetching, setIsFetching] = useState(false);
+    const [hasFetched, setHasFetched] = useState(false);
 
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
@@ -21,24 +26,44 @@ const Chat = withState()((s) => ({
     const themeInputStyle = colorScheme !== 'dark' ? '#ffffff' : '#1b1b1b';
 
     useEffect(() => {
-        console.log(conversationList);
-        setMessages([
-            {
-                _id: 1,
-                text: 'Hello developer',
-                createdAt: new Date(),
-                user: {
-                    _id: 2,
-                    name: 'React Native',
-                    avatar: require('../../assets/nhs-logo.png')
+        if (hasFetched) {
+            const msgs = messages.map(message => (
+                {
+                    _id: uuidv4(),
+                    text: message.text,
+                    createdAt: new Date(message.datetime / 1000000),
+                    user: {
+                        _id: message.sender,
+                        avatar: message.sender === 0 ? require('../../assets/moai-pin.png') : null
+                    }
                 }
-            }
-        ]);
-    }, []);
+            )).reverse();
+            setMessages(msgs);
+        }
+    }, [hasFetched, messages]);
 
-    const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages));
-    }, []);
+    useEffect(() => {
+        async function fetchConversation() {
+            if (conversationList.length > 0) {
+                dispatch(getConversation(conversationList[0].address, conversationList[0].token))
+                    .then(() => {
+                        setHasFetched(true);
+                        setIsFetching(false);
+                    });
+            }
+        }
+        if (!hasFetched && !isFetching) {
+            setIsFetching(true);
+            fetchConversation();
+        }
+    }, [dispatch, hasFetched, isFetching, conversationList]);
+
+    const onSend = ([message]) => {
+        dispatch(sendMessage(conversationList[0].address, conversationList[0].token, message.text))
+            .then(() => {
+                setHasFetched(false);
+            });
+    };
 
     // Message Bubble
     const renderBubble = (props) => {
@@ -126,11 +151,7 @@ const Chat = withState()((s) => ({
                 placeholder='Type a new message...'
                 alwaysShowSend
                 showUserAvatar
-            // minComposerHeight={28}
-            // maxComposerHeight={106}
-            // minInputToolbarHeight={50}
             />
-            {console.log(messages)}
         </MainLayout>
     );
 });
