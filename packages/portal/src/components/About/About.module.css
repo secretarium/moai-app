@@ -1,4 +1,4 @@
-.container-about {
+.containerAbout {
     display: flex;
     flex-direction: column;
     flex: 0.85;
@@ -8,7 +8,7 @@
     padding: 20px;
 }
 
-.container-about > h1, h2 {
+.containerAbout > h1, h2 {
     font-weight: bold;
 }
 

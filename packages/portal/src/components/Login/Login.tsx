@@ -1,5 +1,4 @@
 import React from 'react';
-import './Login.css';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { Button, Divider } from 'antd';
 import { version as packageVersion } from '../../../package.json';
@@ -9,6 +8,7 @@ import LoginRegister from './LoginRegister';
 import LoginValidation from './LoginValidation';
 import LoginLanding from './LoginLanding';
 import LoginSignin from './LoginSignin';
+import style from './Login.module.css';
 
 
 const Login: React.FC = () => {
@@ -16,8 +16,8 @@ const Login: React.FC = () => {
     const history = useHistory();
 
     return (
-        <div className="container-main">
-            <div className="container-login">
+        <div className={style.containerMain}>
+            <div className={style.containerLogin}>
                 <img src={MoaiLogo} alt="moai logo" style={{ width: '100px', height: 'auto', marginBottom: '20px' }} />
                 <Switch>
                     <Route path="/login/register" component={LoginRegister} />
@@ -36,7 +36,7 @@ const Login: React.FC = () => {
                     </a> - <em>{`v${packageVersion}`}</em>
                 </span>
             </div>
-            <div className="hand">
+            <div className={style.hand}>
                 <img src={Hand} alt="moai app" />
             </div>
         </div>

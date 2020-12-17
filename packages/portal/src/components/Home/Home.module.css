@@ -1,4 +1,4 @@
-.container-home {
+.containerHome {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,28 +8,28 @@
     border-radius: 0 15px 15px 0;
 }
 
-.container-home > h1 {
+.containerHome > h1 {
     color: #000;
     font-size: 48px;
 }
 
-.info-home {
+.infoHome {
     color: #000;
     width: 75%;
 }
 
-.learn-more-home {
+.learnMoreHome {
     padding-top: 50px;
     justify-content: center;
     color: #000;
 }
 
-.learn-more-home > a {
+.learnMoreHome > a {
     color: #e95c59
 }
 
 @media (max-width: 1200px) {
-    .container-home {
+    .containerHome {
         border-radius: 0px;
     }
 }

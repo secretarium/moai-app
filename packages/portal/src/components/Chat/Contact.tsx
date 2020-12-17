@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './Contact.css';
 import { Link } from 'react-router-dom';
 import MoaiPin from '../../assets/moai-pin.png';
 import { withState } from '../../store';
 import { toDateTime } from '../../utils/timeHandler';
 import { getLastMessage } from '../../actions';
+import style from './Contact.module.css';
 
 
 type ContactProps = {
@@ -35,21 +35,21 @@ const Contact = withState<ContactProps>()((s) => ({
 
     return (
         <>
-            <Link className="contact" to={{
+            <Link className={style.contact} to={{
                 pathname: `/chat/${address}`,
                 state: { address: address, token: token }
             }}>
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginBottom: '15px' }} />
-                <div className="contact-info">
+                <div className={style.contactInfo}>
                     <h2>ID {address.slice(0, 8)}</h2>
                     {(fetchedInfo === true && lastMessage[index]) ?
                         <>
                             {lastMessage[index].text}
-                            <p className="contact-info-timestamp">{(lastMessage[index].datetime ? toDateTime(lastMessage[index].datetime) : 'New chat')}</p>
+                            <p className={style.contactInfoTimestamp}>{(lastMessage[index].datetime ? toDateTime(lastMessage[index].datetime) : 'New chat')}</p>
                         </> :
                         <>
                             {' '}
-                            <p className="contact-info-timestamp">{' '}</p>
+                            <p className={style.contactInfoTimestamp}>{' '}</p>
                         </>}
                 </div>
             </Link>

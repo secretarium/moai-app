@@ -1,4 +1,4 @@
-.contacts-bar {
+.contactsBar {
     display: flex;
     flex-direction: column;
     flex: 0.25;
@@ -13,7 +13,7 @@
     border-bottom: 2px solid #dee8ee;
 }
 
-.search-container {
+.searchContainer {
     display: flex;
     align-items: center;
     background-color: #fff;
@@ -23,11 +23,11 @@
     width: 100%;
 }
 
-.search-container > .ant-input {
+.searchContainer > div[class*=ant-input] {
     border-radius: 25px;
 }
 
-.search-container > input {
+.searchContainer > input {
     border: none;
     margin-right: 10px;
 }

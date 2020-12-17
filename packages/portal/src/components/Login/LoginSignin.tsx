@@ -60,7 +60,7 @@ const LoginSignin = withState()(
         return (
             <>
                 <h1>Welcome back</h1>
-                <Form className="form" name="registration" onFinish={handleLogin}>
+                <Form name="signin" onFinish={handleLogin}>
                     <Input defaultValue={currentKey?.name} value={currentKey?.name} />
                     <br />
                     <br />

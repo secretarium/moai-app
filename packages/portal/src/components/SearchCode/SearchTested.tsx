@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './SearchCode.css';
 import { Input, Alert } from 'antd';
 import SearchResult from './SearchResult';
 import { withState } from '../../store';
 import { getTested, clearSearchErrors, clearSearchResults } from '../../actions';
 import { useLocation } from 'react-router-dom';
+import style from './SearchCode.module.css';
 
 
 const { Search } = Input;
@@ -46,14 +46,14 @@ const SearchTested = withState()(
         };
 
         return (
-            <div className="container-search">
-                <div className="search-header">
-                    <div className="search-input-code">
+            <div className={style.containerSearch}>
+                <div className={style.searchHeader}>
+                    <div className={style.searchInputCode}>
                         <Search placeholder="Search Test ID..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }}
                             onChange={(): void => clearErrors()} onSearch={(value, event) => onSearch(value, event)} />
                     </div>
                 </div>
-                <div className="results">
+                <div className={style.results}>
                     {errorMessage ? <><Alert message={errorMessage} type="error" /><br /></> : null}
                     {tested ? <SearchResult userId={tested.userId} time={tested.time} /> : null}
                 </div>

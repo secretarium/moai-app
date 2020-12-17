@@ -1,9 +1,9 @@
 import React from 'react';
-import './Login.css';
 import { withState } from '../../store';
 import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { KeyOutlined } from '@ant-design/icons';
+import style from './Login.module.css';
 
 
 const LoginLanding = withState()(
@@ -21,7 +21,7 @@ const LoginLanding = withState()(
                     ? <>
                         <p>Please choose the account you want to log into.</p>
                         {keyPairs.map((keyPair, index) => <React.Fragment key={index}>
-                            <Button icon={<KeyOutlined translate />} className="key-name" onClick={(): void => {
+                            <Button icon={<KeyOutlined translate />} className={style.keyName} onClick={(): void => {
                                 history.push({
                                     pathname: '/login/signin',
                                     state: { email: keyPair.name }
