@@ -21,7 +21,7 @@ const LoginLanding = withState()(
                     ? <>
                         <p>Please choose the account you want to log into.</p>
                         {keyPairs.map((keyPair, index) => <React.Fragment key={index}>
-                            <Button icon={<KeyOutlined translate={{}} />} className={style.keyName} onClick={(): void => {
+                            <Button icon={<KeyOutlined />} className={style.keyName} onClick={(): void => {
                                 history.push({
                                     pathname: '/login/signin',
                                     state: { email: keyPair.name }
