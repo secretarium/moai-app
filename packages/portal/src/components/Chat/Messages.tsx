@@ -35,14 +35,6 @@ const Messages = withState()((s) => ({
     }, [address, location.state]);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            dispatch(getConversation(conversation.address, conversation.token));
-        }, 5000);
-
-        return () => clearInterval(timer);
-    });
-
-    useEffect(() => {
         if (fetchedConversation === false && conversation !== undefined) {
             dispatch(getConversation(conversation.address, conversation.token));
             setFetchedConversation(true);
@@ -51,10 +43,7 @@ const Messages = withState()((s) => ({
 
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        dispatch(sendMessage(conversation.address, conversation.token, message))
-            .then(() => {
-                setFetchedConversation(false);
-            });
+        dispatch(sendMessage(conversation.address, conversation.token, message));
         setMessage('');
     };
 

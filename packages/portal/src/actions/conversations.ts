@@ -38,7 +38,7 @@ export const createConversation = (title: string, name: string, userId: string):
     });
 
 export const getLastMessage = (address: string, token: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_LAST_MESSAGE, { address: address, token: token })({
+    requestFactory(commands.MOAI_GET_LAST_MESSAGE, { address: address, token: token }, true)({
         onResult: result => {
             return {
                 payload: {
@@ -51,8 +51,7 @@ export const getLastMessage = (address: string, token: string): MoaiPortal.Funct
 export const sendMessage = (address: string, token: string, message: string): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_SEND_MESSAGE, { address: address, token: token, message: message })({
         onExecuted: () => ({
-            payload: { message },
-            workload: dispatch => dispatch(getConversation(address, token))
+            payload: { message }
         }),
         onError: (error) => ({
             error: new Error(error)

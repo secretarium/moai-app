@@ -14,24 +14,17 @@ type ContactProps = {
 };
 
 const Contact = withState<ContactProps>()((s) => ({
-    lastMessage: s.conversations.lastMessage,
-    newMessage: s.conversations.newMessage
-}), ({ address, token, index, newMessage, lastMessage, dispatch }) => {
+    lastMessage: s.conversations.lastMessage
+}), ({ address, token, index, lastMessage, dispatch }) => {
 
-    const [fetchedInfo, setFetchedInfo] = useState(false);
-
-    useEffect(() => {
-        if (newMessage === true) {
-            setFetchedInfo(false);
-        }
-    }, [newMessage]);
+    const [hasFetchedLastMessage, setHasFetchedLastMessage] = useState(false);
 
     useEffect(() => {
-        if (fetchedInfo === false && lastMessage[index]) {
+        if (hasFetchedLastMessage === false) {
+            setHasFetchedLastMessage(true);
             dispatch(getLastMessage(address, token));
-            setFetchedInfo(true);
         }
-    }, [address, token, fetchedInfo, lastMessage, index, dispatch]);
+    }, []);
 
     return (
         <>
@@ -42,10 +35,10 @@ const Contact = withState<ContactProps>()((s) => ({
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginBottom: '15px' }} />
                 <div className="contact-info">
                     <h2>ID {address.slice(0, 8)}</h2>
-                    {(fetchedInfo === true && lastMessage[index]) ?
+                    {(hasFetchedLastMessage && lastMessage) ?
                         <>
-                            {lastMessage[index].text}
-                            <p className="contact-info-timestamp">{(lastMessage[index].datetime ? toDateTime(lastMessage[index].datetime) : 'New chat')}</p>
+                            {lastMessage.text}
+                            <p className="contact-info-timestamp">{(lastMessage.datetime ? toDateTime(lastMessage.datetime) : 'New chat')}</p>
                         </> :
                         <>
                             {' '}

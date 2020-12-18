@@ -147,9 +147,8 @@ declare namespace MoaiPortal {
     type Conversations = {
         isFetching: boolean;
         conversationList: Conversation[];
-        lastMessage: Message[];
+        lastMessage: Message;
         messages: Message[];
-        newMessage: boolean;
         newConversation: Conversation;
         messageError?: string;
     };

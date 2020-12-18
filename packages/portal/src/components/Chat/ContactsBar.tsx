@@ -10,10 +10,8 @@ const { Search } = Input;
 const ContactsBar = withState()((s) => ({
     conversationList: s.conversations.conversationList,
     messages: s.conversations.messages,
-    lastMessage: s.conversations.lastMessage,
-    newMessage: s.conversations.newMessage
+    lastMessage: s.conversations.lastMessage
 }), ({ conversationList }) => {
-
 
     return (
         <div className="contacts-bar">

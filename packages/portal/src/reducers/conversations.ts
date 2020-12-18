@@ -4,9 +4,8 @@ import { commands } from '../actions/constants';
 export const initialState: Conversations = {
     isFetching: true,
     conversationList: [],
-    lastMessage: [],
+    lastMessage: null,
     messages: [],
-    newMessage: false,
     newConversation: null
 };
 
@@ -42,16 +41,16 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
         case commands.MOAI_GET_LAST_MESSAGE.REQUEST: {
             return {
                 ...state,
-                lastMessage: [],
                 isFetching: true
             };
         }
         case commands.MOAI_GET_LAST_MESSAGE.SUCCESS: {
-            state.lastMessage.push(payload.result);
+            //state.lastMessage.push(payload.result);
+            state.messages.push(payload.result);
             return {
                 ...state,
                 isFetching: false,
-                newMessage: false
+                lastMessage: payload.result
             };
         }
         case commands.MOAI_SEND_MESSAGE.FAILURE: {
@@ -62,8 +61,7 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
         }
         case commands.MOAI_SEND_MESSAGE.SUCCESS: {
             return {
-                ...state,
-                newMessage: true
+                ...state
             };
         }
         case commands.MOAI_CREATE_CONVERSATION.SUCCESS: {
