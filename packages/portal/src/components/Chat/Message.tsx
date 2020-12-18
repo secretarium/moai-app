@@ -1,5 +1,5 @@
 import React from 'react';
-import './Message.css';
+import style from './Message.module.css';
 
 type Props = {
     username: string;
@@ -11,9 +11,9 @@ type Props = {
 const Message: React.FC<Props> = ({ username, message, timestamp, isSender }) => {
     return (
         <p className={`message-bubble ${isSender && 'message-sender'}`}>
-            <span className="message-name">{username}</span>
+            <span className={style.messageName}>{username}</span>
             {message}
-            <span className="message-timestamp">{timestamp}</span>
+            <span className={style.messageTimestamp}>{timestamp}</span>
         </p>
     );
 };

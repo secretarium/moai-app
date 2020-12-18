@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
 import { withState } from '../../store';
 import { getLastMessage } from '../../actions';
+import style from './Home.module.css';
 
 
 const Home = withState()((s) => ({
@@ -18,15 +18,15 @@ const Home = withState()((s) => ({
     }, [dispatch, fetchedContacts, conversationList]);
 
     return (
-        <div className="container-home">
+        <div className={style.containerHome}>
             <h1>Welcome to Moai</h1>
-            <p className="info-home">
+            <p className={style.infoHome}>
                 Search COVID-19 test results and exposure risk using test barcode or location QR code.
                 <br />
                 <br />
                 All information submitted in the portal is end-to-end encrypted.
             </p>
-            <p className="learn-more-home">
+            <p className={style.learnMoreHome}>
                 Learn more by visiting <a target="_blank" rel="noopener noreferrer" href="https://moaiapp.com/">moaiapp.com</a>
             </p>
         </div >

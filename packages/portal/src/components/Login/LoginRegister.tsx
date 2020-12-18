@@ -61,7 +61,7 @@ const LoginRegister = withState()(
         return (
             <>
                 <h1>Register to Moai Portal</h1>
-                <Form className="form" name="registration" onFinish={handleRegister}>
+                <Form name="registration" onFinish={handleRegister}>
                     <Form.Item name="email" rules={[{ required: true, message: 'Please input your email address!' }]}>
                         <Input placeholder="Email Address" onChange={(): void => clearErrors()} />
                     </Form.Item>
