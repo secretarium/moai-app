@@ -18,7 +18,7 @@ class MoaiDocument extends Document {
             <Html>
                 <Head title="Moai" />
                 <link href="https://unpkg.com/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet" />
-                <body>
+                <body className="overflow-x-hidden">
                     <Main />
                     <NextScript />
                 </body>

@@ -1,8 +1,9 @@
 import { AnyAction as ReduxAnyAction } from 'redux';
 import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
-import { Key } from '@secretarium/connector';
+import { EncryptedKeyPair } from '@secretarium/connector';
 
-declare namespace Moai {
+
+declare namespace MoaiPortal {
     interface FunctionAction {
         (dispatch: Dispatch, getState: () => State): any;
     }
@@ -93,29 +94,81 @@ declare namespace Moai {
     type System = {
         version: string;
         localConfiguration: SystemConfiguration;
-        localKey?: Key;
         currentConnection?: SystemConnection;
-        showOnboarding: boolean;
-        scanCounter: number;
         log: SystemLog;
+    };
+
+    type EncKeyPair = {
+        version: number;
+        iv: string;
+        salt: string;
+        data: string;
+    };
+
+    type Vault = {
+        keyPairs: EncryptedKeyPair[];
+    };
+
+    type Tracer = {
+        isConnected: boolean;
+        isVerified: boolean;
+        emailVerificationAttempt?: number;
+        validationError?: string;
+        loginError?: string;
+        registrationError?: string;
+    };
+
+    type SearchResults = {
+        isFetching: boolean;
+        tested: User;
+        exposed: User[];
+        searchTestedError?: string;
+        searchExposedError?: string;
+    };
+
+    type User = {
+        userId: string;
+        time: number;
+    };
+
+    type Conversation = {
+        address: string;
+        token: string;
+    };
+
+    type Message = {
+        datetime: number;
+        sender: number;
+        text: string;
+        received: number;
+        read: number;
+    };
+
+    type Conversations = {
+        isFetching: boolean;
+        conversationList: Conversation[];
+        lastMessage: Message[];
+        messages: Message[];
+        newMessage: boolean;
+        newConversation: Conversation;
+        messageError?: string;
     };
 
     type State = {
         system: System;
+        tracer: Tracer;
+        conversations: Conversations;
+        searchResults: SearchResults;
+        vault: Vault;
     };
+
 }
 
 declare module 'react-router-dom' {
     interface LinkProps {
-        underlayColor?: string
+        underlayColor?: string;
     }
 }
 
-declare module 'react-native-web' {
-    interface TouchableOpacity {
-        underlayColor?: string
-    }
-}
-
-export = Moai;
-export as namespace Moai;
+export = MoaiPortal;
+export as namespace MoaiPortal;

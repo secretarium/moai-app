@@ -1,6 +1,6 @@
 import { BarCodeScanningResult } from 'expo-camera';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Utils } from '../../../../connect/src';
+import { Utils } from '@secretarium/connector';
 
 export type ParsedCode = {
     source: string;

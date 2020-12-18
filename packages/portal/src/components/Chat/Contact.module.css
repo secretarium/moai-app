@@ -1,0 +1,26 @@
+.contact {
+    grid-area: sub;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 2px solid #dee8ee;
+    color: #000;
+    margin: 20px;
+}
+
+.contactInfo {
+    margin-left: 15px;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.contactInfo > h2 {
+    font-size: 18px;
+    color: #000;
+}
+
+.contactInfoTimestamp {
+    font-size: xx-small;
+}
