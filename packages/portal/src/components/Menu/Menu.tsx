@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Logout from '../../assets/logout.png';
 import Logo from '../../assets/logo-white.png';
 import { disconnect } from '../../actions';
 import { useDispatch } from 'react-redux';
