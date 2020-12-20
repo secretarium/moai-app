@@ -3,7 +3,6 @@ import { commands } from '../actions/constants';
 
 export const initialState: Conversations = {
     isFetching: true,
-    conversationList: [],
     conversation: null,
     messages: []
 };
@@ -26,15 +25,27 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
             return {
                 ...state,
                 isFetching: false,
-                conversationList: payload.result.conversations
+                conversation: payload.result.conversations[0]
             };
         }
         case commands.MOAI_GET_CONVERSATION.SUCCESS: {
             return {
                 ...state,
                 isFetching: false,
-                conversation: payload.result,
                 messages: payload.result.messages
+            };
+        }
+        case commands.MOAI_GET_LATEST_CONVERSATION.SUCCESS: {
+            return {
+                ...state,
+                conversation: payload.result
+            };
+        }
+        case commands.MOAI_GET_LAST_MESSAGE.SUCCESS: {
+            state.messages.push(payload.result);
+            return {
+                ...state,
+                isFetching: false
             };
         }
         case commands.MOAI_SEND_MESSAGE.FAILURE: {

@@ -68,3 +68,9 @@ public/disclaimer.txt
 /.pnp
 .pnp.js
 # @end @expo/next-adapter
+# dotenv environment variables file
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+.env.test
