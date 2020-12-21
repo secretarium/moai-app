@@ -3,7 +3,6 @@ import Message from './Message';
 import { useLocation, useParams } from 'react-router-dom';
 import { withState } from '../../store';
 import { getConversation, sendMessage } from '../../actions';
-import { toDateTime } from '../../utils/timeHandler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import MoaiPin from '../../assets/moai-pin.png';
