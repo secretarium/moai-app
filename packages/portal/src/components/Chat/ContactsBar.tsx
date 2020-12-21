@@ -8,9 +8,7 @@ const { Search } = Input;
 
 
 const ContactsBar = withState()((s) => ({
-    conversationList: s.conversations.conversationList,
-    messages: s.conversations.messages,
-    lastMessage: s.conversations.lastMessage
+    conversationList: s.conversations.conversationList
 }), ({ conversationList }) => {
 
     return (
@@ -22,7 +20,7 @@ const ContactsBar = withState()((s) => ({
             </div>
             <div className="chats">
                 {conversationList.map((convo, index) =>
-                    <Contact key={index} address={convo.address} token={convo.token} index={index} />
+                    <Contact key={index} address={convo.address} token={convo.token} />
                 )}
             </div>
         </div>

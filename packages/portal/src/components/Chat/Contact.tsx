@@ -10,21 +10,36 @@ import { getLastMessage } from '../../actions';
 type ContactProps = {
     address: string;
     token: string;
-    index: number;
 };
 
 const Contact = withState<ContactProps>()((s) => ({
-    lastMessage: s.conversations.lastMessage
-}), ({ address, token, index, lastMessage, dispatch }) => {
+    lastMessages: s.conversations.lastMessages
+}), ({ address, token, lastMessages, dispatch }) => {
 
+    const [messageText, setMessageText] = useState<string>();
+    const [messageTime, setMessageTime] = useState<number>();
     const [hasFetchedLastMessage, setHasFetchedLastMessage] = useState(false);
 
     useEffect(() => {
         if (hasFetchedLastMessage === false) {
             setHasFetchedLastMessage(true);
+            console.log('address contact', address);
             dispatch(getLastMessage(address, token));
         }
     }, []);
+
+    useEffect(() => {
+        if (hasFetchedLastMessage === true) {
+            const message = lastMessages.find(msg => msg.address === address);
+            if (message !== undefined) {
+                setMessageText(message.lastMessage.text);
+                setMessageTime(message.lastMessage.datetime);
+            } else {
+                setMessageText('');
+                setMessageTime(0);
+            }
+        }
+    }, [lastMessages, address, hasFetchedLastMessage]);
 
     return (
         <>
@@ -35,15 +50,10 @@ const Contact = withState<ContactProps>()((s) => ({
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginBottom: '15px' }} />
                 <div className="contact-info">
                     <h2>ID {address.slice(0, 8)}</h2>
-                    {(hasFetchedLastMessage && lastMessage) ?
-                        <>
-                            {lastMessage.text}
-                            <p className="contact-info-timestamp">{(lastMessage.datetime ? toDateTime(lastMessage.datetime) : 'New chat')}</p>
-                        </> :
-                        <>
-                            {' '}
-                            <p className="contact-info-timestamp">{' '}</p>
-                        </>}
+                    {messageText}
+                    <p className="contact-info-timestamp">
+                        {(messageTime !== 0 ? toDateTime(messageTime) : 'New chat!')}
+                    </p>
                 </div>
             </Link>
         </>

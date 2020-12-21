@@ -38,11 +38,12 @@ export const createConversation = (title: string, name: string, userId: string):
     });
 
 export const getLastMessage = (address: string, token: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_LAST_MESSAGE, { address: address, token: token }, true)({
+    requestFactory({...commands.MOAI_GET_LAST_MESSAGE, explicit:`mglm-${address.slice(0,5)}`}, { address: address, token: token }, true)({
         onResult: result => {
             return {
                 payload: {
-                    result
+                    result,
+                    address
                 }
             };
         }

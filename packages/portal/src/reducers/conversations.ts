@@ -4,7 +4,7 @@ import { commands } from '../actions/constants';
 export const initialState: Conversations = {
     isFetching: true,
     conversationList: [],
-    lastMessage: null,
+    lastMessages: [],
     messages: [],
     newConversation: null
 };
@@ -17,8 +17,7 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
             };
         }
         case commands.MOAI_GET_CONVERSATIONS.REQUEST:
-        case commands.MOAI_GET_CONVERSATION.REQUEST:
-        case commands.MOAI_CREATE_CONVERSATION.REQUEST: {
+        case commands.MOAI_GET_CONVERSATION.REQUEST: {
             return {
                 ...state,
                 isFetching: true
@@ -45,12 +44,16 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
             };
         }
         case commands.MOAI_GET_LAST_MESSAGE.SUCCESS: {
-            //state.lastMessage.push(payload.result);
+            const i = state.lastMessages.findIndex(lastMessage => lastMessage.address === payload.address);
+            if (i > -1) {
+                state.lastMessages[i] = { address: state.lastMessages[i].address, lastMessage: payload.result };
+            } else {
+                state.lastMessages.push({ address: payload.address, lastMessage: payload.result });
+            }
             state.messages.push(payload.result);
             return {
                 ...state,
-                isFetching: false,
-                lastMessage: payload.result
+                isFetching: false
             };
         }
         case commands.MOAI_SEND_MESSAGE.FAILURE: {
@@ -62,6 +65,13 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
         case commands.MOAI_SEND_MESSAGE.SUCCESS: {
             return {
                 ...state
+            };
+        }
+        case commands.MOAI_CREATE_CONVERSATION.REQUEST: {
+            return {
+                ...state,
+                isFetching: true,
+                newConversation: null
             };
         }
         case commands.MOAI_CREATE_CONVERSATION.SUCCESS: {
