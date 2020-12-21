@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { withState } from '../../store';
-import { getLastMessage } from '../../actions';
+import React from 'react';
 import style from './Home.module.css';
 
 
-const Home = withState()((s) => ({
-    conversationList: s.conversations.conversationList
-}), ({ conversationList, dispatch }) => {
-
-    const [fetchedContacts, setFetchedContacts] = useState(false);
-
-    useEffect(() => {
-        if (fetchedContacts === false && conversationList.length > 0) {
-            setFetchedContacts(true);
-            conversationList.map((convo) => dispatch(getLastMessage(convo.address, convo.token)));
-        }
-    }, [dispatch, fetchedContacts, conversationList]);
+const Home: React.FC = () => {
 
     return (
         <div className={style.containerHome}>
@@ -31,6 +18,6 @@ const Home = withState()((s) => ({
             </p>
         </div >
     );
-});
+};
 
 export default Home;

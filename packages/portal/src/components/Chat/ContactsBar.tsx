@@ -8,12 +8,8 @@ import style from './ContactsBar.module.css';
 const { Search } = Input;
 
 const ContactsBar = withState()((s) => ({
-    conversationList: s.conversations.conversationList,
-    messages: s.conversations.messages,
-    lastMessage: s.conversations.lastMessage,
-    newMessage: s.conversations.newMessage
+    conversationList: s.conversations.conversationList
 }), ({ conversationList }) => {
-
 
     return (
         <div className={style.contactsBar}>
@@ -24,7 +20,7 @@ const ContactsBar = withState()((s) => ({
             </div>
             <div className={style.chats}>
                 {conversationList.map((convo, index) =>
-                    <Contact key={index} address={convo.address} token={convo.token} index={index} />
+                    <Contact key={index} address={convo.address} token={convo.token} />
                 )}
             </div>
         </div>
