@@ -2,18 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Redirect } from '../../ReactRouter';
-import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
-import { SCP, Key, Constants } from '@secretarium/connector';
 import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
+import { checkIn } from '../../actions/system';
 
-const scp = new SCP();
-const isDev = process.env.NODE_ENV === 'development';
 
 const Checkin = withState<RouteComponentProps<{
     venue: string;
@@ -21,15 +18,14 @@ const Checkin = withState<RouteComponentProps<{
     type?: string
 }>>()(
     (s) => ({
-        localKey: s.system.localKey
+        checkInError: s.system.checkInError,
+        isConnected: s.system.isConnected
     }),
-    ({ dispatch, localKey, match }) => {
+    ({ dispatch, match, checkInError, isConnected }) => {
 
         const history = useHistory();
-        const [isConnecting, setIsConnecting] = useState(false);
-        const [isConnected, setIsConnected] = useState(false);
         const [redirect, setRedirect] = useState(false);
-        const [venuInfo, setVenuInfo] = useState<ParsedCode>({
+        const [venueInfo, setVenueInfo] = useState<ParsedCode>({
             source: Sources.MOAI,
             type: null,
             ...match.params
@@ -45,57 +41,22 @@ const Checkin = withState<RouteComponentProps<{
         const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
 
         useEffect(() => {
-            async function connectBackend() {
-                if (localKey && scp.state === Constants.ConnectionState.closed) {
-                    Key.importKey(localKey.exportableKey).then((key) => {
-                        scp.connect('wss://ovh-uk-eri-2288-2.node.secretarium.org:443', key, 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==').then(() => {
-                            setIsConnected(true);
-                            setIsConnecting(false);
-                        }).catch((error) => {
-                            setPageError(isDev ? `Connection error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                            setIsConnected(false);
-                            setIsConnecting(false);
-                            console.error('Connection error:', error);
+            async function checkInLocation() {
+                if (isConnected && venueInfo) {
+                    dispatch(checkIn(venueInfo))
+                        .then(() => {
+                            setRedirect(true);
+                        })
+                        .catch((error) => {
+                            console.error('checkIn', error);
+                            setPageError(checkInError);
+                            setShowModal(true);
+                            setVenueInfo(undefined);
                         });
-                    });
-                }
-                else if (scp.state === Constants.ConnectionState.secure) {
-                    setIsConnected(true);
-                    setIsConnecting(false);
                 }
             }
-            if (!isConnected && !isConnecting) {
-                setIsConnecting(true);
-                connectBackend();
-            }
-        }, [localKey, isConnected, pageError, isConnecting]);
-
-        useEffect(() => {
-            if (isConnected && venuInfo) {
-
-                const query = scp.newTx('moai', 'check-in', `moai-qr-${Date.now()}`, venuInfo);
-                query.onExecuted?.(() => {
-                    dispatch({ type: actionTypes.MOAI_SAVE_QR_CODE, payload: venuInfo });
-                    dispatch({ type: actionTypes.MOAI_INCREMENT_SCAN_COUNTER });
-                    setRedirect(true);
-                });
-                query.onError?.((error: any) => {
-                    console.error('Error', error);
-                    setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                    setVenuInfo(undefined);
-                    setIsConnected(false);
-                    setShowModal(true);
-                });
-                query.send?.()
-                    .catch((error) => {
-                        console.error('Error', error);
-                        setPageError(isDev ? `Transaction error: ${error?.message?.toString() ?? error?.toString()}` : 'Oops, a problem occured');
-                        setVenuInfo(undefined);
-                        setIsConnected(false);
-                        setShowModal(true);
-                    });
-            }
-        }, [dispatch, isConnected, venuInfo]);
+            checkInLocation();
+        }, [dispatch, isConnected, venueInfo, checkInError]);
 
         let composition;
 

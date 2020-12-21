@@ -1,10 +1,13 @@
 import React, { useState, useEffect, MouseEvent, ChangeEvent } from 'react';
-import './Messages.css';
 import Message from './Message';
 import { useLocation, useParams } from 'react-router-dom';
 import { withState } from '../../store';
 import { getConversation, sendMessage } from '../../actions';
+import { toDateTime } from '../../utils/timeHandler';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import MoaiPin from '../../assets/moai-pin.png';
+import style from './Messages.module.css';
 
 type ParamTypes = {
     address: string;
@@ -54,34 +57,34 @@ const Messages = withState()((s) => ({
     let composition = null;
     if (location.state === null || location.state === undefined)
         composition =
-            <div className="messages-no-chat">
+            <div className={style.messagesNoChat}>
                 <h1>Start chatting</h1>
             </div>;
     else
         composition =
             <>
-                <div className="messages-header">
+                <div className={style.messagesHeader}>
                     <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto' }} />
-                    <div className="messages-header-info">
+                    <div className={style.messagesHeaderInfo}>
                         ID {location.state.address.slice(0, 8)}
                     </div>
                 </div>
-                <div className="messages-body">
+                <div className={style.messagesBody}>
                     {messages.map((singleMessage, index) => {
                         return <Message key={index} message={singleMessage} />;
                     })}
                 </div>
-                <div className="messages-footer">
+                <div className={style.messagesFooter}>
                     <form>
                         <input value={message} onChange={onChange} type="text" placeholder="Type a new message..." />
                         <button onClick={onClick} type="submit">Send message</button>
                     </form>
-                    <i className="fas fa-paper-plane fa-2x" style={{ color: '#25A9E1', padding: '10px' }} />
+                    <FontAwesomeIcon icon={faPaperPlane} />
                 </div>
             </>;
 
     return (
-        <div className="messages">
+        <div className={style.messages}>
             {composition}
         </div>
     );

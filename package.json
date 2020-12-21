@@ -1,6 +1,6 @@
 {
     "name": "@secretarium/moai",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "private": true,
     "description": "Privacy preserving QRCode based checking application",
     "repository": "https://github.com/secretarium/moai-app",
@@ -14,10 +14,8 @@
     "scripts": {
         "lint": "yarn workspaces foreach run lint",
         "lint:fix": "yarn workspaces foreach run lint:fix",
-        "dockerize": "docker build -t secretarium/moai-website .",
         "build": "yarn workspaces foreach run build",
         "start": "yarn workspaces foreach run start",
-        "dev:website": "yarn workspaces foreach -p -i --include @secretarium/moai-strapi --include @secretarium/moai-www run dev",
         "web": "yarn workspace @secretarium/moai-expo web",
         "android": "yarn workspace @secretarium/moai-expo android",
         "ios": "yarn workspace @secretarium/moai-expo ios",

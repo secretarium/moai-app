@@ -70,7 +70,7 @@ const LoginValidation = withState()(
             <>
                 <h1>Email address verification</h1>
                 <p style={{ width: '85%' }}>{`We have sent a verification code to ${location.state.email}. Enter it here and press 'Verify Email'.`}</p>
-                <Form className="form" name="registration" onFinish={handleValidate}>
+                <Form name="validation" onFinish={handleValidate}>
                     <Form.Item name="code" rules={[{ required: true, message: 'Please input the verification code!' }]}>
                         <Input placeholder="Verification Code" onChange={(): void => clearErrors()} />
                     </Form.Item>

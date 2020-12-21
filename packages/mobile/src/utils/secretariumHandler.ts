@@ -1,4 +1,5 @@
-import { Key, SCP, Transaction } from '@secretarium/connector';
+import { ClearKeyPair, Key, SCP, Transaction } from '@secretarium/connector';
+import { REACT_APP_SECRETARIUM_GATEWAYS } from '@env';
 
 interface SecretariumGatewayConfig {
     key: string;
@@ -58,12 +59,21 @@ const printClusterInfo = () => {
 const secretariumHandler = {
     connector: new SCP(),
     initialize: (): void => {
-        handlerStore.clusters = (process?.env?.REACT_APP_SECRETARIUM_GATEWAYS ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
+        handlerStore.clusters = (REACT_APP_SECRETARIUM_GATEWAYS as string ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         printClusterInfo();
     },
     createDeviceKey: (): Promise<Key> =>
         new Promise((resolve, reject) => {
             Key.createKey()
+                .then((key) => {
+                    handlerStore.currentKey = key;
+                    resolve(key);
+                })
+                .catch((e: any) => reject(e));
+        }),
+    use: (clearKeyPair: ClearKeyPair): Promise<Key> =>
+        new Promise((resolve, reject) => {
+            Key.importKey(clearKeyPair)
                 .then((key) => {
                     handlerStore.currentKey = key;
                     resolve(key);

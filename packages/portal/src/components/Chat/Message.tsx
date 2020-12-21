@@ -1,5 +1,5 @@
 import React from 'react';
-import './Message.css';
+import style from './Message.module.css';
 import { toDateTime } from '../../utils/timeHandler';
 
 type Props = {
@@ -7,12 +7,24 @@ type Props = {
 };
 
 const Message: React.FC<Props> = ({ message }) => {
-    return (
-        <p className={`message-bubble ${message.sender === 0 && 'message-sender'}`}>
-            <span className="message-name">{message.sender === 0 ? 'You' : 'Moai User'}</span>
+
+    let composition;
+    if (message.sender === 0)
+        composition = <p className={style.messageBubbleSender}>
+            <span className={style.messageName}>You</span>
             {message.text}
-            <span className="message-timestamp">{toDateTime(message.datetime)}</span>
-        </p>
+            <span className={style.messageTimestamp}>{toDateTime(message.datetime)}</span>
+        </p>;
+    else
+        composition = <p className={style.messageBubbleReceiver}>
+            <span className={style.messageName}>Moai User</span>
+            {message.text}
+            <span className={style.messageTimestamp}>{toDateTime(message.datetime)}</span>
+        </p>;
+    return (
+        <>
+            { composition}
+        </>
     );
 };
 
