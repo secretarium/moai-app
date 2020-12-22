@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withState } from '../../store';
 import { Button, Input, Form, Alert } from 'antd';
-import { verifyTracer, clearTracerErrors, challengeTracer } from '../../actions';
+import { verifyTracer, clearTracerErrors, sendNewValidationCode } from '../../actions';
 import { useLocation, useHistory } from 'react-router-dom';
 import { EncryptedKeyPair } from '@secretarium/connector';
 
@@ -14,9 +14,10 @@ const LoginValidation = withState()(
     (s) => ({
         validationError: s.tracer.validationError,
         registrationError: s.tracer.registrationError,
+        challengeError: s.tracer.challengeError,
         keyPairs: s.vault.keyPairs
     }),
-    ({ dispatch, validationError, registrationError, keyPairs }) => {
+    ({ dispatch, validationError, registrationError, challengeError, keyPairs }) => {
 
         const location = useLocation<LocationTypes>();
         const history = useHistory();
@@ -37,12 +38,18 @@ const LoginValidation = withState()(
                 setErrorMessage(validationError);
             }
 
+            if (challengeError && errorMessage !== challengeError) {
+                setIsValidating(false);
+                setErrorsClear(true);
+                setErrorMessage(challengeError);
+            }
+
             if (registrationError) {
                 setIsValidating(false);
                 history.push('/login/register');
             }
 
-        }, [validationError, registrationError, errorMessage, currentKey, location, keyPairs, history]);
+        }, [validationError, registrationError, challengeError, errorMessage, currentKey, location, keyPairs, history]);
 
         const handleValidate = (values: any): void => {
             setIsValidating(true);
@@ -60,7 +67,7 @@ const LoginValidation = withState()(
 
         const resendCode = (): void => {
             setIsSendingCode(true);
-            dispatch(challengeTracer())
+            dispatch(sendNewValidationCode())
                 .then(() => {
                     setIsSendingCode(false);
                 });
@@ -76,9 +83,8 @@ const LoginValidation = withState()(
                     </Form.Item>
                     <Form.Item>
                         <Button.Group>
-                            <Button loading={isSendingCode} onClick={() => {
-                                resendCode();
-                            }}>Resend Code</Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button loading={isSendingCode} onClick={(): void => resendCode()}>
+                                Resend Code</Button>&nbsp;&nbsp;&nbsp;&nbsp;
                             <Button type="primary" htmlType="submit" loading={isValidating} style={{ backgroundColor: '#00b0ee', width: '120px' }}>
                                 Verify Email
                             </Button>

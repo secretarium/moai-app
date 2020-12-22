@@ -116,6 +116,7 @@ declare namespace MoaiPortal {
         validationError?: string;
         loginError?: string;
         registrationError?: string;
+        challengeError?: string;
     };
 
     type SearchResults = {
