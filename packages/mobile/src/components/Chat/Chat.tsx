@@ -9,7 +9,7 @@ import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
 import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
-import { getConversation, sendMessage, getConversations } from '../../actions/conversations';
+import { getConversation, sendMessage } from '../../actions/conversations';
 import { withState } from '../../store';
 import { useHistory } from 'react-router';
 import { commonStyles } from '../commonStyles';
@@ -17,14 +17,12 @@ import { commonStyles } from '../commonStyles';
 
 const Chat = withState()((s) => ({
     messages: s.conversations.messages,
-    conversationList: s.conversations.conversationList,
     conversation: s.conversations.conversation
-}), ({ messages, conversationList, dispatch }) => {
+}), ({ messages, conversation, dispatch }) => {
 
     const history = useHistory();
     const [stateMessages, setMessages] = useState([]);
     const [hasFetchedConversation, setHasFetchedConversation] = useState(false);
-    const [hasFetchedConversations, setHasFetchedConversations] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [error, setError] = useState<string>();
 
@@ -49,43 +47,24 @@ const Chat = withState()((s) => ({
     }, [messages]);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            conversationList.length > 0 ?? dispatch(getConversation(conversationList[0].address, conversationList[0].token));
-        }, 5000);
-
-        return () => clearInterval(timer);
-    });
-
-    useEffect(() => {
-        async function fetchConversations() {
-            dispatch(getConversations())
-                .then(() => {
-                    setHasFetchedConversations(true);
-                });
-        }
-        if (!hasFetchedConversations && conversationList.length === 0) {
-            fetchConversations();
-        }
-    }, [dispatch, hasFetchedConversations, conversationList]);
-
-    useEffect(() => {
-        if (conversationList.length === 0) {
+        if (isEmptyObject(conversation) || conversation === null || conversation === undefined) {
             setError('No one has contacted you.');
             setShowModal(true);
         }
-        if (hasFetchedConversation === false && conversationList[0]) {
+        if (hasFetchedConversation === false && !isEmptyObject(conversation) && conversation !== undefined) {
             setHasFetchedConversation(true);
-            dispatch(getConversation(conversationList[0].address, conversationList[0].token));
+            dispatch(getConversation(conversation.address, conversation.token));
         }
-    }, [dispatch, hasFetchedConversation, conversationList, messages, history]);
+    }, [dispatch, hasFetchedConversation, conversation, messages, history]);
 
     const onSend = ([message]) => {
-        if (conversationList.length !== 0) {
-            dispatch(sendMessage(conversationList[0].address, conversationList[0].token, message.text))
-                .then(() => {
-                    setHasFetchedConversation(false);
-                });
+        if (!isEmptyObject(conversation) || conversation !== null) {
+            dispatch(sendMessage(conversation.address, conversation.token, message.text));
         }
+    };
+
+    const isEmptyObject = (obj) => {
+        return JSON.stringify(obj) === '{}';
     };
 
     // Message Bubble
