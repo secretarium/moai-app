@@ -53,6 +53,7 @@ const printClusterInfo = () => {
     });
 
     console.info('SFX now using the following cluster configuration');
+    console.log(REACT_APP_SECRETARIUM_GATEWAYS);
     console.table(printableConfig);
 };
 

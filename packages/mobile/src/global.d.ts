@@ -1,6 +1,6 @@
 import { AnyAction as ReduxAnyAction } from 'redux';
 import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
-import { Key, ClearKeyPair } from '@secretarium/connector';
+import { ClearKeyPair } from '@secretarium/connector';
 
 declare namespace Moai {
     interface FunctionAction {
@@ -117,7 +117,6 @@ declare namespace Moai {
 
     type Conversations = {
         isFetching: boolean;
-        conversationList: Conversation[];
         conversation: Conversation;
         messages: Message[];
         messageError?: string;

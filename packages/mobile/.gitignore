@@ -59,4 +59,19 @@ public/disclaimer.txt
 *.key
 *.mobileprovision
 *.orig.*
+# Next.js
+/.next/*
+/out/
+# Next.js production
+/build/
+# Next.js dependencies
+/.pnp
+.pnp.js
+# @end @expo/next-adapter
+# dotenv environment variables file
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+.env.test
 # @end
