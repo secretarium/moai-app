@@ -5194,7 +5194,7 @@ __metadata:
     mongoose: 5.11.8
     supertest: 6.0.1
     ts-jest: 26.4.4
-    ts-node: 9.1.0
+    ts-node: 9.1.1
     typescript: 4.0.3
   languageName: unknown
   linkType: soft
@@ -31987,9 +31987,9 @@ resolve@1.15.0:
   languageName: node
   linkType: hard
 
-"ts-node@npm:9.1.0":
-  version: 9.1.0
-  resolution: "ts-node@npm:9.1.0"
+"ts-node@npm:9.1.1":
+  version: 9.1.1
+  resolution: "ts-node@npm:9.1.1"
   dependencies:
     arg: ^4.1.0
     create-require: ^1.1.0
@@ -32004,7 +32004,7 @@ resolve@1.15.0:
     ts-node-script: dist/bin-script.js
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
-  checksum: a372dd6d4d4228e6670b76920a582021441f9b8fc64382b106160443a92f3fbe87c1a79e2a2be869a3fdc1d81631771e4627c99ec321b781cdc652d020c61fda
+  checksum: af07cb1cee1b2ae9a56dfb400da945640e03bd1add60c71835228b191be65332887eebb8304cba0953bcadf83084f7b3997d169a3573fe64f8077459b64aee90
   languageName: node
   linkType: hard
 
