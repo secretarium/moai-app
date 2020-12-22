@@ -1,30 +1,26 @@
 import React from 'react';
-import './ContactsBar.css';
 import { Input } from 'antd';
 import Contact from './Contact';
 import { withState } from '../../store';
+import style from './ContactsBar.module.css';
+
 
 const { Search } = Input;
 
-
 const ContactsBar = withState()((s) => ({
-    conversationList: s.conversations.conversationList,
-    messages: s.conversations.messages,
-    lastMessage: s.conversations.lastMessage,
-    newMessage: s.conversations.newMessage
+    conversationList: s.conversations.conversationList
 }), ({ conversationList }) => {
 
-
     return (
-        <div className="contacts-bar">
-            <div className="search">
-                <div className="search-container">
+        <div className={style.contactsBar}>
+            <div className={style.search}>
+                <div className={style.searchContainer}>
                     <Search placeholder="Search..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }} />
                 </div>
             </div>
-            <div className="chats">
+            <div className={style.chats}>
                 {conversationList.map((convo, index) =>
-                    <Contact key={index} address={convo.address} token={convo.token} index={index} />
+                    <Contact key={index} address={convo.address} token={convo.token} />
                 )}
             </div>
         </div>

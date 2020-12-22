@@ -1,4 +1,4 @@
-.message-bubble {
+.messageBubbleReceiver {
     position: relative;
     font-size: 15px;
     padding: 10px;
@@ -11,7 +11,21 @@
     color: #000
 }
 
-.message-name {
+.messageBubbleSender {
+    position: relative;
+    font-size: 15px;
+    padding: 10px;
+    margin-left: auto;
+    background-color: #25A9E1;
+    border-radius: 15px;
+    width: fit-content;
+    max-width: 80%;
+    margin-bottom: 25px;
+    color: #fff;
+    border: none;
+}
+
+.messageName {
     position: absolute;
     top: -15px;
     font-weight: 800;
@@ -19,14 +33,7 @@
     color: #000;
 }
 
-.message-sender {
-    margin-left: auto;
-    background-color: #25A9E1;
-    color: #fff;
-    border: none;
-}
-
-.message-timestamp {
+.messageTimestamp {
     margin-left: 10px;
     font-size: xx-small;
 }

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './About.css';
 import { version as packageVersion } from '../../../package.json';
 import ReactMarkdown from 'react-markdown';
+import style from './About.module.css';
 
 
 const About: React.FC = () => {
 
     const [hasFetched, setHasFetched] = useState<boolean>(false);
     const [disclaimer, setDisclaimer] = useState<string>('Loading');
-    //const [licenses, setLicenses] = useState<any>({ status: 'Loading' });
 
     useEffect(() => {
         if (!hasFetched) {
@@ -16,16 +15,12 @@ const About: React.FC = () => {
                 .then((result) => result.text())
                 .then(text => setDisclaimer(text))
                 .catch(() => setDisclaimer('An error occured'));
-            // fetch('/licenses.json')
-            //     .then((result) => result.json())
-            //     .then(text => setLicenses(text))
-            //     .catch(() => setDisclaimer('An error occured'));
             setHasFetched(true);
         }
     }, [hasFetched]);
 
     return (
-        <div className="container-about">
+        <div className={style.containerAbout}>
             <h1>{`About Moai v${packageVersion}`}</h1>
             <div>
                 <p>
@@ -46,14 +41,9 @@ const About: React.FC = () => {
                     whether by implication, estoppel or otherwise.
                 </p>
                 <h2>External licenses</h2>
-                <div className="licenses">
+                <div className={style.licenses}>
                     <ReactMarkdown source={disclaimer} />
                 </div>
-                {/* <h2>List of top-level dependencies</h2>
-                {console.log(licenses)}
-                {Object.keys(licenses).map(function (key) {
-                    return <div>Key: {key}, Value: {licenses[key]}</div>;
-                })} */}
             </div>
         </div>
     );

@@ -4,9 +4,9 @@ import './Body.css';
 
 const Body: React.FC = ({ children }) => {
     return (
-        <div>
+        <>
             {children}
-        </div>
+        </>
     );
 };
 

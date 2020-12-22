@@ -6,7 +6,7 @@
     border-radius: 0 15px 15px 0;
 }
 
-.messages-header {
+.messagesHeader {
     padding: 15px;
     display: flex;
     align-items: center;
@@ -18,18 +18,18 @@
     border-bottom: 2px solid #dee8ee;
 }
 
-.messages-header-info {
+.messagesHeaderInfo {
     flex: 1;
     padding-left: 20px;
 }
 
-.messages-body {
+.messagesBody {
     flex: 1;
     padding: 30px;
     overflow: auto;
 }
 
-.messages-footer {
+.messagesFooter {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,36 +40,36 @@
     margin: 20px 40px 20px 40px;
 }
 
-.messages-footer > form {
+.messagesFooter > form {
     flex: 1;
     display: flex;
     margin-left: 15px;
 }
 
-.messages-footer > form > input {
+.messagesFooter > form > input {
     flex: 1;
     border: none;
     padding: 8px;
     outline: none;
 }
 
-.messages-footer > form > button {
+.messagesFooter > form > button {
     display: none
 }
 
-.messages-no-chat {
+.messagesNoChat {
     display: flex;
     flex: 1;
     align-items: center;
     justify-content: center;
 }
 
-.messages-no-chat > h1 {
+.messagesNoChat > h1 {
     color: #000;
 }
 
 @media (max-width: 1200px) {
-    .messages, .messages-footer, .messages-header {
+    .messages, .messagesFooter, .messagesHeader {
         border-radius: 0px;
     }
 }

@@ -1,4 +1,5 @@
 .contact {
+    grid-area: sub;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -7,7 +8,7 @@
     margin: 20px;
 }
 
-.contact-info {
+.contactInfo {
     margin-left: 15px;
     width: 150px;
     overflow: hidden;
@@ -15,11 +16,11 @@
     text-overflow: ellipsis;
 }
 
-.contact-info > h2 {
+.contactInfo > h2 {
     font-size: 18px;
     color: #000;
 }
 
-.contact-info-timestamp {
+.contactInfoTimestamp {
     font-size: xx-small;
 }

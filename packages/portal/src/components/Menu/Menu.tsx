@@ -1,10 +1,11 @@
 import React from 'react';
-import './Menu.css';
 import { NavLink } from 'react-router-dom';
-import Logout from '../../assets/logout.png';
 import Logo from '../../assets/logo-white.png';
 import { disconnect } from '../../actions';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faComment, faBarcode, faQrcode, faInfo, faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import style from './Menu.module.css';
 
 
 const Menu: React.FC = () => {
@@ -12,40 +13,43 @@ const Menu: React.FC = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="sidebar">
-            <div className="header">
-                {/** connection status */}
-                <img src={Logo} alt="moai" style={{ width: '100px', height: 'auto' }} />
+        <div className={style.sidebar}>
+            <div className={style.header}>
+                <img src={Logo} alt="moai" />
             </div>
-            <div className="options">
-                <NavLink exact className="option" to={'/'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
-                    <i className="fas fa-home fa-lg" style={{ paddingRight: '10px' }} />
-                    Home
+            <div className={style.options}>
+                <NavLink exact className={style.option} to={'/'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <FontAwesomeIcon icon={faHome} />
+                    <span>Home</span>
                 </NavLink>
-                <NavLink className="option" to={'/chat'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
-                    <i className="fas fa-comments fa-lg" style={{ paddingRight: '10px' }} />
-                    Chat
+                <NavLink className={style.option} to={'/chat'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <FontAwesomeIcon icon={faComment} />
+                    <span>Chat</span>
                 </NavLink>
-                <NavLink className="option" to={'/search/tested'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
-                    <i className="fas fa-barcode fa-lg" style={{ paddingRight: '10px' }} />
-                    Search Test ID
+                <NavLink className={style.option} to={'/search/tested'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <FontAwesomeIcon icon={faBarcode} />
+                    <span>Search Test ID</span>
                 </NavLink>
-                <NavLink className="option" to={'/search/exposed'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
-                    <i className="fas fa-qrcode fa-lg" style={{ paddingRight: '13px' }} />
-                    Search Location Code
+                <NavLink className={style.option} to={'/search/exposed'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <FontAwesomeIcon icon={faQrcode} />
+                    <span>Search Location Code</span>
                 </NavLink>
-                {/* <NavLink className="option" to={'/settings'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
-                    <i className="fas fa-cog fa-lg" style={{ paddingRight: '10px' }} />
-                    Settings
+                {/* <NavLink className={style.option} to={'/settings'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <FontAwesomeIcon icon={faCog}  />
+                    <span>Settings</span>
                 </NavLink> */}
-                <NavLink className="option" to={'/about'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
-                    <i className="fas fa-info-circle fa-lg" style={{ paddingRight: '10px' }} />
-                    About Moai
+                <NavLink className={style.option} to={'/about'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                    <FontAwesomeIcon icon={faInfo} style={{ width: '0.8rem' }} />
+                    <span>About Moai</span >
+                </NavLink>
+                <br />
+                <br />
+                <br />
+                <NavLink className={style.option} to={'/'} onClick={() => dispatch(disconnect())} >
+                    <FontAwesomeIcon icon={faPowerOff} />
+                    <span>Logout</span >
                 </NavLink>
             </div>
-            <NavLink className="logout" to={'/'} onClick={() => dispatch(disconnect())} style={{ color: '#fff' }}>
-                <img src={Logout} alt="logout" style={{ width: '45px', height: 'auto', marginRight: '8px' }} /> Logout
-            </NavLink>
         </div>
     );
 };

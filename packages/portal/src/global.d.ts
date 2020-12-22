@@ -144,12 +144,16 @@ declare namespace MoaiPortal {
         read: number;
     };
 
+    type LastMessage = {
+        address: string;
+        lastMessage: Message;
+    };
+
     type Conversations = {
         isFetching: boolean;
         conversationList: Conversation[];
-        lastMessage: Message[];
+        lastMessages: LastMessage[];
         messages: Message[];
-        newMessage: boolean;
         newConversation: Conversation;
         messageError?: string;
     };

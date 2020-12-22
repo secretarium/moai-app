@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import './SearchResult.css';
 import MoaiPin from '../../assets/moai-pin.png';
 import { toDateTime } from '../../utils/timeHandler';
 import { useHistory } from 'react-router-dom';
 import { createConversation } from '../../actions/conversations';
 import { withState } from '../../store';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import style from './SearchResult.module.css';
 
 
 type SearchResultProps = {
@@ -29,21 +31,21 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
     };
 
     return (
-        <div className="search-result-container">
-            <div className="search-result-header">
+        <div className={style.searchResultContainer}>
+            <div className={style.searchResultHeader}>
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginRight: '10px' }} />
                 {/* {`User ID: ${userId}`} */}
             </div>
-            <div className="search-result-body">
+            <div className={style.searchResultBody}>
                 {`User ID: ${userId}`}
                 <br></br>Time: {toDateTime(time)}
                 {/* <br></br>Barcode references: 0 */}
             </div>
-            <div className="search-result-footer">
-                <div className="search-result-button" onClick={() => onClick()}>
-                    <i className="far fa-envelope fa-lg" style={{ paddingRight: '8px' }} /> Message
+            <div className={style.searchResultFooter}>
+                <div className={style.searchResultButton} onClick={() => onClick()}>
+                    <FontAwesomeIcon icon={faEnvelope} /> Message
                 </div>
-                {/* <div className="search-result-button">
+                {/* <div className={style.search-result-button}>
                     Phone
                 </div> */}
             </div>
