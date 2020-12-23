@@ -63,7 +63,7 @@
         "uuid": "8.3.2"
     },
     "devDependencies": {
-        "@babel/core": "7.12.9",
+        "@babel/core": "7.12.10",
         "@babel/preset-typescript": "7.12.7",
         "@expo/webpack-config": "0.12.52",
         "@storybook/addon-actions": "6.1.10",
