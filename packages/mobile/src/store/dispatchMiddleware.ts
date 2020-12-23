@@ -5,6 +5,7 @@ export const secretariumMiddleware: Middleware = ({ dispatch, getState }) => nex
     const unfold = async (action: any): Promise<any> => {
 
         let start;
+        console.log(action);
         if (typeof action === 'function')
             start = action(dispatch, () => getState?.()?.toJS?.());
         else
