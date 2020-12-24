@@ -31,7 +31,7 @@
         "deepmerge": "4.2.2",
         "expo": "39.0.5",
         "expo-asset": "8.2.0",
-        "expo-barcode-scanner": "9.0.0",
+        "expo-barcode-scanner": "9.1.0",
         "expo-camera": "9.0.0",
         "expo-constants": "9.2.0",
         "expo-file-system": "9.2.0",
