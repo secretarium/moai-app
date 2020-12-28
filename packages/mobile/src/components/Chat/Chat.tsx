@@ -47,7 +47,6 @@ const Chat = withState()((s) => ({
     }, [messages]);
 
     useEffect(() => {
-        console.log('CONVERSATION', conversation);
         if (isEmptyObject(conversation) || conversation === null || conversation === undefined) {
             setError('No one has contacted you.');
             setShowModal(true);
