@@ -99,7 +99,7 @@ const App = withState()(
                 setIsConnecting(true);
                 connectBackend();
             }
-        }, [dispatch, localKey, hasConnected, isConnecting, hasObtainedLocalKey]);
+        }, [dispatch, localKey, hasConnected, isConnecting, hasObtainedLocalKey, isConnected]);
 
         const handleAppStateChange = useCallback((nextAppState: string) => {
             if (nextAppState === 'active') {
@@ -117,7 +117,7 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !hasConnected || isConnecting)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !isConnected)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
