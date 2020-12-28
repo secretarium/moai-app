@@ -86,19 +86,8 @@ export const verifyTracer = (code: string): MoaiPortal.FunctionAction =>
         })
     });
 
-export const challengeTracer = (): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_CHALLENGE_TRACER, {})({
-        onResult: result => {
-            return {
-                payload: {
-                    result
-                }
-            };
-        },
-        onError: (error) => ({
-            error: new Error(error)
-        })
-    });
+export const sendNewValidationCode = (): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_CHALLENGE_TRACER, {})();
 
 export const getTracerDetails = (): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_GET_TRACER_DETAILS, {})({
