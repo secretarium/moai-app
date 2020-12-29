@@ -1,6 +1,6 @@
 import { BarCodeScanningResult } from 'expo-camera';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Utils } from '../../../../connect/src';
+import { Utils } from '@secretarium/connector';
 
 export type ParsedCode = {
     source: string;
@@ -26,7 +26,7 @@ export const parseCode = ({ type, data }: BarCodeScanningResult): ParsedCode => 
                 const comps = data.split('/').slice(-2);
                 if (comps?.length === 2 && comps[0] === 'check')
                     return {
-                        source: Sources.MOAI,
+                        source: 'MOAI',
                         venue: comps[1]
                     };
             }
@@ -34,7 +34,7 @@ export const parseCode = ({ type, data }: BarCodeScanningResult): ParsedCode => 
                 try {
                     const comps = data.split(':');
                     const jwtcp = comps[2]?.split('.');
-                    const venue = JSON.parse(Utils.fromBase64(jwtcp[1]));
+                    const venue = JSON.parse(String(Utils.fromBase64(jwtcp[1])));
                     return {
                         source: Sources.NHS,
                         venue: venue.id,

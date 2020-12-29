@@ -1,0 +1,26 @@
+.containerHome {
+    display: block;
+    grid-area: sub / sub / content / content;
+    background-color: #fff;
+    color: #000;
+}
+
+.containerHome > h1 {
+    font-size: 48px;
+}
+
+.containerHome > h1 , .infoHome, .learnMoreHome {
+    padding: 3rem 8rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.learnMoreHome > a {
+    color: #e95c59
+}
+
+@media (max-width: 1200px) {
+    .containerHome {
+        border-radius: 0px;
+    }
+}

@@ -1,0 +1,19 @@
+.containerAbout {
+    grid-area: sub / sub / content / content;
+    overflow: auto;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.containerAbout > h1, h2 {
+    font-weight: bold;
+}
+
+.licenses {
+    display: inline-block;
+    height: 380px;
+    overflow: auto;
+    text-align: justify;
+    padding: 10px;
+    background-color: #ededed;
+}

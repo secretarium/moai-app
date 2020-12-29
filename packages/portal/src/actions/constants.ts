@@ -1,16 +1,31 @@
 let actionMarker = 0;
 
 const commandsPrototype = {
-    MOAI: { application: 'moai', command: 'update-user' },
-    MOAI_PORTAL_GET_CONTACTS: { application: 'moai', command: 'get-contacts' },
+    MOAI_GET_CONVERSATIONS: { application: 'moai', command: 'get-conversations' },
+    MOAI_CREATE_CONVERSATION: { application: 'moai', command: 'create-conversation' },
+    MOAI_GET_CONVERSATION: { application: 'moai', command: 'conversations-get' },
+    MOAI_GET_LAST_MESSAGE: { application: 'moai', command: 'conversations-get-latest-message' },
+    MOAI_SEND_MESSAGE: { application: 'moai', command: 'conversations-write-message' },
+    MOAI_MARK_AS_READ: { application: 'moai', command: 'mark-as-read' },
+    MOAI_REGISTER_TRACER: { application: 'moai', command: 'register-tracer' },
+    MOAI_VERIFY_TRACER: { application: 'moai', command: 'verify-tracer' },
+    MOAI_REGISTER_TEST_BARCODE: { application: 'moai', command: 'register-test-barcode' },
+    MOAI_GET_TESTED: { application: 'moai', command: 'get-tested' },
+    MOAI_GET_EXPOSED: { application: 'moai', command: 'get-exposed' },
+    MOAI_CHALLENGE_TRACER: { application: 'moai', command: 'challenge-tracer' },
+    MOAI_GET_TRACER_DETAILS: { application: 'moai', command: 'get-tracer-details' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
 const actionPrototypes = {
+    MOAI_PORTAL_LOGOUT: 'MOAI_PORTAL_LOGOUT',
+    MOAI_PORTAL_LOGIN: 'MOAI_PORTAL_LOGIN',
     MOAI_PORTAL_SAVE_LOCAL_KEY: 'MOAI_PORTAL_SAVE_LOCAL_KEY',
-    MOAI_PORTAL_SEND_MESSAGE: 'MOAI_PORTAL_SEND_MESSAGE',
-    MOAI_PORTAL_RECEIVE_MESSAGE: 'MOAI_PORTAL_RECEIVE_MESSAGE',
-    MOAI_PORTAL_GET_CHATS: 'MOAI_PORTAL_GET_CHATS',
+    MOAI_PORTAL_TRACER_ERROR_CLEANUP: 'MOAI_PORTAL_TRACER_ERROR_CLEANUP',
+    MOAI_PORTAL_SEARCH_ERROR_CLEANUP: 'MOAI_PORTAL_SEARCH_ERROR_CLEANUP',
+    MOAI_PORTAL_CLEAR_SEARCH_RESULT: 'MOAI_PORTAL_CLEAR_SEARCH_RESULT',
+    VAULT_COMMIT_LOCAL_KEYS: 'VAULT_COMMIT_LOCAL_KEYS',
+    VAULT_REMOVE_LOCAL_KEYS: 'VAULT_REMOVE_LOCAL_KEYS',
     SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: 'SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED',
     SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL: 'SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL',
     SECRETARIUM_CONNECT_CONFIGURATION_FAILED: 'SECRETARIUM_CONNECT_CONFIGURATION_FAILED',
@@ -18,6 +33,9 @@ const actionPrototypes = {
     SECRETARIUM_CONNECT_REQUESTED: 'SECRETARIUM_CONNECT_REQUESTED',
     SECRETARIUM_CONNECT_SUCCESSFUL: 'SECRETARIUM_CONNECT_SUCCESSFUL',
     SECRETARIUM_CONNECT_FAILED: 'SECRETARIUM_CONNECT_FAILED',
+    SECRETARIUM_EPHEMERAL_REQUESTED: 'SECRETARIUM_EPHEMERAL_REQUESTED',
+    SECRETARIUM_EPHEMERAL_SUCCESSFUL: 'SECRETARIUM_EPHEMERAL_SUCCESSFUL',
+    SECRETARIUM_EPHEMERAL_FAILED: 'SECRETARIUM_EPHEMERAL_FAILED',
     SECRETARIUM_DISCONNECT_REQUESTED: 'SECRETARIUM_DISCONNECT_REQUESTED',
     SECRETARIUM_DISCONNECT_SUCCESSFUL: 'SECRETARIUM_DISCONNECT_SUCCESSFUL',
     SECRETARIUM_DISCONNECT_FAILED: 'SECRETARIUM_DISCONNECT_FAILED',

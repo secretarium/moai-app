@@ -1,0 +1,52 @@
+.sidebar {
+    display: block;
+    grid-area: menu;
+    background-color: #2F323E;
+    font-size: 16px;
+}
+
+.header {
+    border-radius: 15px 0 0 0;
+    font-size: 22px;
+    padding: 25px;
+}
+
+.header img {
+    height: 2rem;
+}
+
+.options {
+    flex: 0.8;
+    color: #716F6F;
+    font-weight: bold;
+    padding: 25px 0px 25px 25px;
+}
+
+.option {
+    display: block;
+    height: 3rem;
+    overflow: hidden;
+    padding-bottom: 15px;
+}
+
+.option > span {
+    padding-left: 0.8rem;
+}
+
+@media (max-width: 1200px) {
+    .sidebar, .header {
+        border-radius: 0px;
+    }
+}
+
+@media (max-width: 55rem) {
+
+    .header img {
+        width: 1rem;
+        object-fit: contain;
+    }
+
+    .option > span {
+        display: none;
+    }
+}
