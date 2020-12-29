@@ -12,6 +12,7 @@ import Keys from './components/Infos/Keys';
 import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
+import Questionnaire from './components/Questionnaire';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey, connect } from './actions/system';
 import { useFonts } from 'expo-font';

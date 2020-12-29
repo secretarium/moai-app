@@ -4544,6 +4544,7 @@ __metadata:
     react-native-modal: 11.5.6
     react-native-onboarding-swiper: 1.1.4
     react-native-screens: 2.15.0
+    react-native-simple-radio-button: 2.7.4
     react-native-web: 0.14.9
     react-redux: 7.2.2
     react-responsive: 8.2.0
@@ -27280,6 +27281,13 @@ fsevents@~2.1.2:
     react: "*"
     react-native: "*"
   checksum: 8e267206e0096db73c4e0bbf3939cf3ec7ea7992f9c4fa8b9c505f8457a9f7e27de25fd0cf91a541703597b06567a997f5161a1c69e1a0d53ecb49e0e9cc7846
+  languageName: node
+  linkType: hard
+
+"react-native-simple-radio-button@npm:2.7.4":
+  version: 2.7.4
+  resolution: "react-native-simple-radio-button@npm:2.7.4"
+  checksum: a984a2d27c749b6affb0da3633f55b523146bf9bde1b5b09d62fe3b3981526803ab745ef81c47cc2428a78d823a307cf34487bff1f2fbce7bbfbce27f5439eb9
   languageName: node
   linkType: hard
 
