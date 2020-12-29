@@ -1,62 +1,34 @@
-import React, { useState } from 'react';
-import './Login.css';
-import { Button, Input, Form, Divider } from 'antd';
+import React from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import { Button, Divider } from 'antd';
 import { version as packageVersion } from '../../../package.json';
-import { withState } from '../../store';
-import { useHistory } from 'react-router-dom';
+import Hand from '../../assets/hand.png';
+import MoaiLogo from '../../assets/moai-logo.png';
+import LoginRegister from './LoginRegister';
+import LoginValidation from './LoginValidation';
+import LoginLanding from './LoginLanding';
+import LoginSignin from './LoginSignin';
+import style from './Login.module.css';
 
 
-const Login = withState()(
-    (s) => ({
-        localKey: s.principal.localKey
-    }),
-    ({ localKey, dispatch }) => {
+const Login: React.FC = () => {
 
-        const history = useHistory();
-        const [registrationValues, setRegistrationValues] = useState<{ [key: string]: string }>({});
+    const history = useHistory();
 
-        const onFinishFailed = errorInfo => {
-            console.log('Failed:', errorInfo);
-        };
-
-        const handleRegister = (values: any): void => {
-            setRegistrationValues({
-                email: values.email,
-                password: values.password
-            });
-            history.push('/chat');
-        };
-
-        return (
-            <div className="container-login">
-                <h1>Register to Moai Portal</h1>
-                <Form className="form" name="registration" onFinish={handleRegister} onFinishFailed={onFinishFailed}>
-                    <Form.Item name="email" rules={[{ required: true, message: 'Please input your email address!' }]}>
-                        <Input placeholder="Email Address" />
-                    </Form.Item>
-                    <Form.Item name="password" rules={[{ required: true, message: 'Please input a password for your account!' }]}>
-                        <Input.Password placeholder="Password" />
-                    </Form.Item>
-                    <Form.Item name="confirm" dependencies={['password']} rules={[
-                        { required: true, message: 'Please confirm the password for your account!' },
-                        ({ getFieldValue }) => ({
-                            validator(rule, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject('The two passwords that you entered do not match!');
-                            }
-                        })
-                    ]} hasFeedback>
-                        <Input.Password autoComplete="new-password" placeholder="Confirm Password" type="password" />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" style={{ backgroundColor: '#00b0ee' }}>
-                            Register
-                        </Button>
-                    </Form.Item>
-                </Form>
+    return (
+        <div className={style.containerMain}>
+            <div className={style.containerLogin}>
+                <img src={MoaiLogo} alt="moai logo" style={{ width: '100px', height: 'auto', marginBottom: '20px' }} />
+                <Switch>
+                    <Route path="/login/register" component={LoginRegister} />
+                    <Route path="/login/validate" component={LoginValidation} />
+                    <Route path="/login/signin" component={LoginSignin} />
+                    <Route component={LoginLanding} />
+                </Switch>
                 <Divider style={{ width: '70%', minWidth: '70%' }} />
+                <p style={{ marginBottom: 0 }}>Don't have an account? You can <Button type="link" style={{ padding: 0 }} onClick={(): void => {
+                    history.push('/login/register');
+                }}>Register a new account</Button>.</p>
                 <span>
                     Moai © {new Date().getFullYear()} - Powered by{' '}
                     <a href="https://secretarium.com" rel="noopener noreferrer" target="_blank">
@@ -64,8 +36,12 @@ const Login = withState()(
                     </a> - <em>{`v${packageVersion}`}</em>
                 </span>
             </div>
-        );
-    });
+            <div className={style.hand}>
+                <img src={Hand} alt="moai app" />
+            </div>
+        </div>
+    );
+};
 
 
 export default Login;

@@ -1,2 +1,0 @@
-export const SHOW_ONBOARDING = 'SHOW_ONBOARDING';
-export const SAVE_QR_CODE = 'SAVE_QR_CODE';

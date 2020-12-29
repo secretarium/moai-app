@@ -1,6 +1,7 @@
 import { AnyAction as ReduxAnyAction } from 'redux';
 import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
-import { Key } from '@secretarium/moai-connect';
+import { EncryptedKeyPair } from '@secretarium/connector';
+
 
 declare namespace MoaiPortal {
     interface FunctionAction {
@@ -97,44 +98,80 @@ declare namespace MoaiPortal {
         log: SystemLog;
     };
 
-    type Principal = {
+    type EncKeyPair = {
+        version: number;
+        iv: string;
+        salt: string;
+        data: string;
+    };
+
+    type Vault = {
+        keyPairs: EncryptedKeyPair[];
+    };
+
+    type Tracer = {
         isConnected: boolean;
+        isVerified: boolean;
+        emailVerificationAttempt?: number;
+        validationError?: string;
+        loginError?: string;
+        registrationError?: string;
+        challengeError?: string;
+    };
+
+    type SearchResults = {
         isFetching: boolean;
-        contacts?: Contact[];
-        localKey?: Key;
+        tested: User;
+        exposed: User[];
+        searchTestedError?: string;
+        searchExposedError?: string;
     };
 
-    type Contact = {
-        id: number
+    type User = {
+        userId: string;
+        time: number;
     };
 
-    type Messages = {
-        messageList: MessageList
+    type Conversation = {
+        address: string;
+        token: string;
+    };
+
+    type Message = {
+        datetime: number;
+        sender: number;
+        text: string;
+        received: number;
+        read: number;
+    };
+
+    type LastMessage = {
+        address: string;
+        lastMessage: Message;
+    };
+
+    type Conversations = {
+        isFetching: boolean;
+        conversationList: Conversation[];
+        lastMessages: LastMessage[];
+        messages: Message[];
+        newConversation: Conversation;
+        messageError?: string;
     };
 
     type State = {
         system: System;
-        principal: Principal;
-        messages: Messages;
-    };
-
-    type Message = {
-        message: string,
-        user_ID: number,
-        timestamp: number,
-        seen: MessageSeen
-    };
-
-    type MessageSeen = {
-        seen: boolean,
-        timestamp: number
+        tracer: Tracer;
+        conversations: Conversations;
+        searchResults: SearchResults;
+        vault: Vault;
     };
 
 }
 
 declare module 'react-router-dom' {
     interface LinkProps {
-        underlayColor?: string
+        underlayColor?: string;
     }
 }
 

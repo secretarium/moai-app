@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux';
 import { system } from './system';
-import { principal } from './principal';
-import { messages } from './messages';
+import { tracer } from './tracer';
+import { conversations } from './conversations';
+import { searchResults } from './searchResults';
+import { vault } from './vault';
 
 const reducers = combineReducers({
     system,
-    principal,
-    messages
+    tracer,
+    conversations,
+    searchResults,
+    vault
 });
 
 export default reducers;
