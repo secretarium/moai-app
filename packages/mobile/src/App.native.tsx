@@ -31,7 +31,7 @@ const App = withState()(
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [isConnecting, setIsConnecting] = useState(false);
-        const [hasConnected, setHasConnected] = useState(isConnected);
+        const [hasConnected, setHasConnected] = useState(false);
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
@@ -89,19 +89,17 @@ const App = withState()(
 
         useEffect(() => {
             async function connectBackend() {
-                if (localKey) {
-                    dispatch(connect(localKey))
-                        .then(() => {
-                            setHasConnected(true);
-                            setIsConnecting(false);
-                        });
-                }
+                dispatch(connect(localKey))
+                    .then(() => {
+                        setHasConnected(true);
+                        setIsConnecting(false);
+                    });
             }
-            if (!hasConnected && !isConnecting) {
+            if (!hasConnected && !isConnecting && hasObtainedLocalKey) {
                 setIsConnecting(true);
                 connectBackend();
             }
-        }, [dispatch, localKey, hasConnected, isConnecting]);
+        }, [dispatch, localKey, hasConnected, isConnecting, hasObtainedLocalKey, isConnected]);
 
         const handleAppStateChange = useCallback((nextAppState: string) => {
             if (nextAppState === 'active') {
@@ -119,7 +117,7 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !hasConnected || isConnecting)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !isConnected)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
