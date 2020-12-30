@@ -4238,15 +4238,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/async-storage@npm:1.12.1":
-  version: 1.12.1
-  resolution: "@react-native-community/async-storage@npm:1.12.1"
+"@react-native-async-storage/async-storage@npm:1.13.2":
+  version: 1.13.2
+  resolution: "@react-native-async-storage/async-storage@npm:1.13.2"
   dependencies:
     deep-assign: ^3.0.0
   peerDependencies:
     react: ^16.8
     react-native: ">=0.59"
-  checksum: 91c7c707469ea89f28e90e3d73d509b2325bcc5f101bad161b5f78c3c1576d3b152782e67e4b7161cecfcae94b2474f11092b82cff4b2c316d6f5805bb6aa2da
+  checksum: 27349c3a625b910420317583dcfd0735e133424f6cafefbd841d15da2ca6080a8c9745f875fbf790a9f989076915f581602a000566c78d18a10cf91ba7e0acd7
   languageName: node
   linkType: hard
 
@@ -4436,7 +4436,7 @@ __metadata:
     "@expo/match-media": 0.0.0-beta.2
     "@expo/vector-icons": 12.0.2
     "@expo/webpack-config": 0.12.52
-    "@react-native-community/async-storage": 1.12.1
+    "@react-native-async-storage/async-storage": 1.13.2
     "@secretarium/connector": 0.8.4
     "@storybook/addon-actions": 6.1.11
     "@storybook/addon-links": 6.1.11
