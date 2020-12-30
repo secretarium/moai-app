@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { system } from './system';
+import { conversations } from './conversations';
 
 const reducers = combineReducers({
-    system
+    system,
+    conversations
 });
 
 export default reducers;

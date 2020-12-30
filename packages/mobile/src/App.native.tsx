@@ -13,26 +13,35 @@ import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
-import { generateLocalKey } from './actions';
+import { generateLocalKey, connect } from './actions/system';
+import { useFonts } from 'expo-font';
 import { styles } from './styles';
-import { Text, View, Image } from 'react-native';
+import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
+
 
 const App = withState()(
     (s) => ({
-        localKey: s.system.localKey
+        localKey: s.system.localKey,
+        isConnected: s.system.isConnected
     }),
-    ({ dispatch, localKey }) => {
+    ({ dispatch, localKey, isConnected }) => {
 
         const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
-        const [error, setError] = useState<any>();
+        const [isConnecting, setIsConnecting] = useState(false);
+        const [hasConnected, setHasConnected] = useState(false);
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
-        const [hasParsedInitialURL, setHasParsedInitialURL] = useState(true);
+        const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
-        // const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
+        const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
+
+        const [fontsLoaded] = useFonts({
+            'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+            'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
+        });
 
         const parseUrl = useCallback((url: string | null | undefined) => {
 
@@ -60,15 +69,11 @@ const App = withState()(
         }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
 
         useEffect(() => {
-            if ((pastInitialUrl && initialUrl && initialUrl !== pastInitialUrl) || (!pastInitialUrl && initialUrl)) {
-                try {
-                    history.push(`/checkin/${initialUrl}`);
-                } catch (e) {
-                    setError(e);
-                }
+            if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
+                history.push(`/checkin/${initialUrl}`);
                 setPastInitialUrl(initialUrl);
             }
-        }, [history, initialUrl, pastInitialUrl]);
+        }, [initialUrl, history, pastInitialUrl]);
 
         useEffect(() => {
             if (!localKey && !hasRequestedLocalKey) {
@@ -82,63 +87,43 @@ const App = withState()(
             }
         }, [dispatch, hasRequestedLocalKey, localKey]);
 
-        // const handleAppStateChange = useCallback((nextAppState: string) => {
-        //     if (nextAppState === 'active') {
-        //         setHasRequestedInitialURL(false);
-        //         if (!initialUrl && history.location.pathname.slice(0, 8) === '/scanner') {
-        //             history.push('/');
-        //         }
-        //     }
-        // }, [history, initialUrl]);
+        useEffect(() => {
+            async function connectBackend() {
+                dispatch(connect(localKey))
+                    .then(() => {
+                        setHasConnected(true);
+                        setIsConnecting(false);
+                    });
+            }
+            if (!hasConnected && !isConnecting && hasObtainedLocalKey) {
+                setIsConnecting(true);
+                connectBackend();
+            }
+        }, [dispatch, localKey, hasConnected, isConnecting, hasObtainedLocalKey, isConnected]);
 
-        // useEffect(() => {
-        //     if (!hasPluggedStateChange) {
-        //         AppState.addEventListener('change', handleAppStateChange);
-        //         setHasPluggedStateChange(true);
-        //     }
-        // }, [handleAppStateChange, hasPluggedStateChange]);
+        const handleAppStateChange = useCallback((nextAppState: string) => {
+            if (nextAppState === 'active') {
+                setHasRequestedInitialURL(false);
+                if (!initialUrl && history.location.pathname.slice(0, 8) === '/scanner') {
+                    history.push('/');
+                }
+            }
+        }, [history, initialUrl]);
 
-        if (!hasObtainedLocalKey || !hasParsedInitialURL)
+        useEffect(() => {
+            if (!hasPluggedStateChange) {
+                AppState.addEventListener('change', handleAppStateChange);
+                setHasPluggedStateChange(true);
+            }
+        }, [handleAppStateChange, hasPluggedStateChange]);
+
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !isConnected)
             return <View style={styles.container}>
-                <Text>...</Text>
-                <Text>...</Text>
-                <Text>...</Text>
-                <Text>...</Text>
-                <Text
-                    style={{
-                        color: 'grey'
-                    }} >{JSON.stringify({
-                        hasRequestedLocalKey,
-                        hasRequestedInitialURL,
-                        hasObtainedLocalKey,
-                        hasParsedInitialURL,
-                        pastInitialUrl,
-                        initialUrl,
-                        error
-                    }, null, 4)}</Text>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
 
         return (
             <>
-                <View>
-                    <Text>...</Text>
-                    <Text>...</Text>
-                    <Text>...</Text>
-                    <Text>...</Text>
-                    <Text
-                        style={{
-                            color: 'grey'
-                        }} >{JSON.stringify({
-                            hasRequestedLocalKey,
-                            hasRequestedInitialURL,
-                            hasObtainedLocalKey,
-                            hasParsedInitialURL,
-                            pastInitialUrl,
-                            initialUrl,
-                            error
-                        }, null, 4)}</Text>
-                </View>
                 <Switch>
                     <Route path="/notices" component={Notices} />
                     <Route path="/keys" component={Keys} />

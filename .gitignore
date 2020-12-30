@@ -71,6 +71,7 @@ typings/
 # Yarn
 .yarn-integrity
 .yarn
+.yarn 2
 
 # dotenv environment variables file
 .env.local
@@ -113,6 +114,3 @@ dist
 # Mutation testing
 .stryker-tmp/
 reports
-
-# Project dependent
-lib
