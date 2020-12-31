@@ -87,7 +87,7 @@
         "@types/react-router-dom": "5.1.6",
         "@types/react-router-native": "5.1.0",
         "@types/redux-logger": "3.0.8",
-        "expo-cli": "4.0.16",
+        "expo-cli": "4.0.17",
         "expo-optimize": "0.1.70",
         "expo-yarn-workspaces": "1.2.1",
         "fs-extra": "9.0.1",
