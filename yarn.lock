@@ -4544,7 +4544,7 @@ __metadata:
     react-native-modal: 11.5.6
     react-native-onboarding-swiper: 1.1.4
     react-native-screens: 2.15.0
-    react-native-simple-radio-button: 2.7.4
+    react-native-simple-survey: 3.1.2
     react-native-web: 0.14.9
     react-redux: 7.2.2
     react-responsive: 8.2.0
@@ -27284,10 +27284,27 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-native-simple-radio-button@npm:2.7.4":
-  version: 2.7.4
-  resolution: "react-native-simple-radio-button@npm:2.7.4"
-  checksum: a984a2d27c749b6affb0da3633f55b523146bf9bde1b5b09d62fe3b3981526803ab745ef81c47cc2428a78d823a307cf34487bff1f2fbce7bbfbce27f5439eb9
+"react-native-selection-group@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "react-native-selection-group@npm:2.0.0"
+  dependencies:
+    prop-types: ^15.6.1
+  peerDependencies:
+    react: ">=15.0.0"
+    react-native: ">=0.50.0"
+  checksum: 61bacf5b0c65cb47d99bd45d16429821526168e0877ae740f0abc6af482b566db3a0c4cefefeea54b33b5d9928e46b2c76bac5281ce2a7d66d6daf672e1e5634
+  languageName: node
+  linkType: hard
+
+"react-native-simple-survey@npm:3.1.2":
+  version: 3.1.2
+  resolution: "react-native-simple-survey@npm:3.1.2"
+  dependencies:
+    react-native-selection-group: ^2.0.0
+  peerDependencies:
+    react: ">=15.0.0"
+    react-native: ">=0.50.0"
+  checksum: 2b29cf61eaf8a02acf19b1b5f6229d538c4e2f1c553d7986c4ed8e59fd72fbd1496b3d1818cb72f8b0ed697ab8bec71394b755ab99c97bb915a051640e08f5da
   languageName: node
   linkType: hard
 
