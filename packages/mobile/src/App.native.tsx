@@ -133,10 +133,11 @@ const App = withState()(
                     <Route path="/onboarding" component={OnboardingScreen} />
                     <Route path="/home" component={Home} />
                     <Route path="/about" component={About} />
-                    <Route path="/chat" component={Questionnaire} />
+                    <Route path="/chat" component={Chat} />
                     <Route path="/scanner" component={Scanner} />
                     <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
                     <Route path="/scanned" component={Scanned} />
+                    <Route path="/questionnaire" component={Questionnaire} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;
