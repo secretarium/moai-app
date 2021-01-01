@@ -15,8 +15,6 @@ export const styles = StyleSheet.create({
         paddingTop: 15
     },
     cameraView: {
-        borderTopLeftRadius: screen.width,
-        borderTopRightRadius: screen.width,
         width: screen.width,
         height: '100%',
         top: 220,

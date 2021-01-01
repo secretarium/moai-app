@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { View, Image } from 'react-native';
 import { useFonts } from 'expo-font';
+import { styles } from './styles';
 
 const FontLoader: React.FC = ({ children }) => {
 
@@ -10,7 +11,9 @@ const FontLoader: React.FC = ({ children }) => {
     });
 
     if (!fontsLoaded)
-        return <Text>Loading...</Text>;
+        return <View style={styles.container}>
+            <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
+        </View>;
     else
         return <>{children}</>;
 
