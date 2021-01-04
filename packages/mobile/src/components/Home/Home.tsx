@@ -10,7 +10,7 @@ const Home: React.FC = () => {
     // Color theme
     const colorScheme = useColorScheme();
     const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-    const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
+    const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
 
     return (
         <MainLayout showGoBack={false}>

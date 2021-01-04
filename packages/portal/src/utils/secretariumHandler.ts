@@ -117,7 +117,7 @@ const secretariumHandler = {
 };
 
 if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM_GATEWAYS_OVERWRITABLE === 'true') && window) {
-    (window as any)['sfxCluster'] = (config: string | Record<string, any>) => {
+    (window as any)['moaiCluster'] = (config: string | Record<string, any>) => {
         if (typeof config === 'string') {
             handlerStore.clusters = config.split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         } else {
@@ -125,7 +125,7 @@ if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM
         }
         printClusterInfo();
     };
-    (window as any)['sfxCommand'] = (dcApp: string, command: string, args?: any, id?: string) => {
+    (window as any)['moaiCommand'] = (dcApp: string, command: string, args?: any, id?: string) => {
         secretariumHandler.request(dcApp, command, args ?? {}, id ?? `${Math.random()}`);
     };
 }
