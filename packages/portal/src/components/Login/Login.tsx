@@ -3,7 +3,7 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import { Button, Divider } from 'antd';
 import { version as packageVersion } from '../../../package.json';
 import Hand from '../../assets/hand.png';
-import MoaiLogo from '../../assets/moai-logo.png';
+import MoaiLogo from '../../assets/logo-black.png';
 import LoginRegister from './LoginRegister';
 import LoginValidation from './LoginValidation';
 import LoginLanding from './LoginLanding';
