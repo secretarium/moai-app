@@ -1,6 +1,6 @@
 {
     "name": "@secretarium/moai-expo",
-    "version": "0.0.15",
+    "version": "0.0.16",
     "private": true,
     "description": "Expo mobile and web application",
     "main": "./src/AppEntry.tsx",
@@ -50,6 +50,7 @@
         "react-native-modal": "11.6.1",
         "react-native-onboarding-swiper": "1.1.4",
         "react-native-screens": "2.16.1",
+        "react-native-simple-survey": "3.1.2",
         "react-native-web": "0.14.10",
         "react-redux": "7.2.2",
         "react-responsive": "8.2.0",
