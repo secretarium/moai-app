@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { connect, useSelector as useSelectorBase } from 'react-redux';
 import { persistStore, persistReducer, WebStorage } from 'redux-persist';
-import { AsyncStorageStatic } from '@react-native-community/async-storage';
+import { AsyncStorageStatic } from '@react-native-async-storage/async-storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createLogger } from 'redux-logger';
 import { fromJS, Record as ImmutableRecord } from 'immutable';

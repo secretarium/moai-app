@@ -9,7 +9,7 @@ import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
-import { checkIn } from '../../actions/system';
+import { checkIn, connect } from '../../actions/system';
 
 
 const Checkin = withState<RouteComponentProps<{
@@ -18,10 +18,11 @@ const Checkin = withState<RouteComponentProps<{
     type?: string
 }>>()(
     (s) => ({
+        localKey: s.system.localKey,
         checkInError: s.system.checkInError,
         isConnected: s.system.isConnected
     }),
-    ({ dispatch, match, checkInError, isConnected }) => {
+    ({ dispatch, localKey, match, checkInError, isConnected }) => {
 
         const history = useHistory();
         const [redirect, setRedirect] = useState(false);
@@ -32,31 +33,45 @@ const Checkin = withState<RouteComponentProps<{
         });
         const [pageError, setPageError] = useState<string>();
         const [showModal, setShowModal] = useState<boolean>(false);
+        const [isConnecting, setIsConnecting] = useState(false);
 
         // Color theme
         const colorScheme = useColorScheme();
         const themeModalStyle = colorScheme !== 'dark' ? 'black' : 'white';
         const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
         const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-        const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo.png') : require('../../assets/logo-white.png');
+        const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+
+        useEffect(() => {
+            async function connectBackend() {
+                dispatch(connect(localKey))
+                    .then(() => {
+                        setIsConnecting(false);
+                    });
+            }
+            if (!isConnected) {
+                setIsConnecting(true);
+                connectBackend();
+            }
+        }, [dispatch, localKey, isConnected, isConnecting]);
 
         useEffect(() => {
             async function checkInLocation() {
-                if (isConnected && venueInfo) {
-                    dispatch(checkIn(venueInfo))
-                        .then(() => {
-                            setRedirect(true);
-                        })
-                        .catch((error) => {
-                            console.error('checkIn', error);
-                            setPageError(checkInError);
-                            setShowModal(true);
-                            setVenueInfo(undefined);
-                        });
-                }
+                dispatch(checkIn(venueInfo))
+                    .then(() => {
+                        setRedirect(true);
+                    })
+                    .catch((error) => {
+                        console.error('checkIn', error);
+                        setPageError(checkInError);
+                        setShowModal(true);
+                        setVenueInfo(undefined);
+                    });
             }
-            checkInLocation();
-        }, [dispatch, isConnected, venueInfo, checkInError]);
+            if (isConnected && venueInfo && !isConnecting) {
+                checkInLocation();
+            }
+        }, [dispatch, isConnected, venueInfo, checkInError, isConnecting]);
 
         let composition;
 

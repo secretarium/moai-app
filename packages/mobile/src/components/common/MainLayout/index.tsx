@@ -28,7 +28,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#888888';
     const themeStatusBarStyle = colorScheme !== 'dark' ? 'dark-content' : 'light-content';
-    const themeLogoStyle = colorScheme !== 'dark' ? require('../../../assets/logo.png') : require('../../../assets/logo-white.png');
+    const themeLogoStyle = colorScheme !== 'dark' ? require('../../../assets/logo-black.png') : require('../../../assets/logo-white.png');
 
     return (
         <View style={{

@@ -12,6 +12,7 @@ import Keys from './components/Infos/Keys';
 import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
+import Questionnaire from './components/Questionnaire';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey, connect } from './actions/system';
 import { useFonts } from 'expo-font';
@@ -31,7 +32,7 @@ const App = withState()(
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [isConnecting, setIsConnecting] = useState(false);
-        const [hasConnected, setHasConnected] = useState(isConnected);
+        const [hasConnected, setHasConnected] = useState(false);
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
         const [hasParsedInitialURL, setHasParsedInitialURL] = useState(false);
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
@@ -89,19 +90,17 @@ const App = withState()(
 
         useEffect(() => {
             async function connectBackend() {
-                if (localKey) {
-                    dispatch(connect(localKey))
-                        .then(() => {
-                            setHasConnected(true);
-                            setIsConnecting(false);
-                        });
-                }
+                dispatch(connect(localKey))
+                    .then(() => {
+                        setHasConnected(true);
+                        setIsConnecting(false);
+                    });
             }
-            if (!hasConnected && !isConnecting) {
+            if (!hasConnected && !isConnecting && hasObtainedLocalKey) {
                 setIsConnecting(true);
                 connectBackend();
             }
-        }, [dispatch, localKey, hasConnected, isConnecting]);
+        }, [dispatch, localKey, hasConnected, isConnecting, hasObtainedLocalKey, isConnected]);
 
         const handleAppStateChange = useCallback((nextAppState: string) => {
             if (nextAppState === 'active') {
@@ -119,7 +118,7 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !hasConnected || isConnecting)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !isConnected)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
@@ -138,6 +137,7 @@ const App = withState()(
                     <Route path="/scanner" component={Scanner} />
                     <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
                     <Route path="/scanned" component={Scanned} />
+                    <Route path="/questionnaire" component={Questionnaire} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;
