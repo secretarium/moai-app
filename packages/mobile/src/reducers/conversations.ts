@@ -38,7 +38,7 @@ export const conversations: StoreComponent<Conversations> = (state = initialStat
         case commands.MOAI_GET_LATEST_CONVERSATION.SUCCESS: {
             return {
                 ...state,
-                conversation: payload.result
+                conversation: payload
             };
         }
         case commands.MOAI_GET_LAST_MESSAGE.SUCCESS: {
