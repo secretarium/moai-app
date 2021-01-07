@@ -9,7 +9,7 @@ import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
 import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
-import { getConversation, sendMessage } from '../../actions/conversations';
+import { getConversation, sendMessage } from '../../actions';
 import { withState } from '../../store';
 import { useHistory } from 'react-router';
 import { commonStyles } from '../commonStyles';

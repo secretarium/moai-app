@@ -64,3 +64,26 @@ export const checkIn = (venue: ParsedCode): Moai.FunctionAction =>
             error: new Error(error)
         })
     });
+
+export const getVenues = (): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_GET_VENUES, { max: 10, cursor: 0 })({
+        onResult: result => {
+            return {
+                payload: {
+                    result
+                }
+            };
+        },
+        onError: (error) => ({
+            error: new Error(error)
+        })
+    });
+
+export const registerNotificationToken = (): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { type: 'expo', data: 'notifToken' })();
+
+export const getExposureToken = (): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_GET_EXPOSURE_RISK, {})();
+
+export const registerExposureFeedback = (testId: string, token: string, data: Record<string, unknown>): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_EXPOSURE_FEEDBACK, { testId: testId, token: token, data: data })();

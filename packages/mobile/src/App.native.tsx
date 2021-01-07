@@ -14,7 +14,7 @@ import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
 import Questionnaire from './components/Questionnaire';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
-import { generateLocalKey, connect } from './actions/system';
+import { generateLocalKey, connect } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image } from 'react-native';

@@ -8,6 +8,10 @@ const commandsPrototype = {
     MOAI_GET_LAST_MESSAGE: { application: 'moai', command: 'conversations-get-latest-message' },
     MOAI_SEND_MESSAGE: { application: 'moai', command: 'conversations-write-message' },
     MOAI_GET_LATEST_CONVERSATION: { application: 'moai', command: 'get-latest-conversation' },
+    MOAI_GET_VENUES: { application: 'moai', command: 'get-venues' },
+    MOAI_REGISTER_NOTIFICATION_TOKEN: { application: 'moai', command: 'register-notification-token' },
+    MOAI_GET_EXPOSURE_RISK: { application: 'moai', command: 'get-exposure-risk' },
+    MOAI_REGISTER_EXPOSURE_FEEDBACK: { application: 'moai', command: 'register-exposure-feedback' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
