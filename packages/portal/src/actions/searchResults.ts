@@ -2,8 +2,8 @@ import { commands, actionTypes } from './constants';
 import { requestFactory } from './factories';
 
 
-export const getTested = (barcode: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_TESTED, { barcode: barcode })({
+export const getTested = (testId: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_GET_TESTED, { testId: testId })({
         onResult: result => {
             return {
                 payload: {
@@ -37,3 +37,6 @@ export const clearSearchErrors = (): MoaiPortal.FunctionAction => (dispatch) => 
 export const clearSearchResults = (): MoaiPortal.FunctionAction => (dispatch) => {
     dispatch({ type: actionTypes.MOAI_PORTAL_CLEAR_SEARCH_RESULT });
 };
+
+export const setTestResult = (testId: string, positive: boolean): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_SET_TEST_RESULT, { testId: testId, positive: positive })();
