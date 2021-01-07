@@ -4194,16 +4194,9 @@
     "@types/react" "*"
     "@types/react-router" "*"
 
-"@types/react-router@*":
+"@types/react-router@*", "@types/react-router@5.1.10":
   version "5.1.10"
   resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.10.tgz#7de7ad3df20a8adb2b97943f1871ca4d2705c42c"
-  dependencies:
-    "@types/history" "*"
-    "@types/react" "*"
-
-"@types/react-router@5.1.9":
-  version "5.1.9"
-  resolved "https://registry.yarnpkg.com/@types/react-router/-/react-router-5.1.9.tgz#92a5558f22243d45f90e7699812c342bd98ba41e"
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
