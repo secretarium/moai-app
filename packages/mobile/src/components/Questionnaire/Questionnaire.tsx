@@ -11,12 +11,12 @@ const Questionnaire: React.FC = () => {
     const questions = [
         {
             questionType: 'Info',
-            questionText: 'Welcome to the Moai questionnaire! Tap next to continue'
+            questionText: 'Welcome to the Moai questionnaire! Help us measure your exposure risk, by answering a few questions. Tap next to continue'
         },
         {
             questionType: 'SelectionGroup',
             questionText: 'What was the location type?',
-            questionId: 'What was the location type?',
+            questionId: '1',
             options: [
                 { optionText: 'Indoor', value: 'Indoor' },
                 { optionText: 'Outdoor', value: 'Outdoor' }
@@ -25,7 +25,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'How many people other than you do you estimate were present?',
-            questionId: 'How many people other than you do you estimate were present?',
+            questionId: '2',
             options: [
                 { optionText: '0', value: '0' },
                 { optionText: '1-5', value: '1-5' },
@@ -36,7 +36,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'How long did you stay at the location?',
-            questionId: 'How long did you stay at the location?',
+            questionId: '3',
             options: [
                 { optionText: '5min', value: '5min' },
                 { optionText: '10min', value: '10min' },
@@ -52,7 +52,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'Were people and staff wearing masks?',
-            questionId: 'Were people and staff wearing masks?',
+            questionId: '4',
             options: [
                 { optionText: 'Yes', value: 'Yes' },
                 { optionText: 'No', value: 'No' }
@@ -61,7 +61,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'Were people following the social distancing rules?',
-            questionId: 'Were people following the social distancing rules?',
+            questionId: '7',
             options: [
                 { optionText: 'Yes', value: 'Yes' },
                 { optionText: 'No', value: 'No' }
@@ -70,7 +70,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'Was additional protection put in place? (e.g. one-way systems, walled separators at tills, etc.)',
-            questionId: 'Was additional protection put in place? (e.g. one-way systems, walled separators at tills, etc.)',
+            questionId: '8',
             options: [
                 { optionText: 'Yes', value: 'Yes' },
                 { optionText: 'No', value: 'No' }
@@ -79,7 +79,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'How many were in your party?',
-            questionId: 'How many were in your party?',
+            questionId: '10',
             options: [
                 { optionText: 'Just me', value: 'Just me' },
                 { optionText: '2', value: '2' },
@@ -90,7 +90,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'Were all the members of your party from your household?',
-            questionId: 'Were all the members of your party from your household?',
+            questionId: '11',
             options: [
                 { optionText: 'Yes', value: 'Yes' },
                 { optionText: 'No', value: 'No' }
@@ -99,7 +99,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'MultipleSelectionGroup',
             questionText: 'How was the air flow? (select all that apply)',
-            questionId: 'How was the air flow? (select all that apply)',
+            questionId: '13',
             questionSettings: {
                 autoAdvance: false,
                 allowDeselection: true,
@@ -128,7 +128,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'Were the surfaces cleaned after every usage?',
-            questionId: 'Were the surfaces cleaned after every usage?',
+            questionId: '14',
             options: [
                 { optionText: 'Yes', value: 'Yes' },
                 { optionText: 'No', value: 'No' },
@@ -138,7 +138,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'Did any contact between members of the party occur during the gathering?',
-            questionId: 'Did any contact between members of the party occur during the gathering?',
+            questionId: '15',
             options: [
                 { optionText: 'Yes', value: 'Yes' },
                 { optionText: 'No', value: 'No' }
@@ -147,7 +147,7 @@ const Questionnaire: React.FC = () => {
         {
             questionType: 'SelectionGroup',
             questionText: 'Did it involve singing or physical activities?',
-            questionId: 'Did it involve singing or physical activities?',
+            questionId: '16',
             options: [
                 { optionText: 'Yes', value: 'Yes' },
                 { optionText: 'No', value: 'No' }
@@ -176,7 +176,7 @@ const Questionnaire: React.FC = () => {
                     questions.splice(index + 1, 0, {
                         questionType: 'SelectionGroup',
                         questionText: 'Were all the members from your support bubble?',
-                        questionId: 'Were all the members from your support bubble?',
+                        questionId: '12',
                         options: [
                             { optionText: 'Yes', value: 'Yes' },
                             { optionText: 'No', value: 'No' }
@@ -191,7 +191,7 @@ const Questionnaire: React.FC = () => {
                     questions.splice(index + 1, 0, {
                         questionType: 'TextInput',
                         questionText: 'Can you please describe it in a few words?',
-                        questionId: 'Can you please describe it in a few words?',
+                        questionId: '9',
                         placeholderText: 'Type your answer...'
                     });
                 }
@@ -204,7 +204,7 @@ const Questionnaire: React.FC = () => {
                     questions.splice(index + 1, 0, {
                         questionType: 'SelectionGroup',
                         questionText: 'Were people using the PPE correctly? (e.g. covering both the nose and mouth)',
-                        questionId: 'Were people using the PPE correctly? (e.g. covering both the nose and mouth)',
+                        questionId: '5',
                         options: [
                             { optionText: 'Yes', value: 'Yes' },
                             { optionText: 'No', value: 'No' }
@@ -216,7 +216,7 @@ const Questionnaire: React.FC = () => {
                     questions.splice(index + 1, 0, {
                         questionType: 'SelectionGroup',
                         questionText: 'Was the staff wearing any form of PPE?',
-                        questionId: 'Was the staff wearing any form of PPE?',
+                        questionId: '6',
                         options: [
                             { optionText: 'Yes', value: 'Yes' },
                             { optionText: 'No', value: 'No' }
@@ -298,7 +298,7 @@ const Questionnaire: React.FC = () => {
     };
 
     return (
-        <MainLayout showGoBack={true}>
+        <MainLayout goBackRoute={'/venues'} showGoBack={true}>
             <SimpleSurvey
                 survey={questions}
                 renderSelector={renderButton}

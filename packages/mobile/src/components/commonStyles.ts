@@ -45,6 +45,9 @@ export const commonStyles = StyleSheet.create({
         left: 15,
         top: 10
     },
+    topMidButton: {
+        top: 10
+    },
     topRightButton: {
         right: 15,
         top: 10
