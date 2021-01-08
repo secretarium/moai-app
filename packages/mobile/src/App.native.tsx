@@ -2,8 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
 import { Redirect, Route, Switch } from './ReactRouter';
-import { useColorScheme } from 'react-native-appearance';
-import Modal from 'react-native-modal';
 import About from './About';
 import Home from './components/Home';
 import Scanned from './components/Scanned';
@@ -17,12 +15,10 @@ import Infos from './components/Infos';
 import Questionnaire from './components/Questionnaire';
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
-import { MaterialIcons } from '@expo/vector-icons';
-import { commonStyles } from './components/commonStyles';
 import { generateLocalKey, connect } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
-import { AppState, View, Image, Button, Text } from 'react-native';
+import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
 
 
@@ -32,13 +28,11 @@ const App = withState()(
         isConnected: s.system.isConnected,
         connectionError: s.system.connectionError
     }),
-    ({ dispatch, localKey, isConnected, connectionError }) => {
+    ({ dispatch, localKey, isConnected }) => {
 
         const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
-        const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
-        const [showModal, setShowModal] = useState<boolean>(false);
         const [isConnecting, setIsConnecting] = useState(false);
         const [hasConnected, setHasConnected] = useState(false);
         const [hasRequestedInitialURL, setHasRequestedInitialURL] = useState(false);
@@ -46,11 +40,6 @@ const App = withState()(
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
-
-        // Color theme
-        const colorScheme = useColorScheme();
-        const themeModalStyle = colorScheme !== 'dark' ? 'black' : 'white';
-        const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
@@ -65,13 +54,6 @@ const App = withState()(
             else
                 setInitialUrl(null);
         }, []);
-
-        useEffect(() => {
-            if (connectionError && errorMessage !== connectionError) {
-                setErrorMessage(connectionError);
-                setShowModal(true);
-            }
-        }, [errorMessage, connectionError]);
 
         useEffect(() => {
             if (!initialUrl && !hasRequestedInitialURL) {
@@ -140,15 +122,6 @@ const App = withState()(
 
         if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !isConnected)
             return <View style={styles.container}>
-                <Modal isVisible={showModal}>
-                    <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
-                        <MaterialIcons name='error' size={84} color={themeModalStyle} />
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
-                            {errorMessage}
-                        </Text>
-                        <Button title='Close' onPress={() => setShowModal(false)} />
-                    </View>
-                </Modal>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
 
