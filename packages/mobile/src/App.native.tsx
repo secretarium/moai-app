@@ -25,8 +25,7 @@ import { useHistory } from 'react-router';
 const App = withState()(
     (s) => ({
         localKey: s.system.localKey,
-        isConnected: s.system.isConnected,
-        connectionError: s.system.connectionError
+        isConnected: s.system.isConnected
     }),
     ({ dispatch, localKey, isConnected }) => {
 
