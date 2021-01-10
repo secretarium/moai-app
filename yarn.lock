@@ -4449,7 +4449,7 @@ __metadata:
     "@stryker-mutator/typescript": 4.0.0
     "@svgr/webpack": 5.5.0
     "@types/anymatch": 1.3.1
-    "@types/jest": 26.0.19
+    "@types/jest": 26.0.20
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0
     "@types/react-native": 0.63.44
@@ -4519,7 +4519,7 @@ __metadata:
     "@testing-library/jest-dom": 5.11.8
     "@testing-library/react": 11.2.3
     "@testing-library/user-event": 12.6.0
-    "@types/jest": 26.0.19
+    "@types/jest": 26.0.20
     "@types/node": 14.14.20
     "@types/react": 17.0.0
     "@types/react-dom": 17.0.0
@@ -5969,13 +5969,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*, @types/jest@npm:26.0.19":
+"@types/jest@npm:*":
   version: 26.0.19
   resolution: "@types/jest@npm:26.0.19"
   dependencies:
     jest-diff: ^26.0.0
     pretty-format: ^26.0.0
   checksum: a99858b3d8e57d0f5d310d706be43756d1651d30bb0965b42323fc245674ad37ebb5975510d970b6169349bd1ac73ebf76674b91854ffbffa892049f48eadd78
+  languageName: node
+  linkType: hard
+
+"@types/jest@npm:26.0.20":
+  version: 26.0.20
+  resolution: "@types/jest@npm:26.0.20"
+  dependencies:
+    jest-diff: ^26.0.0
+    pretty-format: ^26.0.0
+  checksum: 35070a1d59bdbd6ac9c64f8aaebf1b3540339ce2b561ebda1e187ab9f0cc8c0caab702dc2fd096184c6c6eb6b042cefaeb315fe600569331374a41043a854d54
   languageName: node
   linkType: hard
 
