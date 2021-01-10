@@ -37,7 +37,6 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
             return {
                 ...merge<any>([initialState, result]),
                 log: [],
-                connectionError: undefined,
                 isConnected: false
             };
         }
@@ -63,13 +62,6 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
             return {
                 ...state,
                 isConnected: true
-            };
-        }
-        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED: {
-            return {
-                ...state,
-                isConnected: false,
-                connectionError: error?.message ?? error ?? 'Connection error'
             };
         }
         case commands.MOAI_GET_VENUES.SUCCESS: {
