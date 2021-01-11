@@ -4,6 +4,7 @@ import { useColorScheme } from 'react-native-appearance';
 import { TouchableOpacity, Text, TextInput, View } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
+import { useHistory } from 'react-router';
 
 
 const Questionnaire: React.FC = () => {
@@ -155,6 +156,8 @@ const Questionnaire: React.FC = () => {
         }
     ];
 
+    const history = useHistory();
+
     // Color theme
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
@@ -165,6 +168,7 @@ const Questionnaire: React.FC = () => {
 
         const answersAsObj = {};
         for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
+        history.push('/questionnaireCompleted');
         console.log(answersAsObj);
     };
 
