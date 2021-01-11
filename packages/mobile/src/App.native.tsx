@@ -13,6 +13,7 @@ import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
 import Questionnaire from './components/Questionnaire';
+import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import { generateLocalKey, connect } from './actions';
@@ -139,7 +140,8 @@ const App = withState()(
                     <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
                     <Route path="/scanned" component={Scanned} />
                     <Route path="/venues" component={Venues} />
-                    <Route path="/questionnaire" component={Questionnaire} />
+                    <Route path="/questionnaire/:venueId" component={Questionnaire} />
+                    <Route path="/questionnaireCompleted" component={QuestionnaireCompleted} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;

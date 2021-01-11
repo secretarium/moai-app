@@ -15,6 +15,7 @@ const Venues = withState()((s) => ({
 }), ({ venues, dispatch }) => {
 
     const [hasFetchedVenues, setHasFetchedVenues] = useState(false);
+    const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     // Color theme
     const colorScheme = useColorScheme();
@@ -44,14 +45,14 @@ const Venues = withState()((s) => ({
     };
 
     useEffect(() => {
-        if (!hasFetchedVenues) {
+        if (hasFetchedVenues === false) {
             dispatch(getVenues());
             setHasFetchedVenues(true);
         }
     }, [hasFetchedVenues, dispatch]);
 
     return (
-        <MainLayout goBackRoute={'/'} showGoBack={true} withNavigation={true}>
+        <MainLayout showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15
@@ -67,11 +68,11 @@ const Venues = withState()((s) => ({
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
                         <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                            <Link to={'/questionnaire'} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                            <Link to={`/questionnaire/${venue.id}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                                 <>
                                     <View style={{ maxWidth: '90%' }}>
-                                        <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 16 }}>{locationTypes[venue.type]}</Text>
-                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>Checked-in on {toDateTime(venue.time)}</Text>
+                                        <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
+                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>Checked-in on <Bold>{toDateTime(venue.time)}</Bold></Text>
                                     </View>
                                     <Entypo
                                         name="chevron-right"
@@ -83,7 +84,7 @@ const Venues = withState()((s) => ({
                         </TouchableOpacity>
                     )
                     :
-                    'You have not checked-in to any location yet.'
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: '#E95C59', paddingLeft: 15 }}>You have not checked-in to any location yet!</Text>
                 }
             </ScrollView>
         </MainLayout>
