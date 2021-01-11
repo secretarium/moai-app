@@ -8,7 +8,7 @@
         "@fortawesome/free-solid-svg-icons": "5.15.1",
         "@fortawesome/react-fontawesome": "0.1.14",
         "@secretarium/connector": "0.8.4",
-        "antd": "4.10.0",
+        "antd": "4.10.2",
         "deepmerge": "4.2.2",
         "immutable": "4.0.0-rc.12",
         "react": "17.0.1",
