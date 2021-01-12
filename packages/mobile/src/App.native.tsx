@@ -140,7 +140,7 @@ const App = withState()(
                     <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
                     <Route path="/scanned" component={Scanned} />
                     <Route path="/venues" component={Venues} />
-                    <Route path="/questionnaire/:venueId" component={Questionnaire} />
+                    <Route path="/questionnaire/:venueType" component={Questionnaire} />
                     <Route path="/questionnaireCompleted" component={QuestionnaireCompleted} />
                     <Route render={() => {
                         // if (showOnboarding)
