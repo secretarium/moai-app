@@ -1,6 +1,6 @@
 {
     "name": "@secretarium/moai-expo",
-    "version": "0.0.20",
+    "version": "0.0.21",
     "private": true,
     "description": "Expo mobile and web application",
     "main": "./src/AppEntry.tsx",
