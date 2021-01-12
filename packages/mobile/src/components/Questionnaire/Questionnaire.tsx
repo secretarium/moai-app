@@ -136,7 +136,9 @@ const Questionnaire = withState<QuestionnaireProps>()(
 
         useEffect(() => {
             switch (venueType) {
-                case '18' || '24' || '26' || '28' || '30': {
+                case '18':
+                case '24':
+                case '30': {
                     questions.unshift(
                         {
                             questionType: 'SelectionGroup',
@@ -151,11 +153,61 @@ const Questionnaire = withState<QuestionnaireProps>()(
                     break;
                 }
                 case '26': {
+                    questions.unshift(
+                        {
+                            questionType: 'SelectionGroup',
+                            questionText: 'What was the location type?',
+                            questionId: '1',
+                            options: [
+                                { optionText: 'Indoor', value: 'Indoor' },
+                                { optionText: 'Outdoor', value: 'Outdoor' }
+                            ]
+                        },
+                        {
+                            questionType: 'SelectionGroup',
+                            questionText: 'Were the surfaces cleaned after every usage?',
+                            questionId: '14',
+                            options: [
+                                { optionText: 'Yes', value: 'Yes' },
+                                { optionText: 'No', value: 'No' },
+                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
+                            ]
+                        }
+                    );
+
                     const index = questions.findIndex(question => question.questionId === '4');
                     questions.splice(index, 1);
                     break;
                 }
-                case '12' || '15' || '16' || '19' || '21' || '26' || '28' || '29': {
+                case '28': {
+                    questions.unshift(
+                        {
+                            questionType: 'SelectionGroup',
+                            questionText: 'What was the location type?',
+                            questionId: '1',
+                            options: [
+                                { optionText: 'Indoor', value: 'Indoor' },
+                                { optionText: 'Outdoor', value: 'Outdoor' }
+                            ]
+                        },
+                        {
+                            questionType: 'SelectionGroup',
+                            questionText: 'Were the surfaces cleaned after every usage?',
+                            questionId: '14',
+                            options: [
+                                { optionText: 'Yes', value: 'Yes' },
+                                { optionText: 'No', value: 'No' },
+                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
+                            ]
+                        }
+                    );
+                    break;
+                }
+                case '12':
+                case '16':
+                case '19':
+                case '21':
+                case '29': {
                     questions.push(
                         {
                             questionType: 'SelectionGroup',
@@ -172,6 +224,16 @@ const Questionnaire = withState<QuestionnaireProps>()(
                 }
                 case '15': {
                     questions.push(
+                        {
+                            questionType: 'SelectionGroup',
+                            questionText: 'Were the surfaces cleaned after every usage?',
+                            questionId: '14',
+                            options: [
+                                { optionText: 'Yes', value: 'Yes' },
+                                { optionText: 'No', value: 'No' },
+                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
+                            ]
+                        },
                         {
                             questionType: 'SelectionGroup',
                             questionText: 'Did any contact between members of the party occur during the gathering?',
@@ -191,7 +253,10 @@ const Questionnaire = withState<QuestionnaireProps>()(
                             ]
                         }
                     );
+                    break;
                 }
+                default:
+                    break;
             }
         }, [venueType]);
 
