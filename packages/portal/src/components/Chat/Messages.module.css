@@ -3,7 +3,6 @@
     flex-direction: column;
     background-color: #fff;
     flex: 0.55;
-    border-radius: 0 15px 15px 0;
 }
 
 .messagesHeader {
@@ -11,7 +10,6 @@
     display: flex;
     align-items: center;
     background-color: #f4f7f9;
-    border-radius: 0 15px 0 0;
     font-size: 18px;
     color: #000;
     height: 90px;
@@ -35,7 +33,6 @@
     align-items: center;
     height: 60px;
     background-color: #fff;
-    border-radius: 0 0 15px 0;
     border-top: 2px solid #dee8ee;
     margin: 20px 40px 20px 40px;
 }

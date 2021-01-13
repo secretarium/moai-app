@@ -38,7 +38,6 @@
     flex: 1;
     background-color: #f4f7f9;
     overflow: auto;
-    border-radius: 0 0 0 15px;
 }
 
 ::placeholder {

@@ -17,11 +17,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install --immutable
+    - run: yarn install
     - run: yarn lint
 
-  test:
-    name: Test
+  build:
+    name: Build
     runs-on: ${{ matrix.os-version }}
     needs: lint
 
@@ -36,7 +36,28 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install --immutable
+    - run: yarn install
+    - run: yarn build
+      env:
+        CI: true
+   
+  test:
+    name: Test
+    runs-on: ${{ matrix.os-version }}
+    needs: build
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        os-version: [ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: yarn install
     - run: yarn test
       env:
         CI: true
