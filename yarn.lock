@@ -2875,6 +2875,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ide/backoff@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@ide/backoff@npm:1.0.0"
+  checksum: 53fdf188304ecd85b1132b893a1082d56ca3fff7c704801e4c92bd7d277089e4215c4550a06c1e3fda1c5da38bfd405946a7629703603cc28894a7bea42e5627
+  languageName: node
+  linkType: hard
+
 "@istanbuljs/load-nyc-config@npm:^1.0.0":
   version: 1.1.0
   resolution: "@istanbuljs/load-nyc-config@npm:1.1.0"
@@ -4469,6 +4476,7 @@ __metadata:
     expo-file-system: 9.3.0
     expo-font: 8.4.0
     expo-linking: 2.0.0
+    expo-notifications: 0.8.2
     expo-optimize: 0.1.70
     expo-splash-screen: 0.8.1
     expo-yarn-workspaces: 1.2.1
@@ -8325,6 +8333,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"assert@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "assert@npm:2.0.0"
+  dependencies:
+    es6-object-assign: ^1.1.0
+    is-nan: ^1.2.1
+    object-is: ^1.0.1
+    util: ^0.12.0
+  checksum: ce8ae5a9e193f720f12523ac16010c8b9ce706bfbf70d3b66e3f8256fc241f065b2629245656b5e04283e789f928fd3868c1e54aaf7d5693c952b674a86ca088
+  languageName: node
+  linkType: hard
+
 "assign-symbols@npm:^1.0.0":
   version: 1.0.0
   resolution: "assign-symbols@npm:1.0.0"
@@ -9251,7 +9271,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"badgin@npm:^1.1.2":
+"badgin@npm:^1.1.2, badgin@npm:^1.1.5":
   version: 1.2.2
   resolution: "badgin@npm:1.2.2"
   checksum: c8c28428b38f6377ae438246ec4f0261c0936b2f1bf3bb8b3474c072ba0931cd05703ae30173ac7e6f5261566cd67f8ac15d3ab51ef9b63a5d5ca004206a6d1b
@@ -13472,6 +13492,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es6-object-assign@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "es6-object-assign@npm:1.1.0"
+  checksum: 55ef44bdddb41f92c34f9ea4dcc64be819837df19c02eed9cc068f4ae5ed2425f358756d9dd1d562cb78e58bddb343d035e8a66bb35658a9b89239ca187e0c85
+  languageName: node
+  linkType: hard
+
 "es6-shim@npm:^0.35.5":
   version: 0.35.6
   resolution: "es6-shim@npm:0.35.6"
@@ -14462,6 +14489,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-constants@npm:9.3.1":
+  version: 9.3.1
+  resolution: "expo-constants@npm:9.3.1"
+  dependencies:
+    fbjs: 1.0.0
+    uuid: ^3.3.2
+  checksum: 9896f7688baff63b87fa906cd0cadad8d8edc0a2807b6b016b1a39289d2ac512033b7fdd5bf970ad870b0397ff120931789ad05b5eea152aead7e40085e6f09a
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:9.3.5, expo-constants@npm:~9.3.3":
   version: 9.3.5
   resolution: "expo-constants@npm:9.3.5"
@@ -14551,6 +14588,21 @@ __metadata:
     unimodules-permissions-interface: "*"
     unimodules-task-manager-interface: "*"
   checksum: f5b62c46ae0e8e1d7f72a25def6fa8851052f76cf6c0348c1c20f0a4a5b7a63e43efacd0971cd9abc3f2e3d76b8a31be1854995fcbb9b65651ea8098514bc740
+  languageName: node
+  linkType: hard
+
+"expo-notifications@npm:0.8.2":
+  version: 0.8.2
+  resolution: "expo-notifications@npm:0.8.2"
+  dependencies:
+    "@ide/backoff": ^1.0.0
+    abort-controller: ^3.0.0
+    assert: ^2.0.0
+    badgin: ^1.1.5
+    expo-application: ~2.4.1
+    expo-constants: 9.3.1
+    uuid: ^3.4.0
+  checksum: f08a9839d8c065095eb4b0461ce06cfb0dd3e59757b11aa8ee5495d24580e47d2b35f2c11341797374599073e415183714c3663998889c27fbf99390ee08a3cd
   languageName: node
   linkType: hard
 
@@ -17967,6 +18019,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"is-generator-function@npm:^1.0.7":
+  version: 1.0.8
+  resolution: "is-generator-function@npm:1.0.8"
+  checksum: 3188976e6f2907c43bf77191999dc35b514b852b8df8318edda8cd4c183f4896b26a650973d6108e38b520c8b7febfe4963b134b01962d79e2955b4ab0156e5b
+  languageName: node
+  linkType: hard
+
 "is-glob@npm:^2.0.0":
   version: 2.0.1
   resolution: "is-glob@npm:2.0.1"
@@ -18038,6 +18097,16 @@ fsevents@~2.1.2:
   version: 2.0.2
   resolution: "is-map@npm:2.0.2"
   checksum: 2fe2cef4c9deb05039b52afd4b3395ff7cfa9f5db457f7569d14b976d814fecccc4a8334614ea1fc47ae5be1847d3ad79c275bec142e5044231d9f766164cfe6
+  languageName: node
+  linkType: hard
+
+"is-nan@npm:^1.2.1":
+  version: 1.3.2
+  resolution: "is-nan@npm:1.3.2"
+  dependencies:
+    call-bind: ^1.0.0
+    define-properties: ^1.1.3
+  checksum: 77248e17843707ca367ff430d7ed0dc9d1023fcf37fe6cb921515c7db89651a16bf499cd20afad4e7b338677d83a472041db081fb6bd75e50f67eb5e42584eb7
   languageName: node
   linkType: hard
 
@@ -32335,6 +32404,20 @@ typescript@4.0.3:
   dependencies:
     inherits: 2.0.3
   checksum: 3485358c8292a8d6655f9b08a3aa4c942ed00eca454c6ca5c29b4537f375e18852d0ac28c1f56c2c28d4d5fbf2ecd1c4160482626fb513f796aba8e9b2040ecf
+  languageName: node
+  linkType: hard
+
+"util@npm:^0.12.0":
+  version: 0.12.3
+  resolution: "util@npm:0.12.3"
+  dependencies:
+    inherits: ^2.0.3
+    is-arguments: ^1.0.4
+    is-generator-function: ^1.0.7
+    is-typed-array: ^1.1.3
+    safe-buffer: ^5.1.2
+    which-typed-array: ^1.1.2
+  checksum: 1e2d9f8f0997e9902e3260dd7533ff3d71ef1eec4c0f6c9fc16355f6228b7a35f0b64fee086298d55dcedf99d75dcc19fa02418c2403c2ab9c25212a1f3c3ffe
   languageName: node
   linkType: hard
 
