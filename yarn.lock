@@ -4470,6 +4470,7 @@ __metadata:
     expo-camera: 9.1.1
     expo-cli: 4.0.17
     expo-constants: 9.3.5
+    expo-crypto: 8.4.0
     expo-file-system: 9.3.0
     expo-font: 8.4.0
     expo-linking: 2.0.0
@@ -13969,6 +13970,13 @@ __metadata:
     fbjs: 1.0.0
     uuid: ^3.3.2
   checksum: 4904235e9e9b6aa2dc83f5c41a659487477020246ab936b5d5a5987f25918676b82dab6115652dcf014af060c363238f9a206226a21938ded456a04f159622c2
+  languageName: node
+  linkType: hard
+
+"expo-crypto@npm:8.4.0":
+  version: 8.4.0
+  resolution: "expo-crypto@npm:8.4.0"
+  checksum: 86059cd25ba589e4a91b6c7d6419dad24539aacf3d745f5f279e9864e6d078fa88221a38b2f83e07d7d0c8cc6c3af6208bb661a9d2780a9989f6e8ac3c96c706
   languageName: node
   linkType: hard
 

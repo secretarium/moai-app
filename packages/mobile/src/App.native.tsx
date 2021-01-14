@@ -9,6 +9,7 @@ import Chat from './components/Chat';
 import Scanner from './components/Scanner';
 import Checkin from './components/Checkin';
 import Keys from './components/Infos/Keys';
+import Key from './components/Infos/Keys/Key';
 import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
@@ -156,6 +157,7 @@ const App = withState()(
                 <Switch>
                     <Route path="/notices" component={Notices} />
                     <Route path="/keys" component={Keys} />
+                    <Route path="/key/:key" component={Key} />
                     <Route path="/infos" component={Infos} />
                     <Route path="/licenses" component={Licenses} />
                     <Route path="/onboarding" component={OnboardingScreen} />
