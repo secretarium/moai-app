@@ -24,6 +24,7 @@ const config = {
         versionCode: 21,
         icon: './assets/android/icon.png',
         package: 'com.secretarium.moai.app',
+        useNextNotificationsApi: true,
         permissions: [
             'CAMERA'
         ],

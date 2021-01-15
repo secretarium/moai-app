@@ -2,8 +2,7 @@ import React from 'react';
 import { SafeAreaView, View, StatusBar, TouchableOpacity, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../../ReactRouter';
-import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { commonStyles } from '../../commonStyles';
 
 
@@ -60,7 +59,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                                         <Entypo name="chat" size={40} color={themeColorStyle} />
                                     </Link>
                                     <Link to={'/venues'} component={TouchableOpacity} style={commonStyles.topMidButton} underlayColor='transparent'>
-                                        <Entypo name="location" size={40} color={themeColorStyle} />
+                                        <MaterialCommunityIcons name="history" size={40} color={themeColorStyle} />
                                     </Link>
                                     <Link to={'/infos'} style={commonStyles.topRightButton} underlayColor='transparent'>
                                         <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />
