@@ -5,6 +5,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Link } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout/index';
 import styles from './styles';
+import i18n from 'i18n-js';
 
 
 const Infos: React.FC = () => {
@@ -20,14 +21,14 @@ const Infos: React.FC = () => {
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
-                    About Moai
+                    {i18n.t('APP_ABOUT')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
                     Moai is a smart, secure contact tracing solution created by Secretarium, a deep-tech startup founded in 2016 with the aim of building useful technology that never compromises anyone’s privacy.{'\n'}{'\n'}
                     The founders are from the world of banking, but they left to pursue projects that would solve problems around handling highly sensitive data: enforcing consent and guaranteeing privacy by design and by default.
                 </Text>
             </View>
-            {['Licenses', 'Keys', 'Notices'].map((item, index) =>
+            {i18n.t('APP_INFOS').map((item, index) =>
                 <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
                     <Link to={`${item.toLowerCase()}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                         <>

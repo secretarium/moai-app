@@ -1,0 +1,13 @@
+{
+    "hello": "Witam w Expo + Next.js",
+    "change-locale": "Zmień język",
+    "APP_TAP_TO_SCAN": "Dotknij, aby zeskanować",
+    "APP_TYPE_MESSAGE": "Napisz wiadomość...",
+    "APP_MEASURE_EXPOSURE_RISK": "Zmierz ryzyko zakażenia",
+    "APP_ABOUT": "O Moai",
+    "APP_INFOS": [
+        "Licencje",
+        "Klucze",
+        "Informacje prawne"
+    ]
+}

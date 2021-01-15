@@ -80,5 +80,9 @@
     },
     "eslintConfig": {
         "extends": "./eslint.config.js"
+    },
+    "dependencies": {
+        "expo-localization": "9.1.0",
+        "i18n-js": "3.8.0"
     }
 }

@@ -13,6 +13,7 @@ import { getConversation, sendMessage } from '../../actions';
 import { withState } from '../../store';
 import { useHistory } from 'react-router';
 import { commonStyles } from '../commonStyles';
+import i18n from 'i18n-js';
 
 
 const Chat = withState()((s) => ({
@@ -159,7 +160,7 @@ const Chat = withState()((s) => ({
                 renderSend={renderSend}
                 renderComposer={renderComposer}
                 renderInputToolbar={renderInputToolbar}
-                placeholder='Type a new message...'
+                placeholder={i18n.t('APP_TYPE_MESSAGE')}
                 alwaysShowSend
                 showUserAvatar
             />

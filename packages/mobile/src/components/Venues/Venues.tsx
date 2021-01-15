@@ -8,6 +8,7 @@ import MainLayout from '../common/MainLayout';
 import { getVenues } from '../../actions';
 import styles from './styles';
 import { toDateTime } from '../../utils/timeHandler';
+import i18n from 'i18n-js';
 
 
 const Venues = withState()((s) => ({
@@ -58,7 +59,7 @@ const Venues = withState()((s) => ({
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
-                    Measure exposure risk
+                    {i18n.t('APP_MEASURE_EXPOSURE_RISK')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
                     These are all locations you have checked-in to. Tap a location and answer a short survey to measure factors that affect the spread of COVID-19.

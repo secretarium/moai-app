@@ -21,6 +21,7 @@ import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
+import { initLocalize } from './services/i18n/localized';
 
 
 const App = withState()(
@@ -30,6 +31,7 @@ const App = withState()(
     }),
     ({ dispatch, localKey, isConnected }) => {
 
+        initLocalize();
         const history = useHistory();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);

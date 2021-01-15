@@ -4569,8 +4569,10 @@ __metadata:
     eslint-plugin-jsx-a11y: 6.4.1
     eslint-plugin-react: 7.22.0
     eslint-plugin-react-hooks: 4.2.0
+    expo-localization: 9.1.0
     expo-yarn-workspaces: 1.2.1
     husky: 4.3.7
+    i18n-js: 3.8.0
     release-it: 14.2.2
   languageName: unknown
   linkType: soft
@@ -14005,6 +14007,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-localization@npm:9.1.0":
+  version: 9.1.0
+  resolution: "expo-localization@npm:9.1.0"
+  dependencies:
+    rtl-detect: ^1.0.2
+  peerDependencies:
+    "@unimodules/core": ~5.1.2
+  checksum: 5aa2f01050ce4d65fbe31b8fe3bb32232b808e6c6eae72d9ce8e101723fe61b6715fd30194a67adba7bd5ddd5d9243dc18d9f8dbe0c6d338214c97d3d91c4055
+  languageName: node
+  linkType: hard
+
 "expo-location@npm:~10.0.0":
   version: 10.0.0
   resolution: "expo-location@npm:10.0.0"
@@ -16641,6 +16654,13 @@ fsevents@^1.2.7:
   version: 1.0.4
   resolution: "hyphenate-style-name@npm:1.0.4"
   checksum: e1ef5816f38e6da74dd3f06b7d4cfa5d13ca9b8ba8392847de1061330ffb5da59853a9f04d1bde712a8eaf9f81a6e9b7c58c654edb2f73b85daf9c2d663dc80e
+  languageName: node
+  linkType: hard
+
+"i18n-js@npm:3.8.0":
+  version: 3.8.0
+  resolution: "i18n-js@npm:3.8.0"
+  checksum: d32519a8685512d39370f9568530853980269d67d22a9085c3963ae0d18f183c2e843d411da354cf95038c2df23c0e72122d8cd7083c16c23dd08f8cf8e44828
   languageName: node
   linkType: hard
 
@@ -27949,6 +27969,13 @@ resolve@1.15.0:
   version: 4.8.5
   resolution: "rsvp@npm:4.8.5"
   checksum: b932bd7606210826fbd9f5483333e8c2c0cff4e33e433ae60f1b31334f4544ff7d1e7d946be4602b787dd3dcb386471f759f01e06587331914af2f619fb8bc99
+  languageName: node
+  linkType: hard
+
+"rtl-detect@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "rtl-detect@npm:1.0.2"
+  checksum: 9147168eaaf1cc4b5377253f84b9ddd6cb81af14b7607d0947b8d7db50655fbc0faa2bd7fef355fa043fdf8a5a084aa57a0460ee287c4b6451c02fb2d9273862
   languageName: node
   linkType: hard
 
