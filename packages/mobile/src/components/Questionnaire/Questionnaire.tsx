@@ -301,7 +301,6 @@ const Questionnaire = withState<QuestionnaireProps>()(
                 case '4': {
                     if (answer.value.value === 'Yes') {
                         const index = questions.findIndex(question => question.questionId === '4');
-                        console.log('YES', index);
                         questions.splice(index + 1, 0, {
                             questionType: 'SelectionGroup',
                             questionText: 'Were people using the PPE correctly? (e.g. covering both the nose and mouth)',
@@ -313,7 +312,6 @@ const Questionnaire = withState<QuestionnaireProps>()(
                         });
                     } else if (answer.value.value === 'No') {
                         const index = questions.findIndex(question => question.questionId === '4');
-                        console.log('NO', index);
                         questions.splice(index + 1, 0, {
                             questionType: 'SelectionGroup',
                             questionText: 'Was the staff wearing any form of PPE?',

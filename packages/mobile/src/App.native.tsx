@@ -26,6 +26,7 @@ import { initLocalize } from './services/i18n/localized';
 import i18n from 'i18n-js';
 import { registerForPushNotificationsAsync } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
+import { actionTypes } from './actions/constants';
 
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
@@ -64,7 +65,10 @@ const App = withState()(
         });
 
         useEffect(() => {
-            registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+            registerForPushNotificationsAsync().then(token => {
+                setExpoPushToken(token);
+                dispatch({ type: actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN, payload: token });
+            });
 
             notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
                 setNotification(notification);

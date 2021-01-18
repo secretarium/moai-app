@@ -3,9 +3,9 @@ import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
 
-export const sendPushNotification = async (msg: string): Promise<void> => {
+export const sendPushNotification = async (msg: string, expoPushToken: string): Promise<void> => {
     const message = {
-        to: 'ExponentPushToken[IiGjVeJ-p6pyyY2s3JCXsX]',
+        to: expoPushToken,
         sound: 'default',
         title: 'New message! ✉️',
         body: msg,
@@ -37,7 +37,6 @@ export const registerForPushNotificationsAsync = async (): Promise<string> => {
             return;
         }
         token = (await Notifications.getExpoPushTokenAsync()).data;
-        console.log(token);
     } else {
         alert('Must use physical device for Push Notifications');
     }

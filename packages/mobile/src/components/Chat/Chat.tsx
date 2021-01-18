@@ -18,8 +18,9 @@ import i18n from 'i18n-js';
 
 const Chat = withState()((s) => ({
     messages: s.conversations.messages,
-    conversation: s.conversations.conversation
-}), ({ messages, conversation, dispatch }) => {
+    conversation: s.conversations.conversation,
+    expoPushToken: s.system.expoPushToken
+}), ({ messages, conversation, expoPushToken, dispatch }) => {
 
     const history = useHistory();
     const [stateMessages, setMessages] = useState([]);
@@ -54,9 +55,9 @@ const Chat = withState()((s) => ({
         }
         if (hasFetchedConversation === false && !isEmptyObject(conversation) && conversation !== undefined) {
             setHasFetchedConversation(true);
-            dispatch(getConversation(conversation.address, conversation.token));
+            dispatch(getConversation(conversation.address, conversation.token, expoPushToken));
         }
-    }, [dispatch, hasFetchedConversation, conversation, messages, history]);
+    }, [dispatch, hasFetchedConversation, conversation, messages, history, expoPushToken]);
 
     const onSend = ([message]) => {
         if (!isEmptyObject(conversation) || conversation !== null) {
