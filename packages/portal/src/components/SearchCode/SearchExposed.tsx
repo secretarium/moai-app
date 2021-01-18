@@ -6,6 +6,7 @@ import { getExposed, clearSearchErrors, clearSearchResults } from '../../actions
 import { toTimestamp } from '../../utils/timeHandler';
 import { useLocation } from 'react-router-dom';
 import style from './SearchCode.module.css';
+import { useTranslation } from 'react-i18next';
 
 
 const { Search } = Input;
@@ -19,6 +20,7 @@ const SearchExposed = withState()(
     ({ dispatch, exposed, searchExposedError }) => {
 
         const location = useLocation();
+        const { t } = useTranslation();
         const [date, setDate] = useState<string | undefined>(undefined);
         const [time, setTime] = useState<string | undefined>(undefined);
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
@@ -37,7 +39,7 @@ const SearchExposed = withState()(
 
         useEffect(() => {
             if (exposed !== null && exposed.length < 1) {
-                setErrorMessage('No results.');
+                setErrorMessage(t('APP_NO_RESULTS'));
             }
         }, [exposed]);
 
@@ -45,7 +47,7 @@ const SearchExposed = withState()(
             event.preventDefault();
             setErrorMessage(undefined);
             if (date === undefined || time === undefined) {
-                setErrorMessage('Please input a date.');
+                setErrorMessage(t('APP_NO_DATE'));
             } else {
                 dispatch(getExposed(value, toTimestamp(date, time)));
             }
@@ -63,15 +65,15 @@ const SearchExposed = withState()(
             <div className={style.containerSearch}>
                 <div className={style.searchHeader}>
                     <div className={style.searchInputCode}>
-                        <Search placeholder="Search Location Code..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }}
+                        <Search placeholder={t('APP_SEARCH_LOCATION_CODE')} style={{ outline: 'none', border: 'none', borderRadius: '25px' }}
                             onChange={(): void => clearErrors()} onSearch={(value, event) => onSearch(value, event)} />
                     </div>
                     <div className={style.searchInputCode}>
-                        <DatePicker style={{ color: '#dfe0e2', outline: 'none', border: 'none', marginLeft: '10px' }}
+                        <DatePicker placeholder={t('APP_SEARCH_DATE')} style={{ color: '#dfe0e2', outline: 'none', border: 'none', marginLeft: '10px' }}
                             onClick={(): void => clearErrors()} onChange={(value, dateString) => setDate(dateString)} />
                     </div>
                     <div className={style.searchInputCode}>
-                        <TimePicker style={{ color: '#dfe0e2', outline: 'none', border: 'none', marginLeft: '10px' }}
+                        <TimePicker placeholder={t('APP_SEARCH_TIME')} style={{ color: '#dfe0e2', outline: 'none', border: 'none', marginLeft: '10px' }}
                             onClick={(): void => clearErrors()} onChange={(value, dateString) => setTime(dateString)} />
                     </div>
                 </div>
