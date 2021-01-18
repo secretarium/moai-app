@@ -41,7 +41,7 @@ const SearchExposed = withState()(
             if (exposed !== null && exposed.length < 1) {
                 setErrorMessage(t('APP_NO_RESULTS'));
             }
-        }, [exposed]);
+        }, [exposed, t]);
 
         const onSearch = (value: string, event: React.MouseEvent<HTMLElement, MouseEvent> | React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>): void => {
             event.preventDefault();
