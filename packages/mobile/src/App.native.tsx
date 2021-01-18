@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
 import { Redirect, Route, Switch } from './ReactRouter';
@@ -24,6 +24,17 @@ import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
 import { initLocalize } from './services/i18n/localized';
 import i18n from 'i18n-js';
+import { registerForPushNotificationsAsync } from './services/notifications/notifications';
+import * as Notifications from 'expo-notifications';
+import { actionTypes } from './actions/constants';
+
+Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false
+    })
+});
 
 const App = withState()(
     (s) => ({
@@ -43,11 +54,31 @@ const App = withState()(
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
+        const [expoPushToken, setExpoPushToken] = useState('');
+        const [notification, setNotification] = useState<Notifications.Notification>();
+        const notificationListener = useRef<any>();
+        const responseListener = useRef<any>();
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
             'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
         });
+
+        useEffect(() => {
+            registerForPushNotificationsAsync().then(token => {
+                setExpoPushToken(token);
+                dispatch({ type: actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN, payload: token });
+            });
+
+            notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+                setNotification(notification);
+            });
+
+            responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+                console.log(response);
+            });
+
+        }, []);
 
         const parseUrl = useCallback((url: string | null | undefined) => {
 
