@@ -1,7 +1,7 @@
 const config = {
     name: 'Moai',
     description: 'An app for Confidential Track and Trace',
-    version: '0.0.22',
+    version: '0.0.23',
     slug: 'moai-confidential-test-and-trace',
     icon: './assets/icon.png',
     splash: {
@@ -12,7 +12,7 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '22',
+        buildNumber: '23',
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.app',
         associatedDomains: [
@@ -21,7 +21,7 @@ const config = {
         ]
     },
     android: {
-        versionCode: 22,
+        versionCode: 23,
         icon: './assets/android/icon.png',
         package: 'com.secretarium.moai.app',
         useNextNotificationsApi: true,
