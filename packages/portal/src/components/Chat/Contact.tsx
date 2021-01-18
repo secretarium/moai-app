@@ -20,12 +20,13 @@ const Contact = withState<ContactProps>()((s) => ({
 
     useEffect(() => {
         const message = lastMessages.find(msg => msg.address === address);
-        if (JSON.stringify(message.lastMessage) !== '{}') {
-            setMessageText(message.lastMessage.text);
-            setMessageTime(message.lastMessage.datetime);
-        } else {
+        if (message === undefined || JSON.stringify(message.lastMessage) === '{}') {
             setMessageText('');
             setMessageTime(0);
+        } else {
+            console.log(message.lastMessage);
+            setMessageText(message.lastMessage.text);
+            setMessageTime(message.lastMessage.datetime);
         }
 
     }, [lastMessages, address]);

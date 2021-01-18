@@ -9,11 +9,13 @@ import LoginValidation from './LoginValidation';
 import LoginLanding from './LoginLanding';
 import LoginSignin from './LoginSignin';
 import style from './Login.module.css';
+import { useTranslation } from 'react-i18next';
 
 
 const Login: React.FC = () => {
 
     const history = useHistory();
+    const { t } = useTranslation();
 
     return (
         <div className={style.containerMain}>
@@ -26,11 +28,13 @@ const Login: React.FC = () => {
                     <Route component={LoginLanding} />
                 </Switch>
                 <Divider style={{ width: '70%', minWidth: '70%' }} />
-                <p style={{ marginBottom: 0 }}>Don't have an account? You can <Button type="link" style={{ padding: 0 }} onClick={(): void => {
-                    history.push('/login/register');
-                }}>Register a new account</Button>.</p>
+                <p style={{ marginBottom: 0 }}>{t('APP_DONT_HAVE_AN_ACCOUNT')}
+                    <Button type="link" style={{ padding: 0 }} onClick={(): void => {
+                        history.push('/login/register');
+                    }}>{t('APP_REGISTER_NEW_ACCOUNT')}</Button>
+                </p>
                 <span>
-                    Moai © {new Date().getFullYear()} - Powered by{' '}
+                    Moai © {new Date().getFullYear()} - {t('APP_POWERED_BY')}{' '}
                     <a href="https://secretarium.com" rel="noopener noreferrer" target="_blank">
                         Secretarium
                     </a> - <em>{`v${packageVersion}`}</em>
