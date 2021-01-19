@@ -23,7 +23,7 @@ const ContactsBar = withState()((s) => ({
             </div>
             <div className={style.chats}>
                 {conversationList.map((convo, index) =>
-                    <Contact key={index} address={convo.address} token={convo.token} />
+                    <Contact key={index} conversation={convo} />
                 )}
             </div>
         </div>
