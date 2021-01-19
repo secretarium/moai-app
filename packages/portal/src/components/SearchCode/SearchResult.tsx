@@ -7,6 +7,7 @@ import { withState } from '../../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import style from './SearchResult.module.css';
+import { useTranslation } from 'react-i18next';
 
 
 type SearchResultProps = {
@@ -19,6 +20,7 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
 }), ({ userId, time, newConversation, dispatch }) => {
 
     const history = useHistory();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (newConversation) {
@@ -37,13 +39,13 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
                 {/* {`User ID: ${userId}`} */}
             </div>
             <div className={style.searchResultBody}>
-                {`User ID: ${userId}`}
-                <br></br>Time: {toDateTime(time)}
+                {`${t('APP_USER_ID')}: ${userId}`}
+                <br></br>{t('APP_TIME')}: {toDateTime(time)}
                 {/* <br></br>Barcode references: 0 */}
             </div>
             <div className={style.searchResultFooter}>
                 <div className={style.searchResultButton} onClick={() => onClick()}>
-                    <FontAwesomeIcon icon={faEnvelope} /> Message
+                    <FontAwesomeIcon icon={faEnvelope} /> {t('APP_MESSAGE')}
                 </div>
                 {/* <div className={style.search-result-button}>
                     Phone

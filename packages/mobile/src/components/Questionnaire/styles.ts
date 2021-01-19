@@ -30,5 +30,16 @@ export const styles = StyleSheet.create({
         textAlignVertical: 'top',
         marginLeft: 10,
         marginRight: 10
+    },
+    homeButtonContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    homeButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10, padding: 10,
+        backgroundColor: 'white',
+        width: '85%'
     }
 });

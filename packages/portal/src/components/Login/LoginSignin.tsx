@@ -3,6 +3,7 @@ import { withState } from '../../store';
 import { Button, Input, Form, Alert } from 'antd';
 import { useLocation, useHistory } from 'react-router-dom';
 import { connect, clearTracerErrors, login } from '../../actions';
+import { useTranslation } from 'react-i18next';
 
 
 type LocationTypes = {
@@ -19,6 +20,7 @@ const LoginSignin = withState()(
 
         const location = useLocation<LocationTypes>();
         const history = useHistory();
+        const { t } = useTranslation();
         const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
@@ -59,17 +61,17 @@ const LoginSignin = withState()(
 
         return (
             <>
-                <h1>Welcome back</h1>
+                <h1>{t('APP_WELCOME_BACK')}</h1>
                 <Form name="signin" onFinish={handleLogin}>
                     <Input defaultValue={currentKey?.name} value={currentKey?.name} />
                     <br />
                     <br />
-                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your password!' }]} >
-                        <Input.Password placeholder="Password" onChange={(): void => clearErrors()} autoFocus />
+                    <Form.Item name="password" rules={[{ required: true, message: t('APP_NO_PASSWORD_ERROR') }]} >
+                        <Input.Password placeholder={t('APP_PASSWORD')} onChange={(): void => clearErrors()} autoFocus />
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" loading={isLoggingIn} style={{ backgroundColor: '#00b0ee', width: '120px' }}>
-                            Connect
+                            {t('APP_CONNECT')}
                         </Button>
                         {/* <Button.Group>
                             <Button>Forgot my password</Button>&nbsp;&nbsp;&nbsp;&nbsp;

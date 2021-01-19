@@ -8,9 +8,11 @@ export const initialState: System = {
     localConfiguration: {
         theme: 'auto'
     },
+    expoPushToken: null,
     isConnected: false,
     showOnboarding: true,
     scanCounter: 0,
+    venues: [],
     log: []
 };
 
@@ -51,6 +53,12 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 showOnboarding: payload
             };
         }
+        case actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN: {
+            return {
+                ...state,
+                expoPushToken: payload
+            };
+        }
         case actionTypes.MOAI_INCREMENT_SCAN_COUNTER: {
             return {
                 ...state,
@@ -61,6 +69,12 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
             return {
                 ...state,
                 isConnected: true
+            };
+        }
+        case commands.MOAI_GET_VENUES.SUCCESS: {
+            return {
+                ...state,
+                venues: payload.result.venues
             };
         }
         case actionTypes.SECRETARIUM_CONNECT_SUCCESSFUL:

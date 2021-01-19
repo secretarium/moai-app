@@ -96,10 +96,19 @@ declare namespace Moai {
         localKey?: ClearKeyPair;
         currentConnection?: SystemConnection;
         checkInError?: string;
+        connectionError?: string;
+        expoPushToken: string;
         isConnected: boolean;
         showOnboarding: boolean;
         scanCounter: number;
+        venues: Venue[];
         log: SystemLog;
+    };
+
+    type Venue = {
+        id: string;
+        time: number;
+        type: number;
     };
 
     type Conversation = {

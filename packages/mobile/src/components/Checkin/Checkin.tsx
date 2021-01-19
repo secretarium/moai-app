@@ -9,7 +9,7 @@ import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
-import { checkIn, connect } from '../../actions/system';
+import { checkIn, connect } from '../../actions';
 
 
 const Checkin = withState<RouteComponentProps<{

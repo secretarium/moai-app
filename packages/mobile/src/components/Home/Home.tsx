@@ -4,6 +4,7 @@ import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout';
 import { commonStyles } from './styles';
+import i18n from 'i18n-js';
 
 
 const Home: React.FC = () => {
@@ -15,7 +16,7 @@ const Home: React.FC = () => {
     return (
         <MainLayout showGoBack={false}>
             <View style={commonStyles.main}>
-                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Tap to scan</Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>{i18n.t('APP_TAP_TO_SCAN')}</Text>
                 <Image
                     source={themeLogoStyle}
                     resizeMode={'contain'}

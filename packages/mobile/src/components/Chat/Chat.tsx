@@ -9,16 +9,18 @@ import { styles } from './styles';
 import { useColorScheme } from 'react-native-appearance';
 import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
-import { getConversation, sendMessage } from '../../actions/conversations';
+import { getConversation, sendMessage } from '../../actions';
 import { withState } from '../../store';
 import { useHistory } from 'react-router';
 import { commonStyles } from '../commonStyles';
+import i18n from 'i18n-js';
 
 
 const Chat = withState()((s) => ({
     messages: s.conversations.messages,
-    conversation: s.conversations.conversation
-}), ({ messages, conversation, dispatch }) => {
+    conversation: s.conversations.conversation,
+    expoPushToken: s.system.expoPushToken
+}), ({ messages, conversation, expoPushToken, dispatch }) => {
 
     const history = useHistory();
     const [stateMessages, setMessages] = useState([]);
@@ -53,9 +55,9 @@ const Chat = withState()((s) => ({
         }
         if (hasFetchedConversation === false && !isEmptyObject(conversation) && conversation !== undefined) {
             setHasFetchedConversation(true);
-            dispatch(getConversation(conversation.address, conversation.token));
+            dispatch(getConversation(conversation.address, conversation.token, expoPushToken));
         }
-    }, [dispatch, hasFetchedConversation, conversation, messages, history]);
+    }, [dispatch, hasFetchedConversation, conversation, messages, history, expoPushToken]);
 
     const onSend = ([message]) => {
         if (!isEmptyObject(conversation) || conversation !== null) {
@@ -159,7 +161,7 @@ const Chat = withState()((s) => ({
                 renderSend={renderSend}
                 renderComposer={renderComposer}
                 renderInputToolbar={renderInputToolbar}
-                placeholder='Type a new message...'
+                placeholder={i18n.t('APP_TYPE_MESSAGE')}
                 alwaysShowSend
                 showUserAvatar
             />
