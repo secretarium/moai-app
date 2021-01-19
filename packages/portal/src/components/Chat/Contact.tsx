@@ -7,19 +7,18 @@ import style from './Contact.module.css';
 
 
 type ContactProps = {
-    address: string;
-    token: string;
+    conversation: MoaiPortal.Conversation
 };
 
 const Contact = withState<ContactProps>()((s) => ({
     lastMessages: s.conversations.lastMessages
-}), ({ address, token, lastMessages }) => {
+}), ({ conversation, lastMessages }) => {
 
     const [messageText, setMessageText] = useState<string>();
     const [messageTime, setMessageTime] = useState<number>();
 
     useEffect(() => {
-        const message = lastMessages.find(msg => msg.address === address);
+        const message = lastMessages.find(msg => msg.address === conversation.address);
         if (JSON.stringify(message.lastMessage) !== '{}') {
             setMessageText(message.lastMessage.text);
             setMessageTime(message.lastMessage.datetime);
@@ -28,17 +27,17 @@ const Contact = withState<ContactProps>()((s) => ({
             setMessageTime(0);
         }
 
-    }, [lastMessages, address]);
+    }, [lastMessages, conversation.address]);
 
     return (
         <>
             <Link className={style.contact} to={{
-                pathname: `/chat/${address}`,
-                state: { address: address, token: token }
+                pathname: `/chat/${conversation.address}`,
+                state: { address: conversation.address, token: conversation.token }
             }}>
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginBottom: '15px' }} />
                 <div className={style.contactInfo}>
-                    <h2>ID {address.slice(0, 8)}</h2>
+                    <h2>ID {conversation.address.slice(0, 8)}</h2>
                     {messageText}
                     <p className="contact-info-timestamp">
                         {(messageTime !== 0 ? toDateTime(messageTime) : 'New chat!')}
