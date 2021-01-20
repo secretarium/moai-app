@@ -48,7 +48,7 @@ web-build/
 public/licenses.json
 public/licenses-mobile.json
 public/disclaimer.txt
-# @generated: @expo/next-adapter@2.1.29
+# @generated
 /.expo/*
 # Expo Web
 /web-build/*
@@ -68,3 +68,10 @@ public/disclaimer.txt
 /.pnp
 .pnp.js
 # @end @expo/next-adapter
+# dotenv environment variables file
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+.env.test
+# @end

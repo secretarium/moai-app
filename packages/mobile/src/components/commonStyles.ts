@@ -20,6 +20,11 @@ export const commonStyles = StyleSheet.create({
         width: '50%',
         top: 20
     },
+    chatLogo: {
+        height: '70%',
+        width: '70%',
+        top: 10
+    },
     pin: {
         height: '80%',
         width: '100%',
@@ -38,6 +43,9 @@ export const commonStyles = StyleSheet.create({
     },
     topLeftButton: {
         left: 15,
+        top: 10
+    },
+    topMidButton: {
         top: 10
     },
     topRightButton: {

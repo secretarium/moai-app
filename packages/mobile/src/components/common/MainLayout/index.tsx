@@ -1,9 +1,8 @@
 import React from 'react';
-import { SafeAreaView, View, StatusBar, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, StatusBar, TouchableOpacity, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../../ReactRouter';
-import { Entypo } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
 import { commonStyles } from '../../commonStyles';
 
 
@@ -28,6 +27,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#888888';
     const themeStatusBarStyle = colorScheme !== 'dark' ? 'dark-content' : 'light-content';
+    const themeLogoStyle = colorScheme !== 'dark' ? require('../../../assets/logo-black.png') : require('../../../assets/logo-white.png');
 
     return (
         <View style={{
@@ -44,14 +44,22 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                                     <Link to={`${goBackRoute}`} style={commonStyles.topLeftButton} underlayColor='transparent'>
                                         <Entypo name="chevron-left" color={themeColorStyle} size={30} />
                                     </Link>
+                                    <Image
+                                        source={themeLogoStyle}
+                                        resizeMode={'contain'}
+                                        style={commonStyles.chatLogo}
+                                    />
                                     <Link to={'/infos'} component={TouchableOpacity} disabled={true} style={commonStyles.topRightButton} underlayColor='transparent'>
                                         <MaterialCommunityIcons name="information" size={40} color={commonStyles.applicationBackground.backgroundColor} />
                                     </Link>
                                 </>
                             ) : (
                                 <>
-                                    <Link to={'/chat'} component={TouchableOpacity} disabled={true} style={commonStyles.topLeftButton} underlayColor='transparent'>
-                                        <Entypo name="chat" size={40} color={commonStyles.applicationBackground.backgroundColor} />
+                                    <Link to={'/chat'} component={TouchableOpacity} style={commonStyles.topLeftButton} underlayColor='transparent'>
+                                        <Entypo name="chat" size={40} color={themeColorStyle} />
+                                    </Link>
+                                    <Link to={'/venues'} component={TouchableOpacity} style={commonStyles.topMidButton} underlayColor='transparent'>
+                                        <MaterialCommunityIcons name="history" size={40} color={themeColorStyle} />
                                     </Link>
                                     <Link to={'/infos'} style={commonStyles.topRightButton} underlayColor='transparent'>
                                         <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />

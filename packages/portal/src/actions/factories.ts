@@ -1,12 +1,13 @@
-import MoaiPortal from '../global';
-import secretariumHandler from '../utils/secretariumHandler';
 import { actionTypes } from './constants';
+import secretariumHandler from '../utils/secretariumHandler';
 
 const subscriptionMap: { [key: string]: () => void } = {};
 const responseTimes: { [key: string]: { q?: number; e?: number; r?: number }[] } = {};
 
 export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, subscribe, ticker) => handlers => dispatch =>
+
     new Promise(resolve => {
+
         let tick = 0;
 
         dispatch({
@@ -21,20 +22,23 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
                 return `${previous}${index}${current}`;
             }, 'sub') : (new Date().getTime() * Math.random()).toString(16).slice(0, 8)}`;
 
+
+        if (command.application === '__local__' && command.command === '__systemClearSubscriptionsHook__')
+            return Object.entries(subscriptionMap).forEach(([id, sub]) => {
+                sub?.();
+                delete subscriptionMap[id];
+            });
+
         if (subscribe) {
-            if (subscriptionMap[requestId]) {
-                subscriptionMap[requestId]?.();
-                delete subscriptionMap[requestId];
-            }
+            if (subscriptionMap[requestId])
+                return resolve();
             subscriptionMap[requestId] = () => resolve();
         }
 
-        if (responseTimes[requestId] === undefined) {
+        if (responseTimes[requestId] === undefined)
             responseTimes[requestId] = [];
-        }
-        if (responseTimes[requestId].length > 200) {
+        if (responseTimes[requestId].length > 200)
             responseTimes[requestId].splice(0, 50);
-        }
         responseTimes[requestId].push({ q: new Date().getTime() });
 
         secretariumHandler
@@ -42,42 +46,38 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
             .then(query => {
                 query
                     .onAcknowledged(() => {
-                        if (handlers?.onAcknowledged) {
+                        if (handlers?.onAcknowledged)
                             dispatch({
                                 type: actionTypes.SECRETARIUM_TRANSACTION_ACKNOWLEDGED,
                                 ...(handlers.onAcknowledged() ?? {})
                             });
-                        }
                     })
                     .onProposed(() => {
-                        if (handlers?.onProposed) {
+                        if (handlers?.onProposed)
                             dispatch({
                                 type: actionTypes.SECRETARIUM_TRANSACTION_PROPOSED,
                                 ...(handlers.onProposed() ?? {})
                             });
-                        }
                     })
                     .onCommitted(() => {
-                        if (handlers?.onCommitted) {
+                        if (handlers?.onCommitted)
                             dispatch({
                                 type: actionTypes.SECRETARIUM_TRANSACTION_COMMITED,
                                 ...(handlers.onCommitted() ?? {})
                             });
-                        }
                     })
                     .onExecuted((requestId: string) => {
                         responseTimes[requestId].push({ e: new Date().getTime() });
-                        if (handlers?.onResult) {
+                        if (handlers?.onResult)
                             dispatch({
                                 type: actionTypes.SECRETARIUM_TRANSACTION_EXECUTED,
                                 ...(handlers?.onExecuted?.() ?? {})
                             });
-                        } else {
+                        else
                             resolve({
                                 type: command.SUCCESS,
                                 ...(handlers?.onExecuted?.() ?? {})
                             });
-                        }
                     })
                     .onResult((result: any, requestId: string) => {
                         responseTimes[requestId].push({ r: new Date().getTime() });
@@ -88,25 +88,24 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
                                 payload: result,
                                 ...outcome
                             }).then(() => {
-                                if (ticker) {
+                                if (ticker)
                                     ticker(tick++);
-                                }
                             });
-                        } else {
-                            delete subscriptionMap[requestId];
-                            if (ticker) {
+                        }
+                        else {
+                            if (ticker)
                                 ticker(tick++);
-                            }
                             resolve({
                                 type: command.SUCCESS,
                                 payload: result,
                                 ...outcome
                             });
+                            delete subscriptionMap[requestId];
                         }
                     })
                     .onError((error: any) => {
                         const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
-                        if (subscribe && !outcome.unsubscribe)
+                        if (subscribe && !outcome.unsubscribe) {
                             dispatch({
                                 type: command.FAILURE,
                                 ...outcome
@@ -114,26 +113,26 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
                                 if (ticker)
                                     ticker(tick++, true);
                             });
-                        else {
-                            delete subscriptionMap[requestId];
+                        } else {
                             if (ticker)
                                 ticker(tick++, true);
                             resolve({
                                 type: command.FAILURE,
                                 ...outcome
                             });
+                            delete subscriptionMap[requestId];
                         }
                     })
                     .send();
             })
             .catch((error: any) => {
                 const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
-                if (subscribe && !outcome.unsubscribe) {
+                if (subscribe && !outcome.unsubscribe)
                     dispatch({
                         type: command.FAILURE,
                         ...outcome
                     });
-                } else {
+                else {
                     delete subscriptionMap[requestId];
                     resolve({
                         type: command.FAILURE,
@@ -143,4 +142,7 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
             });
     });
 
+const isDev = process.env.NODE_ENV === 'development';
+if ((isDev || process.env.REACT_APP_MOAI_PRODUCTION_LOGGING === 'true') && window)
+    (window as any)['moaiSubscriptions'] = subscriptionMap;
 

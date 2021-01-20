@@ -1,4 +1,5 @@
-import { Key, SCP, Transaction } from '@secretarium/connector';
+import { ClearKeyPair, Key, SCP, Transaction } from '@secretarium/connector';
+import { REACT_APP_SECRETARIUM_GATEWAYS } from '@env';
 
 interface SecretariumGatewayConfig {
     key: string;
@@ -51,19 +52,29 @@ const printClusterInfo = () => {
         });
     });
 
-    console.info('SFX now using the following cluster configuration');
+    console.info('Moai now using the following cluster configuration');
+    console.log(REACT_APP_SECRETARIUM_GATEWAYS);
     console.table(printableConfig);
 };
 
 const secretariumHandler = {
     connector: new SCP(),
     initialize: (): void => {
-        handlerStore.clusters = (process?.env?.REACT_APP_SECRETARIUM_GATEWAYS ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
+        handlerStore.clusters = (REACT_APP_SECRETARIUM_GATEWAYS as string ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         printClusterInfo();
     },
     createDeviceKey: (): Promise<Key> =>
         new Promise((resolve, reject) => {
             Key.createKey()
+                .then((key) => {
+                    handlerStore.currentKey = key;
+                    resolve(key);
+                })
+                .catch((e: any) => reject(e));
+        }),
+    use: (clearKeyPair: ClearKeyPair): Promise<Key> =>
+        new Promise((resolve, reject) => {
+            Key.importKey(clearKeyPair)
                 .then((key) => {
                     handlerStore.currentKey = key;
                     resolve(key);
@@ -107,7 +118,7 @@ const secretariumHandler = {
 };
 
 if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM_GATEWAYS_OVERWRITABLE === 'true') && window) {
-    (window as any)['sfxCluster'] = (config: string | Record<string, any>) => {
+    (window as any)['moaiCluster'] = (config: string | Record<string, any>) => {
         if (typeof config === 'string') {
             handlerStore.clusters = config.split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         } else {
@@ -115,7 +126,7 @@ if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM
         }
         printClusterInfo();
     };
-    (window as any)['sfxCommand'] = (dcApp: string, command: string, args?: any, id?: string) => {
+    (window as any)['moaiCommand'] = (dcApp: string, command: string, args?: any, id?: string) => {
         secretariumHandler.request(dcApp, command, args ?? {}, id ?? `${Math.random()}`);
     };
 }

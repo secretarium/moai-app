@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { KeyOutlined } from '@ant-design/icons';
 import style from './Login.module.css';
+import { useTranslation } from 'react-i18next';
 
 
 const LoginLanding = withState()(
@@ -13,15 +14,16 @@ const LoginLanding = withState()(
     ({ keyPairs }) => {
 
         const history = useHistory();
+        const { t } = useTranslation();
 
         return (
             <>
-                <h1>Login to Moai Portal</h1>
+                <h1>{t('APP_LOGIN_ACCOUNT')}</h1>
                 {keyPairs?.length > 0
                     ? <>
-                        <p>Please choose the account you want to log into.</p>
+                        <p>{t('APP_CHOOSE_ACCOUNT')}</p>
                         {keyPairs.map((keyPair, index) => <React.Fragment key={index}>
-                            <Button icon={<KeyOutlined translate={{}} />} className={style.keyName} onClick={(): void => {
+                            <Button icon={<KeyOutlined />} className={style.keyName} onClick={(): void => {
                                 history.push({
                                     pathname: '/login/signin',
                                     state: { email: keyPair.name }
@@ -31,10 +33,10 @@ const LoginLanding = withState()(
                         )}
                     </>
                     : <>
-                        <p>There is no account currently setup on this device.</p>
+                        <p>{t('APP_NO_ACCOUNT')}</p>
                         <Button type="primary" style={{ backgroundColor: '#00b0ee', width: '120px' }} onClick={(): void => {
                             history.push('/login/register');
-                        }}>Register</Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        }}>{t('APP_REGISTER')}</Button>&nbsp;&nbsp;&nbsp;&nbsp;
                     </>
                 }
             </>

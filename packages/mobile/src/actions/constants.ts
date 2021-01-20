@@ -2,11 +2,22 @@ let actionMarker = 0;
 
 const commandsPrototype = {
     MOAI: { application: 'moai', command: 'update-user' },
+    MOAI_CHECK_IN: { application: 'moai', command: 'check-in' },
+    MOAI_GET_CONVERSATIONS: { application: 'moai', command: 'get-conversations' },
+    MOAI_GET_CONVERSATION: { application: 'moai', command: 'conversations-get' },
+    MOAI_GET_LAST_MESSAGE: { application: 'moai', command: 'conversations-get-latest-message' },
+    MOAI_SEND_MESSAGE: { application: 'moai', command: 'conversations-write-message' },
+    MOAI_GET_LATEST_CONVERSATION: { application: 'moai', command: 'get-latest-conversation' },
+    MOAI_GET_VENUES: { application: 'moai', command: 'get-venues' },
+    MOAI_REGISTER_NOTIFICATION_TOKEN: { application: 'moai', command: 'register-notification-token' },
+    MOAI_GET_EXPOSURE_RISK: { application: 'moai', command: 'get-exposure-risk' },
+    MOAI_REGISTER_EXPOSURE_FEEDBACK: { application: 'moai', command: 'register-exposure-feedback' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
 const actionPrototypes = {
     MOAI_SAVE_LOCAL_KEY: 'MOAI_SAVE_LOCAL_KEY',
+    MOAI_SAVE_EXPO_PUSH_TOKEN: 'MOAI_SAVE_EXPO_PUSH_TOKEN',
     MOAI_SHOW_ONBOARDING: 'MOAI_SHOW_ONBOARDING',
     MOAI_SAVE_QR_CODE: 'MOAI_SAVE_QR_CODE',
     MOAI_INCREMENT_SCAN_COUNTER: 'MOAI_INCREMENT_SCAN_COUNTER',
@@ -36,7 +47,7 @@ const decorateCommands = (commands: CommandTypeMap) => {
     for (const key in commands)
         decoratedCommands[key as keyof CommandTypeMap] = {
             ...commands[key as keyof CommandTypeMap],
-            ...(process.env.NODE_ENV === 'development' || process.env.REACT_APP_SFX_PRODUCTION_LOGGING === 'true'
+            ...(process.env.NODE_ENV === 'development' || process.env.REACT_APP_MOAI_PRODUCTION_LOGGING === 'true'
                 ? {
                     REQUEST: `${key}_REQUEST`,
                     SUCCESS: `${key}_SUCCESS`,
@@ -57,7 +68,7 @@ type ActionTypeArray = typeof actionPrototypes;
 
 const mangleActions = (actions: ActionTypeArray) => {
     const mangledActions: Partial<ActionTypeArray> = {};
-    if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_SFX_PRODUCTION_LOGGING === 'true')
+    if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_MOAI_PRODUCTION_LOGGING === 'true')
         return actions;
     else {
         for (const key in actions)

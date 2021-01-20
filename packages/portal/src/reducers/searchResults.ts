@@ -50,8 +50,10 @@ export const searchResults: StoreComponent<SearchResults> = (state = initialStat
             let resultingError: string;
             if (error?.message === 'invalid arg \'barcode\'') {
                 resultingError = 'Please enter a valid barcode.';
+            } else if (error?.message.trim() === 'no user found') {
+                resultingError = 'No results.';
             } else {
-                resultingError = 'Unknown error occured while validating.';
+                resultingError = 'Unknown error occured while searching.';
             }
             return {
                 ...state,
@@ -61,9 +63,9 @@ export const searchResults: StoreComponent<SearchResults> = (state = initialStat
         case commands.MOAI_GET_EXPOSED.FAILURE: {
             let resultingError: string;
             if (error?.message === 'invalid arg \'venue\'') {
-                resultingError = 'Please enter a valid venue code.';
+                resultingError = 'Please enter a valid location code.';
             } else {
-                resultingError = 'Unknown error occured while validating.';
+                resultingError = 'Unknown error occured while searching.';
             }
             return {
                 ...state,

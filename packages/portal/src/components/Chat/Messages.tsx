@@ -3,11 +3,12 @@ import Message from './Message';
 import { useLocation, useParams } from 'react-router-dom';
 import { withState } from '../../store';
 import { getConversation, sendMessage } from '../../actions';
-import { toDateTime } from '../../utils/timeHandler';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import MoaiPin from '../../assets/moai-pin.png';
 import style from './Messages.module.css';
+import { useTranslation } from 'react-i18next';
+
 
 type ParamTypes = {
     address: string;
@@ -18,6 +19,7 @@ const Messages = withState()((s) => ({
 }), ({ messages, dispatch }) => {
 
     const location = useLocation<MoaiPortal.Conversation>();
+    const { t } = useTranslation();
     const { address } = useParams<ParamTypes>();
     const [fetchedConversation, setFetchedConversation] = useState(false);
     const [conversation, setConversation] = useState<MoaiPortal.Conversation | undefined>();
@@ -46,9 +48,7 @@ const Messages = withState()((s) => ({
 
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log('you sent the following message: ', message);
-        dispatch(sendMessage(conversation.address, conversation.token, message))
-            .then(() => dispatch(getConversation(conversation.address, conversation.token)));
+        dispatch(sendMessage(conversation.address, conversation.token, message));
         setMessage('');
     };
 
@@ -60,7 +60,7 @@ const Messages = withState()((s) => ({
     if (location.state === null || location.state === undefined)
         composition =
             <div className={style.messagesNoChat}>
-                <h1>Start chatting</h1>
+                <h1>{t('APP_START_CHATTING')}</h1>
             </div>;
     else
         composition =
@@ -72,20 +72,14 @@ const Messages = withState()((s) => ({
                     </div>
                 </div>
                 <div className={style.messagesBody}>
-                    {/* {messages.messageList.map((message) => {
-                        if (message.sender === messages.myself)
-                            return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={true} />;
-                        else
-                            return <Message username="user id" message={message.text} timestamp={`${message.time} pm`} isSender={false} />;
-                    })} */}
                     {messages.map((singleMessage, index) => {
-                        return <Message key={index} username="You" /** for now */ message={singleMessage.text} timestamp={toDateTime(singleMessage.datetime)} isSender={true} />;
+                        return <Message key={index} message={singleMessage} />;
                     })}
                 </div>
                 <div className={style.messagesFooter}>
                     <form>
-                        <input value={message} onChange={onChange} type="text" placeholder="Type a new message..." />
-                        <button onClick={onClick} type="submit">Send message</button>
+                        <input value={message} onChange={onChange} type="text" placeholder={t('APP_TYPE_MESSAGE')} />
+                        <button onClick={onClick} type="submit">{t('APP_SEND_MESSAGE')}</button>
                     </form>
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </div>

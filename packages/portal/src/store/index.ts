@@ -19,7 +19,8 @@ const persistConfig = {
 
 const isDev = process.env.NODE_ENV === 'development';
 const middlewares = isDev ? [dispatchMiddleware, createLogger({
-    collapsed: true
+    collapsed: true,
+    stateTransformer: state => (state?.toJS ? state.toJS() : state)
 })] : [dispatchMiddleware];
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const immutableStateReducer = (state: any, ownProps: any) => fromJS(persistedReducer(state?.toJS ? state.toJS() : state, ownProps));
