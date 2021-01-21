@@ -116,14 +116,17 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 ...state
             };
         case commands.MOAI_CHECK_IN.REQUEST:
+        case commands.MOAI_REGISTER_TEST.REQUEST:
             delete state.checkInError;
             return {
                 ...state
             };
         case commands.MOAI_CHECK_IN.SUCCESS:
+        case commands.MOAI_REGISTER_TEST.SUCCESS:
             return {
                 ...state
             };
+        case commands.MOAI_REGISTER_TEST.FAILURE:
         case commands.MOAI_CHECK_IN.FAILURE:
             return {
                 ...state,

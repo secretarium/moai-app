@@ -65,6 +65,13 @@ export const checkIn = (venue: ParsedCode): Moai.FunctionAction =>
         })
     });
 
+export const registerTest = (testId: string): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_TEST, { testId: testId })({
+        onError: (error) => ({
+            error: new Error(error)
+        })
+    });
+
 export const getVenues = (): Moai.FunctionAction =>
     requestFactory(commands.MOAI_GET_VENUES, { max: 10, cursor: 0 })({
         onResult: result => {

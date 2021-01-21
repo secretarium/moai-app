@@ -66,7 +66,6 @@ const App = withState()(
         });
 
         useEffect(() => {
-            console.log(location.pathname);
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
                 dispatch(registerNotificationToken(token));
