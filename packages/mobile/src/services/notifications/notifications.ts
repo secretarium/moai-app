@@ -3,13 +3,13 @@ import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 
 
-export const sendPushNotification = async (msg: string, expoPushToken: string): Promise<void> => {
+export const sendPushNotification = async (msg: string, expoPushToken: string, goToPath: string): Promise<void> => {
     const message = {
         to: expoPushToken,
         sound: 'default',
         title: 'New message! ✉️',
         body: msg,
-        data: { data: 'goes here' }
+        data: { url: goToPath }
     };
 
     await fetch('https://exp.host/--/api/v2/push/send', {

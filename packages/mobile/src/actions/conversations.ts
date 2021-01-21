@@ -46,7 +46,7 @@ export const getLastMessage = (address: string, token: string, expoPushToken: st
     requestFactory(commands.MOAI_GET_LAST_MESSAGE, { address: address, token: token }, true)({
         onResult: result => {
             if (result.sender === 0) {
-                sendPushNotification(result.text, expoPushToken);
+                sendPushNotification(result.text, expoPushToken, '/chat');
             }
             return {
                 payload: {
