@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
-import { Redirect } from '../../ReactRouter';
+import { Redirect, useLocation } from '../../ReactRouter';
 import { withState } from '../../store';
 import { ParsedCode, Sources } from './dataParser';
 import Modal from 'react-native-modal';
@@ -9,8 +9,11 @@ import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
-import { checkIn, connect } from '../../actions';
+import { checkIn, connect, registerTest } from '../../actions';
 
+type LocationTypes = {
+    testId: string;
+};
 
 const Checkin = withState<RouteComponentProps<{
     venue: string;
@@ -25,7 +28,9 @@ const Checkin = withState<RouteComponentProps<{
     ({ dispatch, localKey, match, checkInError, isConnected }) => {
 
         const history = useHistory();
+        const location = useLocation<LocationTypes>();
         const [redirect, setRedirect] = useState(false);
+        const [test, setTest] = useState(location.state.testId);
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
             source: Sources.MOAI,
             type: null,
@@ -68,10 +73,27 @@ const Checkin = withState<RouteComponentProps<{
                         setVenueInfo(undefined);
                     });
             }
-            if (isConnected && venueInfo && !isConnecting) {
-                checkInLocation();
+
+            async function registerCovidTest() {
+                dispatch(registerTest(test))
+                    .then(() => {
+                        setRedirect(true);
+                    })
+                    .catch((error) => {
+                        console.error('registerTest', error);
+                        setPageError(checkInError);
+                        setShowModal(true);
+                        setTest(undefined);
+                    });
             }
-        }, [dispatch, isConnected, venueInfo, checkInError, isConnecting]);
+
+            if (isConnected && venueInfo && !isConnecting && !test) {
+                checkInLocation();
+            } else if (isConnected && test && !isConnecting) {
+                registerCovidTest();
+            }
+
+        }, [dispatch, isConnected, venueInfo, checkInError, isConnecting, test]);
 
         let composition;
 
@@ -81,7 +103,7 @@ const Checkin = withState<RouteComponentProps<{
             composition =
                 <>
                     <View style={commonStyles.main}>
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Checking in...</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>{!test ? 'Checking in...' : 'Registering...'}</Text>
                         <Image
                             source={themeLogoStyle}
                             resizeMode={'contain'}

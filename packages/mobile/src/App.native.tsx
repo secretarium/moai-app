@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
-import { Redirect, Route, Switch } from './ReactRouter';
+import { Redirect, Route, Switch, useLocation } from './ReactRouter';
 import About from './About';
 import Home from './components/Home';
 import Scanned from './components/Scanned';
@@ -17,7 +17,7 @@ import Questionnaire from './components/Questionnaire';
 import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
-import { generateLocalKey, connect } from './actions';
+import { generateLocalKey, connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image } from 'react-native';
@@ -26,15 +26,7 @@ import { initLocalize } from './services/i18n/localized';
 import i18n from 'i18n-js';
 import { registerForPushNotificationsAsync } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
-import { actionTypes } from './actions/constants';
 
-Notifications.setNotificationHandler({
-    handleNotification: async () => ({
-        shouldShowAlert: true,
-        shouldPlaySound: false,
-        shouldSetBadge: false
-    })
-});
 
 const App = withState()(
     (s) => ({
@@ -45,6 +37,7 @@ const App = withState()(
 
         initLocalize();
         const history = useHistory();
+        const location = useLocation();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [isConnecting, setIsConnecting] = useState(false);
@@ -64,10 +57,18 @@ const App = withState()(
             'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
         });
 
+        Notifications.setNotificationHandler({
+            handleNotification: async () => ({
+                shouldShowAlert: location.pathname !== '/chat',
+                shouldPlaySound: false,
+                shouldSetBadge: false
+            })
+        });
+
         useEffect(() => {
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
-                dispatch({ type: actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN, payload: token });
+                dispatch(registerNotificationToken(token));
             });
 
             notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
@@ -75,7 +76,8 @@ const App = withState()(
             });
 
             responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-                console.log(response);
+                const url = response.notification.request.content.data.url;
+                history.push(url);
             });
 
         }, []);
