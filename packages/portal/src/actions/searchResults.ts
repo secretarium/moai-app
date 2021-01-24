@@ -1,9 +1,10 @@
 import { commands, actionTypes } from './constants';
 import { requestFactory } from './factories';
+import { createConversation } from './conversations';
 
 
-export const getTested = (barcode: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_TESTED, { barcode: barcode })({
+export const getTested = (testId: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_GET_TESTED, { testId: testId })({
         onResult: result => {
             return {
                 payload: {
@@ -27,6 +28,15 @@ export const getExposed = (venue: string, utc: number): MoaiPortal.FunctionActio
         },
         onError: (error) => ({
             error: new Error(error)
+        })
+    });
+
+export const setTestResult = (testId: string, positive: boolean, userId: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_SET_TEST_RESULT, { testId: testId, positive: positive })({
+        onExecuted: () => ({
+            workload: dispatch => {
+                dispatch(createConversation('title', 'name', userId, positive));
+            }
         })
     });
 

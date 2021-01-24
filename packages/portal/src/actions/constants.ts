@@ -14,6 +14,7 @@ const commandsPrototype = {
     MOAI_GET_EXPOSED: { application: 'moai', command: 'get-exposed' },
     MOAI_CHALLENGE_TRACER: { application: 'moai', command: 'challenge-tracer' },
     MOAI_GET_TRACER_DETAILS: { application: 'moai', command: 'get-tracer-details' },
+    MOAI_SET_TEST_RESULT: { application: 'moai', command: 'set-test-result' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 

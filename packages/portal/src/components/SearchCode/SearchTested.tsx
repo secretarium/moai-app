@@ -18,6 +18,7 @@ const SearchTested = withState()(
     ({ dispatch, tested, searchTestedError }) => {
 
         const location = useLocation();
+        const [testId, setTestId] = useState<string>();
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
 
@@ -34,6 +35,7 @@ const SearchTested = withState()(
 
         const onSearch = (value: string, event: React.MouseEvent<HTMLElement, MouseEvent> | React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>): void => {
             event.preventDefault();
+            setTestId(value);
             dispatch(getTested(value));
         };
 
@@ -55,7 +57,7 @@ const SearchTested = withState()(
                 </div>
                 <div className={style.results}>
                     {errorMessage ? <><Alert message={errorMessage} type="error" /><br /></> : null}
-                    {tested ? <SearchResult userId={tested.userId} time={tested.time} /> : null}
+                    {tested ? <SearchResult testId={testId} userId={tested.userId} time={tested.time} /> : null}
                 </div>
             </div>
         );
