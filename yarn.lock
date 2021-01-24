@@ -1682,7 +1682,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.1, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.11.1, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.4.5, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.1, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.11.1, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.4.5, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.12.5
   resolution: "@babel/runtime@npm:7.12.5"
   dependencies:
@@ -4536,11 +4536,14 @@ __metadata:
     cross-env: 7.0.3
     deepmerge: 4.2.2
     fs-extra: 9.0.1
+    i18next: 19.8.4
+    i18next-browser-languagedetector: 6.0.1
     immutable: 4.0.0-rc.12
     license-checker: 25.0.1
     npm-license-crawler: 0.2.1
     react: 17.0.1
     react-dom: 17.0.1
+    react-i18next: 11.8.5
     react-markdown: 5.0.3
     react-redux: 7.2.2
     react-router-dom: 5.2.0
@@ -16429,6 +16432,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"html-parse-stringify2@npm:2.0.1":
+  version: 2.0.1
+  resolution: "html-parse-stringify2@npm:2.0.1"
+  dependencies:
+    void-elements: ^2.0.1
+  checksum: 5535977f2ea919ae28d89e3a7f292ea2c8fcad54014bf76404000d54b7796b8c80eabef5e35661f0e72f62c808e2c49e6733ac0d081d9fa7263d153da13094d6
+  languageName: node
+  linkType: hard
+
 "html-to-react@npm:^1.3.4":
   version: 1.4.5
   resolution: "html-to-react@npm:1.4.5"
@@ -16721,6 +16733,24 @@ fsevents@^1.2.7:
   version: 3.8.0
   resolution: "i18n-js@npm:3.8.0"
   checksum: d32519a8685512d39370f9568530853980269d67d22a9085c3963ae0d18f183c2e843d411da354cf95038c2df23c0e72122d8cd7083c16c23dd08f8cf8e44828
+  languageName: node
+  linkType: hard
+
+"i18next-browser-languagedetector@npm:6.0.1":
+  version: 6.0.1
+  resolution: "i18next-browser-languagedetector@npm:6.0.1"
+  dependencies:
+    "@babel/runtime": ^7.5.5
+  checksum: 4541f84d2393483458b5ec4c1956bb03519a0d8c1c7d58815f3f33a292e847f050ddd060ca3d15678a95e0ebc2dd619d47c1b8a07d6ec95692615d1c60ea488d
+  languageName: node
+  linkType: hard
+
+"i18next@npm:19.8.4":
+  version: 19.8.4
+  resolution: "i18next@npm:19.8.4"
+  dependencies:
+    "@babel/runtime": ^7.12.0
+  checksum: e4e5a2cf123aa074d2b86e12e37c1938b4b4620d046974fd28783ec09d9230316d83d6b0a93dfc4fb6df17f2865768487206c083354c231154cdc2039e713276
   languageName: node
   linkType: hard
 
@@ -26419,6 +26449,19 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-i18next@npm:11.8.5":
+  version: 11.8.5
+  resolution: "react-i18next@npm:11.8.5"
+  dependencies:
+    "@babel/runtime": ^7.3.1
+    html-parse-stringify2: 2.0.1
+  peerDependencies:
+    i18next: ">= 19.0.0"
+    react: ">= 16.8.0"
+  checksum: 4bc4dca7e13358dc2c311d6735b369dba701791f91457c3b18eb2f09757ae36adc6c1e32cc3ce27f2cfe9089656cb2fc911f0aad8f35b3398db30d58d501fa9a
+  languageName: node
+  linkType: hard
+
 "react-inspector@npm:^5.0.1":
   version: 5.1.0
   resolution: "react-inspector@npm:5.1.0"
@@ -31751,6 +31794,13 @@ typescript@4.0.3:
   version: 1.1.2
   resolution: "vm-browserify@npm:1.1.2"
   checksum: 8eb0dfbf2d2fe4df9ecc54fed0fd13150e66c833774f92d201b40933322b9c79d9c8cdb3cf1de44fad3d254e35c4ef1884e9a04722271c1499205b3e9473a57b
+  languageName: node
+  linkType: hard
+
+"void-elements@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "void-elements@npm:2.0.1"
+  checksum: b97359a7297232c40188407bc034884a6c0ba6d859f41772576919a27341343334b92db30bffd8cc68e75fc9647e32b393d84a6e49a174db2b731f01e728397c
   languageName: node
   linkType: hard
 

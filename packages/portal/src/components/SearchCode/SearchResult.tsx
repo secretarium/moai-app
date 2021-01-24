@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import style from './SearchResult.module.css';
 import { Modal, Radio, Popconfirm } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 
 type SearchResultProps = {
@@ -26,6 +27,7 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
     const [isPopVisible, setIsPopVisible] = useState(false);
     const [modalConfirmLoading, setModalConfirmLoading] = useState(false);
     const [popConfirmLoading, setPopConfirmLoading] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (newConversation) {
@@ -78,8 +80,8 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginRight: '10px' }} />
             </div>
             <div className={style.searchResultBody}>
-                {`User ID: ${userId}`}
-                <br></br>Time: {toDateTime(time)}
+                {`${t('APP_USER_ID')}: ${userId}`}
+                <br></br>{t('APP_TIME')}: {toDateTime(time)}
             </div>
             <div className={style.searchResultFooter}>
                 {testId ?
@@ -112,7 +114,7 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
                             okButtonProps={{ loading: popConfirmLoading }}
                         >
                             <div className={style.searchResultButton} onClick={() => onClick()}>
-                                <FontAwesomeIcon icon={faEnvelope} /> Message
+                                <FontAwesomeIcon icon={faEnvelope} /> {t('APP_MESSAGE')}
                             </div>
                         </Popconfirm>
                     </>}

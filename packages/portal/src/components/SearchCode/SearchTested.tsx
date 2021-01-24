@@ -5,6 +5,7 @@ import { withState } from '../../store';
 import { getTested, clearSearchErrors, clearSearchResults } from '../../actions';
 import { useLocation } from 'react-router-dom';
 import style from './SearchCode.module.css';
+import { useTranslation } from 'react-i18next';
 
 
 const { Search } = Input;
@@ -19,6 +20,7 @@ const SearchTested = withState()(
 
         const location = useLocation();
         const [testId, setTestId] = useState<string>();
+        const { t } = useTranslation();
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
 
@@ -51,7 +53,7 @@ const SearchTested = withState()(
             <div className={style.containerSearch}>
                 <div className={style.searchHeader}>
                     <div className={style.searchInputCode}>
-                        <Search placeholder="Search Test ID..." style={{ outline: 'none', border: 'none', borderRadius: '25px' }}
+                        <Search placeholder={t('APP_SEARCH_TEST_ID')} style={{ outline: 'none', border: 'none', borderRadius: '25px' }}
                             onChange={(): void => clearErrors()} onSearch={(value, event) => onSearch(value, event)} />
                     </div>
                 </div>

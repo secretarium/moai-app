@@ -9,7 +9,7 @@ const commandsPrototype = {
     MOAI_MARK_AS_READ: { application: 'moai', command: 'mark-as-read' },
     MOAI_REGISTER_TRACER: { application: 'moai', command: 'register-tracer' },
     MOAI_VERIFY_TRACER: { application: 'moai', command: 'verify-tracer' },
-    MOAI_REGISTER_TEST_BARCODE: { application: 'moai', command: 'register-test-barcode' },
+    MOAI_REGISTER_TEST_BARCODE: { application: 'moai', command: 'register-test' },
     MOAI_GET_TESTED: { application: 'moai', command: 'get-tested' },
     MOAI_GET_EXPOSED: { application: 'moai', command: 'get-exposed' },
     MOAI_CHALLENGE_TRACER: { application: 'moai', command: 'challenge-tracer' },
