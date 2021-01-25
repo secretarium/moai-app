@@ -303,7 +303,6 @@ const Questionnaire = withState<QuestionnaireProps>()(
                 case '4': {
                     if (answer.value.value === 'Yes') {
                         const index = questions.findIndex(question => question.questionId === '4');
-                        console.log('YES', index);
                         questions.splice(index + 1, 0, {
                             questionType: 'SelectionGroup',
                             questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q5'),
@@ -315,7 +314,6 @@ const Questionnaire = withState<QuestionnaireProps>()(
                         });
                     } else if (answer.value.value === 'No') {
                         const index = questions.findIndex(question => question.questionId === '4');
-                        console.log('NO', index);
                         questions.splice(index + 1, 0, {
                             questionType: 'SelectionGroup',
                             questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q6'),

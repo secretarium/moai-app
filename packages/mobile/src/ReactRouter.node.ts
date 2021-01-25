@@ -3,5 +3,6 @@ export {
     Switch,
     Route,
     Link,
-    Redirect
+    Redirect,
+    useLocation
 } from 'react-router-dom';

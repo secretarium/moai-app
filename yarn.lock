@@ -1682,7 +1682,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.1, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.11.1, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.4.5, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.1, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.11.1, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.1, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.4.5, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.12.5
   resolution: "@babel/runtime@npm:7.12.5"
   dependencies:
@@ -2869,6 +2869,13 @@ __metadata:
   peerDependencies:
     react: "*"
   checksum: 87f813f6d780f0b33f5c86e9fcf34d718fb9bc282077ebae0c68ce34aabbcfefc440003a197b8481d60eca3fe75863bac44bb608183c9f484e01b83763dbb186
+  languageName: node
+  linkType: hard
+
+"@ide/backoff@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@ide/backoff@npm:1.0.0"
+  checksum: 53fdf188304ecd85b1132b893a1082d56ca3fff7c704801e4c92bd7d277089e4215c4550a06c1e3fda1c5da38bfd405946a7629703603cc28894a7bea42e5627
   languageName: node
   linkType: hard
 
@@ -4463,9 +4470,11 @@ __metadata:
     expo-camera: 9.1.1
     expo-cli: 4.0.17
     expo-constants: 9.3.5
+    expo-crypto: 8.4.0
     expo-file-system: 9.3.0
     expo-font: 8.4.0
     expo-linking: 2.0.0
+    expo-notifications: 0.8.2
     expo-optimize: 0.1.70
     expo-splash-screen: 0.8.1
     expo-yarn-workspaces: 1.2.1
@@ -4527,11 +4536,14 @@ __metadata:
     cross-env: 7.0.3
     deepmerge: 4.2.2
     fs-extra: 9.0.1
+    i18next: 19.8.4
+    i18next-browser-languagedetector: 6.0.1
     immutable: 4.0.0-rc.12
     license-checker: 25.0.1
     npm-license-crawler: 0.2.1
     react: 17.0.1
     react-dom: 17.0.1
+    react-i18next: 11.8.5
     react-markdown: 5.0.3
     react-redux: 7.2.2
     react-router-dom: 5.2.0
@@ -7988,6 +8000,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"assert@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "assert@npm:2.0.0"
+  dependencies:
+    es6-object-assign: ^1.1.0
+    is-nan: ^1.2.1
+    object-is: ^1.0.1
+    util: ^0.12.0
+  checksum: ce8ae5a9e193f720f12523ac16010c8b9ce706bfbf70d3b66e3f8256fc241f065b2629245656b5e04283e789f928fd3868c1e54aaf7d5693c952b674a86ca088
+  languageName: node
+  linkType: hard
+
 "assign-symbols@npm:^1.0.0":
   version: 1.0.0
   resolution: "assign-symbols@npm:1.0.0"
@@ -8921,7 +8945,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"badgin@npm:^1.1.2":
+"badgin@npm:^1.1.2, badgin@npm:^1.1.5":
   version: 1.2.2
   resolution: "badgin@npm:1.2.2"
   checksum: c8c28428b38f6377ae438246ec4f0261c0936b2f1bf3bb8b3474c072ba0931cd05703ae30173ac7e6f5261566cd67f8ac15d3ab51ef9b63a5d5ca004206a6d1b
@@ -12931,6 +12955,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es6-object-assign@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "es6-object-assign@npm:1.1.0"
+  checksum: 55ef44bdddb41f92c34f9ea4dcc64be819837df19c02eed9cc068f4ae5ed2425f358756d9dd1d562cb78e58bddb343d035e8a66bb35658a9b89239ca187e0c85
+  languageName: node
+  linkType: hard
+
 "es6-shim@npm:^0.35.5":
   version: 0.35.6
   resolution: "es6-shim@npm:0.35.6"
@@ -13926,6 +13957,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-constants@npm:9.3.1":
+  version: 9.3.1
+  resolution: "expo-constants@npm:9.3.1"
+  dependencies:
+    fbjs: 1.0.0
+    uuid: ^3.3.2
+  checksum: 9896f7688baff63b87fa906cd0cadad8d8edc0a2807b6b016b1a39289d2ac512033b7fdd5bf970ad870b0397ff120931789ad05b5eea152aead7e40085e6f09a
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:9.3.5, expo-constants@npm:~9.3.3":
   version: 9.3.5
   resolution: "expo-constants@npm:9.3.5"
@@ -13934,6 +13975,13 @@ __metadata:
     fbjs: 1.0.0
     uuid: ^3.3.2
   checksum: 4904235e9e9b6aa2dc83f5c41a659487477020246ab936b5d5a5987f25918676b82dab6115652dcf014af060c363238f9a206226a21938ded456a04f159622c2
+  languageName: node
+  linkType: hard
+
+"expo-crypto@npm:8.4.0":
+  version: 8.4.0
+  resolution: "expo-crypto@npm:8.4.0"
+  checksum: 86059cd25ba589e4a91b6c7d6419dad24539aacf3d745f5f279e9864e6d078fa88221a38b2f83e07d7d0c8cc6c3af6208bb661a9d2780a9989f6e8ac3c96c706
   languageName: node
   linkType: hard
 
@@ -14026,6 +14074,21 @@ __metadata:
     unimodules-permissions-interface: "*"
     unimodules-task-manager-interface: "*"
   checksum: f5b62c46ae0e8e1d7f72a25def6fa8851052f76cf6c0348c1c20f0a4a5b7a63e43efacd0971cd9abc3f2e3d76b8a31be1854995fcbb9b65651ea8098514bc740
+  languageName: node
+  linkType: hard
+
+"expo-notifications@npm:0.8.2":
+  version: 0.8.2
+  resolution: "expo-notifications@npm:0.8.2"
+  dependencies:
+    "@ide/backoff": ^1.0.0
+    abort-controller: ^3.0.0
+    assert: ^2.0.0
+    badgin: ^1.1.5
+    expo-application: ~2.4.1
+    expo-constants: 9.3.1
+    uuid: ^3.4.0
+  checksum: f08a9839d8c065095eb4b0461ce06cfb0dd3e59757b11aa8ee5495d24580e47d2b35f2c11341797374599073e415183714c3663998889c27fbf99390ee08a3cd
   languageName: node
   linkType: hard
 
@@ -16369,6 +16432,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"html-parse-stringify2@npm:2.0.1":
+  version: 2.0.1
+  resolution: "html-parse-stringify2@npm:2.0.1"
+  dependencies:
+    void-elements: ^2.0.1
+  checksum: 5535977f2ea919ae28d89e3a7f292ea2c8fcad54014bf76404000d54b7796b8c80eabef5e35661f0e72f62c808e2c49e6733ac0d081d9fa7263d153da13094d6
+  languageName: node
+  linkType: hard
+
 "html-to-react@npm:^1.3.4":
   version: 1.4.5
   resolution: "html-to-react@npm:1.4.5"
@@ -16661,6 +16733,24 @@ fsevents@^1.2.7:
   version: 3.8.0
   resolution: "i18n-js@npm:3.8.0"
   checksum: d32519a8685512d39370f9568530853980269d67d22a9085c3963ae0d18f183c2e843d411da354cf95038c2df23c0e72122d8cd7083c16c23dd08f8cf8e44828
+  languageName: node
+  linkType: hard
+
+"i18next-browser-languagedetector@npm:6.0.1":
+  version: 6.0.1
+  resolution: "i18next-browser-languagedetector@npm:6.0.1"
+  dependencies:
+    "@babel/runtime": ^7.5.5
+  checksum: 4541f84d2393483458b5ec4c1956bb03519a0d8c1c7d58815f3f33a292e847f050ddd060ca3d15678a95e0ebc2dd619d47c1b8a07d6ec95692615d1c60ea488d
+  languageName: node
+  linkType: hard
+
+"i18next@npm:19.8.4":
+  version: 19.8.4
+  resolution: "i18next@npm:19.8.4"
+  dependencies:
+    "@babel/runtime": ^7.12.0
+  checksum: e4e5a2cf123aa074d2b86e12e37c1938b4b4620d046974fd28783ec09d9230316d83d6b0a93dfc4fb6df17f2865768487206c083354c231154cdc2039e713276
   languageName: node
   linkType: hard
 
@@ -17440,6 +17530,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"is-generator-function@npm:^1.0.7":
+  version: 1.0.8
+  resolution: "is-generator-function@npm:1.0.8"
+  checksum: 3188976e6f2907c43bf77191999dc35b514b852b8df8318edda8cd4c183f4896b26a650973d6108e38b520c8b7febfe4963b134b01962d79e2955b4ab0156e5b
+  languageName: node
+  linkType: hard
+
 "is-glob@npm:^2.0.0":
   version: 2.0.1
   resolution: "is-glob@npm:2.0.1"
@@ -17511,6 +17608,16 @@ fsevents@^1.2.7:
   version: 2.0.2
   resolution: "is-map@npm:2.0.2"
   checksum: 2fe2cef4c9deb05039b52afd4b3395ff7cfa9f5db457f7569d14b976d814fecccc4a8334614ea1fc47ae5be1847d3ad79c275bec142e5044231d9f766164cfe6
+  languageName: node
+  linkType: hard
+
+"is-nan@npm:^1.2.1":
+  version: 1.3.2
+  resolution: "is-nan@npm:1.3.2"
+  dependencies:
+    call-bind: ^1.0.0
+    define-properties: ^1.1.3
+  checksum: 77248e17843707ca367ff430d7ed0dc9d1023fcf37fe6cb921515c7db89651a16bf499cd20afad4e7b338677d83a472041db081fb6bd75e50f67eb5e42584eb7
   languageName: node
   linkType: hard
 
@@ -26342,6 +26449,19 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-i18next@npm:11.8.5":
+  version: 11.8.5
+  resolution: "react-i18next@npm:11.8.5"
+  dependencies:
+    "@babel/runtime": ^7.3.1
+    html-parse-stringify2: 2.0.1
+  peerDependencies:
+    i18next: ">= 19.0.0"
+    react: ">= 16.8.0"
+  checksum: 4bc4dca7e13358dc2c311d6735b369dba701791f91457c3b18eb2f09757ae36adc6c1e32cc3ce27f2cfe9089656cb2fc911f0aad8f35b3398db30d58d501fa9a
+  languageName: node
+  linkType: hard
+
 "react-inspector@npm:^5.0.1":
   version: 5.1.0
   resolution: "react-inspector@npm:5.1.0"
@@ -31451,6 +31571,20 @@ typescript@4.0.3:
   languageName: node
   linkType: hard
 
+"util@npm:^0.12.0":
+  version: 0.12.3
+  resolution: "util@npm:0.12.3"
+  dependencies:
+    inherits: ^2.0.3
+    is-arguments: ^1.0.4
+    is-generator-function: ^1.0.7
+    is-typed-array: ^1.1.3
+    safe-buffer: ^5.1.2
+    which-typed-array: ^1.1.2
+  checksum: 1e2d9f8f0997e9902e3260dd7533ff3d71ef1eec4c0f6c9fc16355f6228b7a35f0b64fee086298d55dcedf99d75dcc19fa02418c2403c2ab9c25212a1f3c3ffe
+  languageName: node
+  linkType: hard
+
 "utila@npm:~0.4":
   version: 0.4.0
   resolution: "utila@npm:0.4.0"
@@ -31660,6 +31794,13 @@ typescript@4.0.3:
   version: 1.1.2
   resolution: "vm-browserify@npm:1.1.2"
   checksum: 8eb0dfbf2d2fe4df9ecc54fed0fd13150e66c833774f92d201b40933322b9c79d9c8cdb3cf1de44fad3d254e35c4ef1884e9a04722271c1499205b3e9473a57b
+  languageName: node
+  linkType: hard
+
+"void-elements@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "void-elements@npm:2.0.1"
+  checksum: b97359a7297232c40188407bc034884a6c0ba6d859f41772576919a27341343334b92db30bffd8cc68e75fc9647e32b393d84a6e49a174db2b731f01e728397c
   languageName: node
   linkType: hard
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
-import { Redirect, Route, Switch } from './ReactRouter';
+import { Redirect, Route, Switch, useLocation } from './ReactRouter';
 import About from './About';
 import Home from './components/Home';
 import Scanned from './components/Scanned';
@@ -9,6 +9,7 @@ import Chat from './components/Chat';
 import Scanner from './components/Scanner';
 import Checkin from './components/Checkin';
 import Keys from './components/Infos/Keys';
+import Key from './components/Infos/Keys/Key';
 import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
 import Infos from './components/Infos';
@@ -16,12 +17,15 @@ import Questionnaire from './components/Questionnaire';
 import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
-import { generateLocalKey, connect } from './actions';
+import { generateLocalKey, connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
 import { initLocalize } from './services/i18n/localized';
+import i18n from 'i18n-js';
+import { registerForPushNotificationsAsync } from './services/notifications/notifications';
+import * as Notifications from 'expo-notifications';
 
 
 const App = withState()(
@@ -33,6 +37,7 @@ const App = withState()(
 
         initLocalize();
         const history = useHistory();
+        const location = useLocation();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [isConnecting, setIsConnecting] = useState(false);
@@ -42,11 +47,40 @@ const App = withState()(
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
+        const [expoPushToken, setExpoPushToken] = useState('');
+        const [notification, setNotification] = useState<Notifications.Notification>();
+        const notificationListener = useRef<any>();
+        const responseListener = useRef<any>();
 
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
             'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
         });
+
+        Notifications.setNotificationHandler({
+            handleNotification: async () => ({
+                shouldShowAlert: location.pathname !== '/chat',
+                shouldPlaySound: false,
+                shouldSetBadge: false
+            })
+        });
+
+        useEffect(() => {
+            registerForPushNotificationsAsync().then(token => {
+                setExpoPushToken(token);
+                dispatch(registerNotificationToken(token));
+            });
+
+            notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+                setNotification(notification);
+            });
+
+            responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+                const url = response.notification.request.content.data.url;
+                history.push(url);
+            });
+
+        }, []);
 
         const parseUrl = useCallback((url: string | null | undefined) => {
 
@@ -130,10 +164,11 @@ const App = withState()(
         return (
             <>
                 <Switch>
-                    <Route path="/notices" component={Notices} />
-                    <Route path="/keys" component={Keys} />
+                    <Route path={`/${i18n.t('APP_INFOS')[2]}`} component={Notices} />
+                    <Route path={`/${i18n.t('APP_INFOS')[1]}`} component={Keys} />
+                    <Route path="/key/:key" component={Key} />
                     <Route path="/infos" component={Infos} />
-                    <Route path="/licenses" component={Licenses} />
+                    <Route path={`/${i18n.t('APP_INFOS')[0]}`} component={Licenses} />
                     <Route path="/onboarding" component={OnboardingScreen} />
                     <Route path="/home" component={Home} />
                     <Route path="/about" component={About} />

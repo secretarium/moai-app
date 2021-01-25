@@ -18,6 +18,7 @@ const Scanner: React.FC = () => {
 
     const [hasPermission, setHasPermission] = useState<boolean>(null);
     const [venuInfo, setVenuInfo] = useState<ParsedCode>();
+    const [test, setTest] = useState<string>();
     const [error, setError] = useState<string>();
     const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -33,8 +34,10 @@ const Scanner: React.FC = () => {
         if (parsedCode.source !== Sources.INVALID) {
             setShowModal(false);
             setVenuInfo(parsedCode);
+        } else if (code.type === 'org.iso.Code128') {
+            setTest(code.data);
         } else {
-            setError('Sorry, we were unable to recognise this QRCode');
+            setError('Sorry, we were unable to recognise this code');
             setShowModal(true);
             setVenuInfo(undefined);
         }
@@ -47,8 +50,13 @@ const Scanner: React.FC = () => {
         })();
     }, []);
 
-    if (venuInfo)
-        return <Redirect to={`/checkin/${[venuInfo.venue, venuInfo.source, venuInfo.type].filter(Boolean).join('/')}`} />;
+    if (venuInfo) {
+        return <Redirect to={{ pathname: `/checkin/${[venuInfo.venue, venuInfo.source, venuInfo.type].filter(Boolean).join('/')}`, state: { testId: null } }} />;
+    }
+
+    if (test) {
+        return <Redirect to={{ pathname: `/checkin/${test}`, state: { testId: test } }} />;
+    }
 
     let composition;
 
@@ -81,8 +89,8 @@ const Scanner: React.FC = () => {
                     onBarCodeScanned={handleBarCodeScanned}
                     barCodeScannerSettings={{
                         barCodeTypes: [
-                            BarCodeScanner.Constants.BarCodeType.qr
-                            // BarCodeScanner.Constants.BarCodeType.code128
+                            BarCodeScanner.Constants.BarCodeType.qr,
+                            BarCodeScanner.Constants.BarCodeType.code128
                         ]
                     }}
                     style={[StyleSheet.absoluteFillObject]}

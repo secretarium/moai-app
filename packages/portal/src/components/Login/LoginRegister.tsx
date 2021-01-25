@@ -3,6 +3,7 @@ import { withState } from '../../store';
 import { Button, Input, Form, Alert } from 'antd';
 import { register, clearTracerErrors } from '../../actions';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 const LoginRegister = withState()(
@@ -12,6 +13,7 @@ const LoginRegister = withState()(
     ({ dispatch, registrationError }) => {
 
         const history = useHistory();
+        const { t } = useTranslation();
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
         const [isRegistering, setIsRegistering] = useState<boolean>(false);
@@ -60,26 +62,26 @@ const LoginRegister = withState()(
 
         return (
             <>
-                <h1>Register to Moai Portal</h1>
+                <h1>{t('APP_REGISTER_ACCOUNT')}</h1>
                 <Form name="registration" onFinish={handleRegister}>
-                    <Form.Item name="email" rules={[{ required: true, message: 'Please input your email address!' }]}>
-                        <Input placeholder="Email Address" onChange={(): void => clearErrors()} />
+                    <Form.Item name="email" rules={[{ required: true, message: t('APP_NO_EMAIL_ERROR') }]}>
+                        <Input placeholder={t('APP_EMAIL')} onChange={(): void => clearErrors()} />
                     </Form.Item>
-                    <Form.Item name="password" rules={[{ required: true, message: 'Please input a password for your account!' }]}>
-                        <Input.Password placeholder="Password" onChange={(): void => clearErrors()} />
+                    <Form.Item name="password" rules={[{ required: true, message: t('APP_NO_PASSWORD_ERROR') }]}>
+                        <Input.Password placeholder={t('APP_PASSWORD')} onChange={(): void => clearErrors()} />
                     </Form.Item>
                     <Form.Item name="confirm" dependencies={['password']} rules={[
-                        { required: true, message: 'Please confirm the password for your account!' },
+                        { required: true, message: t('APP_NO_CONFIRM_ERROR') },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
                                 if (!value || getFieldValue('password') === value) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject('The two passwords that you entered do not match!');
+                                return Promise.reject(t('APP_WRONG_PASSWORD_ERROR'));
                             }
                         })
                     ]} hasFeedback>
-                        <Input.Password autoComplete="new-password" placeholder="Confirm Password" type="password" onChange={(): void => clearErrors()} />
+                        <Input.Password autoComplete="new-password" placeholder={t('APP_CONFIRM_PASSWORD')} type="password" onChange={(): void => clearErrors()} />
                     </Form.Item>
                     <Form.Item>
                         <Button.Group>
@@ -87,10 +89,10 @@ const LoginRegister = withState()(
                                 history.push('/');
                                 clearErrors();
                             }}>
-                                Go back
+                                {t('APP_GO_BACK')}
                             </Button>&nbsp;&nbsp;&nbsp;&nbsp;
                             <Button type="primary" loading={isRegistering} htmlType="submit" style={{ backgroundColor: '#00b0ee', width: '120px' }}>
-                                Register
+                                {t('APP_REGISTER')}
                             </Button>
                         </Button.Group>
                     </Form.Item>

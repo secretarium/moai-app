@@ -30,7 +30,7 @@ const Infos: React.FC = () => {
             </View>
             {i18n.t('APP_INFOS').map((item, index) =>
                 <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                    <Link to={`${item.toLowerCase()}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                    <Link to={`/${item.toLowerCase()}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                         <>
                             <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{item}</Text>
                             <Entypo
