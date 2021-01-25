@@ -62,7 +62,7 @@ const Venues = withState()((s) => ({
                     {i18n.t('APP_MEASURE_EXPOSURE_RISK')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
-                    These are all locations you have checked-in to. Tap a location and answer a short survey to measure factors that affect the spread of COVID-19.
+                    {i18n.t('APP_ALL_CHECKED_IN_LOCATIONS')}
                 </Text>
             </View>
             <ScrollView>
@@ -73,7 +73,7 @@ const Venues = withState()((s) => ({
                                 <>
                                     <View style={{ maxWidth: '90%' }}>
                                         <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
-                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>Checked-in on <Bold>{toDateTime(venue.time)}</Bold></Text>
+                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
                                     </View>
                                     <Entypo
                                         name="chevron-right"
@@ -85,7 +85,7 @@ const Venues = withState()((s) => ({
                         </TouchableOpacity>
                     )
                     :
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: '#E95C59', paddingLeft: 15 }}>You have not checked-in to any location yet!</Text>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: '#E95C59', paddingLeft: 15 }}>{i18n.t('APP_NOT_CHECKED_IN')}!</Text>
                 }
             </ScrollView>
         </MainLayout>

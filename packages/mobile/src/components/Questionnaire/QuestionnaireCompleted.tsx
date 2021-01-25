@@ -4,6 +4,7 @@ import MainLayout from '../common/MainLayout';
 import { useColorScheme } from 'react-native-appearance';
 import { useHistory } from 'react-router';
 import { styles } from './styles';
+import i18n from 'i18n-js';
 
 
 const QuestionnaireCompleted: React.FC = () => {
@@ -22,12 +23,12 @@ const QuestionnaireCompleted: React.FC = () => {
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 21, paddingBottom: 15 }}>
-                    Thank you for completing the questionnaire!
+                    {i18n.t('APP_QUESTIONNAIRE_COMPLETED')}!
                 </Text>
             </View>
             <View style={styles.homeButtonContainer} >
                 <TouchableOpacity onPress={() => history.push('/')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Go home</Text>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_GO_HOME')}</Text>
                 </TouchableOpacity>
             </View>
         </MainLayout>
