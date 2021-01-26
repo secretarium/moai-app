@@ -1,8 +1,8 @@
 const config = {
     name: 'Moai',
-    description: 'An app for Confidential Track and Trace',
-    version: '0.0.23',
-    slug: 'moai-confidential-test-and-trace',
+    description: 'An app contributing towards the research on measuring the factors affecting the spread of COVID-19',
+    version: '0.0.24',
+    slug: 'moai-app',
     icon: './assets/icon.png',
     splash: {
         image: './assets/splash.png',
@@ -12,7 +12,7 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '23',
+        buildNumber: '24',
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.app',
         associatedDomains: [
@@ -21,7 +21,7 @@ const config = {
         ]
     },
     android: {
-        versionCode: 23,
+        versionCode: 24,
         icon: './assets/android/icon.png',
         package: 'com.secretarium.moai.app',
         useNextNotificationsApi: true,
