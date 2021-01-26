@@ -86,7 +86,7 @@
         "@types/react-native": "0.63.45",
         "@types/react-native-onboarding-swiper": "1.1.1",
         "@types/react-redux": "7.1.15",
-        "@types/react-router": "5.1.10",
+        "@types/react-router": "5.1.11",
         "@types/react-router-dom": "5.1.7",
         "@types/react-router-native": "5.1.0",
         "@types/redux-logger": "3.0.8",
