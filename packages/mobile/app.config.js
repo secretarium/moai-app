@@ -14,7 +14,7 @@ const config = {
     ios: {
         buildNumber: '24',
         icon: './assets/ios/icon.png',
-        bundleIdentifier: 'com.secretarium.moai.app',
+        bundleIdentifier: 'com.secretarium.moaiapp',
         associatedDomains: [
             'applinks:moaiapp.com',
             'applinks:moai-app.com'
@@ -23,7 +23,7 @@ const config = {
     android: {
         versionCode: 24,
         icon: './assets/android/icon.png',
-        package: 'com.secretarium.moai.app',
+        package: 'com.secretarium.moaiapp',
         useNextNotificationsApi: true,
         permissions: [
             'CAMERA'
