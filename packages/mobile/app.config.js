@@ -1,7 +1,7 @@
 const config = {
     name: 'Moai',
     description: 'An app contributing towards the research on measuring the factors affecting the spread of COVID-19',
-    version: '0.0.24',
+    version: '0.0.25',
     slug: 'moai-app',
     icon: './assets/icon.png',
     splash: {
@@ -12,7 +12,7 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '24',
+        buildNumber: '25',
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moaiapp',
         associatedDomains: [
@@ -21,7 +21,7 @@ const config = {
         ]
     },
     android: {
-        versionCode: 24,
+        versionCode: 25,
         icon: './assets/android/icon.png',
         package: 'com.secretarium.moaiapp',
         useNextNotificationsApi: true,
