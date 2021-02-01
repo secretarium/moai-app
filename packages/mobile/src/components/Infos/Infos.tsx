@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Entypo } from '@expo/vector-icons';
 import { Link } from '../../ReactRouter';
@@ -28,22 +28,20 @@ const Infos: React.FC = () => {
                     The founders are from the world of banking, but they left to pursue projects that would solve problems around handling highly sensitive data: enforcing consent and guaranteeing privacy by design and by default.
                 </Text>
             </View>
-            <ScrollView>
-                {i18n.t('APP_INFOS').map((item, index) =>
-                    <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                        <Link to={`/${item.toLowerCase()}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
-                            <>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{item}</Text>
-                                <Entypo
-                                    name="chevron-right"
-                                    style={{ alignSelf: 'center' }}
-                                    color={themeTextStyle}
-                                    size={24} />
-                            </>
-                        </Link>
-                    </TouchableOpacity>
-                )}
-            </ScrollView>
+            {i18n.t('APP_INFOS').map((item, index) =>
+                <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
+                    <Link to={`/${item.toLowerCase()}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                        <>
+                            <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{item}</Text>
+                            <Entypo
+                                name="chevron-right"
+                                style={{ alignSelf: 'center' }}
+                                color={themeTextStyle}
+                                size={24} />
+                        </>
+                    </Link>
+                </TouchableOpacity>
+            )}
         </MainLayout>
     );
 };
