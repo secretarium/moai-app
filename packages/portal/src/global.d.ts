@@ -111,7 +111,6 @@ declare namespace MoaiPortal {
 
     type Tracer = {
         isConnected: boolean;
-        isVerified: boolean;
         emailVerificationAttempt?: number;
         validationError?: string;
         loginError?: string;

@@ -39,9 +39,9 @@ export const vault: StoreComponent<Vault> = (state = initialState, { type, paylo
         }
         case actionTypes.VAULT_COMMIT_LOCAL_KEYS: {
             const keyPairs = state.keyPairs;
-            if (!keyPairs.some(keyPair => keyPair.name === payload.email)) {
+            if (!keyPairs.some(keyPair => keyPair.name === payload.username)) {
                 keyPairs.push({
-                    name: payload.email,
+                    name: payload.username,
                     ...extractKeyInfo(payload.keyPair)
                 });
             }
@@ -51,7 +51,7 @@ export const vault: StoreComponent<Vault> = (state = initialState, { type, paylo
             };
         }
         case actionTypes.VAULT_REMOVE_LOCAL_KEYS: {
-            const keyPairs = state.keyPairs.filter(keyPair => !keyPair.name.includes(payload.email));
+            const keyPairs = state.keyPairs.filter(keyPair => !keyPair.name.includes(payload.username));
             return {
                 ...state,
                 keyPairs

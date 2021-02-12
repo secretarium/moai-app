@@ -17,8 +17,6 @@ const LoginRegister = withState()(
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
         const [isRegistering, setIsRegistering] = useState<boolean>(false);
-        const [email, setEmail] = useState<string>();
-        const [goToValidate, setGoToValidate] = useState<boolean>(false);
 
         useEffect(() => {
             if (registrationError && errorMessage !== registrationError) {
@@ -28,28 +26,9 @@ const LoginRegister = withState()(
             }
         }, [errorMessage, registrationError]);
 
-        useEffect(() => {
-            if (goToValidate && isRegistering) {
-                history.push({
-                    pathname: '/login/validate',
-                    state: { email: email }
-                });
-            }
-        }, [email, history, goToValidate, isRegistering]);
-
         const handleRegister = (values: any): void => {
-            setEmail(values.email);
             setIsRegistering(true);
-            dispatch(register(values.email, values.password))
-                .then(() => {
-                    if (errorMessage === undefined) {
-                        setGoToValidate(true);
-                    }
-                })
-                .catch((error: any) => {
-                    setErrorMessage(error);
-                    setGoToValidate(false);
-                });
+            dispatch(register(values.token, values.username, values.password));
         };
 
         const clearErrors = (): void => {
@@ -64,8 +43,11 @@ const LoginRegister = withState()(
             <>
                 <h1>{t('APP_REGISTER_ACCOUNT')}</h1>
                 <Form name="registration" onFinish={handleRegister}>
-                    <Form.Item name="email" rules={[{ required: true, message: t('APP_NO_EMAIL_ERROR') }]}>
-                        <Input placeholder={t('APP_EMAIL')} onChange={(): void => clearErrors()} />
+                    <Form.Item name="username" rules={[{ required: true, message: t('APP_NO_EMAIL_ERROR') }]}>
+                        <Input placeholder={t('APP_USERNAME')} onChange={(): void => clearErrors()} />
+                    </Form.Item>
+                    <Form.Item name="token" rules={[{ required: true, message: t('APP_NO_EMAIL_ERROR') }]}>
+                        <Input placeholder="Token" onChange={(): void => clearErrors()} />
                     </Form.Item>
                     <Form.Item name="password" rules={[{ required: true, message: t('APP_NO_PASSWORD_ERROR') }]}>
                         <Input.Password placeholder={t('APP_PASSWORD')} onChange={(): void => clearErrors()} />
