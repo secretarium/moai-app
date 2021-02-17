@@ -15,6 +15,11 @@ const commandsPrototype = {
     MOAI_CHALLENGE_TRACER: { application: 'moai', command: 'challenge-tracer' },
     MOAI_GET_TRACER_DETAILS: { application: 'moai', command: 'get-tracer-details' },
     MOAI_SET_TEST_RESULT: { application: 'moai', command: 'set-test-result' },
+    MOAI_GET_TRACERS_GROUPS: { application: 'moai', command: 'get-tracers-groups' },
+    MOAI_GET_TRACERS_GROUP_MEMBERS: { application: 'moai', command: 'get-tracers-group-members' },
+    MOAI_INVITE_TRACER: { application: 'moai', command: 'administrate-group' },
+    MOAI_GRANT_ADMIN: { application: 'moai', command: 'administrate-group' },
+    MOAI_REVOKE_ADMIN: { application: 'moai', command: 'administrate-group' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 

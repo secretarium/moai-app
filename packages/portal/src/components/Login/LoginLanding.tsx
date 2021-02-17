@@ -26,7 +26,7 @@ const LoginLanding = withState()(
                             <Button icon={<KeyOutlined />} className={style.keyName} onClick={(): void => {
                                 history.push({
                                     pathname: '/login/signin',
-                                    state: { email: keyPair.name }
+                                    state: { username: keyPair.name }
                                 });
                             }}>{keyPair.name}</Button>
                         </React.Fragment>

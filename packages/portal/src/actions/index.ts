@@ -1,4 +1,4 @@
 export * from './conversations';
 export * from './searchResults';
-export * from './tracer';
+export * from './principal';
 export * from './vault';

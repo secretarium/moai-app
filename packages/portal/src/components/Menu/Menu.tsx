@@ -2,15 +2,16 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/logo-white.png';
 import { disconnect } from '../../actions';
-import { useDispatch } from 'react-redux';
 import { MessageOutlined, HomeOutlined, QrcodeOutlined, BarcodeOutlined, TeamOutlined, InfoCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import style from './Menu.module.css';
 import { useTranslation } from 'react-i18next';
+import { withState } from '../../store';
 
 
-const Menu: React.FC = () => {
+const Menu = withState()((s) => ({
+    isAdmin: s.principal.isAdmin
+}), ({ isAdmin, dispatch }) => {
 
-    const dispatch = useDispatch();
     const { t } = useTranslation();
 
     return (
@@ -35,10 +36,12 @@ const Menu: React.FC = () => {
                     <QrcodeOutlined />
                     <span className={style.navOption}>{t('APP_SEARCH_LOCATION_CODE')}</span>
                 </NavLink>
-                <NavLink className={style.option} to={'/admin'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
-                    <TeamOutlined />
-                    <span className={style.navOption}>{t('APP_ADMIN')}</span>
-                </NavLink>
+                {isAdmin ?
+                    <NavLink className={style.option} to={'/admin'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
+                        <TeamOutlined />
+                        <span className={style.navOption}>{t('APP_ADMIN')}</span>
+                    </NavLink> : null
+                }
                 <NavLink className={style.option} to={'/about'} style={{ color: '#8B8C9D' }} activeStyle={{ color: '#FAFCFC' }}>
                     <InfoCircleOutlined />
                     <span className={style.navOption}>{t('APP_ABOUT_MOAI')}</span>
@@ -50,6 +53,6 @@ const Menu: React.FC = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Menu;
