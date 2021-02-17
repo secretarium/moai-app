@@ -3,6 +3,7 @@
     overflow: auto;
     background-color: #fff;
     padding: 20px;
+    
 }
 
 .containerAbout > h1, h2 {
@@ -16,4 +17,5 @@
     text-align: justify;
     padding: 10px;
     background-color: #ededed;
+    box-shadow: 0 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
 }

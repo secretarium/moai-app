@@ -6,7 +6,7 @@ import { addKeys, removeKeys } from './vault';
 import { getConversations } from './conversations';
 
 
-export const register = (email: string, password: string): MoaiPortal.AnyAction => ({
+export const register = (token: string, username: string, password: string): MoaiPortal.AnyAction => ({
     type: actionTypes.PDATA_NEW_USER_REQUESTED,
     workload: (dispatch: MoaiPortal.Dispatch) => {
         secretariumHandler
@@ -17,7 +17,7 @@ export const register = (email: string, password: string): MoaiPortal.AnyAction 
                         .createKey(password)
                         .then((key) => key.exportEncryptedKey())
                         .then((encryptedKeyPair) => {
-                            dispatch(addKeys(encryptedKeyPair, email)).then(() => resolve(encryptedKeyPair));
+                            dispatch(addKeys(encryptedKeyPair, username)).then(() => resolve(encryptedKeyPair));
                         });
                 });
             })
@@ -26,7 +26,7 @@ export const register = (email: string, password: string): MoaiPortal.AnyAction 
                     type: actionTypes.PDATA_NEW_USER_SUCCESSFUL,
                     workload: (dispatch) => {
                         dispatch(
-                            connect(encryptedKeyPair, email, password, true)
+                            connect(encryptedKeyPair, username, password, true, token)
                         );
                     }
                 });
@@ -54,40 +54,16 @@ export const clearTracerErrors = (): MoaiPortal.FunctionAction => (dispatch) => 
     dispatch({ type: actionTypes.MOAI_PORTAL_TRACER_ERROR_CLEANUP });
 };
 
-export const registerTracer = (email: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_TRACER, { email: email })({
-        onResult: result => {
-            return {
-                payload: {
-                    result
-                }
-            };
-        },
-        onError: (error) => ({
-            error: new Error(error),
-            workload: dispatch => dispatch(removeKeys(email))
-        })
-    });
-
-export const verifyTracer = (code: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_VERIFY_TRACER, { code: code })({
+export const registerTracer = (token: string, username: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_TRACER, { token: token, username: username })({
         onExecuted: () => ({
-            payload: {
-                isConnected: true,
-                isVerified: true
-            },
-            workload: dispatch => dispatch(getConversations())
+            payload: { isConnected: true }
         }),
         onError: (error) => ({
-            payload: {
-                isConnected: false
-            },
-            error: new Error(error)
+            error: new Error(error),
+            workload: dispatch => dispatch(removeKeys(username))
         })
     });
-
-export const sendNewValidationCode = (): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_CHALLENGE_TRACER, {})();
 
 export const getTracerDetails = (): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_GET_TRACER_DETAILS, {})({
@@ -95,7 +71,8 @@ export const getTracerDetails = (): MoaiPortal.FunctionAction =>
             return {
                 payload: {
                     result
-                }
+                },
+                workload: dispatch => result.isGroupAdmin ? dispatch(getGroupMembers(result.group)) : null
             };
         },
         onError: (error) => ({
@@ -103,7 +80,7 @@ export const getTracerDetails = (): MoaiPortal.FunctionAction =>
         })
     });
 
-export const connect = (encryptedKeyPair: EncryptedKeyPair, email: string, password: string, isRegistering?: boolean): MoaiPortal.AnyAction => ({
+export const connect = (encryptedKeyPair: EncryptedKeyPair, username: string, password: string, isRegistering?: boolean, token?: string): MoaiPortal.AnyAction => ({
     type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED,
     workload: (dispatch: MoaiPortal.Dispatch) => {
         secretariumHandler
@@ -115,10 +92,11 @@ export const connect = (encryptedKeyPair: EncryptedKeyPair, email: string, passw
                             type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL,
                             workload: (dispatch) => {
                                 dispatch(getTracerDetails());
+                                dispatch(login());
                             }
                         });
                         if (isRegistering) {
-                            dispatch(registerTracer(email));
+                            dispatch(registerTracer(token, username));
                         }
                     })
                     .catch((error) => {
@@ -139,8 +117,7 @@ export const disconnect = (): MoaiPortal.FunctionAction => (dispatch) => {
             dispatch({
                 type: actionTypes.MOAI_PORTAL_LOGOUT,
                 payload: {
-                    isConnected: false,
-                    isVerified: null
+                    isConnected: false
                 }
             });
             dispatch({ type: actionTypes.SECRETARIUM_DISCONNECT_SUCCESSFUL });
@@ -152,3 +129,23 @@ export const disconnect = (): MoaiPortal.FunctionAction => (dispatch) => {
             });
         });
 };
+
+export const inviteTracer = (id: number, expiry: number, email: string, grantAdmin: boolean): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_INVITE_TRACER, { id: id, type: 'email-invite', expiry: 90061, grantAdmin: grantAdmin, email: email })();
+
+export const grantAdmin = (id: number, userId: number): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_GRANT_ADMIN, { id: id, type: 'grant-admin', userId: userId })();
+
+export const revokeAdmin = (id: number, userId: number): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_REVOKE_ADMIN, { id: id, type: 'revoke-admin', userId: userId })();
+
+export const getGroupMembers = (id: number): MoaiPortal.FunctionAction =>
+    requestFactory({ ...commands.MOAI_GET_TRACERS_GROUP_MEMBERS, explicit: `mglm-${id}` }, { id: id }, true)({
+        onResult: result => {
+            return {
+                payload: {
+                    result
+                }
+            };
+        }
+    });

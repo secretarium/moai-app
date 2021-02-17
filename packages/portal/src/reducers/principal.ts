@@ -1,12 +1,13 @@
-import { Tracer, StoreComponent } from '../global';
+import { Principal, StoreComponent } from '../global';
 import { actionTypes, commands } from '../actions/constants';
 
-export const initialState: Tracer = {
+export const initialState: Principal = {
     isConnected: false,
-    isVerified: null
+    group: null,
+    groupMembers: null
 };
 
-export const tracer: StoreComponent<Tracer> = (state = initialState, { type, payload, error }) => {
+export const principal: StoreComponent<Principal> = (state = initialState, { type, payload, error }) => {
     switch (type) {
         case 'persist/REHYDRATE': {
             return {
@@ -34,61 +35,15 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
                 registrationError: resultingError
             };
         }
-        case commands.MOAI_REGISTER_TRACER.SUCCESS: {
-            return {
-                ...state
-            };
-        }
-        case commands.MOAI_CHALLENGE_TRACER.REQUEST: {
-            delete state.challengeError;
-            delete state.validationError;
-            return {
-                ...state
-            };
-        }
-        case commands.MOAI_CHALLENGE_TRACER.SUCCESS: {
-            return {
-                ...state,
-                emailVerificationAttempt: (state.emailVerificationAttempt + 1) ?? 0
-            };
-        }
-        case commands.MOAI_CHALLENGE_TRACER.FAILURE:
-            return {
-                ...state,
-                challengeError: error?.message ?? error ?? 'Unknown error occured while challenging.'
-            };
-        case commands.MOAI_VERIFY_TRACER.REQUEST: {
-            delete state.validationError;
-            return {
-                ...state
-            };
-        }
-        case commands.MOAI_VERIFY_TRACER.FAILURE: {
-            let resultingError: string;
-            console.log(error?.message.slice(0, 12));
-            if (error?.message === 'Not connected') {
-                resultingError = 'Connection lost.';
-            } else if (error?.message.slice(0, 12) === 'invalid code') {
-                resultingError = 'Please enter a valid code.';
-            } else {
-                resultingError = 'Unknown error occured while validating.';
-            }
-            return {
-                ...state,
-                ...payload,
-                validationError: resultingError
-            };
-        }
+        case commands.MOAI_REGISTER_TRACER.SUCCESS:
         case actionTypes.MOAI_PORTAL_LOGOUT:
-        case actionTypes.MOAI_PORTAL_LOGIN:
-        case commands.MOAI_VERIFY_TRACER.SUCCESS: {
+        case actionTypes.MOAI_PORTAL_LOGIN: {
             return {
                 ...state,
                 ...payload
             };
         }
         case actionTypes.MOAI_PORTAL_TRACER_ERROR_CLEANUP: {
-            delete state.validationError;
             delete state.loginError;
             delete state.registrationError;
             return {
@@ -98,20 +53,33 @@ export const tracer: StoreComponent<Tracer> = (state = initialState, { type, pay
         case commands.MOAI_GET_TRACER_DETAILS.SUCCESS: {
             return {
                 ...state,
-                isVerified: payload.result.verified
+                isAdmin: payload.result.isGroupAdmin ?? false,
+                group: payload.result.group
             };
         }
-        case commands.MOAI_GET_TRACER_DETAILS.FAILURE: {
+        case commands.MOAI_GET_TRACERS_GROUP_MEMBERS.SUCCESS: {
             return {
                 ...state,
-                isVerified: false
+                groupMembers: payload.result
             };
         }
         case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL:
-        case commands.MOAI_CHALLENGE_TRACER:
+        case commands.MOAI_GET_TRACER_DETAILS.FAILURE:
+        case commands.MOAI_GET_TRACERS_GROUP_MEMBERS.REQUEST:
+        case commands.MOAI_GET_TRACERS_GROUP_MEMBERS.FAILURE:
+        case commands.MOAI_INVITE_TRACER.REQUEST:
+        case commands.MOAI_INVITE_TRACER.FAILURE:
+        case commands.MOAI_INVITE_TRACER.SUCCESS:
+        case commands.MOAI_GRANT_ADMIN.REQUEST:
+        case commands.MOAI_GRANT_ADMIN.FAILURE:
+        case commands.MOAI_GRANT_ADMIN.SUCCESS:
+        case commands.MOAI_REVOKE_ADMIN.REQUEST:
+        case commands.MOAI_REVOKE_ADMIN.FAILURE:
+        case commands.MOAI_REVOKE_ADMIN.SUCCESS: {
             return {
                 ...state
             };
+        }
         case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED: {
             let resultingError: string;
             if (error?.message === 'Can\'t decrypt, Invalid password') {

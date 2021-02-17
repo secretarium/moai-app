@@ -109,14 +109,20 @@ declare namespace MoaiPortal {
         keyPairs: EncryptedKeyPair[];
     };
 
-    type Tracer = {
+    type Principal = {
         isConnected: boolean;
-        isVerified: boolean;
-        emailVerificationAttempt?: number;
-        validationError?: string;
+        group: number;
+        groupMembers: Tracer[];
+        isAdmin?: boolean;
         loginError?: string;
         registrationError?: string;
-        challengeError?: string;
+    };
+
+    type Tracer = {
+        tracer: { username: string };
+        userId: number;
+        status: number;
+        date: number;
     };
 
     type SearchResults = {
@@ -161,7 +167,7 @@ declare namespace MoaiPortal {
 
     type State = {
         system: System;
-        tracer: Tracer;
+        principal: Principal;
         conversations: Conversations;
         searchResults: SearchResults;
         vault: Vault;
