@@ -8,7 +8,8 @@
     "APP_INFOS": [
         "Licences",
         "Clés",
-        "Avis"
+        "Avis",
+        "Expo Push Notification Token"
     ],
     "APP_CHECKIN": "Enregistrement",
     "APP_REGISTERING": "Enregistrement",
