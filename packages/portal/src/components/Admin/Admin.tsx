@@ -14,9 +14,6 @@ const Admin = withState()((s) => ({
     const { t } = useTranslation();
     const [groupInfo, setGroupInfo] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [isPopVisible, setIsPopVisible] = useState(false);
-    const [modalConfirmLoading, setModalConfirmLoading] = useState(false);
-    const [popConfirmLoading, setPopConfirmLoading] = useState(false);
 
     const columns = [
         {
@@ -58,7 +55,7 @@ const Admin = withState()((s) => ({
 
     useEffect(() => {
         groupMembers.forEach((member, index) => {
-            setGroupInfo([
+            setGroupInfo(groupInfo => [
                 ...groupInfo,
                 {
                     key: index,

@@ -21,7 +21,7 @@ const Login: React.FC = () => {
             <div className={style.containerLogin}>
                 <img src={MoaiLogo} alt="moai logo" style={{ width: '100px', height: 'auto', marginBottom: '20px' }} />
                 <Switch>
-                    <Route path="/login/register" component={LoginRegister} />
+                    <Route path="/login/register/:token?" component={LoginRegister} />
                     <Route path="/login/signin" component={LoginSignin} />
                     <Route component={LoginLanding} />
                 </Switch>
