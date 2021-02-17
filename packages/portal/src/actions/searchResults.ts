@@ -1,5 +1,6 @@
 import { commands, actionTypes } from './constants';
 import { requestFactory } from './factories';
+import { createConversation } from './conversations';
 
 
 export const getTested = (testId: string): MoaiPortal.FunctionAction =>
@@ -30,6 +31,15 @@ export const getExposed = (venue: string, utc: number): MoaiPortal.FunctionActio
         })
     });
 
+export const setTestResult = (testId: string, positive: boolean, userId: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_SET_TEST_RESULT, { testId: testId, positive: positive })({
+        onExecuted: () => ({
+            workload: dispatch => {
+                dispatch(createConversation('title', 'name', userId, positive));
+            }
+        })
+    });
+
 export const clearSearchErrors = (): MoaiPortal.FunctionAction => (dispatch) => {
     dispatch({ type: actionTypes.MOAI_PORTAL_SEARCH_ERROR_CLEANUP });
 };
@@ -37,6 +47,3 @@ export const clearSearchErrors = (): MoaiPortal.FunctionAction => (dispatch) => 
 export const clearSearchResults = (): MoaiPortal.FunctionAction => (dispatch) => {
     dispatch({ type: actionTypes.MOAI_PORTAL_CLEAR_SEARCH_RESULT });
 };
-
-export const setTestResult = (testId: string, positive: boolean): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_SET_TEST_RESULT, { testId: testId, positive: positive })();

@@ -23,7 +23,6 @@ const Contact = withState<ContactProps>()((s) => ({
             setMessageText('');
             setMessageTime(0);
         } else {
-            console.log(message.lastMessage);
             setMessageText(message.lastMessage.text);
             setMessageTime(message.lastMessage.datetime);
         }
