@@ -8,7 +8,8 @@
     "APP_INFOS": [
         "Licenses",
         "Keys",
-        "Notices"
+        "Notices",
+        "Expo Push Notification Token"
     ],
     "APP_CHECKIN": "Checking in",
     "APP_REGISTERING": "Registering",

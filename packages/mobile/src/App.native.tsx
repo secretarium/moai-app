@@ -12,6 +12,7 @@ import Keys from './components/Infos/Keys';
 import Key from './components/Infos/Keys/Key';
 import Notices from './components/Infos/Notices';
 import Licenses from './components/Infos/Licenses';
+import ExpoPushToken from './components/Infos/ExpoPushToken';
 import Infos from './components/Infos';
 import Questionnaire from './components/Questionnaire';
 import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
@@ -47,7 +48,7 @@ const App = withState()(
         const [hasRequestedLocalKey, setHasRequestedLocalKey] = useState(false);
         const [hasObtainedLocalKey, setHasObtainedLocalKey] = useState(false);
         const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
-        const [expoPushToken, setExpoPushToken] = useState('');
+        const [expoToken, setExpoPushToken] = useState('');
         const [notification, setNotification] = useState<Notifications.Notification>();
         const notificationListener = useRef<any>();
         const responseListener = useRef<any>();
@@ -68,6 +69,7 @@ const App = withState()(
         useEffect(() => {
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
+                console.log('TOKEN', token);
                 dispatch(registerNotificationToken(token));
             });
 
@@ -164,6 +166,7 @@ const App = withState()(
         return (
             <>
                 <Switch>
+                    <Route path={`/${i18n.t('APP_INFOS')[3]}`} component={ExpoPushToken} />
                     <Route path={`/${i18n.t('APP_INFOS')[2]}`} component={Notices} />
                     <Route path={`/${i18n.t('APP_INFOS')[1]}`} component={Keys} />
                     <Route path="/key/:key" component={Key} />

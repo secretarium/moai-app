@@ -8,6 +8,7 @@
     "APP_INFOS": [
         "Licencje",
         "Klucze",
-        "Informacje prawne"
+        "Informacje prawne",
+        "Expo Push Notification Token"
     ]
 }
