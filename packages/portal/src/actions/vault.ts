@@ -2,17 +2,17 @@ import { actionTypes } from './constants';
 import { EncryptedKeyPair } from '@secretarium/connector';
 
 
-export const addKeys = (keyPair: EncryptedKeyPair, email: string): MoaiPortal.AnyAction => ({
+export const addKeys = (keyPair: EncryptedKeyPair, username: string): MoaiPortal.AnyAction => ({
     type: actionTypes.VAULT_COMMIT_LOCAL_KEYS,
     payload: {
         keyPair,
-        email
+        username
     }
 });
 
-export const removeKeys = (email: string): MoaiPortal.AnyAction => ({
+export const removeKeys = (username: string): MoaiPortal.AnyAction => ({
     type: actionTypes.VAULT_REMOVE_LOCAL_KEYS,
     payload: {
-        email
+        username
     }
 });

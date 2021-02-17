@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { withState } from '../../store';
 import { Button, Input, Form, Alert } from 'antd';
-import { useLocation, useHistory } from 'react-router-dom';
-import { connect, clearTracerErrors, login } from '../../actions';
+import { useLocation } from 'react-router-dom';
+import { connect, clearTracerErrors } from '../../actions';
 import { useTranslation } from 'react-i18next';
 
 
 type LocationTypes = {
-    email: string;
+    username: string;
 };
 
 const LoginSignin = withState()(
     (s) => ({
         keyPairs: s.vault.keyPairs,
-        loginError: s.tracer.loginError,
-        isVerified: s.tracer.isVerified
+        loginError: s.principal.loginError
     }),
-    ({ keyPairs, loginError, isVerified, dispatch }) => {
+    ({ keyPairs, loginError, dispatch }) => {
 
         const location = useLocation<LocationTypes>();
-        const history = useHistory();
         const { t } = useTranslation();
         const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
         const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
         const [errorsClear, setErrorsClear] = useState<boolean>(false);
-        const [currentKey] = useState(keyPairs.find(key => key.name === location.state.email));
+        const [currentKey] = useState(keyPairs.find(key => key.name === location.state.username));
 
         useEffect(() => {
             if (loginError && errorMessage !== loginError) {
@@ -33,17 +31,6 @@ const LoginSignin = withState()(
                 setErrorMessage(loginError);
             }
         }, [errorMessage, loginError]);
-
-        useEffect(() => {
-            if (isVerified === true && isLoggingIn === true) {
-                dispatch(login());
-            } else if (isVerified === false) {
-                history.push({
-                    pathname: '/login/validate',
-                    state: { email: currentKey.name }
-                });
-            }
-        }, [isVerified, isLoggingIn, dispatch, history, currentKey]);
 
         const handleLogin = (values: any): void => {
             setIsLoggingIn(true);

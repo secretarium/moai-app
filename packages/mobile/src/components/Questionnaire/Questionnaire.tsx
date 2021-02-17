@@ -6,6 +6,8 @@ import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
 import { RouteComponentProps, useHistory } from 'react-router';
 import { withState } from '../../store';
+import i18n from 'i18n-js';
+
 
 type QuestionnaireProps = RouteComponentProps<{
     venueType: string;
@@ -20,11 +22,11 @@ const Questionnaire = withState<QuestionnaireProps>()(
         const questions = [
             {
                 questionType: 'Info',
-                questionText: 'Welcome to the Moai questionnaire! Help us measure your exposure risk, by answering a few questions. Tap next to continue'
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_WELCOME')
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'How many people other than you do you estimate were present?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q2'),
                 questionId: '2',
                 options: [
                     { optionText: '0', value: '0' },
@@ -35,7 +37,7 @@ const Questionnaire = withState<QuestionnaireProps>()(
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'How long did you stay at the location?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q3'),
                 questionId: '3',
                 options: [
                     { optionText: '5min', value: '5min' },
@@ -51,37 +53,37 @@ const Questionnaire = withState<QuestionnaireProps>()(
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Were people and staff wearing masks?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q4'),
                 questionId: '4',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                    { optionText: i18n.t('APP_NO'), value: 'No' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Were people following the social distancing rules?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q7'),
                 questionId: '7',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                    { optionText: i18n.t('APP_NO'), value: 'No' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Was additional protection put in place? (e.g. one-way systems, walled separators at tills, etc.)',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q8'),
                 questionId: '8',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                    { optionText: i18n.t('APP_NO'), value: 'No' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'How many were in your party?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q10'),
                 questionId: '10',
                 options: [
-                    { optionText: 'Just me', value: 'Just me' },
+                    { optionText: i18n.t('APP_JUST_ME'), value: 'Just me' },
                     { optionText: '2', value: '2' },
                     { optionText: '2-4', value: '2-4' },
                     { optionText: '4+', value: '4+' }
@@ -89,16 +91,16 @@ const Questionnaire = withState<QuestionnaireProps>()(
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Were all the members of your party from your household?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q11'),
                 questionId: '11',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                    { optionText: i18n.t('APP_NO'), value: 'No' }
                 ]
             },
             {
                 questionType: 'MultipleSelectionGroup',
-                questionText: 'How was the air flow? (select all that apply)',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13'),
                 questionId: '13',
                 questionSettings: {
                     autoAdvance: false,
@@ -108,19 +110,19 @@ const Questionnaire = withState<QuestionnaireProps>()(
                 },
                 options: [
                     {
-                        optionText: 'Well ventilated (doors or windows open, large inside space e.g. museums, etc.)',
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A1'),
                         value: 'Well ventilated (doors or windows open, large inside space e.g. museums, etc.)'
                     },
                     {
-                        optionText: 'Air conditioning or heating was present and very likely to be working',
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A2'),
                         value: 'Air conditioning or heating was present and very likely to be working'
                     },
                     {
-                        optionText: 'The air was circulating a lot',
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A3'),
                         value: 'The air was circulating a lot'
                     },
                     {
-                        optionText: 'Confined space with no apparent ventilation',
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A4'),
                         value: 'Confined space with no apparent ventilation'
                     }
                 ]
@@ -142,11 +144,11 @@ const Questionnaire = withState<QuestionnaireProps>()(
                     questions.unshift(
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'What was the location type?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
                             questionId: '1',
                             options: [
-                                { optionText: 'Indoor', value: 'Indoor' },
-                                { optionText: 'Outdoor', value: 'Outdoor' }
+                                { optionText: i18n.t('APP_INDOOR'), value: 'Indoor' },
+                                { optionText: i18n.t('APP_OUTDOOR'), value: 'Outdoor' }
                             ]
                         }
                     );
@@ -156,21 +158,21 @@ const Questionnaire = withState<QuestionnaireProps>()(
                     questions.unshift(
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'What was the location type?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
                             questionId: '1',
                             options: [
-                                { optionText: 'Indoor', value: 'Indoor' },
-                                { optionText: 'Outdoor', value: 'Outdoor' }
+                                { optionText: i18n.t('APP_INDOOR'), value: 'Indoor' },
+                                { optionText: i18n.t('APP_OUTDOOR'), value: 'Outdoor' }
                             ]
                         },
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
                             questionId: '14',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' },
+                                { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
                             ]
                         }
                     );
@@ -183,21 +185,21 @@ const Questionnaire = withState<QuestionnaireProps>()(
                     questions.unshift(
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'What was the location type?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
                             questionId: '1',
                             options: [
-                                { optionText: 'Indoor', value: 'Indoor' },
-                                { optionText: 'Outdoor', value: 'Outdoor' }
+                                { optionText: i18n.t('APP_INDOOR'), value: 'Indoor' },
+                                { optionText: i18n.t('APP_OUTDOOR'), value: 'Outdoor' }
                             ]
                         },
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
                             questionId: '14',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' },
+                                { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
                             ]
                         }
                     );
@@ -211,12 +213,12 @@ const Questionnaire = withState<QuestionnaireProps>()(
                     questions.push(
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
                             questionId: '14',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' },
+                                { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
                             ]
                         }
                     );
@@ -226,30 +228,30 @@ const Questionnaire = withState<QuestionnaireProps>()(
                     questions.push(
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
                             questionId: '14',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' },
+                                { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
                             ]
                         },
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'Did any contact between members of the party occur during the gathering?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q15'),
                             questionId: '15',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' }
                             ]
                         },
                         {
                             questionType: 'SelectionGroup',
-                            questionText: 'Did it involve singing or physical activities?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q16'),
                             questionId: '16',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' }
                             ]
                         }
                     );
@@ -276,11 +278,11 @@ const Questionnaire = withState<QuestionnaireProps>()(
                         const index = questions.findIndex(question => question.questionId === '11');
                         questions.splice(index + 1, 0, {
                             questionType: 'SelectionGroup',
-                            questionText: 'Were all the members from your support bubble?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q12'),
                             questionId: '12',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' }
                             ]
                         });
                     }
@@ -291,9 +293,9 @@ const Questionnaire = withState<QuestionnaireProps>()(
                         const index = questions.findIndex(question => question.questionId === '8');
                         questions.splice(index + 1, 0, {
                             questionType: 'TextInput',
-                            questionText: 'Can you please describe it in a few words?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q9'),
                             questionId: '9',
-                            placeholderText: 'Type your answer...'
+                            placeholderText: `${i18n.t('APP_TYPE_ANSWER')}...`
                         });
                     }
                     break;
@@ -303,22 +305,22 @@ const Questionnaire = withState<QuestionnaireProps>()(
                         const index = questions.findIndex(question => question.questionId === '4');
                         questions.splice(index + 1, 0, {
                             questionType: 'SelectionGroup',
-                            questionText: 'Were people using the PPE correctly? (e.g. covering both the nose and mouth)',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q5'),
                             questionId: '5',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' }
                             ]
                         });
                     } else if (answer.value.value === 'No') {
                         const index = questions.findIndex(question => question.questionId === '4');
                         questions.splice(index + 1, 0, {
                             questionType: 'SelectionGroup',
-                            questionText: 'Was the staff wearing any form of PPE?',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q6'),
                             questionId: '6',
                             options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
+                                { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                                { optionText: i18n.t('APP_NO'), value: 'No' }
                             ]
                         });
                     }
@@ -332,7 +334,7 @@ const Questionnaire = withState<QuestionnaireProps>()(
         const renderPreviousButton = (onPress, enabled) => {
             return (
                 <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Previous</Text>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_PREVIOUS')}</Text>
                 </TouchableOpacity>
             );
         };
@@ -340,7 +342,7 @@ const Questionnaire = withState<QuestionnaireProps>()(
         const renderNextButton = (onPress, enabled) => {
             return (
                 <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Next</Text>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_NEXT')}</Text>
                 </TouchableOpacity>
             );
         };
@@ -348,7 +350,7 @@ const Questionnaire = withState<QuestionnaireProps>()(
         const renderFinishedButton = (onPress, enabled) => {
             return (
                 <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Finished</Text>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_FINISHED')}</Text>
                 </TouchableOpacity>
             );
         };

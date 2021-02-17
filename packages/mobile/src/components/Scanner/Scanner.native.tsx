@@ -11,6 +11,7 @@ import { styles } from './styles';
 import { parseCode, Sources, ParsedCode } from '../Checkin/dataParser';
 import { Redirect } from 'react-router';
 import { commonStyles } from '../commonStyles';
+import i18n from 'i18n-js';
 
 
 const Scanner: React.FC = () => {
@@ -60,23 +61,22 @@ const Scanner: React.FC = () => {
     let composition;
 
     if (hasPermission === null)
-        composition = <Text>Requesting for camera permission...</Text>;
+        composition = <Text>{i18n.t('APP_REQUEST_CAMERA_PERMISSION')}...</Text>;
     else if (hasPermission === false)
         composition = <>
             <View style={styles.messageContainer} >
                 <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: 'white' }]}>
-                    It looks like your privacy settings are preventing us from accessing your camera. Without camera access you will not be able to use the app for scanning.
-                    You can change your settings, by tapping the button below. It will redirect you to your Settings app. Then you need to select Moai app from the list of applications and turn the Camera access on.
+                    {i18n.t('APP_NO_CAMERA_PERMISSION')}
                 </Text>
                 <TouchableOpacity onPress={() => Linking.openSettings()} style={styles.settingsButton}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: 'white' }}>Go to settings</Text>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: 'white' }}>{i18n.t('APP_GO_TO_SETTINGS')}</Text>
                 </TouchableOpacity>
             </View>
         </>;
     else
         composition = <>
             <View style={styles.curvedView}>
-                <Text style={{ fontSize: 24, color: themeTextStyle }}>Scanning...</Text>
+                <Text style={{ fontSize: 24, color: themeTextStyle }}>{i18n.t('APP_SCANNING')}...</Text>
                 <Image
                     source={themeLogoStyle}
                     resizeMode={'contain'}

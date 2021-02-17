@@ -10,6 +10,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
 import { checkIn, connect, registerTest } from '../../actions';
+import i18n from 'i18n-js';
 
 type LocationTypes = {
     testId: string;
@@ -103,7 +104,7 @@ const Checkin = withState<RouteComponentProps<{
             composition =
                 <>
                     <View style={commonStyles.main}>
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>{!test ? 'Checking in...' : 'Registering...'}</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>{!test ? `${i18n.t('APP_CHECKIN')}...` : `${i18n.t('APP_REGISTERING')}...`}</Text>
                         <Image
                             source={themeLogoStyle}
                             resizeMode={'contain'}
