@@ -34,7 +34,7 @@
     "APP_ADMIN_SEND_INVITE": "Send Invite",
     "APP_ADMIN_INPUT_EMAIL": "Please input the email address of the tracer you would like to add to your group",
     "APP_ADMIN_GRANT_ADMIN": "Grant Admin",
-    "APP_ADMIN_REVOKE_ADMIN": "Revoke Admin",
+    "APP_ADMIN_REVOKE_ADMIN": "",
     "APP_SEARCH_TEST_ID": "Search test ID",
     "APP_SEARCH_LOCATION_CODE": "Search location code",
     "APP_SEARCH_DATE": "Search date",
