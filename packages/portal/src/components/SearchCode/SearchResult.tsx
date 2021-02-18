@@ -24,7 +24,6 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
     const history = useHistory();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [positive, setPositive] = useState(null);
-    const [isPopVisible, setIsPopVisible] = useState(false);
     const [modalConfirmLoading, setModalConfirmLoading] = useState(false);
     const [popConfirmLoading, setPopConfirmLoading] = useState(false);
     const { t } = useTranslation();
@@ -35,12 +34,7 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
         }
     }, [newConversation, history]);
 
-    const onClick = (): void => {
-        dispatch(createConversation('title', 'name', userId));
-    };
-
     const onChange = (e): void => {
-        console.log('radio checked', e.target.value);
         setPositive(e.target.value);
     };
 
@@ -65,13 +59,8 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
         setPopConfirmLoading(true);
         dispatch(createConversation('title', 'name', userId))
             .then(() => {
-                setIsPopVisible(false);
                 setPopConfirmLoading(false);
             });
-    };
-
-    const handleCancelPop = (e): void => {
-        setIsPopVisible(false);
     };
 
     return (
@@ -106,14 +95,12 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
                     <>
                         <Popconfirm
                             title="Do you want to send a message to this user?"
-                            visible={isPopVisible}
                             onConfirm={handleOkPop}
-                            onCancel={handleCancelPop}
                             okText="Yes"
                             cancelText="No"
                             okButtonProps={{ loading: popConfirmLoading }}
                         >
-                            <div className={style.searchResultButton} onClick={() => onClick()}>
+                            <div className={style.searchResultButton}>
                                 <FontAwesomeIcon icon={faEnvelope} /> {t('APP_MESSAGE')}
                             </div>
                         </Popconfirm>

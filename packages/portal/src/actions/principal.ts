@@ -129,12 +129,12 @@ export const disconnect = (): MoaiPortal.FunctionAction => (dispatch) => {
 };
 
 export const inviteTracer = (id: number, expiry: number, email: string, grantAdmin: boolean): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_INVITE_TRACER, { id: id, type: 'email-invite', expiry: 90061, grantAdmin: grantAdmin, email: email })();
+    requestFactory(commands.MOAI_INVITE_TRACER, { id: id, type: 'email-invite', expiry: expiry, grantAdmin: grantAdmin, email: email })();
 
-export const grantAdmin = (id: number, userId: number): MoaiPortal.FunctionAction =>
+export const grantAdmin = (id: number, userId: string): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_GRANT_ADMIN, { id: id, type: 'grant-admin', userId: userId })();
 
-export const revokeAdmin = (id: number, userId: number): MoaiPortal.FunctionAction =>
+export const revokeAdmin = (id: number, userId: string): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_REVOKE_ADMIN, { id: id, type: 'revoke-admin', userId: userId })();
 
 export const getGroupMembers = (id: number): MoaiPortal.FunctionAction =>
