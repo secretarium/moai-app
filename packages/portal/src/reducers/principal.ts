@@ -25,8 +25,10 @@ export const principal: StoreComponent<Principal> = (state = initialState, { typ
         case commands.MOAI_REGISTER_TRACER.FAILURE:
         case actionTypes.PDATA_NEW_USER_FAILED: {
             let resultingError: string;
-            if (error?.message === 'your organisation is not whitelisted') {
-                resultingError = 'Sorry, your organisation is not whitelisted.';
+            if (error?.message === 'token is already fully used, please generate a new one') {
+                resultingError = 'Token has already been used, please generate a new one';
+            } else if (error?.message === 'can\'t find arg \'token\'') {
+                resultingError = 'Please input a token';
             } else {
                 resultingError = 'Unknown error occured while registering.';
             }
@@ -35,7 +37,12 @@ export const principal: StoreComponent<Principal> = (state = initialState, { typ
                 registrationError: resultingError
             };
         }
-        case commands.MOAI_REGISTER_TRACER.SUCCESS:
+        case commands.MOAI_REGISTER_TRACER.SUCCESS: {
+            return {
+                ...state,
+                isConnected: true
+            };
+        }
         case actionTypes.MOAI_PORTAL_LOGOUT:
         case actionTypes.MOAI_PORTAL_LOGIN: {
             return {
