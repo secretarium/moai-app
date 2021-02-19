@@ -61,7 +61,7 @@ const Admin = withState()((s) => ({
                     >
                         <Button
                             type="dashed"
-                            disabled={record.status !== 1 ? true : false}
+                            disabled={record.status !== 'Member' ? true : false}
                             style={{ marginRight: '1rem' }}>
                             {t('APP_ADMIN_GRANT_ADMIN')}
                         </Button>
@@ -76,7 +76,7 @@ const Admin = withState()((s) => ({
                         <Button
                             type="dashed"
                             danger
-                            disabled={record.status !== 2 ? true : false}
+                            disabled={record.status !== 'Admin' ? true : false}
                             style={{ marginRight: '1rem' }}>
                             {t('APP_ADMIN_REVOKE_ADMIN')}
                         </Button>
@@ -95,7 +95,7 @@ const Admin = withState()((s) => ({
                     key: member.userId,
                     username: member.tracer.username,
                     userId: String(member.userId).slice(0, 8),
-                    status: member.status,
+                    status: member.status === 1 ? 'Member' : 'Admin',
                     date: toDateTime(member.date)
                 }
             ]);
@@ -108,7 +108,7 @@ const Admin = withState()((s) => ({
 
     const handleOkModal = (): void => {
         setModalConfirmLoading(true);
-        dispatch(inviteTracer(group, 90061, inviteEmail, false))
+        dispatch(inviteTracer(group, (Date.now() + 24 * 60 * 60 * 1000) * 1000000, inviteEmail, false))
             .then(() => {
                 setIsModalVisible(false);
                 setModalConfirmLoading(false);

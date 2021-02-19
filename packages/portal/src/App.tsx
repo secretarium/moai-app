@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Menu from './components/Menu';
 import About from './components/About';
 import Admin from './components/Admin';
+import StatusBar from './components/Status';
 import { NotLoggedIn, LoggedIn } from './components/Login/LoginStatusSwitch';
 
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
                         <Route path="/admin" component={Admin} />
                         <Route render={() => <Redirect to="/" />} />
                     </Switch>
+                    <StatusBar />
                 </LoggedIn>
             </Body>
         </Providers>
