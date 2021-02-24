@@ -2,6 +2,7 @@ import { commands } from './constants';
 import { requestFactory } from './factories';
 import { sendPushNotification } from '../services/notifications/notifications';
 
+
 export const getConversations = (): Moai.FunctionAction =>
     requestFactory(commands.MOAI_GET_CONVERSATIONS, { max: 10, cursor: 0 })({
         onResult: result => {

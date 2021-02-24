@@ -1,7 +1,18 @@
 import Constants from 'expo-constants';
+import Base64 from 'Base64';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
+import { Utils } from '@secretarium/connector';
 
+
+const toBase64 = (src: Uint8Array, urlSafeMode = false): string => {
+    const x = Base64.btoa(String.fromCharCode.apply(null, Array.from(src)));
+    return urlSafeMode ? x.replace(/\+/g, '-').replace(/\//g, '_') : x;
+};
+
+export const createPushNotifEncryptionKey = (): string => {
+    return toBase64(Utils.getRandomBytes(16), true);
+};
 
 export const sendPushNotification = async (msg: string, expoPushToken: string, goToPath: string): Promise<void> => {
     const message = {

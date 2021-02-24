@@ -4,6 +4,7 @@ import { ClearKeyPair } from '@secretarium/connector';
 import { ParsedCode } from '../components/Checkin/dataParser';
 import { requestFactory } from './factories';
 import { getConversations } from './conversations';
+//import { sendPushNotification } from '../services/notifications/notifications';
 
 
 export const generateLocalKey = (): Moai.FunctionAction => (dispatch) =>
@@ -75,6 +76,7 @@ export const registerTest = (testId: string): Moai.FunctionAction =>
 export const getVenues = (): Moai.FunctionAction =>
     requestFactory(commands.MOAI_GET_VENUES, { max: 10, cursor: 0 })({
         onResult: result => {
+            //sendPushNotification('checkedin', 'ExponentPushToken[kb8Y5RLx5_soeOTh9Xm2Vd]', '/chat');
             return {
                 payload: {
                     result
@@ -86,8 +88,8 @@ export const getVenues = (): Moai.FunctionAction =>
         })
     });
 
-export const registerNotificationToken = (expoPushToken: string): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { type: 'expo', data: expoPushToken })({
+export const registerNotificationToken = (expoPushToken: string, encryptionKey: string): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { token: expoPushToken, encryptionKey: encryptionKey })({
         onExecuted: () => ({
             workload: dispatch => {
                 dispatch({ type: actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN, payload: expoPushToken });
