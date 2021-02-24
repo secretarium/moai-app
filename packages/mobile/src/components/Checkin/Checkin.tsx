@@ -75,7 +75,7 @@ const Checkin = withState<RouteComponentProps<{
                     });
             }
 
-            async function registerCovidTest() {
+            async function registerUserTest() {
                 dispatch(registerTest(test))
                     .then(() => {
                         setRedirect(true);
@@ -91,7 +91,7 @@ const Checkin = withState<RouteComponentProps<{
             if (isConnected && venueInfo && !isConnecting && !test) {
                 checkInLocation();
             } else if (isConnected && test && !isConnecting) {
-                registerCovidTest();
+                registerUserTest();
             }
 
         }, [dispatch, isConnected, venueInfo, checkInError, isConnecting, test]);

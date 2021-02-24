@@ -1,6 +1,6 @@
 const config = {
     name: 'Moai',
-    description: 'An app contributing towards the research on measuring the factors affecting the spread of COVID-19',
+    description: 'A research app developed by Secretarium',
     version: '0.0.26',
     slug: 'moai-app',
     icon: './assets/icon.png',
