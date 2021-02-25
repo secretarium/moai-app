@@ -44,7 +44,7 @@
     "APP_ABOUT_MOAI": "About Moai",
     "APP_ADMIN": "Admin",
     "APP_LOGOUT": "Logout",
-    "APP_HOME_INFO": "Search COVID-19 test results and exposure risk using test barcode or location QR code. All information submitted in the portal is end-to-end encrypted.",
+    "APP_HOME_INFO": "Search test results and exposure risk using test barcode or location QR code. All information submitted in the portal is end-to-end encrypted.",
     "APP_START_CHATTING": "Start chatting",
     "APP_SEARCH": "Search",
     "APP_SEND_MESSAGE": "Send message",
