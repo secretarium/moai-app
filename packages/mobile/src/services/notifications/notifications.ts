@@ -3,11 +3,21 @@ import Base64 from 'Base64';
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
 import { Utils } from '@secretarium/connector';
+import crypto from '../../utils/vendor/msrCrypto';
 
 
 const toBase64 = (src: Uint8Array, urlSafeMode = false): string => {
     const x = Base64.btoa(String.fromCharCode.apply(null, Array.from(src)));
     return urlSafeMode ? x.replace(/\+/g, '-').replace(/\//g, '_') : x;
+};
+
+export const decryptPushNotification = async (pushNotifEncryptionKey: string, body: string): Promise<string> => {
+    const key = Utils.fromBase64(pushNotifEncryptionKey, true);
+    const encryptedBytes = Utils.fromBase64(body, true);
+    const iv = encryptedBytes.subarray(0, 12);
+    const cryptoKey = await crypto.subtle?.importKey('raw', key, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);
+    const msgBytes = new Uint8Array(await crypto.subtle?.decrypt({ name: 'AES-GCM', iv: iv, tagLength: 128 }, cryptoKey, encryptedBytes.subarray(12)));
+    return Utils.decode(msgBytes);
 };
 
 export const createPushNotifEncryptionKey = (): string => {

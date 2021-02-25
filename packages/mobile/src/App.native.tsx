@@ -71,7 +71,6 @@ const App = withState()(
 
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
-                console.log('TOKEN', token);
                 dispatch(registerNotificationToken(token, encryptionKey));
             });
 
