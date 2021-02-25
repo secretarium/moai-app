@@ -15,7 +15,7 @@
     "APP_REGISTERING": "Enregistrement",
     "APP_CHECKED_IN": "Enregistré le",
     "APP_NOT_CHECKED_IN": "Vous ne vous êtes encore enregistré dans aucun lieu",
-    "APP_ALL_CHECKED_IN_LOCATIONS": "Ceci sont tous les endroits où vous vous êtes enregistré. Appuyez sur un emplacement et répondez à une courte enquête pour mesurer les facteurs qui affectent la propagation du COVID-19.",
+    "APP_ALL_CHECKED_IN_LOCATIONS": "Ceci sont tous les endroits où vous vous êtes enregistré.",
     "APP_QUESTIONNAIRE_COMPLETED": "Merci d'avoir complété le questionnaire",
     "APP_GO_HOME": "Acceuil",
     "APP_SUCCESS": "Succès",

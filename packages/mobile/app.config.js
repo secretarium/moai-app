@@ -1,8 +1,8 @@
 const config = {
     name: 'Moai',
-    description: 'An app contributing towards the research on measuring the factors affecting the spread of COVID-19',
-    version: '0.0.26',
-    slug: 'moai-app',
+    description: 'A research app developed by Secretarium',
+    version: '0.0.27',
+    slug: 'moai-app-research',
     icon: './assets/icon.png',
     splash: {
         image: './assets/splash.png',
@@ -12,18 +12,18 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '26',
+        buildNumber: '27',
         icon: './assets/ios/icon.png',
-        bundleIdentifier: 'com.secretarium.moaiapp',
+        bundleIdentifier: 'com.secretarium.moai.research',
         associatedDomains: [
             'applinks:moaiapp.com',
             'applinks:moai-app.com'
         ]
     },
     android: {
-        versionCode: 26,
+        versionCode: 27,
         icon: './assets/android/icon.png',
-        package: 'com.secretarium.moaiapp',
+        package: 'com.secretarium.moai.research',
         useNextNotificationsApi: true,
         permissions: [
             'CAMERA'
