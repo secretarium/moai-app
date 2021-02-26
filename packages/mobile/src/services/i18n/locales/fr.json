@@ -20,7 +20,7 @@
     "APP_GO_HOME": "Acceuil",
     "APP_SUCCESS": "Succès",
     "APP_GOT_IT": "J'ai compris",
-    "APP_HOW_WILL_NHS_CONTACT_YOU": "Comment NHS Test and Trace vous contactera-t-il",
+    "APP_HOW_WILL_WE_CONTACT_YOU": "Comment nous contactera-t-il",
     "APP_CONTACT_VIA_MESSAGING": "Vous serez contacté par messagerie, directement à l'intérieur de Moai",
     "APP_USE_APP_TO_SCAN_TEST": "Bonjour! N'oubliez pas d'utiliser l'application Moai pour scanner le code-barres après avoir été testé pour le coronavirus !",
     "APP_REQUEST_CAMERA_PERMISSION": "Autorisatez l'accès à la caméra",

@@ -48,7 +48,7 @@ const Scanned = withState()((s) => ({
             </View>
             <View style={styles.messageContainer} >
                 <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>
-                    <Bold>{i18n.t('APP_HOW_WILL_NHS_CONTACT_YOU')}?</Bold>{'\n'}{'\n'}
+                    <Bold>{i18n.t('APP_HOW_WILL_WE_CONTACT_YOU')}?</Bold>{'\n'}{'\n'}
                     {i18n.t('APP_CONTACT_VIA_MESSAGING')}!
                 </Text>
             </View>
