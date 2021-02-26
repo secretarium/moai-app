@@ -181,8 +181,8 @@ const App = withState()(
                     <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
                     <Route path="/scanned" component={Scanned} />
                     <Route path="/venues" component={Venues} />
-                    <Route path="/questionnaire/:venueType" component={Questionnaire} />
-                    <Route path="/questionnaireCompleted" component={QuestionnaireCompleted} />
+                    <Route path="/feedback/:venueType" component={Questionnaire} />
+                    <Route path="/feedback" component={QuestionnaireCompleted} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;

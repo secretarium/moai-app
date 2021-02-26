@@ -267,7 +267,7 @@ const Questionnaire = withState<QuestionnaireProps>()(
 
             const answersAsObj = {};
             for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
-            history.push('/questionnaireCompleted');
+            history.push('/feedback');
             console.log(answersAsObj);
         };
 

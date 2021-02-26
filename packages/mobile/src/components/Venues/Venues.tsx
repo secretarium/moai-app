@@ -69,7 +69,7 @@ const Venues = withState()((s) => ({
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
                         <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                            <Link to={`/questionnaire/${venue.type}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                            <Link to={`/feedback/${venue.type}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                                 <>
                                     <View style={{ maxWidth: '90%' }}>
                                         <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
