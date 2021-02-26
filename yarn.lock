@@ -4501,6 +4501,7 @@ __metadata:
     "@types/react-router-dom": 5.1.7
     "@types/react-router-native": 5.1.0
     "@types/redux-logger": 3.0.8
+    Base64: 1.1.0
     deepmerge: 4.2.2
     expo: 40.0.0
     expo-asset: 8.2.1
@@ -7112,6 +7113,13 @@ __metadata:
   version: 4.2.2
   resolution: "@xtuc/long@npm:4.2.2"
   checksum: f1467fbac4892f443aa353617d6601001f849281f538d0e37d28458d56e410ea11b309667e9b21abcc3943c072c85e9b4cdfefe2b7c9117c036e264e49c7a22d
+  languageName: node
+  linkType: hard
+
+"Base64@npm:1.1.0":
+  version: 1.1.0
+  resolution: "Base64@npm:1.1.0"
+  checksum: f481b5b5278125780c289cf9f08021fcd650042faaf975bc51c90fa01e3693cae44d5ca5d8a47ecda03bcf8c113162624bc137d4c22dde9dd98bb504c93994c4
   languageName: node
   linkType: hard
 

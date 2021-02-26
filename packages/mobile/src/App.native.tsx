@@ -25,7 +25,7 @@ import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
 import { initLocalize } from './services/i18n/localized';
 import i18n from 'i18n-js';
-import { registerForPushNotificationsAsync } from './services/notifications/notifications';
+import { registerForPushNotificationsAsync, createPushNotifEncryptionKey } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
 
 
@@ -67,9 +67,11 @@ const App = withState()(
         });
 
         useEffect(() => {
+            const encryptionKey = createPushNotifEncryptionKey();
+
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
-                dispatch(registerNotificationToken(token));
+                dispatch(registerNotificationToken(token, encryptionKey));
             });
 
             notificationListener.current = Notifications.addNotificationReceivedListener(notification => {

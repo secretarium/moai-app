@@ -28,6 +28,7 @@
         "@expo/vector-icons": "12.0.2",
         "@react-native-async-storage/async-storage": "1.13.2",
         "@secretarium/connector": "0.8.4",
+        "Base64": "1.1.0",
         "deepmerge": "4.2.2",
         "expo": "40.0.0",
         "expo-asset": "8.2.1",
