@@ -86,8 +86,8 @@ export const getVenues = (): Moai.FunctionAction =>
         })
     });
 
-export const registerNotificationToken = (expoPushToken: string, encryptionKey: string): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { token: expoPushToken, encryptionKey: encryptionKey })({
+export const registerNotificationToken = (expoPushToken: string, encryptionKey: string, language: string): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { token: expoPushToken, encryptionKey: encryptionKey, language: language })({
         onExecuted: () => ({
             workload: dispatch => {
                 dispatch({ type: actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN, payload: expoPushToken });
