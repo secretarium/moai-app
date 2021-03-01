@@ -56,6 +56,9 @@ export const clearTracerErrors = (): MoaiPortal.FunctionAction => (dispatch) => 
 
 export const registerTracer = (token: string, username: string): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_REGISTER_TRACER, { token: token, username: username })({
+        onExecuted: () => ({
+            workload: dispatch => dispatch(getTracerDetails())
+        }),
         onError: (error) => ({
             error: new Error(error),
             workload: dispatch => dispatch(removeKeys(username))
@@ -88,10 +91,10 @@ export const connect = (encryptedKeyPair: EncryptedKeyPair, username: string, pa
                         dispatch({
                             type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL,
                             workload: (dispatch) => {
-                                dispatch(getTracerDetails());
                                 if (isRegistering) {
                                     dispatch(registerTracer(token, username));
                                 } else {
+                                    dispatch(getTracerDetails());
                                     dispatch(login());
                                 }
                             }
