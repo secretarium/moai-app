@@ -1,6 +1,7 @@
 {
     "hello": "Bienvenue sur Expo + Next.js",
     "change-locale": "Changer de langue",
+    "APP_NOTIFICATION_ALERT": "Notification Alert",
     "APP_TAP_TO_SCAN": "Pressez pour scanner",
     "APP_TYPE_MESSAGE": "Tapper un message...",
     "APP_MEASURE_EXPOSURE_RISK": "Mesurer votre risque d'exposition",

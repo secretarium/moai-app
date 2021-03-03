@@ -139,7 +139,7 @@ const Chat = withState()((s) => ({
     };
 
     return (
-        <MainLayout showGoBack={true}>
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
             <Modal isVisible={showModal}>
                 <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
                     <MaterialIcons name='error' size={84} color={themeTextStyle} />

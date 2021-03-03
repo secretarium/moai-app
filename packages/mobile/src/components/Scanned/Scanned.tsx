@@ -22,7 +22,7 @@ const Scanned = withState()((s) => ({
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     return (
-        <MainLayout showGoBack={true}>
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
             <Modal isVisible={showModal}>
                 <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>

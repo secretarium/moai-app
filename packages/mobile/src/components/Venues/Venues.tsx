@@ -53,7 +53,7 @@ const Venues = withState()((s) => ({
     }, [hasFetchedVenues, dispatch]);
 
     return (
-        <MainLayout showGoBack={true}>
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15

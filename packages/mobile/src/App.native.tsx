@@ -18,6 +18,7 @@ import Questionnaire from './components/Questionnaire';
 import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
+import Notification from './components/Notification';
 import { generateLocalKey, connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
@@ -25,7 +26,7 @@ import { AppState, View, Image } from 'react-native';
 import { useHistory } from 'react-router';
 import { initLocalize } from './services/i18n/localized';
 import i18n from 'i18n-js';
-import { registerForPushNotificationsAsync, createPushNotifEncryptionKey } from './services/notifications/notifications';
+import { registerForPushNotificationsAsync, createPushNotifEncryptionKey, decryptPushNotification } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
 
 
@@ -50,6 +51,7 @@ const App = withState()(
         const [hasPluggedStateChange, setHasPluggedStateChange] = useState(false);
         const [expoToken, setExpoPushToken] = useState('');
         const [notification, setNotification] = useState<Notifications.Notification>();
+        const [notificationMessage, setNotificationMessage] = useState<string>();
         const notificationListener = useRef<any>();
         const responseListener = useRef<any>();
 
@@ -68,7 +70,7 @@ const App = withState()(
 
         useEffect(() => {
             const encryptionKey = createPushNotifEncryptionKey();
-            
+            console.log('key', encryptionKey);
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
                 dispatch(registerNotificationToken(token, encryptionKey, i18n.locale));
@@ -79,11 +81,18 @@ const App = withState()(
             });
 
             responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-                const url = response.notification.request.content.data.url;
-                history.push(url);
+                const encryptedMessage = response.notification.request.content.data.encrypted;
+                decryptPushNotification(encryptionKey, encryptedMessage as string)
+                    .then((decryptedMessage) => setNotificationMessage(decryptedMessage));
             });
 
         }, []);
+
+        useEffect(() => {
+            if (notificationMessage) {
+                history.push(`/notification/${notificationMessage}`);
+            }
+        }, [notificationMessage, history]);
 
         const parseUrl = useCallback((url: string | null | undefined) => {
 
@@ -183,6 +192,7 @@ const App = withState()(
                     <Route path="/venues" component={Venues} />
                     <Route path="/feedback/:venueType" component={Questionnaire} />
                     <Route path="/feedback" component={QuestionnaireCompleted} />
+                    <Route path="/notification/:notificationMessage" component={Notification} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;

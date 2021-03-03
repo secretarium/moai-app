@@ -15,7 +15,7 @@ const Infos: React.FC = () => {
     const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
 
     return (
-        <MainLayout goBackRoute={'/'} showGoBack={true} withNavigation={true}>
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15
