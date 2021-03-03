@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 import MainLayout from '../common/MainLayout';
 import { useColorScheme } from 'react-native-appearance';
@@ -20,10 +20,6 @@ const Notification = withState<NotificationProps>()(
         // Color theme
         const colorScheme = useColorScheme();
         const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-
-        useEffect(() => {
-            console.log(notificationMessage);
-        }, [notificationMessage]);
 
         return (
             <MainLayout goBackRoute={'/'} showGoBack={true}>

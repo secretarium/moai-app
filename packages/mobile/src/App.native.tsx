@@ -70,7 +70,7 @@ const App = withState()(
 
         useEffect(() => {
             const encryptionKey = createPushNotifEncryptionKey();
-            console.log('key', encryptionKey);
+            //console.log('key', encryptionKey);
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
                 dispatch(registerNotificationToken(token, encryptionKey, i18n.locale));
