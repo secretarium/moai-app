@@ -30,7 +30,7 @@ const Keys: React.FC = () => {
     }, []);
 
     return (
-        <MainLayout goBackRoute={'/infos'} showGoBack={true} withNavigation={true}>
+        <MainLayout goBackRoute={'/infos'} showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15

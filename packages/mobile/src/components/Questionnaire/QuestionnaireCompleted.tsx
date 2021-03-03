@@ -17,7 +17,7 @@ const QuestionnaireCompleted: React.FC = () => {
     const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
 
     return (
-        <MainLayout showGoBack={true}>
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15
