@@ -1,7 +1,7 @@
 const config = {
     name: 'Moai',
     description: 'A research app developed by Secretarium',
-    version: '0.0.29',
+    version: '0.0.30',
     slug: 'moai-app-research',
     icon: './assets/icon.png',
     splash: {
@@ -12,7 +12,7 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '29',
+        buildNumber: '30',
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.research',
         associatedDomains: [
@@ -21,7 +21,7 @@ const config = {
         ]
     },
     android: {
-        versionCode: 29,
+        versionCode: 30,
         icon: './assets/android/icon.png',
         package: 'com.secretarium.moai.research',
         useNextNotificationsApi: true,
