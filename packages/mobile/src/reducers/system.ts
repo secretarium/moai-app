@@ -8,7 +8,6 @@ export const initialState: System = {
     localConfiguration: {
         theme: 'auto'
     },
-    expoPushToken: null,
     isConnected: false,
     showOnboarding: true,
     scanCounter: 0,

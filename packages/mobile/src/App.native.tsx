@@ -132,11 +132,11 @@ const App = withState()(
                 dispatch(generateLocalKey()).then(() => {
                     setHasObtainedLocalKey(true);
                 });
-            } else if (localKey) {
+            } else if (localKey && !hasRequestedLocalKey && !hasObtainedLocalKey) {
                 setHasRequestedLocalKey(true);
                 setHasObtainedLocalKey(true);
             }
-        }, [dispatch, hasRequestedLocalKey, localKey]);
+        }, [dispatch, hasRequestedLocalKey, hasObtainedLocalKey, localKey]);
 
         useEffect(() => {
             async function connectBackend() {
@@ -168,7 +168,7 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
-        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL || !isConnected)
+        if (!fontsLoaded || !hasObtainedLocalKey || !hasParsedInitialURL)
             return <View style={styles.container}>
                 <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
             </View>;
