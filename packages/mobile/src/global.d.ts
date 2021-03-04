@@ -97,7 +97,7 @@ declare namespace Moai {
         currentConnection?: SystemConnection;
         checkInError?: string;
         connectionError?: string;
-        expoPushToken: string;
+        expoPushToken?: string;
         isConnected: boolean;
         showOnboarding: boolean;
         scanCounter: number;
