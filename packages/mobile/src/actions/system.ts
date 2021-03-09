@@ -11,6 +11,7 @@ export const generateLocalKey = (): Moai.FunctionAction => (dispatch) =>
         .then((key) => {
             key.exportKey()
                 .then((clearKeyPair) => {
+                    dispatch(connect(clearKeyPair));
                     dispatch({
                         type: actionTypes.MOAI_SAVE_LOCAL_KEY,
                         payload: clearKeyPair
