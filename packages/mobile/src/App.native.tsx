@@ -127,18 +127,6 @@ const App = withState()(
         }, [initialUrl, history, pastInitialUrl]);
 
         useEffect(() => {
-            if (!localKey && !hasRequestedLocalKey) {
-                setHasRequestedLocalKey(true);
-                dispatch(generateLocalKey()).then(() => {
-                    setHasObtainedLocalKey(true);
-                });
-            } else if (localKey && !hasRequestedLocalKey && !hasObtainedLocalKey) {
-                setHasRequestedLocalKey(true);
-                setHasObtainedLocalKey(true);
-            }
-        }, [dispatch, hasRequestedLocalKey, hasObtainedLocalKey, localKey]);
-
-        useEffect(() => {
             async function connectBackend() {
                 dispatch(connect(localKey))
                     .then(() => {
@@ -146,11 +134,31 @@ const App = withState()(
                         setIsConnecting(false);
                     });
             }
-            if (!hasConnected && !isConnecting && hasObtainedLocalKey) {
-                setIsConnecting(true);
+            if (!localKey && !hasRequestedLocalKey) {
+                setHasRequestedLocalKey(true);
+                dispatch(generateLocalKey()).then(() => {
+                    setHasObtainedLocalKey(true);
+                });
+            } else if (localKey && !hasRequestedLocalKey && !hasObtainedLocalKey && !isConnected) {
+                setHasRequestedLocalKey(true);
+                setHasObtainedLocalKey(true);
                 connectBackend();
             }
-        }, [dispatch, localKey, hasConnected, isConnecting, hasObtainedLocalKey, isConnected]);
+        }, [dispatch, hasRequestedLocalKey, hasObtainedLocalKey, localKey, isConnected]);
+
+        // useEffect(() => {
+        //     async function connectBackend() {
+        //         dispatch(connect(localKey))
+        //             .then(() => {
+        //                 setHasConnected(true);
+        //                 setIsConnecting(false);
+        //             });
+        //     }
+        //     if (!hasConnected && !isConnecting && hasObtainedLocalKey) {
+        //         setIsConnecting(true);
+        //         connectBackend();
+        //     }
+        // }, [dispatch, localKey, hasConnected, isConnecting, hasObtainedLocalKey, isConnected]);
 
         const handleAppStateChange = useCallback((nextAppState: string) => {
             if (nextAppState === 'active') {
