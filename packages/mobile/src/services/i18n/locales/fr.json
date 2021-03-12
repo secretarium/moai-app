@@ -55,8 +55,18 @@
     "APP_EXPOSURE_QUESTIONNAIRE_Q14": "Les surfaces ont-elles été nettoyées après chaque utilisation?",
     "APP_EXPOSURE_QUESTIONNAIRE_Q15": "Y a-t-il eu des contacts entre les membres du groupe pendant le rassemblement?",
     "APP_EXPOSURE_QUESTIONNAIRE_Q16": "Cela impliquait-il du chant ou des activités physiques?",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q17": "How was the temperature in the venue?",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q18": "How was the humidity in the venue?",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q19": "Do you know the type of the venue that you visited?",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q20": "Please select the venue type",
     "APP_EXPOSURE_QUESTIONNAIRE_Q13_A1": "Bien ventilé (portes ou fenêtres ouvertes, grand espace intérieur par exemple musées, etc.)",
     "APP_EXPOSURE_QUESTIONNAIRE_Q13_A2": "La climatisation ou le chauffage étaient présents et très susceptibles de fonctionner",
     "APP_EXPOSURE_QUESTIONNAIRE_Q13_A3": "L'air circulait beaucoup",
-    "APP_EXPOSURE_QUESTIONNAIRE_Q13_A4": "Espace confiné sans ventilation apparente"
+    "APP_EXPOSURE_QUESTIONNAIRE_Q13_A4": "Espace confiné sans ventilation apparente",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q17_A1": "Felt warm (above 25 degrees Celsius)",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q17_A2": "Normal room temperature (between 20 and 25 degrees Celsius)",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q17_A3": "Felt cold (below 19 degrees Celsius)",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q18_A1": "Identical to outside",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q18_A2": "Dryer than outside",
+    "APP_EXPOSURE_QUESTIONNAIRE_Q18_A3": "More humid than outside"
 }
