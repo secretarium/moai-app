@@ -64,10 +64,23 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 scanCounter: state.scanCounter + 1
             };
         }
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: {
+            delete state.connectionError;
+            return {
+                ...state
+            };
+        }
         case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL: {
             return {
                 ...state,
                 isConnected: true
+            };
+        }
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED: {
+            return {
+                ...state,
+                isConnected: false,
+                connectionError: 'Oops! Unknown error occured while trying to connect to Moai'
             };
         }
         case commands.MOAI_GET_VENUES.SUCCESS: {
