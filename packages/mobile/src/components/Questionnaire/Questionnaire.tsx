@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../common/MainLayout';
 import { useColorScheme } from 'react-native-appearance';
 import { TouchableOpacity, Text, TextInput, View } from 'react-native';
@@ -126,10 +126,49 @@ const Questionnaire = withState<QuestionnaireProps>()(
                         value: 'Confined space with no apparent ventilation'
                     }
                 ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17'),
+                questionId: '17',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A1'),
+                        value: 'Felt warm (above 25 degrees Celsius)'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A2'),
+                        value: 'Normal room temperature (between 20 and 25 degrees Celsius)'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A3'),
+                        value: 'Felt cold (below 19 degrees Celsius)'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18'),
+                questionId: '18',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A1'),
+                        value: 'Identical to outside'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A2'),
+                        value: 'Dryer than outside'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A3'),
+                        value: 'More humid than outside'
+                    }
+                ]
             }
         ];
 
         const history = useHistory();
+        const [venue, setVenue] = useState<string>();
 
         // Color theme
         const colorScheme = useColorScheme();
@@ -137,7 +176,23 @@ const Questionnaire = withState<QuestionnaireProps>()(
         const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
 
         useEffect(() => {
-            switch (venueType) {
+            if (!venueType) {
+                questions.unshift(
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q19'),
+                        questionId: '19',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
+                            { optionText: i18n.t('APP_NO'), value: 'No' }
+                        ]
+                    }
+                );
+            }
+        }, []);
+
+        useEffect(() => {
+            switch (venue) {
                 case '18':
                 case '24':
                 case '30': {
@@ -260,7 +315,7 @@ const Questionnaire = withState<QuestionnaireProps>()(
                 default:
                     break;
             }
-        }, [venueType]);
+        }, [venue]);
 
         const onSurveyFinished = (answers) => {
             const infoQuestionsRemoved = [...answers];
@@ -324,6 +379,99 @@ const Questionnaire = withState<QuestionnaireProps>()(
                             ]
                         });
                     }
+                    break;
+                }
+                case '19': {
+                    if (answer.value.value === 'Yes') {
+                        const index = questions.findIndex(question => question.questionId === '19');
+                        questions.splice(index + 1, 0, {
+                            questionType: 'SelectionGroup',
+                            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20'),
+                            questionId: '20',
+                            options: [
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A1'),
+                                    value: '12'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A2'),
+                                    value: '13'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A3'),
+                                    value: '14'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A4'),
+                                    value: '15'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A5'),
+                                    value: '16'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A6'),
+                                    value: '17'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A7'),
+                                    value: '18'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A8'),
+                                    value: '19'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A9'),
+                                    value: '20'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A10'),
+                                    value: '21'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A11'),
+                                    value: '22'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A12'),
+                                    value: '23'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A13'),
+                                    value: '24'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A14'),
+                                    value: '25'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A15'),
+                                    value: '26'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A16'),
+                                    value: '27'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A17'),
+                                    value: '28'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A18'),
+                                    value: '29'
+                                },
+                                {
+                                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A19'),
+                                    value: '30'
+                                }
+                            ]
+                        });
+                    }
+                    break;
+                }
+                case '20': {
+                    setVenue(answer.value.value);
                     break;
                 }
                 default:

@@ -36,12 +36,12 @@ export const connect = (clearKeyPair: ClearKeyPair): Moai.AnyAction => ({
                         });
                     })
                     .catch((error) => {
-                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED });
+                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED, error });
                         console.error('connect', error);
                     });
             })
             .catch((error) => {
-                dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED });
+                dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED, error });
                 console.error('connect', error);
             });
     }

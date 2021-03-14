@@ -21,7 +21,7 @@ import Notification from './components/Notification';
 import { connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
-import { AppState, View, Image, ActivityIndicator, Text } from 'react-native';
+import { AppState, View, Image, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import { useHistory } from 'react-router';
 import { initLocalize } from './services/i18n/localized';
 import i18n from 'i18n-js';
@@ -32,9 +32,10 @@ import * as Notifications from 'expo-notifications';
 const App = withState()(
     (s) => ({
         localKey: s.system.localKey,
-        isConnected: s.system.isConnected
+        isConnected: s.system.isConnected,
+        connectionError: s.system.connectionError
     }),
-    ({ dispatch, localKey, isConnected }) => {
+    ({ dispatch, localKey, isConnected, connectionError }) => {
 
         initLocalize();
         const history = useHistory();
@@ -67,7 +68,6 @@ const App = withState()(
 
         useEffect(() => {
             const encryptionKey = createPushNotifEncryptionKey();
-            //console.log('key', encryptionKey);
             registerForPushNotificationsAsync().then(token => {
                 setExpoPushToken(token);
                 dispatch(registerNotificationToken(token, encryptionKey, i18n.locale));
@@ -145,6 +145,10 @@ const App = withState()(
             }
         }, [history, initialUrl]);
 
+        const reconnect = () => {
+            dispatch(connect(localKey));
+        };
+
         useEffect(() => {
             if (!hasPluggedStateChange) {
                 AppState.addEventListener('change', handleAppStateChange);
@@ -155,8 +159,17 @@ const App = withState()(
         if (!fontsLoaded || !hasParsedInitialURL || !isConnected)
             return <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
                 <Image source={require(('./assets/logo-white.png'))} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
-                <ActivityIndicator size="large" color="#fff" />
-                <Text style={{ fontSize: 18, color: '#fff', top: 20 }}>Connecting to Moai...</Text>
+                {connectionError
+                    ? <>
+                        <Text style={[styles.text, { width: '80%' }]}>{connectionError}</Text>
+                        <TouchableOpacity onPress={reconnect} style={[styles.button]}>
+                            <Text style={[styles.text, { top: 0 }]}>Try again</Text>
+                        </TouchableOpacity>
+                    </>
+                    : <>
+                        <ActivityIndicator size="large" color="#fff" />
+                        <Text style={[styles.text]}>Connecting to Moai...</Text>
+                    </>}
             </View>;
 
         return (
@@ -175,7 +188,7 @@ const App = withState()(
                     <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
                     <Route path="/scanned" component={Scanned} />
                     <Route path="/venues" component={Venues} />
-                    <Route path="/feedback/:venueType" component={Questionnaire} />
+                    <Route path="/feedback/:venueType?/:venueId" component={Questionnaire} />
                     <Route path="/feedback" component={QuestionnaireCompleted} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
                     <Route render={() => {
