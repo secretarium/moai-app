@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'white',
         width: '33%',
-        top: 40
+        top: 40,
+        marginBottom: 60
     },
     optionButton: {
         alignItems: 'center',

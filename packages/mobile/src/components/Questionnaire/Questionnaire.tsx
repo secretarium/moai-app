@@ -542,7 +542,7 @@ const Questionnaire: React.FC = () => {
     };
 
     return (
-        <MainLayout goBackRoute={'/venues'} showGoBack={true}>
+        <MainLayout goBackRoute={'/home'} showGoBack={true}>
             <ScrollView>
                 <SimpleSurvey
                     survey={questions}
