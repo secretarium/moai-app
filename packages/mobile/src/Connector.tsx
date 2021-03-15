@@ -26,11 +26,11 @@ const Connector = withState()(
             }
         }, [dispatch, hasRequestedLocalKey, hasObtainedLocalKey, localKey]);
 
-        if (!hasObtainedLocalKey && !localKey)
-            return <View style={styles.container}>
-                <Image source={require('../assets/splash.png')} style={styles.backgroundImage} />
+        if (!hasObtainedLocalKey)
+            return <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+                <Image source={require('./assets/logo-white.png')} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
                 <ActivityIndicator size="large" color="#fff" />
-                <Text>Generating local key...</Text>
+                <Text style={[styles.text]}>Generating local key...</Text>
             </View>;
         else
             return <>{children}</>;

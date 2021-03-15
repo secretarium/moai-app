@@ -158,7 +158,7 @@ const App = withState()(
 
         if (!fontsLoaded || !hasParsedInitialURL || !isConnected)
             return <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-                <Image source={require(('./assets/logo-white.png'))} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
+                <Image source={require('./assets/logo-white.png')} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
                 {connectionError
                     ? <>
                         <Text style={[styles.text, { width: '80%' }]}>{connectionError}</Text>
