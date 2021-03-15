@@ -39,6 +39,7 @@
     "APP_TYPE_ANSWER": "Type your answer",
     "APP_OFTEN": "Often but not after every usage",
     "APP_EXPOSURE_QUESTIONNAIRE_WELCOME": "Welcome to the Moai questionnaire! Help us measure your exposure risk, by answering a few questions. Tap next to continue",
+    "APP_EXPOSURE_QUESTIONNAIRE_UNKNOWN_VENUE": "Without a known venue type, we cannot go forward with the questionnaire. Thank you.",
     "APP_EXPOSURE_QUESTIONNAIRE_Q1": "What was the location type?",
     "APP_EXPOSURE_QUESTIONNAIRE_Q2": "How many people other than you do you estimate were present?",
     "APP_EXPOSURE_QUESTIONNAIRE_Q3": "How long did you stay at the location?",
