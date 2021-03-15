@@ -3,7 +3,6 @@ import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { withState } from '../../store';
 import { Entypo } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
-import { Link } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout';
 import { getVenues } from '../../actions';
 import styles from './styles';
@@ -59,7 +58,7 @@ const Venues = withState()((s) => ({
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
-                    {i18n.t('APP_MEASURE_EXPOSURE_RISK')}
+                    {i18n.t('APP_CHECK_IN_HISTORY')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
                     {i18n.t('APP_ALL_CHECKED_IN_LOCATIONS')}
@@ -69,19 +68,15 @@ const Venues = withState()((s) => ({
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
                         <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                            <Link to={`/feedback/${venue.type}/${venue.id}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
-                                <>
-                                    <View style={{ maxWidth: '90%' }}>
-                                        <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
-                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
-                                    </View>
-                                    <Entypo
-                                        name="chevron-right"
-                                        style={{ alignSelf: 'center' }}
-                                        color={themeTextStyle}
-                                        size={24} />
-                                </>
-                            </Link>
+                            <View style={{ maxWidth: '90%' }}>
+                                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
+                                <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
+                            </View>
+                            <Entypo
+                                name="chevron-right"
+                                style={{ alignSelf: 'center' }}
+                                color={themeTextStyle}
+                                size={24} />
                         </TouchableOpacity>
                     )
                     :
