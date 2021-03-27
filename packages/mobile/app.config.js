@@ -12,13 +12,16 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '34',
+        buildNumber: '35',
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.research',
         associatedDomains: [
             'applinks:moaiapp.com',
             'applinks:moai-app.com'
-        ]
+        ],
+        infoPlist: {
+            NSCameraUsageDescription: 'This app uses the camera to check into venues (e.g. bars, restaurants, shops, music venues, sports arenas) by scanning QR code posters at the entrances.'
+        }
     },
     android: {
         versionCode: 34,
