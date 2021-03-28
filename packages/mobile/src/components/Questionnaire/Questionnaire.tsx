@@ -430,7 +430,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
                 break;
             }
             case '14': {
-                questions.unshift(
+                questions.push(
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
@@ -457,7 +457,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
                 break;
             }
             case '16': {
-                questions.unshift(
+                questions.push(
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
@@ -538,8 +538,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
     }, [venue]);
 
     const onSurveyFinished = (answers) => {
-        answers.shift();
-        for (let i = 0; i < 19; i++) {
+        for (let i = 1; i < 19; i++) {
             if (answers.some(answer => Number(answer.questionId) === i)) {
                 const index = answers.findIndex(answer => Number(answer.questionId) === i);
                 finalAnswers.push(answers[index].value.value);
@@ -549,7 +548,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
         }
 
         if (venue) {
-            console.log('lala', finalAnswers);
+            finalAnswers.unshift(venue);
             history.push('/feedback/completed');
         } else {
             history.push('/home');
