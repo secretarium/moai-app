@@ -12,7 +12,7 @@ import i18n from 'i18n-js';
 
 
 const Venues = withState()((s) => ({
-    venues: s.system.venues
+    venues: s.exposure.venues
 }), ({ venues, dispatch }) => {
 
     const [hasFetchedVenues, setHasFetchedVenues] = useState(false);

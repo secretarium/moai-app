@@ -72,20 +72,6 @@ export const registerTest = (testId: string): Moai.FunctionAction =>
         })
     });
 
-export const getVenues = (): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_GET_VENUES, { max: 10, cursor: 0 })({
-        onResult: result => {
-            return {
-                payload: {
-                    result
-                }
-            };
-        },
-        onError: (error) => ({
-            error: new Error(error)
-        })
-    });
-
 export const registerNotificationToken = (expoPushToken: string, encryptionKey: string, language: string): Moai.FunctionAction =>
     requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { token: expoPushToken, encryptionKey: encryptionKey, language: language })({
         onExecuted: () => ({
@@ -97,9 +83,3 @@ export const registerNotificationToken = (expoPushToken: string, encryptionKey: 
             error: new Error(error)
         })
     });
-
-export const getExposureRisk = (): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_GET_EXPOSURE_RISK, {})();
-
-export const registerExposureFeedback = (testId: string, token: string, data: Record<string, unknown>): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_EXPOSURE_FEEDBACK, { testId: testId, token: token, data: data })();
