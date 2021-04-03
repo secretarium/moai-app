@@ -4,171 +4,401 @@ import { useColorScheme } from 'react-native-appearance';
 import { TouchableOpacity, Text, TextInput, View, ScrollView } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
-import { useHistory } from 'react-router';
+import { useHistory, RouteComponentProps } from 'react-router';
 import i18n from 'i18n-js';
 
+type QuestionnaireProps = RouteComponentProps<{
+    venueType: string;
+}>;
 
-const Questionnaire: React.FC = () => {
+const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
 
-    const questions = [
-        {
-            questionType: 'Info',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_WELCOME')
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q19'),
-            questionId: '19',
-            options: [
-                { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                { optionText: i18n.t('APP_NO'), value: 'No' }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q2'),
-            questionId: '2',
-            options: [
-                { optionText: '0', value: '0' },
-                { optionText: '1-5', value: '1-5' },
-                { optionText: '5-10', value: '5-10' },
-                { optionText: '11+', value: '11+' }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q3'),
-            questionId: '3',
-            options: [
-                { optionText: '5min', value: '5min' },
-                { optionText: '10min', value: '10min' },
-                { optionText: '15min', value: '15min' },
-                { optionText: '20min', value: '20min' },
-                { optionText: '30min', value: '30min' },
-                { optionText: '45min', value: '45min' },
-                { optionText: '1h', value: '1h' },
-                { optionText: '2h', value: '2h' },
-                { optionText: '2h+', value: '2h+' }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q4'),
-            questionId: '4',
-            options: [
-                { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                { optionText: i18n.t('APP_NO'), value: 'No' }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q7'),
-            questionId: '7',
-            options: [
-                { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                { optionText: i18n.t('APP_NO'), value: 'No' }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q8'),
-            questionId: '8',
-            options: [
-                { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                { optionText: i18n.t('APP_NO'), value: 'No' }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q10'),
-            questionId: '10',
-            options: [
-                { optionText: i18n.t('APP_JUST_ME'), value: 'Just me' },
-                { optionText: '2', value: '2' },
-                { optionText: '2-4', value: '2-4' },
-                { optionText: '4+', value: '4+' }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q11'),
-            questionId: '11',
-            options: [
-                { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                { optionText: i18n.t('APP_NO'), value: 'No' }
-            ]
-        },
-        {
-            questionType: 'MultipleSelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13'),
-            questionId: '13',
-            questionSettings: {
-                autoAdvance: false,
-                allowDeselection: true,
-                maxMultiSelect: 4,
-                minMultiSelect: 1
+    const { params: { venueType } } = match;
+
+    let questions;
+
+    if (venueType) {
+        questions = [
+            {
+                questionType: 'Info',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_WELCOME')
             },
-            options: [
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A1'),
-                    value: 'Well ventilated (doors or windows open, large inside space e.g. museums, etc.)'
-                },
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A2'),
-                    value: 'Air conditioning or heating was present and very likely to be working'
-                },
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A3'),
-                    value: 'The air was circulating a lot'
-                },
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A4'),
-                    value: 'Confined space with no apparent ventilation'
-                }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17'),
-            questionId: '17',
-            options: [
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A1'),
-                    value: 'Felt warm (above 25 degrees Celsius)'
-                },
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A2'),
-                    value: 'Normal room temperature (between 20 and 25 degrees Celsius)'
-                },
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A3'),
-                    value: 'Felt cold (below 19 degrees Celsius)'
-                }
-            ]
-        },
-        {
-            questionType: 'SelectionGroup',
-            questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18'),
-            questionId: '18',
-            options: [
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A1'),
-                    value: 'Identical to outside'
-                },
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A2'),
-                    value: 'Dryer than outside'
-                },
-                {
-                    optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A3'),
-                    value: 'More humid than outside'
-                }
-            ]
-        }
-    ];
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q2'),
+                questionId: '2',
+                options: [
+                    { optionText: '0', value: '0' },
+                    { optionText: '1-5', value: '1' },
+                    { optionText: '5-10', value: '2' },
+                    { optionText: '11+', value: '3' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q3'),
+                questionId: '3',
+                options: [
+                    { optionText: '5min', value: '0' },
+                    { optionText: '10min', value: '1' },
+                    { optionText: '15min', value: '2' },
+                    { optionText: '20min', value: '3' },
+                    { optionText: '30min', value: '4' },
+                    { optionText: '45min', value: '5' },
+                    { optionText: '1h', value: '6' },
+                    { optionText: '2h', value: '7' },
+                    { optionText: '2h+', value: '8' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q4'),
+                questionId: '4',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q7'),
+                questionId: '7',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q8'),
+                questionId: '8',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q10'),
+                questionId: '9',
+                options: [
+                    { optionText: i18n.t('APP_JUST_ME'), value: '0' },
+                    { optionText: '2', value: '1' },
+                    { optionText: '2-4', value: '2' },
+                    { optionText: '4+', value: '3' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q11'),
+                questionId: '10',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13'),
+                questionId: '12',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A3'),
+                        value: '2'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A4'),
+                        value: '3'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17'),
+                questionId: '13',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A3'),
+                        value: '2'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18'),
+                questionId: '14',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A3'),
+                        value: '2'
+                    }
+                ]
+            }
+        ];
+    } else {
+        questions = [
+            {
+                questionType: 'Info',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_WELCOME')
+            },
+            {
+
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q19'),
+                questionId: '21',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20'),
+                questionId: '0',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A3'),
+                        value: '2'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A4'),
+                        value: '3'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A5'),
+                        value: '4'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A6'),
+                        value: '5'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A7'),
+                        value: '6'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A8'),
+                        value: '7'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A9'),
+                        value: '8'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A10'),
+                        value: '9'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A11'),
+                        value: '10'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A12'),
+                        value: '11'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A13'),
+                        value: '12'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A14'),
+                        value: '13'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A15'),
+                        value: '14'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A16'),
+                        value: '15'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A17'),
+                        value: '16'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A18'),
+                        value: '17'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A19'),
+                        value: '18'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q2'),
+                questionId: '2',
+                options: [
+                    { optionText: '0', value: '0' },
+                    { optionText: '1-5', value: '1' },
+                    { optionText: '5-10', value: '2' },
+                    { optionText: '11+', value: '3' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q3'),
+                questionId: '3',
+                options: [
+                    { optionText: '5min', value: '0' },
+                    { optionText: '10min', value: '1' },
+                    { optionText: '15min', value: '2' },
+                    { optionText: '20min', value: '3' },
+                    { optionText: '30min', value: '4' },
+                    { optionText: '45min', value: '5' },
+                    { optionText: '1h', value: '6' },
+                    { optionText: '2h', value: '7' },
+                    { optionText: '2h+', value: '8' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q4'),
+                questionId: '4',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q7'),
+                questionId: '7',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q8'),
+                questionId: '8',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q10'),
+                questionId: '9',
+                options: [
+                    { optionText: i18n.t('APP_JUST_ME'), value: '0' },
+                    { optionText: '2', value: '1' },
+                    { optionText: '2-4', value: '2' },
+                    { optionText: '4+', value: '3' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q11'),
+                questionId: '10',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13'),
+                questionId: '12',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A3'),
+                        value: '2'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A4'),
+                        value: '3'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17'),
+                questionId: '13',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A3'),
+                        value: '2'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18'),
+                questionId: '14',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A3'),
+                        value: '2'
+                    }
+                ]
+            }
+        ];
+    }
 
     const history = useHistory();
     const [venue, setVenue] = useState<string>();
+    const [finalAnswers] = useState([]);
 
     // Color theme
     const colorScheme = useColorScheme();
@@ -176,42 +406,48 @@ const Questionnaire: React.FC = () => {
     const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
 
     useEffect(() => {
+        if (venueType) {
+            setVenue(venueType);
+        }
+    }, []);
+
+    useEffect(() => {
         switch (venue) {
-            case '18':
-            case '24':
-            case '30': {
-                questions.unshift(
+            case '6':
+            case '12':
+            case '18': {
+                questions.push(
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
                         questionId: '1',
                         options: [
-                            { optionText: i18n.t('APP_INDOOR'), value: 'Indoor' },
-                            { optionText: i18n.t('APP_OUTDOOR'), value: 'Outdoor' }
+                            { optionText: i18n.t('APP_INDOOR'), value: '0' },
+                            { optionText: i18n.t('APP_OUTDOOR'), value: '1' }
                         ]
                     }
                 );
                 break;
             }
-            case '26': {
-                questions.unshift(
+            case '14': {
+                questions.push(
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
                         questionId: '1',
                         options: [
-                            { optionText: i18n.t('APP_INDOOR'), value: 'Indoor' },
-                            { optionText: i18n.t('APP_OUTDOOR'), value: 'Outdoor' }
+                            { optionText: i18n.t('APP_INDOOR'), value: '0' },
+                            { optionText: i18n.t('APP_OUTDOOR'), value: '1' }
                         ]
                     },
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
-                        questionId: '14',
+                        questionId: '15',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' },
-                            { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
                         ]
                     }
                 );
@@ -220,77 +456,77 @@ const Questionnaire: React.FC = () => {
                 questions.splice(index, 1);
                 break;
             }
-            case '28': {
-                questions.unshift(
+            case '16': {
+                questions.push(
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
                         questionId: '1',
                         options: [
-                            { optionText: i18n.t('APP_INDOOR'), value: 'Indoor' },
-                            { optionText: i18n.t('APP_OUTDOOR'), value: 'Outdoor' }
+                            { optionText: i18n.t('APP_INDOOR'), value: '0' },
+                            { optionText: i18n.t('APP_OUTDOOR'), value: '1' }
                         ]
                     },
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
-                        questionId: '14',
+                        questionId: '15',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' },
-                            { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
                         ]
                     }
                 );
                 break;
             }
-            case '12':
-            case '16':
-            case '19':
-            case '21':
-            case '29': {
+            case '0':
+            case '4':
+            case '7':
+            case '9':
+            case '17': {
                 questions.push(
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
-                        questionId: '14',
+                        questionId: '15',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' },
-                            { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
                         ]
                     }
                 );
                 break;
             }
-            case '15': {
+            case '3': {
                 questions.push(
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
-                        questionId: '14',
+                        questionId: '15',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' },
-                            { optionText: i18n.t('APP_OFTEN'), value: 'Often but not after every usage' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
                         ]
                     },
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q15'),
-                        questionId: '15',
+                        questionId: '16',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
                         ]
                     },
                     {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q16'),
-                        questionId: '16',
+                        questionId: '17',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
                         ]
                     }
                 );
@@ -302,161 +538,83 @@ const Questionnaire: React.FC = () => {
     }, [venue]);
 
     const onSurveyFinished = (answers) => {
-        const infoQuestionsRemoved = [...answers];
-
-        const answersAsObj = {};
-        for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
+        for (let i = 1; i < 18; i++) {
+            if (answers.some(answer => Number(answer.questionId) === i)) {
+                const index = answers.findIndex(answer => Number(answer.questionId) === i);
+                finalAnswers.push(Number(answers[index].value.value));
+            } else {
+                finalAnswers.push(10);
+            }
+        }
 
         if (venue) {
+            finalAnswers.unshift(Number(venue));
             history.push('/feedback/completed');
+            //console.log('RESULTS', finalAnswers);
         } else {
             history.push('/home');
+            //console.log('RESULTS', finalAnswers);
         }
     };
 
     const onAnswerSubmitted = (answer) => {
         switch (answer.questionId) {
-            case '11': {
-                if (answer.value.value === 'No') {
-                    const index = questions.findIndex(question => question.questionId === '11');
+            case '10': {
+                if (answer.value.value === '1') {
+                    const index = questions.findIndex(question => question.questionId === '10');
                     questions.splice(index + 1, 0, {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q12'),
-                        questionId: '12',
+                        questionId: '11',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
                         ]
                     });
                 }
                 break;
             }
             case '8': {
-                if (answer.value.value === 'Yes') {
+                if (answer.value.value === '0') {
                     const index = questions.findIndex(question => question.questionId === '8');
                     questions.splice(index + 1, 0, {
                         questionType: 'TextInput',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q9'),
-                        questionId: '9',
+                        questionId: '22',
                         placeholderText: `${i18n.t('APP_TYPE_ANSWER')}...`
                     });
                 }
                 break;
             }
             case '4': {
-                if (answer.value.value === 'Yes') {
+                if (answer.value.value === '0') {
                     const index = questions.findIndex(question => question.questionId === '4');
                     questions.splice(index + 1, 0, {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q5'),
                         questionId: '5',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
                         ]
                     });
-                } else if (answer.value.value === 'No') {
+                } else if (answer.value.value === '1') {
                     const index = questions.findIndex(question => question.questionId === '4');
                     questions.splice(index + 1, 0, {
                         questionType: 'SelectionGroup',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q6'),
                         questionId: '6',
                         options: [
-                            { optionText: i18n.t('APP_YES'), value: 'Yes' },
-                            { optionText: i18n.t('APP_NO'), value: 'No' }
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
                         ]
                     });
                 }
                 break;
             }
-            case '19': {
-                if (answer.value.value === 'Yes') {
-                    const index = questions.findIndex(question => question.questionId === '19');
-                    questions.splice(index + 1, 0, {
-                        questionType: 'SelectionGroup',
-                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20'),
-                        questionId: '20',
-                        options: [
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A1'),
-                                value: '12'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A2'),
-                                value: '13'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A3'),
-                                value: '14'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A4'),
-                                value: '15'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A5'),
-                                value: '16'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A6'),
-                                value: '17'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A7'),
-                                value: '18'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A8'),
-                                value: '19'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A9'),
-                                value: '20'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A10'),
-                                value: '21'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A11'),
-                                value: '22'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A12'),
-                                value: '23'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A13'),
-                                value: '24'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A14'),
-                                value: '25'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A15'),
-                                value: '26'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A16'),
-                                value: '27'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A17'),
-                                value: '28'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A18'),
-                                value: '29'
-                            },
-                            {
-                                optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A19'),
-                                value: '30'
-                            }
-                        ]
-                    });
-                } else if (answer.value.value === 'No') {
-                    const index = questions.findIndex(question => question.questionId === '19');
+            case '21': {
+                if (answer.value.value === '1') {
+                    const index = questions.findIndex(question => question.questionId === '21');
                     questions.splice(index + 1, 0, {
                         questionType: 'Info',
                         questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_UNKNOWN_VENUE')
@@ -465,7 +623,7 @@ const Questionnaire: React.FC = () => {
                 }
                 break;
             }
-            case '20': {
+            case '0': {
                 setVenue(answer.value.value);
                 break;
             }

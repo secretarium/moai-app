@@ -11,7 +11,6 @@ export const initialState: System = {
     isConnected: false,
     showOnboarding: true,
     scanCounter: 0,
-    venues: [],
     log: []
 };
 
@@ -81,12 +80,6 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 ...state,
                 isConnected: false,
                 connectionError: 'Oops! Unknown error occured while trying to connect to Moai'
-            };
-        }
-        case commands.MOAI_GET_VENUES.SUCCESS: {
-            return {
-                ...state,
-                venues: payload.result.venues
             };
         }
         case actionTypes.SECRETARIUM_CONNECT_SUCCESSFUL:
