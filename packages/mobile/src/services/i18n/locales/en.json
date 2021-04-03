@@ -5,6 +5,7 @@
     "APP_TAP_TO_SCAN": "Tap to scan",
     "APP_TYPE_MESSAGE": "Type a message...",
     "APP_MEASURE_EXPOSURE_RISK": "Measure exposure risk",
+    "APP_CHECK_IN_HISTORY": "Check-in History",
     "APP_ABOUT": "About Moai",
     "APP_INFOS": [
         "Licenses",
@@ -19,6 +20,7 @@
     "APP_ALL_CHECKED_IN_LOCATIONS": "These are all locations you have checked-in to. Tap a location and answer a short survey.",
     "APP_QUESTIONNAIRE_COMPLETED": "Thank you for completing the questionnaire",
     "APP_GO_HOME": "Go home",
+    "APP_CHECK_EXPOSURE": "Check exposure risk",
     "APP_SUCCESS": "Success",
     "APP_GOT_IT": "Got it",
     "APP_HOW_WILL_WE_CONTACT_YOU": "How will we contact you",
