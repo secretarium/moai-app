@@ -59,7 +59,7 @@ const Venues = withState()((s) => ({
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
-                    {i18n.t('APP_MEASURE_EXPOSURE_RISK')}
+                    {i18n.t('APP_CHECK_IN_HISTORY')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
                     {i18n.t('APP_ALL_CHECKED_IN_LOCATIONS')}

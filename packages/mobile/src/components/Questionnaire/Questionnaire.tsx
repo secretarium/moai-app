@@ -538,20 +538,22 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
     }, [venue]);
 
     const onSurveyFinished = (answers) => {
-        for (let i = 1; i < 19; i++) {
+        for (let i = 1; i < 18; i++) {
             if (answers.some(answer => Number(answer.questionId) === i)) {
                 const index = answers.findIndex(answer => Number(answer.questionId) === i);
-                finalAnswers.push(answers[index].value.value);
+                finalAnswers.push(Number(answers[index].value.value));
             } else {
-                finalAnswers.push('does not apply');
+                finalAnswers.push(10);
             }
         }
 
         if (venue) {
-            finalAnswers.unshift(venue);
+            finalAnswers.unshift(Number(venue));
             history.push('/feedback/completed');
+            //console.log('RESULTS', finalAnswers);
         } else {
             history.push('/home');
+            //console.log('RESULTS', finalAnswers);
         }
     };
 
