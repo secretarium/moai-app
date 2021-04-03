@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 declare namespace _default {
     export namespace subtle {
         function encrypt(algorithm: any, keyHandle: any, buffer: any, ...args: any[]): Promise<any>;
