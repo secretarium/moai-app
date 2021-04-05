@@ -106,12 +106,16 @@ declare namespace Moai {
 
     type Exposure = {
         venues: Venue[];
+        riskProfile?: 'low' | 'medium' | 'high';
+        cumulatedRisk?: string;
+        risk?: string;
     };
 
     type Venue = {
         id: string;
         time: number;
         type: number;
+        risk?: string;
     };
 
     type Conversation = {

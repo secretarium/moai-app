@@ -3,7 +3,7 @@ import { Text, Image, View, Button, TouchableOpacity } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { withState } from '../../store';
 import MainLayout from '../common/MainLayout';
-import { styles, commonStyles } from './styles';
+import { commonStyles } from './styles';
 import Modal from 'react-native-modal';
 import { useHistory } from 'react-router';
 import i18n from 'i18n-js';
@@ -46,14 +46,14 @@ const Scanned = withState()((s) => ({
                     />
                 </View>
             </View>
-            <View style={styles.messageContainer} >
-                <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>
+            <View style={commonStyles.messageContainer} >
+                <Text style={[commonStyles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>
                     <Bold>{i18n.t('APP_HOW_WILL_WE_CONTACT_YOU')}?</Bold>{'\n'}{'\n'}
                     {i18n.t('APP_CONTACT_VIA_MESSAGING')}!
                 </Text>
             </View>
-            <View style={styles.homeButtonContainer} >
-                <TouchableOpacity onPress={() => history.push('/')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
+            <View style={commonStyles.homeButtonContainer} >
+                <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: themeColorStyle }]}>
                     <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_GO_HOME')}</Text>
                 </TouchableOpacity>
             </View>
