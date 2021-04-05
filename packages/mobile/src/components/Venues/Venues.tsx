@@ -69,7 +69,7 @@ const Venues = withState()((s) => ({
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
                         <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                            <Link to={`/feedback/form/${venue.id}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                            <Link to={`/feedback/form/${venue.type}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                                 <View style={{ maxWidth: '90%' }}>
                                     <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
                                     <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
