@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@ant-design/icons": "4.3.0",
-        "@fortawesome/fontawesome-svg-core": "1.2.32",
+        "@fortawesome/fontawesome-svg-core": "1.2.35",
         "@fortawesome/free-solid-svg-icons": "5.15.1",
         "@fortawesome/react-fontawesome": "0.1.14",
         "@secretarium/connector": "0.8.4",
@@ -19,7 +19,7 @@
         "react-markdown": "5.0.3",
         "react-redux": "7.2.2",
         "react-router-dom": "5.2.0",
-        "react-scripts": "3.4.3",
+        "react-scripts": "4.0.3",
         "redux": "4.0.5",
         "redux-logger": "3.0.6",
         "redux-persist": "6.0.0"
