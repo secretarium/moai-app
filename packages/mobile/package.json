@@ -37,7 +37,7 @@
         "expo-constants": "9.3.5",
         "expo-crypto": "8.4.0",
         "expo-file-system": "9.3.0",
-        "expo-font": "8.4.0",
+        "expo-font": "9.0.0",
         "expo-linking": "2.0.0",
         "expo-notifications": "0.8.2",
         "expo-splash-screen": "0.8.1",
