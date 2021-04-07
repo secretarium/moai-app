@@ -70,15 +70,17 @@ const Venues = withState()((s) => ({
                     venues.map((venue, index) =>
                         <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
                             <Link to={`/feedback/form/${venue.type}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
-                                <View style={{ maxWidth: '90%' }}>
-                                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
-                                    <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
-                                </View>
-                                <Entypo
-                                    name="chevron-right"
-                                    style={{ alignSelf: 'center' }}
-                                    color={themeTextStyle}
-                                    size={24} />
+                                <>
+                                    <View style={{ maxWidth: '90%' }}>
+                                        <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
+                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
+                                    </View>
+                                    <Entypo
+                                        name="chevron-right"
+                                        style={{ alignSelf: 'center' }}
+                                        color={themeTextStyle}
+                                        size={24} />
+                                </>
                             </Link>
                         </TouchableOpacity>
                     )
