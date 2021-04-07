@@ -12,7 +12,7 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '36',
+        buildNumber: '37',
         icon: './assets/ios/icon.png',
         bundleIdentifier: 'com.secretarium.moai.research',
         associatedDomains: [
@@ -24,7 +24,7 @@ const config = {
         }
     },
     android: {
-        versionCode: 35,
+        versionCode: 36,
         icon: './assets/android/icon.png',
         package: 'com.secretarium.moai.research',
         useNextNotificationsApi: true,
