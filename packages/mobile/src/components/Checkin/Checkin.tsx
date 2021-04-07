@@ -3,7 +3,7 @@ import { Text, View, Button, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Redirect, useLocation } from '../../ReactRouter';
 import { withState } from '../../store';
-import { ParsedCode, Sources } from './dataParser';
+import { ParsedCode } from './dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -33,8 +33,6 @@ const Checkin = withState<RouteComponentProps<{
         const [redirect, setRedirect] = useState(false);
         const [test, setTest] = useState(location.state.testId);
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
-            source: Sources.MOAI,
-            type: null,
             ...match.params
         });
         const [pageError, setPageError] = useState<string>();

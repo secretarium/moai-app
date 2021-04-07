@@ -3,7 +3,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Utils } from '@secretarium/connector';
 
 export type ParsedCode = {
-    source: string;
+    source?: string;
     venue?: string;
     type?: string;
 };
@@ -26,7 +26,6 @@ export const parseCode = ({ type, data }: BarCodeScanningResult): ParsedCode => 
                 const comps = data.split('/').slice(-2);
                 if (comps?.length === 2 && comps[0] === 'check')
                     return {
-                        source: 'MOAI',
                         venue: comps[1]
                     };
             }
