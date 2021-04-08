@@ -55,7 +55,7 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
         setIsModalVisible(false);
     };
 
-    const handleOkPop = (e): void => {
+    const handleOkPop = (): void => {
         setPopConfirmLoading(true);
         dispatch(createConversation('title', 'name', userId))
             .then(() => {

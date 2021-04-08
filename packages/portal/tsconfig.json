@@ -3,17 +3,18 @@
     "compilerOptions": {
         "baseUrl": "./src",
         "outDir": "./dist",
-        "target": "es5",
+        "target": "ES2015",
         "lib": [
-            "ES2015"
+            "es2020"
         ],
         "allowJs": true,
         "strict": false,
         "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
-        "module": "esnext",
+        "module": "ESNext",
         "isolatedModules": true,
-        "jsx": "preserve"
+        "jsx": "react",
+        "noFallthroughCasesInSwitch": true
     },
     "include": [
         "index.d.ts",
