@@ -57,6 +57,9 @@ const config = {
     web: {
         favicon: './assets/android/icon.png'
     },
+    assetBundlePatterns: [
+        '**/*'
+    ],
     packagerOpts: {
         config: 'metro.config.js',
         sourceExts: [
