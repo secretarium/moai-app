@@ -31,7 +31,7 @@ export const register = (token: string, username: string, password: string): Moa
                     }
                 });
             })
-            .catch((error: any) => {
+            .catch(error => {
                 dispatch({
                     type: actionTypes.PDATA_NEW_USER_FAILED,
                     error: new Error(error)
