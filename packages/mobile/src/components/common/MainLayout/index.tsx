@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView, View, StatusBar, TouchableOpacity, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../../ReactRouter';
-import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { commonStyles } from '../../commonStyles';
 
 
@@ -36,6 +36,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
         }}>
             <SafeAreaView style={commonStyles.container}>
                 <StatusBar barStyle={statusBarStyle ?? themeStatusBarStyle} />
+                {(showGoBack !== true) ? <>{children}</> : null}
                 {withNavigation
                     ? <View style={commonStyles.navigation}>
                         {(showGoBack === true) ?
@@ -55,20 +56,23 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                                 </>
                             ) : (
                                 <>
-                                    <Link to={'/chat'} component={TouchableOpacity} style={commonStyles.topLeftButton} underlayColor='transparent'>
-                                        <Entypo name="chat" size={40} color={themeColorStyle} />
+                                    <Link to={'/chat'} component={TouchableOpacity} style={commonStyles.bottomLeftButton} underlayColor='transparent'>
+                                        <Entypo name="chat" size={35} color={themeColorStyle} />
                                     </Link>
-                                    <Link to={'/venues'} component={TouchableOpacity} style={commonStyles.topMidButton} underlayColor='transparent'>
-                                        <MaterialCommunityIcons name="history" size={40} color={themeColorStyle} />
+                                    <Link to={'/venues'} component={TouchableOpacity} underlayColor='transparent'>
+                                        <FontAwesome5 name="shield-virus" size={35} color={themeColorStyle} />
                                     </Link>
-                                    <Link to={'/infos'} style={commonStyles.topRightButton} underlayColor='transparent'>
-                                        <MaterialCommunityIcons name="information" size={40} color={themeColorStyle} />
+                                    <Link to={'/venues'} component={TouchableOpacity} underlayColor='transparent'>
+                                        <MaterialCommunityIcons name="history" size={35} color={themeColorStyle} />
+                                    </Link>
+                                    <Link to={'/infos'} style={commonStyles.bottomRightButton} underlayColor='transparent'>
+                                        <MaterialCommunityIcons name="information" size={35} color={themeColorStyle} />
                                     </Link>
                                 </>
                             )}
                     </View>
                     : null}
-                {children}
+                {(showGoBack === true) ? <>{children}</> : null}
             </SafeAreaView>
         </View>
     );

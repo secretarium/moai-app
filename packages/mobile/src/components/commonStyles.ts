@@ -43,7 +43,7 @@ export const commonStyles = StyleSheet.create({
     },
     topLeftButton: {
         left: 15,
-        top: 10
+        top: 15
     },
     topMidButton: {
         top: 10
@@ -51,6 +51,12 @@ export const commonStyles = StyleSheet.create({
     topRightButton: {
         right: 15,
         top: 10
+    },
+    bottomLeftButton: {
+        left: 20
+    },
+    bottomRightButton: {
+        right: 20
     },
     main: {
         flex: 1,
