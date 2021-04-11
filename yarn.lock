@@ -4741,8 +4741,10 @@ __metadata:
     react-native-gifted-chat: 0.16.3
     react-native-modal: 11.6.1
     react-native-onboarding-swiper: 1.1.4
+    react-native-qrcode-svg: 6.1.1
     react-native-screens: 2.15.0
     react-native-simple-survey: 3.1.2
+    react-native-svg: 12.1.1-0
     react-native-web: 0.14.10
     react-redux: 7.2.2
     react-responsive: 8.2.0
@@ -9533,7 +9535,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer-alloc@npm:^1.1.0":
+"buffer-alloc@npm:^1.1.0, buffer-alloc@npm:^1.2.0":
   version: 1.2.0
   resolution: "buffer-alloc@npm:1.2.0"
   dependencies:
@@ -9564,7 +9566,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer-from@npm:^1.0.0":
+"buffer-from@npm:^1.0.0, buffer-from@npm:^1.1.1":
   version: 1.1.1
   resolution: "buffer-from@npm:1.1.1"
   checksum: a5570c873ee2691375c4bd8eaad87a934e5b37fed1da645eba43c837699855951527883a84c59a79f8bdc7d5cd740f3cb0060f856035a82fdb7e7f99eb6dd01e
@@ -9596,7 +9598,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer@npm:^5.2.0, buffer@npm:^5.5.0":
+"buffer@npm:^5.2.0, buffer@npm:^5.4.3, buffer@npm:^5.5.0":
   version: 5.7.1
   resolution: "buffer@npm:5.7.1"
   dependencies:
@@ -11398,7 +11400,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-select@npm:^2.0.0, css-select@npm:^2.0.2":
+"css-select@npm:^2.0.0, css-select@npm:^2.0.2, css-select@npm:^2.1.0":
   version: 2.1.0
   resolution: "css-select@npm:2.1.0"
   dependencies:
@@ -11431,7 +11433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-tree@npm:^1.1.2":
+"css-tree@npm:^1.0.0-alpha.39, css-tree@npm:^1.1.2":
   version: 1.1.3
   resolution: "css-tree@npm:1.1.3"
   dependencies:
@@ -12265,6 +12267,13 @@ __metadata:
     miller-rabin: ^4.0.0
     randombytes: ^2.0.0
   checksum: 5542e4eacfe2da109545d940f73db1a69f880291331e076c8c079d6a0a35b1a2a504a1c99c0aa8ad8658f7dd06ba38f605fdd6f64e55703db41a65bf8d69665a
+  languageName: node
+  linkType: hard
+
+"dijkstrajs@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "dijkstrajs@npm:1.0.1"
+  checksum: b089cd5508390b614eab255ef7bdf6e03c56bd694b2e3fca82e4c35a7eb19ceae80082d5a8630b5fd016fa5421a1c9cca75d9095a25c50c072d0cfd84881ae85
   languageName: node
   linkType: hard
 
@@ -18026,7 +18035,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"isarray@npm:^2.0.5":
+"isarray@npm:^2.0.1, isarray@npm:^2.0.5":
   version: 2.0.5
   resolution: "isarray@npm:2.0.5"
   checksum: 57a6657fd920e40860b8b2cb089f7352e2c5e363449645dc35a130aba3d687b7810c33145fb2678157ef42c4a8a9d5cc71ec8ba36c08000abfbcdaa332606f04
@@ -25020,6 +25029,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"qrcode@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "qrcode@npm:1.4.4"
+  dependencies:
+    buffer: ^5.4.3
+    buffer-alloc: ^1.2.0
+    buffer-from: ^1.1.1
+    dijkstrajs: ^1.0.1
+    isarray: ^2.0.1
+    pngjs: ^3.3.0
+    yargs: ^13.2.4
+  bin:
+    qrcode: ./bin/qrcode
+  checksum: 14ea7b5a18e620e969e91cf0f63d89c4eb3c8506d1d18a200ef34b2e432ed3393ab359eff4001b45b93b9c501caac2f5786497c9865adc2e68989bbfcd77007d
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.5.2, qs@npm:~6.5.2":
   version: 6.5.2
   resolution: "qs@npm:6.5.2"
@@ -26158,6 +26184,20 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-native-qrcode-svg@npm:6.1.1":
+  version: 6.1.1
+  resolution: "react-native-qrcode-svg@npm:6.1.1"
+  dependencies:
+    prop-types: ^15.7.2
+    qrcode: ^1.4.4
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.63.4"
+    react-native-svg: ^12.1.0
+  checksum: 8990047deeca62e0c561cd9aa1f878b756c07dbe5a57711b94d7896227fdcc6d5cab06adb6a6b3cd3129c50daf23bdb345b86277b925e0e5231376689744c1bc
+  languageName: node
+  linkType: hard
+
 "react-native-safe-area-context@npm:3.1.9":
   version: 3.1.9
   resolution: "react-native-safe-area-context@npm:3.1.9"
@@ -26199,6 +26239,19 @@ fsevents@^1.2.7:
     react: ">=15.0.0"
     react-native: ">=0.50.0"
   checksum: 2b29cf61eaf8a02acf19b1b5f6229d538c4e2f1c553d7986c4ed8e59fd72fbd1496b3d1818cb72f8b0ed697ab8bec71394b755ab99c97bb915a051640e08f5da
+  languageName: node
+  linkType: hard
+
+"react-native-svg@npm:12.1.1-0":
+  version: 12.1.1-0
+  resolution: "react-native-svg@npm:12.1.1-0"
+  dependencies:
+    css-select: ^2.1.0
+    css-tree: ^1.0.0-alpha.39
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.50.0"
+  checksum: bda0fb051bbb01e62bc0ac508d63267191e3514e29a1517690919d41ca53fe7640e030d32a9b40f6b8904c697cdcbfb888c3d0007a5cf3da6aeab02ee0c40e85
   languageName: node
   linkType: hard
 
@@ -32724,7 +32777,7 @@ typescript@4.0.3:
   languageName: node
   linkType: hard
 
-"yargs@npm:^13.3.2":
+"yargs@npm:^13.2.4, yargs@npm:^13.3.2":
   version: 13.3.2
   resolution: "yargs@npm:13.3.2"
   dependencies:

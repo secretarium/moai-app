@@ -197,7 +197,7 @@ const App = withState()(
                     <Route path="/feedback/form/:venueType?" component={Questionnaire} />
                     <Route path="/feedback/completed" component={QuestionnaireCompleted} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
-                    <Route path="/immunity" component={Immunity} />
+                    <Route path="/immunity" exact component={Immunity} />
                     <Route path="/immunity/certificate/:userDigest" component={Certificate} />
                     <Route render={() => {
                         // if (showOnboarding)
