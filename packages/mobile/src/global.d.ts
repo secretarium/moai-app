@@ -134,10 +134,32 @@ declare namespace Moai {
         messageError?: string;
     };
 
+    type ImmunityRecord = {
+        type: 1 | 2 | 3;
+        datetime: number;
+        forecastedEndDate: number;
+        registerer: string;
+        registrationDate: number;
+        metadata: Record<string, string>;
+    };
+
+    type ImmunityCertificate = {
+        userDetailsDigest: string;
+        expiryDate: number;
+        verificationToken: string;
+        approver: string;
+    };
+
+    type Immunity = {
+        immunityRecords: ImmunityRecord[];
+        immunityCertificate: ImmunityCertificate;
+    };
+
     type State = {
         exposure: Exposure;
         system: System;
         conversations: Conversations;
+        immunity: Immunity;
     };
 }
 

@@ -13,6 +13,9 @@ const commandsPrototype = {
     MOAI_REGISTER_NOTIFICATION_TOKEN: { application: 'moai', command: 'register-notification-token' },
     MOAI_GET_EXPOSURE_RISK: { application: 'moai', command: 'get-exposure-risk' },
     MOAI_REGISTER_EXPOSURE_FEEDBACK: { application: 'moai', command: 'register-exposure-feedback' },
+    MOAI_GET_IMMUNITY_RECORDS: { application: 'moai', command: 'get-immunity-records' },
+    MOAI_REQUEST_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'request-immunity-certificate' },
+    MOAI_GET_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'get-immunity-certificate' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 

@@ -7,6 +7,10 @@
     "APP_MEASURE_EXPOSURE_RISK": "Measure exposure risk",
     "APP_CHECK_IN_HISTORY": "Check-in History",
     "APP_ABOUT": "About Moai",
+    "APP_IMMUNITY": "Immunity Records",
+    "APP_IMMUNITY_CONTEXT": "View your immunity records and certificates, or request a new immunity certificate.",
+    "APP_REQUEST_IMMUNITY_CERTIFICATE": "Request Immunity Certificate",
+    "APP_IMMUNITY_CERTIFICATE": "Immunity Certificate",
     "APP_INFOS": [
         "Licenses",
         "Keys",
@@ -90,6 +94,5 @@
     "APP_EXPOSURE_QUESTIONNAIRE_Q20_A16": "Retail shops",
     "APP_EXPOSURE_QUESTIONNAIRE_Q20_A17": "Sports and fitness facilities. For example, gyms, indoor sports facilities, swimming pools",
     "APP_EXPOSURE_QUESTIONNAIRE_Q20_A18": "Transport for example, taxis and waiting rooms",
-    "APP_EXPOSURE_QUESTIONNAIRE_Q20_A19": "Other"    
-
+    "APP_EXPOSURE_QUESTIONNAIRE_Q20_A19": "Other"
 }

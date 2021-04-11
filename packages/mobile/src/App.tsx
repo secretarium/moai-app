@@ -18,6 +18,8 @@ import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireComp
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import Notification from './components/Notification';
+import Immunity from './components/Immunity';
+import Certificate from './components/Immunity/Certificate';
 import { connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
@@ -40,6 +42,7 @@ const App = withState()(
         initLocalize();
         const history = useHistory();
         const location = useLocation();
+        const [goToCertificate, setGoToCertificate] = useState<boolean>();
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [isConnecting, setIsConnecting] = useState(false);
@@ -95,7 +98,10 @@ const App = withState()(
             const comps = url ? url.split('/').slice(-2) : undefined;
             if (comps?.length === 2 && comps[0] === 'check')
                 setInitialUrl(comps[1]);
-            else
+            else if (comps?.length === 2 && comps[0] === 'certificate') {
+                setInitialUrl(comps[1]);
+                setGoToCertificate(true);
+            } else
                 setInitialUrl(null);
         }, []);
 
@@ -117,10 +123,10 @@ const App = withState()(
 
         useEffect(() => {
             if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
-                history.push(`/checkin/${initialUrl}`);
+                goToCertificate ? history.push(`/immunity/certificate/${initialUrl}`) : history.push(`/checkin/${initialUrl}`);
                 setPastInitialUrl(initialUrl);
             }
-        }, [initialUrl, history, pastInitialUrl]);
+        }, [initialUrl, history, pastInitialUrl, goToCertificate]);
 
         useEffect(() => {
             async function connectBackend() {
@@ -191,6 +197,8 @@ const App = withState()(
                     <Route path="/feedback/form/:venueType?" component={Questionnaire} />
                     <Route path="/feedback/completed" component={QuestionnaireCompleted} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
+                    <Route path="/immunity" component={Immunity} />
+                    <Route path="/immunity/certificate/:userDigest" component={Certificate} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;

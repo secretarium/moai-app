@@ -59,7 +59,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                                     <Link to={'/chat'} component={TouchableOpacity} style={commonStyles.bottomLeftButton} underlayColor='transparent'>
                                         <Entypo name="chat" size={35} color={themeColorStyle} />
                                     </Link>
-                                    <Link to={'/venues'} component={TouchableOpacity} underlayColor='transparent'>
+                                    <Link to={'/immunity'} component={TouchableOpacity} underlayColor='transparent'>
                                         <FontAwesome5 name="shield-virus" size={35} color={themeColorStyle} />
                                     </Link>
                                     <Link to={'/venues'} component={TouchableOpacity} underlayColor='transparent'>

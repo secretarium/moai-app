@@ -6,7 +6,7 @@ import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout';
 import { getVenues } from '../../actions';
-import styles from './styles';
+import { styles, commonStyles } from './styles';
 import { toDateTime } from '../../utils/timeHandler';
 import i18n from 'i18n-js';
 
@@ -68,7 +68,7 @@ const Venues = withState()((s) => ({
             <ScrollView>
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
-                        <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
+                        <TouchableOpacity style={[commonStyles.card, { backgroundColor: themeColorStyle }]} key={index}>
                             <Link to={`/feedback/form/${venue.type}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                                 <>
                                     <View style={{ maxWidth: '90%' }}>

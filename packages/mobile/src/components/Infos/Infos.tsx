@@ -4,11 +4,12 @@ import { useColorScheme } from 'react-native-appearance';
 import { Entypo } from '@expo/vector-icons';
 import { Link } from '../../ReactRouter';
 import MainLayout from '../common/MainLayout/index';
-import styles from './styles';
+import { commonStyles } from './styles';
 import i18n from 'i18n-js';
 
 
 const Infos: React.FC = () => {
+
     // Color theme
     const colorScheme = useColorScheme();
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
@@ -30,7 +31,7 @@ const Infos: React.FC = () => {
             </View>
             <ScrollView>
                 {i18n.t('APP_INFOS').map((item, index) =>
-                    <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
+                    <TouchableOpacity style={[commonStyles.card, { backgroundColor: themeColorStyle }]} key={index}>
                         <Link to={`/${item.toLowerCase()}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                             <>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{item}</Text>

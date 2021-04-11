@@ -23,7 +23,7 @@ export const commonStyles = StyleSheet.create({
     chatLogo: {
         height: '70%',
         width: '70%',
-        top: 10
+        top: 15
     },
     pin: {
         height: '80%',
@@ -69,5 +69,14 @@ export const commonStyles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    card: {
+        borderRadius: 4,
+        overflow: 'hidden',
+        alignItems: 'center',
+        maxWidth: '90%',
+        marginHorizontal: 12,
+        marginVertical: 6,
+        padding: 20
     }
 });
