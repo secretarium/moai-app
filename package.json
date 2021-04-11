@@ -22,8 +22,9 @@
         "test": "yarn workspaces foreach run test",
         "test:mutation": "yarn workspaces foreach run test:mutation",
         "preinstall": "node ./scripts/hintYarn.js",
-        "postinstall": "cd ./packages/mobile && expo-yarn-workspaces postinstall",
-        "release": "release-it"
+        "postinstall": "husky install && cd ./packages/mobile && expo-yarn-workspaces postinstall",
+        "release": "release-it",
+        "prepare": "husky install"
     },
     "keywords": [
         "secretarium",
