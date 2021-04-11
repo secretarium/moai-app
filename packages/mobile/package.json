@@ -36,7 +36,7 @@
         "expo-camera": "9.1.1",
         "expo-constants": "9.3.5",
         "expo-crypto": "8.4.0",
-        "expo-file-system": "9.3.0",
+        "expo-file-system": "10.0.0",
         "expo-font": "8.4.0",
         "expo-linking": "2.0.1",
         "expo-notifications": "0.8.2",
