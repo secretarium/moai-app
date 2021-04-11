@@ -1,26 +1,27 @@
 {
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": "./src",
-        "outDir": "./dist",
-        "target": "es5",
-        "lib": [
-            "ES2015"
-        ],
-        "allowJs": true,
-        "strict": false,
-        "forceConsistentCasingInFileNames": true,
-        "esModuleInterop": true,
-        "module": "esnext",
-        "isolatedModules": true,
-        "jsx": "preserve"
-    },
-    "include": [
-        "index.d.ts",
-        "src/*.ts",
-        "src/*.tsx"
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "target": "ES2015",
+    "lib": [
+      "es2020"
     ],
-    "exclude": [
-        "node_modules"
-    ]
+    "allowJs": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": [
+    "index.d.ts",
+    "src/*.ts",
+    "src/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -8,14 +8,23 @@ declare namespace MoaiPortal {
         (dispatch: Dispatch, getState: () => State): any;
     }
 
+    type ErrorObject = {
+        errorCode: string | number;
+        errorMessage: string,
+        errorDescription?: string,
+        errorTimestamp: string | number;
+        errorStack?: Array<ErrorObject>;
+    };
+
     interface AnyAction extends ReduxAnyAction {
         payload?: any;
+        error?: Error | ErrorObject;
         workload?: FunctionAction;
         unsubscribe?: boolean;
     }
 
     interface RequestFactory {
-        (command: QueryCommand & ActionTypeDecoration, args?: { [key: string]: any }, subscribe?: boolean, ticker?: (index: number, error?: boolean) => any): (handlers?: QueryHandlers) => (dispatch: Dispatch) => Promise<AnyAction>;
+        (command: QueryCommand & ActionTypeDecoration, args?: { [key: string]: any }, subscribe?: boolean, ticker?: (index: number, error?: boolean) => any): (handlers?: QueryHandlers) => (dispatch: Dispatch) => Promise<AnyAction | void>;
     }
 
     interface Dispatch {

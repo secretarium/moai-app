@@ -9,7 +9,7 @@ const StatusBar = withState()(
     (s) => ({
         currentConnection: s.system?.currentConnection
     }),
-    ({ dispatch, currentConnection }) => {
+    ({ currentConnection }) => {
 
         const [retryTimeLeft, setRetryTimeLeft] = useState(Math.floor(((currentConnection?.nextTry ?? 0) - new Date().getTime()) / 1000));
         const currentlyLoading: ReactElement[] = [];

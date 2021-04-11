@@ -188,7 +188,7 @@ const App = withState()(
                     <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
                     <Route path="/scanned" component={Scanned} />
                     <Route path="/venues" component={Venues} />
-                    <Route path="/feedback/form" component={Questionnaire} />
+                    <Route path="/feedback/form/:venueType?" component={Questionnaire} />
                     <Route path="/feedback/completed" component={QuestionnaireCompleted} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
                     <Route render={() => {

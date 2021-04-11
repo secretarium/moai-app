@@ -6,12 +6,13 @@ const responseTimes: { [key: string]: { q?: number; e?: number; r?: number }[] }
 
 export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, subscribe, ticker) => handlers => dispatch =>
 
-    new Promise(resolve => {
+    new Promise<MoaiPortal.AnyAction | void>(resolve => {
 
         let tick = 0;
 
         dispatch({
-            type: command.REQUEST
+            type: command.REQUEST,
+            payload: args
         });
 
         const requestId = command.explicit ?? `${command.application}-${command.command}-${subscribe ? Object
@@ -103,7 +104,7 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
                             delete subscriptionMap[requestId];
                         }
                     })
-                    .onError((error: any) => {
+                    .onError(error => {
                         const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
                         if (subscribe && !outcome.unsubscribe) {
                             dispatch({
@@ -125,7 +126,7 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
                     })
                     .send();
             })
-            .catch((error: any) => {
+            .catch(error => {
                 const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
                 if (subscribe && !outcome.unsubscribe)
                     dispatch({

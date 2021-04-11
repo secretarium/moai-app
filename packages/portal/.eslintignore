@@ -5,9 +5,5 @@
 **/node_modules/**
 **/public/**
 **/reports/**
-**/.expo/**
-**/.git/**
 **/.stryker-tmp/**
-**/.yarn/**
 !.eslintrc.js
-**/vendor/msrCrypto.js

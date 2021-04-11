@@ -12,6 +12,12 @@ interface SecretariumClusterConfig {
     [cluster: string]: SecretariumGatewayConfig;
 }
 
+interface ConnectionInformation {
+    cluster: string;
+    endpoint: string;
+    socket: SCP;
+}
+
 const handlerStore: {
     currentConnection: SCP;
     currentKey: Key;
@@ -69,7 +75,7 @@ const secretariumHandler = {
                     handlerStore.currentKey = key;
                     resolve(key);
                 })
-                .catch((e: any) => reject(e));
+                .catch(e => reject(e));
         }),
     use: (encKey: EncryptedKeyPair, password: string): Promise<Key> =>
         new Promise((resolve, reject) => {
@@ -78,9 +84,9 @@ const secretariumHandler = {
                     handlerStore.currentKey = key;
                     resolve(key);
                 })
-                .catch((e: any) => reject(e));
+                .catch(e => reject(e));
         }),
-    connect: (): Promise<any> =>
+    connect: (): Promise<ConnectionInformation> =>
         new Promise((resolve, reject) => {
             const cluster = Object.entries<SecretariumGatewayConfig>(handlerStore.clusters)?.[0];
             const endpoint = cluster?.[1]?.gateways?.[0]?.endpoint;
@@ -95,7 +101,7 @@ const secretariumHandler = {
                             socket: handlerStore.currentConnection
                         });
                     })
-                    .catch((e: any) => reject(e));
+                    .catch(e => reject(e));
             } else {
                 reject('Cluster not configured.');
             }

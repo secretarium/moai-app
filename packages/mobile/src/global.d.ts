@@ -101,8 +101,11 @@ declare namespace Moai {
         isConnected: boolean;
         showOnboarding: boolean;
         scanCounter: number;
-        venues: Venue[];
         log: SystemLog;
+    };
+
+    type Exposure = {
+        venues: Venue[];
     };
 
     type Venue = {
@@ -132,6 +135,7 @@ declare namespace Moai {
     };
 
     type State = {
+        exposure: Exposure;
         system: System;
         conversations: Conversations;
     };

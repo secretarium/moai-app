@@ -23,7 +23,7 @@ const Scanned = withState()((s) => ({
 
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
-            <Modal isVisible={showModal}>
+            <Modal isVisible={false}>
                 <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>
                         {i18n.t('APP_USE_APP_TO_SCAN_TEST')}

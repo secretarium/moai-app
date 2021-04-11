@@ -31,7 +31,7 @@ const LoginRegister = withState()(
             }
         }, [errorMessage, registrationError]);
 
-        const handleRegister = (values: any): void => {
+        const handleRegister = (values): void => {
             setIsRegistering(true);
             if (token) {
                 dispatch(register(token, values.username, values.password));

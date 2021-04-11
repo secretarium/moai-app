@@ -32,7 +32,7 @@ const LoginSignin = withState()(
             }
         }, [errorMessage, loginError]);
 
-        const handleLogin = (values: any): void => {
+        const handleLogin = (values): void => {
             setIsLoggingIn(true);
             setErrorMessage(undefined);
             dispatch(connect(currentKey, currentKey.name, values.password));
