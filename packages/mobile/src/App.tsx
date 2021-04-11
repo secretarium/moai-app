@@ -15,6 +15,8 @@ import ExpoPushToken from './components/Infos/ExpoPushToken';
 import Infos from './components/Infos';
 import Questionnaire from './components/Questionnaire';
 import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
+import RiskProfile from './components/Questionnaire/RiskProfile';
+import Exposure from './components/Exposure';
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import Notification from './components/Notification';
@@ -196,6 +198,8 @@ const App = withState()(
                     <Route path="/venues" component={Venues} />
                     <Route path="/feedback/form/:venueType?" component={Questionnaire} />
                     <Route path="/feedback/completed" component={QuestionnaireCompleted} />
+                    <Route path="/feedback/exposure" component={Exposure} />
+                    <Route path="/feedback/riskProfile" component={RiskProfile} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
                     <Route path="/immunity" exact component={Immunity} />
                     <Route path="/immunity/certificate/:userDigest" component={Certificate} />

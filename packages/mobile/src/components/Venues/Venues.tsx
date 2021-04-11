@@ -4,6 +4,7 @@ import { withState } from '../../store';
 import { Entypo } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../ReactRouter';
+import { useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
 import { getVenues } from '../../actions';
 import { styles, commonStyles } from './styles';
@@ -12,9 +13,11 @@ import i18n from 'i18n-js';
 
 
 const Venues = withState()((s) => ({
-    venues: s.exposure.venues
-}), ({ venues, dispatch }) => {
+    venues: s.exposure.venues,
+    riskProfile: s.exposure.riskProfile
+}), ({ venues, riskProfile, dispatch }) => {
 
+    const history = useHistory();
     const [hasFetchedVenues, setHasFetchedVenues] = useState(false);
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
@@ -44,6 +47,12 @@ const Venues = withState()((s) => ({
         17: 'Transport for example, taxis and waiting rooms',
         18: 'Other'
     };
+
+    useEffect(() => {
+        if (!riskProfile) {
+            history.push('/feedback/riskProfile');
+        }
+    }, []);
 
     useEffect(() => {
         if (hasFetchedVenues === false) {
