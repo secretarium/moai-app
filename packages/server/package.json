@@ -11,6 +11,6 @@
     "homepage": "https://github.com/secretarium/moai-app#readme",
     "main": "src/server.ts",
     "devDependencies": {
-        "@types/supertest": "2.0.10"
+        "@types/supertest": "2.0.11"
     }
 }
