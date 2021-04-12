@@ -83,3 +83,10 @@ export const registerNotificationToken = (expoPushToken: string, encryptionKey: 
             error: new Error(error)
         })
     });
+
+export const setRiskProfile = (riskLevel: 'low' | 'medium' | 'high'): Moai.AnyAction => ({
+    type: actionTypes.MOAI_SET_RISK_PROFILE,
+    payload: {
+        riskLevel
+    }
+});

@@ -1,4 +1,4 @@
-import { actionTypes, commands } from './constants';
+import { commands } from './constants';
 import { requestFactory } from './factories';
 
 export const getVenues = (): Moai.FunctionAction =>
@@ -15,15 +15,8 @@ export const getVenues = (): Moai.FunctionAction =>
         })
     });
 
-export const setRiskProfile = (riskLevel: 'low' | 'medium' | 'high'): Moai.AnyAction => ({
-    type: actionTypes.MOAI_SET_RISK_PROFILE,
-    payload: {
-        riskLevel
-    }
-});
-
 export const getExposureRisk = (results: number[]): Moai.FunctionAction => (dispatch, getState) => {
-    const riskProfile = getState()?.exposure.riskProfile;
+    const riskProfile = getState()?.system.riskProfile;
     dispatch(requestFactory(commands.MOAI_GET_EXPOSURE_RISK, { riskProfile: riskProfile, questionnaire: results })({
         onResult: result => {
             return {

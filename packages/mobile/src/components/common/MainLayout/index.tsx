@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, StatusBar, TouchableOpacity, Image } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
+import { withState } from '../../../store';
 import { Link } from '../../../ReactRouter';
 import { MaterialCommunityIcons, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { commonStyles } from '../../commonStyles';
@@ -14,14 +15,17 @@ type MainLayoutProps = {
     goBackRoute?: string;
 };
 
-const MainLayout: React.FC<MainLayoutProps> = ({
+const MainLayout = withState<MainLayoutProps>()((s) => ({
+    riskProfile: s.system.riskProfile
+}), ({
     children,
     withNavigation = true,
     backgroundColor,
     statusBarStyle,
     showGoBack,
-    goBackRoute
-}) => {
+    goBackRoute,
+    riskProfile }) => {
+
 
     // Color theme
     const colorScheme = useColorScheme();
@@ -62,7 +66,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                                     <Link to={'/immunity'} component={TouchableOpacity} underlayColor='transparent'>
                                         <FontAwesome5 name="shield-virus" size={35} color={themeColorStyle} />
                                     </Link>
-                                    <Link to={'/venues'} component={TouchableOpacity} underlayColor='transparent'>
+                                    <Link to={riskProfile ? '/venues' : '/feedback/riskProfile'} component={TouchableOpacity} underlayColor='transparent'>
                                         <MaterialCommunityIcons name="history" size={35} color={themeColorStyle} />
                                     </Link>
                                     <Link to={'/infos'} style={commonStyles.bottomRightButton} underlayColor='transparent'>
@@ -76,6 +80,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({
             </SafeAreaView>
         </View>
     );
-};
+});
 
 export default MainLayout;

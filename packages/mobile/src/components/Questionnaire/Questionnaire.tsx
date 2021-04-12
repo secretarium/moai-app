@@ -6,12 +6,16 @@ import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
 import { useHistory, RouteComponentProps } from 'react-router';
 import i18n from 'i18n-js';
+import { getExposureRisk } from '../../actions';
+import { withState } from '../../store';
 
 type QuestionnaireProps = RouteComponentProps<{
     venueType: string;
 }>;
 
-const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
+const Questionnaire = withState<QuestionnaireProps>()((s) => ({
+    venues: s.exposure.venues
+}), ({ match, dispatch }) => {
 
     const { params: { venueType } } = match;
 
@@ -549,6 +553,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
 
         if (venue) {
             finalAnswers.unshift(Number(venue));
+            dispatch(getExposureRisk(finalAnswers));
             history.push('/feedback/completed');
             //console.log('RESULTS', finalAnswers);
         } else {
@@ -700,7 +705,7 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
     };
 
     return (
-        <MainLayout goBackRoute={'/home'} showGoBack={true}>
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
             <ScrollView>
                 <SimpleSurvey
                     survey={questions}
@@ -718,6 +723,6 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
             </ScrollView>
         </MainLayout>
     );
-};
+});
 
 export default Questionnaire;

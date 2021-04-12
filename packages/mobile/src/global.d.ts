@@ -100,22 +100,29 @@ declare namespace Moai {
         expoPushToken?: string;
         isConnected: boolean;
         showOnboarding: boolean;
+        riskProfile?: 'low' | 'medium' | 'high';
+        certificateRequested: boolean;
         scanCounter: number;
         log: SystemLog;
     };
 
     type Exposure = {
         venues: Venue[];
-        riskProfile?: 'low' | 'medium' | 'high';
         cumulatedRisk?: string;
-        risk?: string;
+        risk?: Risk;
+    };
+
+    type Risk = {
+        inferred: number;
+        riskIndex: number;
+        colour: string;
+        visuallyImpairedColour: string;
     };
 
     type Venue = {
         id: string;
         time: number;
         type: number;
-        risk?: string;
     };
 
     type Conversation = {

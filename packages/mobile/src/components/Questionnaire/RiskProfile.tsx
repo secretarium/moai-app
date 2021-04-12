@@ -132,7 +132,7 @@ const RiskProfile = withState()(
         };
 
         return (
-            <MainLayout goBackRoute={'/home'} showGoBack={true}>
+            <MainLayout goBackRoute={'/'} showGoBack={true}>
                 <ScrollView>
                     <SimpleSurvey
                         survey={questions}

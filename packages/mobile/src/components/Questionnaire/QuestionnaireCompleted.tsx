@@ -6,7 +6,6 @@ import { useHistory } from 'react-router';
 import { styles } from './styles';
 import i18n from 'i18n-js';
 
-
 const QuestionnaireCompleted: React.FC = () => {
 
     const history = useHistory();

@@ -1,5 +1,5 @@
 import { Exposure, StoreComponent } from '../global';
-import { actionTypes, commands } from '../actions/constants';
+import { commands } from '../actions/constants';
 
 export const initialState: Exposure = {
     venues: []
@@ -18,15 +18,10 @@ export const exposure: StoreComponent<Exposure> = (state = initialState, { type,
                 venues: payload.result.venues
             };
         }
-        case actionTypes.MOAI_SET_RISK_PROFILE: {
+        case commands.MOAI_GET_EXPOSURE_RISK.SUCCESS: {
             return {
                 ...state,
-                riskProfile: payload.riskLevel
-            };
-        }
-        case commands.MOAI_GET_EXPOSURE_RISK: {
-            return {
-                ...state
+                risk: payload.result
             };
         }
         default:

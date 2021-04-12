@@ -4,7 +4,6 @@ import { withState } from '../../store';
 import { Entypo } from '@expo/vector-icons';
 import { useColorScheme } from 'react-native-appearance';
 import { Link } from '../../ReactRouter';
-import { useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
 import { getVenues } from '../../actions';
 import { styles, commonStyles } from './styles';
@@ -13,11 +12,9 @@ import i18n from 'i18n-js';
 
 
 const Venues = withState()((s) => ({
-    venues: s.exposure.venues,
-    riskProfile: s.exposure.riskProfile
-}), ({ venues, riskProfile, dispatch }) => {
+    venues: s.exposure.venues
+}), ({ venues, dispatch }) => {
 
-    const history = useHistory();
     const [hasFetchedVenues, setHasFetchedVenues] = useState(false);
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
@@ -49,12 +46,6 @@ const Venues = withState()((s) => ({
     };
 
     useEffect(() => {
-        if (!riskProfile) {
-            history.push('/feedback/riskProfile');
-        }
-    }, []);
-
-    useEffect(() => {
         if (hasFetchedVenues === false) {
             dispatch(getVenues());
             setHasFetchedVenues(true);
@@ -78,7 +69,7 @@ const Venues = withState()((s) => ({
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
                         <TouchableOpacity style={[commonStyles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                            <Link to={`/feedback/form/${venue.type}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                            <Link to={`/feedback/form/${venue.type}/${venue.id}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                                 <>
                                     <View style={{ maxWidth: '90%' }}>
                                         <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>

@@ -10,6 +10,7 @@
     "APP_IMMUNITY": "Immunity Records",
     "APP_IMMUNITY_CONTEXT": "View your immunity records and certificates, or request a new immunity certificate.",
     "APP_REQUEST_IMMUNITY_CERTIFICATE": "Request Immunity Certificate",
+    "APP_VIEW_IMMUNITY_CERTIFICATE": "View Immunity Certificate",
     "APP_IMMUNITY_CERTIFICATE": "Immunity Certificate",
     "APP_INFOS": [
         "Licenses",
@@ -27,7 +28,9 @@
     "APP_CHECK_EXPOSURE": "Check exposure level",
     "APP_EXPOSURE_RISK": "Exposure Risk",
     "APP_EXPOSURE_RISK_RESULT": "Your exposure risk is at level",
+    "APP_RISK_LEVEL": "Risk level",
     "APP_TURN_ON_COLOUR_BLIND_MODE": "Turn on colour blind mode",
+    "APP_TURN_OFF_COLOUR_BLIND_MODE": "Turn off colour blind mode",
     "APP_SUCCESS": "Success",
     "APP_GOT_IT": "Got it",
     "APP_HOW_WILL_WE_CONTACT_YOU": "How will we contact you",

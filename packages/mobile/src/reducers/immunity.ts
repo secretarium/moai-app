@@ -19,11 +19,6 @@ export const immunity: StoreComponent<Immunity> = (state = initialState, { type,
                 immunityRecords: payload.result
             };
         }
-        case commands.MOAI_REQUEST_IMMUNITY_CERTIFICATE.SUCCESS: {
-            return {
-                ...state
-            };
-        }
         case commands.MOAI_GET_IMMUNITY_CERTIFICATE.SUCCESS: {
             return {
                 ...state,

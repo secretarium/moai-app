@@ -125,7 +125,7 @@ const App = withState()(
 
         useEffect(() => {
             if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
-                goToCertificate ? history.push(`/immunity/certificate/${initialUrl}`) : history.push(`/checkin/${initialUrl}`);
+                goToCertificate ? history.push(`/immunity/${initialUrl}`) : history.push(`/checkin/${initialUrl}`);
                 setPastInitialUrl(initialUrl);
             }
         }, [initialUrl, history, pastInitialUrl, goToCertificate]);
@@ -201,8 +201,8 @@ const App = withState()(
                     <Route path="/feedback/exposure" component={Exposure} />
                     <Route path="/feedback/riskProfile" component={RiskProfile} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
-                    <Route path="/immunity" exact component={Immunity} />
-                    <Route path="/immunity/certificate/:userDigest" component={Certificate} />
+                    <Route path="/immunity/:userDigest?" component={Immunity} />
+                    <Route path="/certificate" component={Certificate} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;
