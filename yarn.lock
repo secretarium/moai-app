@@ -4387,9 +4387,9 @@ __metadata:
     react-native-modal: 11.9.0
     react-native-onboarding-swiper: 1.1.4
     react-native-qrcode-svg: 6.1.1
-    react-native-svg: 12.1.1-0
     react-native-screens: 2.15.2
     react-native-simple-survey: 3.1.2
+    react-native-svg: 12.1.1-0
     react-native-web: 0.15.6
     react-redux: 7.2.3
     react-responsive: 8.2.0
@@ -6855,11 +6855,11 @@ __metadata:
   linkType: hard
 
 "acorn@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "acorn@npm:8.1.0"
+  version: 8.1.1
+  resolution: "acorn@npm:8.1.1"
   bin:
     acorn: bin/acorn
-  checksum: 30c5e6b64b214da61cb2dadfe62cc19bba0edbde3fc1b7631ece1aa6d550a89a9b1e757a29721f0e8cde38b47f7c9b61f63f0f049120e3c49ba8324357d9eaca
+  checksum: eb22aec23abbf2406592a8fb9abddcf09db72855cfb309236730ab1c8ac597aea3edf67a02f33eb8c86d6a76d3bacc4fbeb0ff7feb440d5cf1cb7cca18821bf8
   languageName: node
   linkType: hard
 
@@ -8779,17 +8779,17 @@ __metadata:
   linkType: hard
 
 "browserslist@npm:^4.0.0, browserslist@npm:^4.12.0, browserslist@npm:^4.14.5, browserslist@npm:^4.16.3, browserslist@npm:^4.6.2, browserslist@npm:^4.6.4":
-  version: 4.16.3
-  resolution: "browserslist@npm:4.16.3"
+  version: 4.16.4
+  resolution: "browserslist@npm:4.16.4"
   dependencies:
-    caniuse-lite: ^1.0.30001181
-    colorette: ^1.2.1
-    electron-to-chromium: ^1.3.649
+    caniuse-lite: ^1.0.30001208
+    colorette: ^1.2.2
+    electron-to-chromium: ^1.3.712
     escalade: ^3.1.1
-    node-releases: ^1.1.70
+    node-releases: ^1.1.71
   bin:
     browserslist: cli.js
-  checksum: 37eafd9d58bd5c63b96d193dd7a6d0637a020d094d36a6a83b71a612e313d1678d2688f5300979b334241d15891ebe95fe905e6572ef15ffb6e153fce5c7be18
+  checksum: 285d5a9a2797ac9b8feeab6f9599443b3fce1ae307f6b1122ba89dbc8b9b824fcb453fac2ae42a531073b11a1f7e79e6584a5f8066d0ef263f2c724569de800d
   languageName: node
   linkType: hard
 
@@ -9156,7 +9156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30000981, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001125, caniuse-lite@npm:^1.0.30001181":
+"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30000981, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001125, caniuse-lite@npm:^1.0.30001208":
   version: 1.0.30001208
   resolution: "caniuse-lite@npm:1.0.30001208"
   checksum: 462d65aa3da9cb6218aa3243f604a1b49298928f2d09b0befa1e59d251b431708e5a88d6032d3bd9cb2dd0293f9ce7dabee8efd7d4d868c431aeb199c528fee7
@@ -10986,9 +10986,9 @@ __metadata:
   linkType: hard
 
 "date-fns@npm:^2.15.0":
-  version: 2.20.1
-  resolution: "date-fns@npm:2.20.1"
-  checksum: 103fb6302cae5c3b2b450d4c019e2208f314747b042a84098900b983e67dc96917e51248b7a42d3fed15e3b40776ea70b9da6798794a556ca291eb19f9286dc5
+  version: 2.20.2
+  resolution: "date-fns@npm:2.20.2"
+  checksum: dc8aa7713580bdf8cf25dfbda3a5606f1cd7a59cafea4faae5e626dd47b945e39ec7540cd7518c5916463a41b96eb446b0d2a22c7f71caea2195224ff977da67
   languageName: node
   linkType: hard
 
@@ -11509,6 +11509,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dijkstrajs@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "dijkstrajs@npm:1.0.1"
+  checksum: b089cd5508390b614eab255ef7bdf6e03c56bd694b2e3fca82e4c35a7eb19ceae80082d5a8630b5fd016fa5421a1c9cca75d9095a25c50c072d0cfd84881ae85
+  languageName: node
+  linkType: hard
+
 "dir-glob@npm:^2.2.2":
   version: 2.2.2
   resolution: "dir-glob@npm:2.2.2"
@@ -11850,7 +11857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.649":
+"electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.712":
   version: 1.3.712
   resolution: "electron-to-chromium@npm:1.3.712"
   checksum: 058a8c969fc791ec94fbcc6297476b03e833654cf667d742903f8efe31fbf6f02688455a93566a9ef9d84b070dc9a7b2d6d5ac81e27f0d70a9bfba823c5e644f
@@ -18395,8 +18402,8 @@ fsevents@^1.2.7:
   linkType: hard
 
 "jsdom@npm:^16.4.0":
-  version: 16.5.2
-  resolution: "jsdom@npm:16.5.2"
+  version: 16.5.3
+  resolution: "jsdom@npm:16.5.3"
   dependencies:
     abab: ^2.0.5
     acorn: ^8.1.0
@@ -18429,7 +18436,7 @@ fsevents@^1.2.7:
   peerDependenciesMeta:
     canvas:
       optional: true
-  checksum: 52f9afe6e299c142c15f18c8327fd29c72ae0ea38217cd511726d90002214582e6de9e001583118e435e80b660eb1da7a7fb88be74d6e65b51cca7cdc0f71dda
+  checksum: bb62b5f8f71879dd86feff6358005657b4474f3a6bb701ee65f2a8f2d3aaad8ff043bec06a228951122d6ea2d94ff7ed1c7105668b4c7dc23545e24ae896faab
   languageName: node
   linkType: hard
 
@@ -20949,7 +20956,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"node-releases@npm:^1.1.61, node-releases@npm:^1.1.70":
+"node-releases@npm:^1.1.61, node-releases@npm:^1.1.71":
   version: 1.1.71
   resolution: "node-releases@npm:1.1.71"
   checksum: ffaffb71951cb1e97c2a129bd0624453a9f5d2c24364b247b68e09047f872c8070147aebb7fd8725117b02bcba259de9cdb4de5f6853b7ab626f611e9147bffa
@@ -24517,8 +24524,8 @@ fsevents@^1.2.7:
   linkType: hard
 
 "rc-trigger@npm:^5.0.0, rc-trigger@npm:^5.0.4, rc-trigger@npm:^5.1.2, rc-trigger@npm:^5.2.1":
-  version: 5.2.3
-  resolution: "rc-trigger@npm:5.2.3"
+  version: 5.2.4
+  resolution: "rc-trigger@npm:5.2.4"
   dependencies:
     "@babel/runtime": ^7.11.2
     classnames: ^2.2.6
@@ -24528,7 +24535,7 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ">=16.9.0"
     react-dom: ">=16.9.0"
-  checksum: 6c0353bcbb1590c75f3dff64db1fed91bd4597e316c6eb28731bb081be66945992b9043edee908eaca537acfcfa293b378addef73dd7a0116be5691296d4659d
+  checksum: bb5f09dda1df6634bf1d9c74d40afc72aa0a2734b3f7d9a726f229bbaa1ca70051c249581f09a5a4826abe0006dc5acb1252e5ea0abce8e8e16584bd29566fb2
   languageName: node
   linkType: hard
 
@@ -26084,9 +26091,9 @@ fsevents@^1.2.7:
   linkType: hard
 
 "resolve-alpn@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "resolve-alpn@npm:1.0.0"
-  checksum: fca356f266d6735c5b1209d245a5acc14d534468ea2b061173349cb2af61b98f6643f7f75e45b5a048a825f9313191276fe42bdfe91fb948d6ad7b31243d9ba1
+  version: 1.1.1
+  resolution: "resolve-alpn@npm:1.1.1"
+  checksum: 40f01bf401699d967e58d82de68f22a29330493866de2cef90a2f0833940d2aadfd2da4aae07a4d4519f1aff449ac614734af573895a2a80058a16d33fa2fcc4
   languageName: node
   linkType: hard
 
@@ -29301,11 +29308,11 @@ typescript@4.1.5:
   linkType: hard
 
 "uglify-js@npm:^3.1.4":
-  version: 3.13.3
-  resolution: "uglify-js@npm:3.13.3"
+  version: 3.13.4
+  resolution: "uglify-js@npm:3.13.4"
   bin:
     uglifyjs: bin/uglifyjs
-  checksum: ea05ab8088d2ad1f41941bbca0eb3ea80af8eb9944ba290edf34ed86a1516614afacd7dfd6e852535f404bb6a354973eed79ecf6a23c2aa761834d2b720c839c
+  checksum: 4a885dfa4e54d05d376d616e02db90bc484476c4c8a025b4ed91a10539a5a9c986a499ee60637b9f2c6698b97201761842630a9c7602f0d7d90056e9fa7f8dd3
   languageName: node
   linkType: hard
 
