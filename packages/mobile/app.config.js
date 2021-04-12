@@ -43,8 +43,18 @@ const config = {
                     },
                     {
                         scheme: 'https',
+                        host: '*.moaiapp.com',
+                        pathPrefix: '/immunity/certificate'
+                    },
+                    {
+                        scheme: 'https',
                         host: '*.moai-app.com',
                         pathPrefix: '/check'
+                    },
+                    {
+                        scheme: 'https',
+                        host: '*.moai-app.com',
+                        pathPrefix: '/immunity/certificate'
                     }
                 ],
                 category: [

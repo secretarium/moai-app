@@ -6,7 +6,6 @@ import { useHistory } from 'react-router';
 import { styles } from './styles';
 import i18n from 'i18n-js';
 
-
 const QuestionnaireCompleted: React.FC = () => {
 
     const history = useHistory();
@@ -25,10 +24,13 @@ const QuestionnaireCompleted: React.FC = () => {
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 21, paddingBottom: 15 }}>
                     {i18n.t('APP_QUESTIONNAIRE_COMPLETED')}!
                 </Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
+                    Using our model we can determine your exposure risk level, based on the answers you provided and your risk profile. Tap the button below to learn more.
+                </Text>
             </View>
             <View style={styles.homeButtonContainer} >
-                <TouchableOpacity onPress={() => history.push('/')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_GO_HOME')}</Text>
+                <TouchableOpacity onPress={() => history.push('/feedback/exposure')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_CHECK_EXPOSURE')}</Text>
                 </TouchableOpacity>
             </View>
         </MainLayout>
