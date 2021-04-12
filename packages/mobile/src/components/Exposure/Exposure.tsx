@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import MainLayout from '../common/MainLayout';
 import { useColorScheme } from 'react-native-appearance';
