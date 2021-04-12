@@ -74,8 +74,6 @@ const RiskProfile = withState()(
         const onSurveyFinished = (answers) => {
             if (answers[0].value.value === '0' && answers[0].value.value === '1')
                 dispatch(setRiskProfile('high'));
-            if (answers[0].value.value === '0' && answers[0].value.value === '0')
-                dispatch(setRiskProfile('high'));
             else if (answers[0].value.value === '1' && answers[1].value.value === '0')
                 dispatch(setRiskProfile('medium'));
             else
