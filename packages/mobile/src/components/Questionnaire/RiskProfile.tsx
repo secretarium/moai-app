@@ -78,7 +78,7 @@ const RiskProfile = withState()(
                 dispatch(setRiskProfile('medium'));
             else
                 dispatch(setRiskProfile('low'));
-            history.push('/venues');
+            history.push('/immunity');
         };
 
         const renderPreviousButton = (onPress, enabled) => {

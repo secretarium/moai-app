@@ -70,6 +70,12 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 certificateRequested: true
             };
         }
+        case commands.MOAI_GET_VACCINE_CODE.SUCCESS: {
+            return {
+                ...state,
+                vaccineId: payload.result
+            };
+        }
         case actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN: {
             return {
                 ...state,
