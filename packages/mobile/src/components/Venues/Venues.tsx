@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { withState } from '../../store';
 import { Entypo } from '@expo/vector-icons';
@@ -12,10 +12,10 @@ import i18n from 'i18n-js';
 
 
 const Venues = withState()((s) => ({
-    venues: s.exposure.venues
-}), ({ venues, dispatch }) => {
+    venues: s.exposure.venues,
+    riskProfile: s.system.riskProfile
+}), ({ venues, riskProfile, dispatch }) => {
 
-    const [hasFetchedVenues, setHasFetchedVenues] = useState(false);
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     // Color theme
@@ -46,11 +46,8 @@ const Venues = withState()((s) => ({
     };
 
     useEffect(() => {
-        if (hasFetchedVenues === false) {
-            dispatch(getVenues());
-            setHasFetchedVenues(true);
-        }
-    }, [hasFetchedVenues, dispatch]);
+        dispatch(getVenues());
+    }, [dispatch]);
 
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
@@ -69,7 +66,7 @@ const Venues = withState()((s) => ({
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
                         <TouchableOpacity style={[commonStyles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                            <Link to={`/feedback/form/${venue.type}/${venue.id}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                            <Link to={riskProfile ? `/feedback/form/${venue.type}/${venue.id}` : '/feedback/riskProfile'} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                                 <>
                                     <View style={{ maxWidth: '90%' }}>
                                         <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>

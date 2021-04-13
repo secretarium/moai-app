@@ -16,6 +16,7 @@ const commandsPrototype = {
     MOAI_GET_IMMUNITY_RECORDS: { application: 'moai', command: 'get-immunity-records' },
     MOAI_REQUEST_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'request-immunity-certificate' },
     MOAI_GET_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'get-immunity-certificate' },
+    MOAI_GET_VACCINE_CODE: {application: 'moai', command: 'register-vaccine-id'},
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 

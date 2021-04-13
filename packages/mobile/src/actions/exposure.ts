@@ -2,7 +2,7 @@ import { commands } from './constants';
 import { requestFactory } from './factories';
 
 export const getVenues = (): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_GET_VENUES, { max: 10, cursor: 0 })({
+    requestFactory(commands.MOAI_GET_VENUES, { max: 100, cursor: 0 })({
         onResult: result => {
             return {
                 payload: {

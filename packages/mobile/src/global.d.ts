@@ -101,6 +101,7 @@ declare namespace Moai {
         isConnected: boolean;
         showOnboarding: boolean;
         riskProfile?: 'low' | 'medium' | 'high';
+        vaccineId?: string;
         certificateRequested: boolean;
         scanCounter: number;
         log: SystemLog;
@@ -147,11 +148,11 @@ declare namespace Moai {
 
     type ImmunityRecord = {
         type: 1 | 2 | 3;
-        datetime: number;
-        forecastedEndDate: number;
-        registerer: string;
-        registrationDate: number;
-        metadata: Record<string, string>;
+        datetime?: number;
+        forecastedEndDate?: number;
+        registerer?: string;
+        registrationDate?: number;
+        metadata?: Record<string, string>;
     };
 
     type ImmunityCertificate = {

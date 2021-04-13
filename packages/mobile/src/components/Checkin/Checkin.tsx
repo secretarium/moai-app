@@ -14,6 +14,7 @@ import i18n from 'i18n-js';
 
 type LocationTypes = {
     testId: string;
+    testType: 'covidTest' | 'covidAntibodyTest';
 };
 
 const Checkin = withState<RouteComponentProps<{
@@ -32,6 +33,7 @@ const Checkin = withState<RouteComponentProps<{
         const location = useLocation<LocationTypes>();
         const [redirect, setRedirect] = useState(false);
         const [test, setTest] = useState(location.state.testId);
+        const [type, setType] = useState(location.state.testType);
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
             ...match.params
         });
@@ -74,7 +76,7 @@ const Checkin = withState<RouteComponentProps<{
             }
 
             async function registerUserTest() {
-                dispatch(registerTest(test))
+                dispatch(registerTest(test, type))
                     .then(() => {
                         setRedirect(true);
                     })

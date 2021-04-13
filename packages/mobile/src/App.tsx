@@ -21,7 +21,8 @@ import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import Notification from './components/Notification';
 import Immunity from './components/Immunity';
-import Certificate from './components/Immunity/Certificate';
+import QR from './components/Immunity/QR';
+import Setup from './components/Immunity/Setup';
 import { connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
@@ -31,7 +32,6 @@ import { initLocalize } from './services/i18n/localized';
 import i18n from 'i18n-js';
 import { registerForPushNotificationsAsync, createPushNotifEncryptionKey, decryptPushNotification } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
-
 
 const App = withState()(
     (s) => ({
@@ -202,7 +202,8 @@ const App = withState()(
                     <Route path="/feedback/riskProfile" component={RiskProfile} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
                     <Route path="/immunity/:userDigest?" component={Immunity} />
-                    <Route path="/certificate" component={Certificate} />
+                    <Route path="/setup" component={Setup} />
+                    <Route path="/qrcode/:type" component={QR} />
                     <Route render={() => {
                         // if (showOnboarding)
                         //     return <Redirect to="/onboarding" />;

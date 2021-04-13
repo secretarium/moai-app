@@ -45,6 +45,12 @@ const Exposure = withState()((s) => ({
         }
     };
 
+    const exposure = {
+        1: 'LOW',
+        2: 'MEDIUM',
+        3: 'HIGH'
+    };
+
     const renderPin = () => {
         switch (pinColor) {
             case '86ab50':
@@ -111,7 +117,7 @@ const Exposure = withState()((s) => ({
             </View>
             <View style={commonStyles.messageContainer} >
                 <Text style={[commonStyles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>
-                    {i18n.t('APP_EXPOSURE_RISK_RESULT')}: <Bold>{riskIndex}</Bold>
+                    {i18n.t('APP_EXPOSURE_RISK_RESULT')}: <Bold>{exposure[Number(riskIndex)]}</Bold>
                 </Text>
             </View>
             <View style={commonStyles.homeButtonContainer} >
