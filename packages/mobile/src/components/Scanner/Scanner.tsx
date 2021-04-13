@@ -19,8 +19,10 @@ const Scanner: React.FC = () => {
     const [hasPermission, setHasPermission] = useState<boolean>(null);
     const [venuInfo, setVenuInfo] = useState<ParsedCode>();
     const [test, setTest] = useState<string>();
+    const [testType, setTestType] = useState<'covidTest' | 'covidAntibodyTest'>();
     const [error, setError] = useState<string>();
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [askForTestType, setAskForTestType] = useState<boolean>(false);
 
     // Color theme
     const colorScheme = useColorScheme();
@@ -35,6 +37,7 @@ const Scanner: React.FC = () => {
             setShowModal(false);
             setVenuInfo(parsedCode);
         } else if (code.type === 'org.iso.Code128') {
+            setAskForTestType(true);
             setTest(code.data);
         } else {
             setError('Sorry, we were unable to recognise this code');
@@ -54,8 +57,8 @@ const Scanner: React.FC = () => {
         return <Redirect to={{ pathname: `/checkin/${[venuInfo.venue, venuInfo.source, venuInfo.type].filter(Boolean).join('/')}`, state: { testId: null } }} />;
     }
 
-    if (test) {
-        return <Redirect to={{ pathname: `/checkin/${test}`, state: { testId: test } }} />;
+    if (test && testType) {
+        return <Redirect to={{ pathname: `/checkin/${test}`, state: { testId: test, testType: testType } }} />;
     }
 
     let composition;
@@ -112,6 +115,16 @@ const Scanner: React.FC = () => {
                         {error}
                     </Text>
                     <Button title='Close' onPress={() => setShowModal(false)} />
+                </View>
+            </Modal>
+            <Modal isVisible={askForTestType}>
+                <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
+                    <MaterialIcons name='error' size={84} color={themeModalStyle} />
+                    <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
+                        We noticed you are scanning a barcode. Is it a COVID-19 test or an antibody test?
+                    </Text>
+                    <Button title='COVID-19' onPress={() => { setAskForTestType(false); setTestType('covidTest'); }} />
+                    <Button title='Antibody' onPress={() => { setAskForTestType(false); setTestType('covidAntibodyTest'); }} />
                 </View>
             </Modal>
             {composition}

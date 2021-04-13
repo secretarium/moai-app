@@ -65,8 +65,8 @@ export const checkIn = (venue: ParsedCode): Moai.FunctionAction =>
         })
     });
 
-export const registerTest = (testId: string): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_TEST, { testId: testId })({
+export const registerTest = (testId: string, type: string): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_TEST, { testId: testId, type: type })({
         onError: (error) => ({
             error: new Error(error)
         })
