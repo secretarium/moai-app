@@ -64,7 +64,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                                         <FontAwesome5 name="shield-virus" size={35} color={themeColorStyle} />
                                     </Link>
                                     <Link to={'/venues'} component={TouchableOpacity} underlayColor='transparent'>
-                                        <MaterialCommunityIcons name="history" size={35} color={themeColorStyle} />
+                                        <MaterialCommunityIcons name="history" size={40} color={themeColorStyle} />
                                     </Link>
                                     <Link to={'/infos'} style={commonStyles.bottomRightButton} underlayColor='transparent'>
                                         <MaterialCommunityIcons name="information" size={35} color={themeColorStyle} />

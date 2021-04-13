@@ -119,12 +119,13 @@ const Scanner: React.FC = () => {
             </Modal>
             <Modal isVisible={askForTestType}>
                 <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
-                    <MaterialIcons name='error' size={84} color={themeModalStyle} />
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
-                        We noticed you are scanning a barcode. Is it a COVID-19 test or an antibody test?
+                        Is this a barcode for an infection test or an antibody test?
                     </Text>
-                    <Button title='COVID-19' onPress={() => { setAskForTestType(false); setTestType('covidTest'); }} />
-                    <Button title='Antibody' onPress={() => { setAskForTestType(false); setTestType('covidAntibodyTest'); }} />
+                    <View style={{ flexDirection: 'row', padding: 15, alignContent: 'center', justifyContent: 'center' }}>
+                        <Button title='Infection' onPress={() => { setAskForTestType(false); setTestType('covidTest'); }} />
+                        <Button title='Antibody' onPress={() => { setAskForTestType(false); setTestType('covidAntibodyTest'); }} />
+                    </View>
                 </View>
             </Modal>
             {composition}

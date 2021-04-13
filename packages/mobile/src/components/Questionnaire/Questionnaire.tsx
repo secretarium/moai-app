@@ -672,7 +672,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     const renderQuestionText = (questionText) => {
         return (
             <View style={{ marginLeft: 10, marginRight: 10 }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{questionText}</Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{questionText}</Text>
             </View>
         );
     };
@@ -680,7 +680,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     const renderInfoText = (infoText) => {
         return (
             <View style={{ marginLeft: 10, marginRight: 10 }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{infoText}</Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{infoText}</Text>
             </View>
         );
     };
@@ -706,7 +706,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
 
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
-            <ScrollView>
+            <ScrollView style={{marginTop: 20}}>
                 <SimpleSurvey
                     survey={questions}
                     renderSelector={renderButton}
