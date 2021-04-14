@@ -3,9 +3,7 @@ const config = {
     description: 'A research app developed by Secretarium',
     version: '0.0.41',
     slug: 'moai-app-research',
-    expo: {
-        scheme: 'moai-app-research'
-    },
+    scheme: 'moai-app-research',
     icon: './assets/icon.png',
     splash: {
         image: './assets/splash.png',
