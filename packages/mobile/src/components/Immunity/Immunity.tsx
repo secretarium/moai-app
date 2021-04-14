@@ -165,7 +165,7 @@ const Immunity = withState<ImmunityProps>()((s) => ({
                 <View>
                     {records.length > 1
                         ? <TouchableOpacity
-                            onPress={() => openURL('https://moaiapp.com/check-certificate/')}
+                            onPress={() => openURL('https://moaiapp.com/check-certificate/scan-id/app')}
                             style={[commonStyles.card, { backgroundColor: themeColorStyle, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]}>
                             <>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{i18n.t('APP_REQUEST_IMMUNITY_CERTIFICATE')}</Text>
