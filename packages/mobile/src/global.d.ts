@@ -102,7 +102,7 @@ declare namespace Moai {
         showOnboarding: boolean;
         riskProfile?: 'low' | 'medium' | 'high';
         vaccineId?: string;
-        certificateRequested: boolean;
+        certificateRequested?: boolean;
         scanCounter: number;
         log: SystemLog;
     };

@@ -32,14 +32,15 @@ const Checkin = withState<RouteComponentProps<{
         const history = useHistory();
         const location = useLocation<LocationTypes>();
         const [redirect, setRedirect] = useState(false);
-        const [test, setTest] = useState(location.state.testId);
-        const [type, setType] = useState(location.state.testType);
+        const [test, setTest] = useState<string>();
+        const [type, setType] = useState<string>();
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
             ...match.params
         });
         const [pageError, setPageError] = useState<string>();
         const [showModal, setShowModal] = useState<boolean>(false);
         const [isConnecting, setIsConnecting] = useState(false);
+        const [isScanning, setIsScanning] = useState(false);
 
         // Color theme
         const colorScheme = useColorScheme();
@@ -47,6 +48,13 @@ const Checkin = withState<RouteComponentProps<{
         const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
         const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
         const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+
+        useEffect(() => {
+            if (location.state !== null && location.state !== undefined) {
+                setTest(location.state.testId);
+                setType(location.state.testType);
+            }
+        }, [location]);
 
         useEffect(() => {
             async function connectBackend() {
@@ -63,6 +71,7 @@ const Checkin = withState<RouteComponentProps<{
 
         useEffect(() => {
             async function checkInLocation() {
+                setIsScanning(true);
                 dispatch(checkIn(venueInfo))
                     .then(() => {
                         setRedirect(true);
@@ -76,6 +85,7 @@ const Checkin = withState<RouteComponentProps<{
             }
 
             async function registerUserTest() {
+                setIsScanning(true);
                 dispatch(registerTest(test, type))
                     .then(() => {
                         setRedirect(true);
@@ -88,13 +98,13 @@ const Checkin = withState<RouteComponentProps<{
                     });
             }
 
-            if (isConnected && venueInfo && !isConnecting && !test) {
+            if (isConnected && venueInfo && !isConnecting && !test && !isScanning) {
                 checkInLocation();
-            } else if (isConnected && test && !isConnecting) {
+            } else if (isConnected && test && !isConnecting && !isScanning) {
                 registerUserTest();
             }
 
-        }, [dispatch, isConnected, venueInfo, checkInError, isConnecting, test]);
+        }, [dispatch, isConnected, venueInfo, checkInError, isConnecting, test, type, isScanning]);
 
         let composition;
 

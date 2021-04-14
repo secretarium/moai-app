@@ -23,8 +23,9 @@ const Immunity = withState<ImmunityProps>()((s) => ({
     records: s.immunity.immunityRecords,
     certificate: s.immunity.immunityCertificate,
     riskProfile: s.system.riskProfile,
-    vaccineId: s.system.vaccineId
-}), ({ records, certificate, riskProfile, vaccineId, match, dispatch }) => {
+    vaccineId: s.system.vaccineId,
+    requested: s.system.certificateRequested
+}), ({ records, certificate, riskProfile, vaccineId, requested, match, dispatch }) => {
 
     const { params: { userDigest } } = match;
     const history = useHistory();
@@ -97,7 +98,7 @@ const Immunity = withState<ImmunityProps>()((s) => ({
                             </>
                         </TouchableOpacity>
                     </>}
-                {certificate
+                {requested
                     ? <>
                         <View style={{
                             paddingVertical: 30,
@@ -110,18 +111,20 @@ const Immunity = withState<ImmunityProps>()((s) => ({
                                 {i18n.t('APP_VIEW_YOUR_IMMUNITY_CERTIFICATE')}
                             </Text>
                         </View>
-                        <TouchableOpacity
-                            onPress={() => history.push('/qrcode/certificate')}
-                            style={[commonStyles.card, { backgroundColor: themeColorStyle, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]}>
-                            <>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{i18n.t('APP_VIEW_IMMUNITY_CERTIFICATE')}</Text>
-                                <Entypo
-                                    name="chevron-right"
-                                    style={{ alignSelf: 'center' }}
-                                    color={themeTextStyle}
-                                    size={24} />
-                            </>
-                        </TouchableOpacity>
+                        {certificate
+                            ? <TouchableOpacity
+                                onPress={() => history.push('/qrcode/certificate')}
+                                style={[commonStyles.card, { backgroundColor: themeColorStyle, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]}>
+                                <>
+                                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{i18n.t('APP_VIEW_IMMUNITY_CERTIFICATE')}</Text>
+                                    <Entypo
+                                        name="chevron-right"
+                                        style={{ alignSelf: 'center' }}
+                                        color={themeTextStyle}
+                                        size={24} />
+                                </>
+                            </TouchableOpacity>
+                            : <Text style={{ fontFamily: 'Poppins-Bold', color: '#A8D18D', paddingLeft: 15, marginBottom: 15 }}>{i18n.t('APP_REQUESTED_IMMUNITY_CERTIFICATE')}</Text>}
                     </>
                     : null}
                 {vaccineId

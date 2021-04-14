@@ -44,7 +44,7 @@ const App = withState()(
         initLocalize();
         const history = useHistory();
         const location = useLocation();
-        const [goToCertificate, setGoToCertificate] = useState<boolean>();
+        const [userDigest, setUserDigest] = useState<string>(undefined);
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [isConnecting, setIsConnecting] = useState(false);
@@ -87,7 +87,6 @@ const App = withState()(
                 decryptPushNotification(encryptionKey, encryptedMessage as string)
                     .then((decryptedMessage) => setNotificationMessage(decryptedMessage));
             });
-
         }, []);
 
         useEffect(() => {
@@ -101,14 +100,14 @@ const App = withState()(
             if (comps?.length === 2 && comps[0] === 'check')
                 setInitialUrl(comps[1]);
             else if (comps?.length === 2 && comps[0] === 'certificate') {
-                setInitialUrl(comps[1]);
-                setGoToCertificate(true);
+                history.push(`/immunity/${comps[1]}`);
+                setUserDigest(comps[1]);
             } else
                 setInitialUrl(null);
         }, []);
 
         useEffect(() => {
-            if (!initialUrl && !hasRequestedInitialURL) {
+            if (!initialUrl && !hasRequestedInitialURL && !userDigest) {
                 setHasRequestedInitialURL(true);
                 Linking.getInitialURL().then((url) => {
                     setHasParsedInitialURL(true);
@@ -121,14 +120,14 @@ const App = withState()(
                     parseUrl(url);
                 });
             }
-        }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
+        }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, userDigest, parseUrl]);
 
         useEffect(() => {
             if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
-                goToCertificate ? history.push(`/immunity/${initialUrl}`) : history.push(`/checkin/${initialUrl}`);
+                history.push(`/checkin/${initialUrl}`);
                 setPastInitialUrl(initialUrl);
             }
-        }, [initialUrl, history, pastInitialUrl, goToCertificate]);
+        }, [initialUrl, history, pastInitialUrl]);
 
         useEffect(() => {
             async function connectBackend() {
