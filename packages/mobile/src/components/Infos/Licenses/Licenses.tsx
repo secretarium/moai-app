@@ -6,7 +6,7 @@ import { openURL } from 'expo-linking';
 import { Entypo } from '@expo/vector-icons';
 import licensesData from '../../../../public/licenses-mobile.json';
 import MainLayout from '../../common/MainLayout';
-import { version as packageVersion } from '../../../../package.json';
+
 
 const Licenses: React.FC = () => {
     // Color theme
@@ -47,9 +47,6 @@ const Licenses: React.FC = () => {
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
                     About Moai
-                </Text>
-                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 20, paddingBottom: 15 }}>
-                    v{packageVersion}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 20, paddingBottom: 15 }}>
                     Third-Party Notice &amp; Credits

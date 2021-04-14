@@ -60,8 +60,7 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
         }
         case commands.MOAI_REQUEST_IMMUNITY_CERTIFICATE.FAILURE: {
             return {
-                ...state,
-                certificateRequested: false
+                ...state
             };
         }
         case commands.MOAI_REQUEST_IMMUNITY_CERTIFICATE.SUCCESS: {
