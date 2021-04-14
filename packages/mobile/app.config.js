@@ -56,6 +56,9 @@ const config = {
                         scheme: 'https',
                         host: '*.moai-app.com',
                         pathPrefix: '/immunity/certificate'
+                    },
+                    {
+                        scheme: 'moai-app-research'
                     }
                 ],
                 category: [
