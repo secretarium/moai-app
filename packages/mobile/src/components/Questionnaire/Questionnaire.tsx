@@ -418,12 +418,6 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     }, [venueType]);
 
     useEffect(() => {
-        console.log(feedbackToken);
-        console.log(testId);
-        console.log(venueType);
-    }, [feedbackToken, testId, venueType]);
-
-    useEffect(() => {
         switch (venue) {
             case '6':
             case '12':
