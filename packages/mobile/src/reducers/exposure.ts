@@ -24,6 +24,11 @@ export const exposure: StoreComponent<Exposure> = (state = initialState, { type,
                 risk: payload.result
             };
         }
+        case commands.MOAI_REGISTER_EXPOSURE_FEEDBACK.SUCCESS: {
+            return {
+                ...state
+            };
+        }
         default:
             return state;
     }

@@ -196,6 +196,7 @@ const App = withState()(
                     <Route path="/scanned" component={Scanned} />
                     <Route path="/venues" component={Venues} />
                     <Route path="/feedback/form/:venueType?" component={Questionnaire} />
+                    <Route path="/feedback/exposure/form/:feedbackToken/:testId" component={Questionnaire} />
                     <Route path="/feedback/completed" component={QuestionnaireCompleted} />
                     <Route path="/feedback/exposure" component={Exposure} />
                     <Route path="/feedback/riskProfile" component={RiskProfile} />
