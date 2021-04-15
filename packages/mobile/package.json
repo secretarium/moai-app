@@ -40,7 +40,7 @@
         "expo-font": "8.4.0",
         "expo-linking": "2.0.1",
         "expo-notifications": "0.8.2",
-        "expo-splash-screen": "0.8.1",
+        "expo-splash-screen": "0.10.2",
         "immutable": "4.0.0-rc.12",
         "metro-react-native-babel-preset": "0.65.2",
         "react": "17.0.2",
