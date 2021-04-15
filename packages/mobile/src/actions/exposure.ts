@@ -31,5 +31,5 @@ export const getExposureRisk = (results: number[]): Moai.FunctionAction => (disp
     }));
 };
 
-export const registerExposureFeedback = (testId: string, token: string, data: Record<string, unknown>): Moai.FunctionAction =>
+export const registerExposureFeedback = (testId: string, token: string, data: number[]): Moai.FunctionAction =>
     requestFactory(commands.MOAI_REGISTER_EXPOSURE_FEEDBACK, { testId: testId, token: token, data: data })();

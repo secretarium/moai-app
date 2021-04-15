@@ -32,8 +32,8 @@ const Checkin = withState<RouteComponentProps<{
         const history = useHistory();
         const location = useLocation<LocationTypes>();
         const [redirect, setRedirect] = useState(false);
-        const [test, setTest] = useState<string>();
-        const [type, setType] = useState<string>();
+        const [test, setTest] = useState<string>(location.state.testId);
+        const [type, setType] = useState<string>(location.state.testType);
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
             ...match.params
         });
@@ -48,13 +48,6 @@ const Checkin = withState<RouteComponentProps<{
         const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
         const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
         const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
-
-        useEffect(() => {
-            if (location.state !== null && location.state !== undefined) {
-                setTest(location.state.testId);
-                setType(location.state.testType);
-            }
-        }, [location]);
 
         useEffect(() => {
             async function connectBackend() {
@@ -95,6 +88,7 @@ const Checkin = withState<RouteComponentProps<{
                         setPageError(checkInError);
                         setShowModal(true);
                         setTest(undefined);
+                        setType(undefined);
                     });
             }
 

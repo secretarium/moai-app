@@ -19,6 +19,7 @@ const Notification = withState<NotificationProps>()(
         const { params: { notificationMessage } } = match;
         const history = useHistory();
         const [notifContent, setNotifContent] = useState();
+        const [notifObject, setNotifObject] = useState(JSON.parse(notificationMessage));
 
         // Color theme
         const colorScheme = useColorScheme();
@@ -28,6 +29,7 @@ const Notification = withState<NotificationProps>()(
         useEffect(() => {
             if (notificationMessage) {
                 const notifObj = JSON.parse(notificationMessage);
+                setNotifObject(notifObj);
                 setNotifContent(notifObj.type);
             }
         }, [notificationMessage]);
@@ -38,7 +40,9 @@ const Notification = withState<NotificationProps>()(
                     return <>
                         <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>Would you like to answer a few questions to learn more about your exposure?</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
-                            <TouchableOpacity onPress={() => history.push('/feedback/form')} style={[commonStyles.homeButton, { backgroundColor: themeColorStyle, marginBottom: 15 }]}>
+                            <TouchableOpacity onPress={() => notifObject.feedbackToken
+                                ? history.push(`/feedback/form/exposure/${notifObject.feedbackToken}/${notifObject.testId}`)
+                                : history.push('/feedback/form')} style={[commonStyles.homeButton, { backgroundColor: themeColorStyle, marginBottom: 15 }]}>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Yes</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: themeColorStyle }]}>

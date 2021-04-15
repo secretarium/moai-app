@@ -26,7 +26,7 @@ const Scanner: React.FC = () => {
 
     // Color theme
     const colorScheme = useColorScheme();
-    const themeTextStyle = colorScheme !== 'dark' ? 'white' : 'black';
+    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
     const themeModalStyle = colorScheme !== 'dark' ? 'black' : 'white';
     const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
     const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
@@ -122,14 +122,18 @@ const Scanner: React.FC = () => {
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
                         Is this a barcode for an infection test or an antibody test?
                     </Text>
-                    <View style={{ flexDirection: 'row', padding: 15, alignContent: 'center', justifyContent: 'center' }}>
-                        <Button title='Infection' onPress={() => { setAskForTestType(false); setTestType('covidTest'); }} />
-                        <Button title='Antibody' onPress={() => { setAskForTestType(false); setTestType('covidAntibodyTest'); }} />
+                    <View style={{ flexDirection: 'row' }}>
+                        <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('covidTest'); }}>
+                            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>Infection</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('covidAntibodyTest'); }}>
+                            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>Antibody</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
-            {composition}
-        </MainLayout>
+            { composition}
+        </MainLayout >
     );
 };
 

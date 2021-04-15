@@ -6,18 +6,20 @@ import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
 import { useHistory, RouteComponentProps } from 'react-router';
 import i18n from 'i18n-js';
-import { getExposureRisk } from '../../actions';
+import { getExposureRisk, registerExposureFeedback } from '../../actions';
 import { withState } from '../../store';
 
 type QuestionnaireProps = RouteComponentProps<{
     venueType: string;
+    feedbackToken: string;
+    testId: string;
 }>;
 
 const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     venues: s.exposure.venues
 }), ({ match, dispatch }) => {
 
-    const { params: { venueType } } = match;
+    const { params: { venueType, feedbackToken, testId } } = match;
 
     let questions;
 
@@ -413,7 +415,13 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
         if (venueType) {
             setVenue(venueType);
         }
-    }, []);
+    }, [venueType]);
+
+    useEffect(() => {
+        console.log(feedbackToken);
+        console.log(testId);
+        console.log(venueType);
+    }, [feedbackToken, testId, venueType]);
 
     useEffect(() => {
         switch (venue) {
@@ -551,14 +559,17 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
             }
         }
 
+        if (feedbackToken && venue) {
+            finalAnswers.unshift(Number(venue));
+            dispatch(registerExposureFeedback(testId, feedbackToken, finalAnswers));
+        }
+
         if (venue) {
             finalAnswers.unshift(Number(venue));
             dispatch(getExposureRisk(finalAnswers));
             history.push('/feedback/completed');
-            //console.log('RESULTS', finalAnswers);
         } else {
             history.push('/home');
-            //console.log('RESULTS', finalAnswers);
         }
     };
 
@@ -671,7 +682,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
 
     const renderQuestionText = (questionText) => {
         return (
-            <View style={{ marginLeft: 10, marginRight: 10 }}>
+            <View style={{ marginLeft: 15, marginRight: 15, marginBottom: 20 }}>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{questionText}</Text>
             </View>
         );
@@ -679,7 +690,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
 
     const renderInfoText = (infoText) => {
         return (
-            <View style={{ marginLeft: 10, marginRight: 10 }}>
+            <View style={{ marginLeft: 15, marginRight: 15 }}>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{infoText}</Text>
             </View>
         );
@@ -706,7 +717,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
 
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
-            <ScrollView style={{marginTop: 20}}>
+            <ScrollView style={{ marginTop: 20 }}>
                 <SimpleSurvey
                     survey={questions}
                     renderSelector={renderButton}
