@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppearanceProvider } from 'react-native-appearance';
 import { Provider as ReduxProvider } from 'react-redux';
-import { Router } from './ReactRouter';
+import { NativeRouter } from 'react-router-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import Connector from './Connector';
@@ -14,7 +14,7 @@ const Providers: React.FC = ({ children }) => (
         <ReduxProvider store={store}>
             <Connector>
                 <PersistGate loading={null} persistor={persistor}>
-                    <Router>{children}</Router>
+                    <NativeRouter>{children}</NativeRouter>
                 </PersistGate>
             </Connector>
         </ReduxProvider>

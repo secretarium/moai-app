@@ -1,20 +1,17 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
-import { useColorScheme } from 'react-native-appearance';
 import { Entypo } from '@expo/vector-icons';
-import { Link } from '../../ReactRouter';
+import { Link } from 'react-router-native';
 import MainLayout from '../common/MainLayout/index';
 import { commonStyles } from './styles';
 import i18n from 'i18n-js';
 import { version as packageVersion } from '../../../package.json';
+import { useTheme } from '../../hooks/useTheme';
 
 
-const Infos: React.FC = () => {
+const About: React.FC = () => {
 
-    // Color theme
-    const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+    const { colors } = useTheme();
 
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
@@ -22,26 +19,26 @@ const Infos: React.FC = () => {
                 paddingVertical: 30,
                 paddingHorizontal: 15
             }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
                     {i18n.t('APP_ABOUT')}
                 </Text>
-                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 20, paddingBottom: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 20, paddingBottom: 15 }}>
                     v{packageVersion}
                 </Text>
-                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>
                     Developed by Secretarium, a deep-tech startup founded in 2016 with the aim of building useful technology that never compromises anyone’s privacy.
                 </Text>
             </View>
             <ScrollView>
                 {i18n.t('APP_INFOS').map((item, index) =>
-                    <TouchableOpacity style={[commonStyles.card, { backgroundColor: themeColorStyle }]} key={index}>
+                    <TouchableOpacity style={[commonStyles.card, { backgroundColor: colors.button }]} key={index}>
                         <Link to={`/${item.toLowerCase()}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                             <>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{item}</Text>
+                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>{item}</Text>
                                 <Entypo
                                     name="chevron-right"
                                     style={{ alignSelf: 'center' }}
-                                    color={themeTextStyle}
+                                    color={colors.text}
                                     size={24} />
                             </>
                         </Link>
@@ -52,4 +49,4 @@ const Infos: React.FC = () => {
     );
 };
 
-export default Infos;
+export default About;

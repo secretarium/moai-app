@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
-import { Redirect, Route, Switch, useLocation } from './ReactRouter';
+import { Redirect, Route, Switch, useLocation } from 'react-router-native';
 import Home from './components/Home';
 import Scanned from './components/Scanned';
 import Chat from './components/Chat';
 import Scanner from './components/Scanner';
 import Checkin from './components/Checkin';
-import Keys from './components/Infos/Keys';
-import Key from './components/Infos/Keys/Key';
-import Notices from './components/Infos/Notices';
-import Licenses from './components/Infos/Licenses';
-import ExpoPushToken from './components/Infos/ExpoPushToken';
-import Infos from './components/Infos';
+import Keys from './components/About/Keys';
+import Key from './components/About/Keys/Key';
+import Notices from './components/About/Notices';
+import Licenses from './components/About/Licenses';
+import ExpoPushToken from './components/About/ExpoPushToken';
+import About from './components/About';
 import Questionnaire from './components/Questionnaire';
 import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
 import RiskProfile from './components/Questionnaire/RiskProfile';
@@ -186,7 +186,7 @@ const App = withState()(
                     <Route path={`/${i18n.t('APP_INFOS')[2]}`} component={Notices} />
                     <Route path={`/${i18n.t('APP_INFOS')[1]}`} component={Keys} />
                     <Route path="/key/:key" component={Key} />
-                    <Route path="/infos" component={Infos} />
+                    <Route path="/about" component={About} />
                     <Route path={`/${i18n.t('APP_INFOS')[0]}`} component={Licenses} />
                     <Route path="/onboarding" component={OnboardingScreen} />
                     <Route path="/home" component={Home} />

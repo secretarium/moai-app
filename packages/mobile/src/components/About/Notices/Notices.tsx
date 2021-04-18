@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
 import { Asset } from 'expo-asset';
 import { View, Text, ScrollView } from 'react-native';
-import { useColorScheme } from 'react-native-appearance';
 import MainLayout from '../../common/MainLayout/index';
 import disclaimerPath from '../../../../public/disclaimer.txt';
+import { useTheme } from '../../../hooks/useTheme';
 
 
 const Notices: React.FC = () => {
-    const [disclaimer, setDisclaimer] = useState<string>();
 
-    // Color theme
-    const colorScheme = useColorScheme();
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+    const [disclaimer, setDisclaimer] = useState<string>();
+    const { colors } = useTheme();
 
     useEffect(() => {
         const fetchDisclaimer = async () => {
@@ -30,16 +28,16 @@ const Notices: React.FC = () => {
     }, []);
 
     return (
-        <MainLayout goBackRoute={'/infos'} showGoBack={true}>
+        <MainLayout goBackRoute={'/about'} showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15
             }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
                     External Licenses
                 </Text>
                 <ScrollView>
-                    <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>{disclaimer}</Text>
+                    <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{disclaimer}</Text>
                 </ScrollView>
             </View>
         </MainLayout>

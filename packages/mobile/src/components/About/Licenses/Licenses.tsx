@@ -1,18 +1,16 @@
 import React from 'react';
 import { Text, FlatList, TouchableOpacity, View } from 'react-native';
-import { useColorScheme } from 'react-native-appearance';
 import styles from './styles';
 import { openURL } from 'expo-linking';
 import { Entypo } from '@expo/vector-icons';
 import licensesData from '../../../../public/licenses-mobile.json';
 import MainLayout from '../../common/MainLayout';
+import { useTheme } from '../../../hooks/useTheme';
 
 
 const Licenses: React.FC = () => {
-    // Color theme
-    const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+
+    const { colors } = useTheme();
 
     const getNameAndVersion = (key) => {
         let name;
@@ -40,21 +38,21 @@ const Licenses: React.FC = () => {
     });
 
     return (
-        <MainLayout goBackRoute={'/infos'} showGoBack={true}>
+        <MainLayout goBackRoute={'/about'} showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15
             }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
                     About Moai
                 </Text>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 20, paddingBottom: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 20, paddingBottom: 15 }}>
                     Third-Party Notice &amp; Credits
                 </Text>
-                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, paddingBottom: 20 }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, paddingBottom: 20 }}>
                     Moai incroporates components from the projects listed below. The original copyright notices and the licenses under which Secretarium Ltd. received such components are set forth below for informational purposes. Secretarium Ltd. reserves all rights not expressly granted herein, whether by implication, estoppel or otherwise.
                 </Text>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>
                     List of top-level dependencies
                 </Text>
             </View>
@@ -62,19 +60,19 @@ const Licenses: React.FC = () => {
                 data={getLicenses}
                 renderItem={({ item }) => (
                     <View style={styles.cardShadow}>
-                        <View style={[styles.card, { backgroundColor: themeColorStyle }]}>
+                        <View style={[styles.card, { backgroundColor: colors.button }]}>
                             <TouchableOpacity
                                 style={styles.item}
                                 onPress={() => item.licenseUrl && openURL(item.licenseUrl)}>
                                 <View style={{ maxWidth: '90%' }}>
-                                    <Text style={[styles.name, { fontFamily: 'Poppins-Bold', color: themeTextStyle }]}>{item.name}</Text>
-                                    <Text style={[styles.text, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{item.licenses}</Text>
-                                    <Text style={[styles.text, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{item.version}</Text>
+                                    <Text style={[styles.name, { fontFamily: 'Poppins-Bold', color: colors.text }]}>{item.name}</Text>
+                                    <Text style={[styles.text, { fontFamily: 'Poppins-Regular', color: colors.text }]}>{item.licenses}</Text>
+                                    <Text style={[styles.text, { fontFamily: 'Poppins-Regular', color: colors.text }]}>{item.version}</Text>
                                 </View>
                                 <Entypo
                                     name="chevron-right"
                                     style={{ alignSelf: 'center' }}
-                                    color={themeTextStyle}
+                                    color={colors.text}
                                     size={24} />
                             </TouchableOpacity>
                         </View>

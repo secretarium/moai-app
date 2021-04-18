@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid';
 import MainLayout from '../common/MainLayout';
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
-import { useColorScheme } from 'react-native-appearance';
 import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
 import { FontAwesome } from '@expo/vector-icons';
 import { getConversation, sendMessage } from '../../actions';
@@ -14,6 +13,7 @@ import { withState } from '../../store';
 import { useHistory } from 'react-router';
 import { commonStyles } from '../commonStyles';
 import i18n from 'i18n-js';
+import { useTheme } from '../../hooks/useTheme';
 
 
 const Chat = withState()((s) => ({
@@ -23,15 +23,11 @@ const Chat = withState()((s) => ({
 }), ({ messages, conversation, expoPushToken, dispatch }) => {
 
     const history = useHistory();
+    const { colors } = useTheme();
     const [stateMessages, setMessages] = useState([]);
     const [hasFetchedConversation, setHasFetchedConversation] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [error, setError] = useState<string>();
-
-    const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-    const themeInputStyle = colorScheme !== 'dark' ? '#ffffff' : '#1b1b1b';
 
     useEffect(() => {
         const msgs = messages.map(message => (
@@ -76,7 +72,7 @@ const Chat = withState()((s) => ({
                 {...props}
                 wrapperStyle={{
                     left: {
-                        backgroundColor: themeColorStyle
+                        backgroundColor: colors.button
                     },
                     right: {
                         backgroundColor: '#e95c59'
@@ -84,7 +80,7 @@ const Chat = withState()((s) => ({
                 }}
                 textStyle={{
                     left: {
-                        color: themeTextStyle,
+                        color: colors.text,
                         fontFamily: 'Poppins-Regular'
                     },
                     right: {
@@ -103,7 +99,7 @@ const Chat = withState()((s) => ({
                 {...props}
                 timeTextStyle={{
                     left: {
-                        color: themeTextStyle,
+                        color: colors.text,
                         fontFamily: 'Poppins-Regular'
                     },
                     right: {
@@ -127,23 +123,23 @@ const Chat = withState()((s) => ({
     // Message Text Input
     const renderInputToolbar = (props) => {
         return (
-            <InputToolbar {...props} containerStyle={[styles.footerContainer, { backgroundColor: themeInputStyle, borderTopColor: themeInputStyle }]} />
+            <InputToolbar {...props} containerStyle={[styles.footerContainer, { backgroundColor: colors.input, borderTopColor: colors.input }]} />
         );
     };
 
     // Message Bottom Bar (Text Input + Send Button)
     const renderComposer = (props) => {
         return (
-            <Composer {...props} textInputStyle={[styles.inputContainer, { backgroundColor: themeColorStyle, color: themeTextStyle }]} multiline={true} />
+            <Composer {...props} textInputStyle={[styles.inputContainer, { backgroundColor: colors.button, color: colors.text }]} multiline={true} />
         );
     };
 
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
             <Modal isVisible={showModal}>
-                <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
-                    <MaterialIcons name='error' size={84} color={themeTextStyle} />
-                    <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>
+                <View style={[commonStyles.modalContainer, { backgroundColor: colors.button }]}>
+                    <MaterialIcons name='error' size={84} color={colors.text} />
+                    <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>
                         {error}
                     </Text>
                     <Button title='Close' onPress={() => history.push('/')} />
