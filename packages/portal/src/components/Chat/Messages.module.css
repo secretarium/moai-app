@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: #fff;
     flex: 0.55;
+    overflow: auto;
 }
 
 .messagesHeader {
@@ -11,6 +12,7 @@
     align-items: center;
     background-color: #f4f7f9;
     font-size: 18px;
+    font-weight: bold;
     color: #000;
     height: 90px;
     border-bottom: 2px solid #dee8ee;
