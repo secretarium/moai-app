@@ -26,7 +26,7 @@ const About: React.FC = () => {
                     v{packageVersion}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>
-                    Developed by Secretarium, a deep-tech startup founded in 2016 with the aim of building useful technology that never compromises anyone’s privacy.
+                    {i18n.t('APP_ABOUT_SECRETARIUM')}
                 </Text>
             </View>
             <ScrollView>

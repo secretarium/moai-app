@@ -21,7 +21,7 @@ const QuestionnaireCompleted: React.FC = () => {
                     {i18n.t('APP_QUESTIONNAIRE_COMPLETED')}!
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>
-                    Using our model we can determine your exposure risk level, based on the answers you provided and your risk profile. Tap the button below to learn more.
+                    {i18n.t('APP_EXPOSURE_MODEL')}
                 </Text>
             </View>
             <View style={styles.homeButtonContainer} >

@@ -35,7 +35,7 @@ const Scanner: React.FC = () => {
             setAskForTestType(true);
             setTest(code.data);
         } else {
-            setError('Sorry, we were unable to recognise this code');
+            setError(i18n.t('APP_ERROR_SCANNER'));
             setShowModal(true);
             setVenuInfo(undefined);
         }
@@ -115,14 +115,18 @@ const Scanner: React.FC = () => {
             <Modal isVisible={askForTestType}>
                 <View style={[commonStyles.modalContainer, { backgroundColor: colors.modalBackground }]}>
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.modalText }}>
-                        Is this a barcode for an infection test or an antibody test?
+                        {i18n.t('APP_INFECTION_OR_ANTIBODY')}
                     </Text>
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('covidTest'); }}>
-                            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>Infection</Text>
+                            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>
+                                {i18n.t('APP_INFECTION')}
+                            </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('covidAntibodyTest'); }}>
-                            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>Antibody</Text>
+                            <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>
+                                {i18n.t('APP_ANTIBODY')}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>

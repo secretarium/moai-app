@@ -47,9 +47,9 @@ const Immunity = withState<ImmunityProps>()((s) => ({
     };
 
     const immunity = {
-        1: 'Unknown',
-        2: 'Vaccine',
-        3: 'Natural'
+        1: i18n.t('APP_UNKNOWN'),
+        2: i18n.t('APP_VACCINE'),
+        3: i18n.t('APP_NATURAL')
     };
 
     return (
@@ -180,7 +180,7 @@ const Immunity = withState<ImmunityProps>()((s) => ({
                         ? records.map((record, index) =>
                             <View style={[commonStyles.card, { backgroundColor: colors.button, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]} key={index}>
                                 <>
-                                    <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>Immunity Type: {immunity[Number(record.type)]}</Text>
+                                    <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>{i18n.t('APP_IMMUNITY_TYPE')}: {immunity[Number(record.type)]}</Text>
                                 </>
                             </View>
                         )

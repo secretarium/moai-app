@@ -34,42 +34,42 @@ const Notification = withState<NotificationProps>()(
             switch (notifContent) {
                 case 'feedbackInvitation':
                     return <>
-                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>Would you like to answer a few questions to learn more about your exposure?</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_FEEDBACK_INVITATION')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
                             <TouchableOpacity onPress={() => notifObject.feedbackToken
                                 ? history.push(`/feedback/form/exposure/${notifObject.feedbackToken}/${notifObject.testId}`)
                                 : history.push('/feedback/form')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>Yes</Text>
+                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_YES')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button }]}>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>No</Text>
+                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_NO')}</Text>
                             </TouchableOpacity>
                         </View>
                     </>;
                 case 'newImmunityRecord':
                     return <>
-                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>Your immunity record has been updated!</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_NEW_IMMUNITY_RECORD')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
                             <TouchableOpacity onPress={() => history.push('/immunity')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>Check Immunity Records</Text>
+                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_CHECK_IMMUNITY_RECORDS')}</Text>
                             </TouchableOpacity>
                         </View>
                     </>;
                 case 'immunityCertificateRequestApproved':
                     return <>
-                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>Your request for an immunity certificate has been approved! You can view it in your Immunity Records.</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_IMMUNITY_RECORD_APPROVED')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
                             <TouchableOpacity onPress={() => history.push('/immunity')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>Check Immunity Records</Text>
+                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_CHECK_IMMUNITY_RECORDS')}</Text>
                             </TouchableOpacity>
                         </View>
                     </>;
                 case 'immunityCertificateRequestRejected':
                     return <>
-                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>Sorry, your request for an immunity certificate has been rejected.</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_IMMUNITY_RECORD_REJECTED')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
                             <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
-                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>Go home</Text>
+                                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_GO_HOME')}</Text>
                             </TouchableOpacity>
                         </View>
                     </>;

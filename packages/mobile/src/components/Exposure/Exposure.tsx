@@ -42,9 +42,9 @@ const Exposure = withState()((s) => ({
     };
 
     const exposure = {
-        0: 'LOW',
-        1: 'MEDIUM',
-        2: 'HIGH'
+        0: i18n.t('APP_LOW'),
+        1: i18n.t('APP_MEDIUM'),
+        2: i18n.t('APP_HIGH')
     };
 
     const renderPin = () => {
@@ -92,7 +92,7 @@ const Exposure = withState()((s) => ({
                     style={commonStyles.pin}
                 />;
             default:
-                return <Text>Loading...</Text>;
+                return <Text>{i18n.t('APP_LOADING')}...</Text>;
         }
     };
 

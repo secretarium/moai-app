@@ -5,6 +5,7 @@ import { View, Text, ScrollView } from 'react-native';
 import MainLayout from '../../common/MainLayout/index';
 import disclaimerPath from '../../../../public/disclaimer.txt';
 import { useTheme } from '../../../hooks/useTheme';
+import i18n from 'i18n-js';
 
 
 const Notices: React.FC = () => {
@@ -20,8 +21,7 @@ const Notices: React.FC = () => {
                 const data = await FileSystem.readAsStringAsync(disclaimerFile.localUri);
                 setDisclaimer(data);
             } catch (error) {
-                console.error(error);
-                setDisclaimer('Sorry, an error occured loading the disclaimer');
+                setDisclaimer(i18n.t('APP_ERROR_LOADING_LICENSES'));
             }
         };
         fetchDisclaimer();
@@ -34,7 +34,7 @@ const Notices: React.FC = () => {
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
-                    External Licenses
+                    {i18n.t('APP_EXTERNAL_LICENSES')}
                 </Text>
                 <ScrollView>
                     <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{disclaimer}</Text>

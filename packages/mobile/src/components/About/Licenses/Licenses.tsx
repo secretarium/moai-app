@@ -6,6 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import licensesData from '../../../../public/licenses-mobile.json';
 import MainLayout from '../../common/MainLayout';
 import { useTheme } from '../../../hooks/useTheme';
+import i18n from 'i18n-js';
 
 
 const Licenses: React.FC = () => {
@@ -44,16 +45,16 @@ const Licenses: React.FC = () => {
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
-                    About Moai
+                    {i18n.t('APP_ABOUT')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 20, paddingBottom: 15 }}>
-                    Third-Party Notice &amp; Credits
+                    {i18n.t('APP_THIRD_PARTY_NOTICES')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, paddingBottom: 20 }}>
-                    Moai incroporates components from the projects listed below. The original copyright notices and the licenses under which Secretarium Ltd. received such components are set forth below for informational purposes. Secretarium Ltd. reserves all rights not expressly granted herein, whether by implication, estoppel or otherwise.
+                    {i18n.t('APP_THIRD_PARTY_LICENSES')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>
-                    List of top-level dependencies
+                    {i18n.t('APP_TOP_LEVEL_DEPENDENCIES')}
                 </Text>
             </View>
             <FlatList

@@ -6,6 +6,7 @@ import * as Crypto from 'expo-crypto';
 import styles from './styles';
 import { Link } from 'react-router-native';
 import { useTheme } from '../../../hooks/useTheme';
+import i18n from 'i18n-js';
 
 
 const Keys: React.FC = () => {
@@ -31,10 +32,10 @@ const Keys: React.FC = () => {
                 paddingHorizontal: 15
             }}>
                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
-                    Public Keys
+                    {i18n.t('APP_PUBLIC_KEYS')}
                 </Text>
                 <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>
-                    List of public keys used to connect to the Secretarium backend
+                    {i18n.t('APP_PUBLIC_KEYS_LIST')}
                 </Text>
             </View>
             <ScrollView>
@@ -53,7 +54,6 @@ const Keys: React.FC = () => {
                     </Link>
                 </TouchableOpacity>
             </ScrollView>
-
         </MainLayout>
     );
 };
