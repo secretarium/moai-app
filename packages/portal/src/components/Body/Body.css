@@ -21,18 +21,17 @@ body {
     overflow: hidden;
 }
 
-body > div {
+body > #root {
     height: 100%;
     width: 100%;
     display: grid;
-    overflow: hidden;
     grid-template-areas: "menu sub content" "status status status";
     grid-template-rows: 1fr 2rem;
     grid-template-columns: 20rem 20rem 1fr;
 }
 
 @media (max-width: 65rem) {
-    body > div {
+    body > #root {
         grid-template-columns: 4rem 20rem 1fr;
     }
 }

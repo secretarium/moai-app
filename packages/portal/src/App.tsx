@@ -38,7 +38,7 @@ const App: React.FC = () => {
                     <StatusBar />
                 </LoggedIn>
             </Body>
-        </Providers>
+        </Providers >
     );
 };
 
