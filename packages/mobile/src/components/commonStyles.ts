@@ -1,16 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { Appearance } from 'react-native-appearance';
-
-const isDark = Appearance.getColorScheme() === 'dark';
 
 export const commonStyles = StyleSheet.create({
     applicationBackground: {
         flex: 1,
-        backgroundColor: isDark ? '#1b1b1b' : '#ffffff',
         fontFamily: 'Poppins-Regular'
-    },
-    navbarBackground: {
-        backgroundColor: isDark ? '#1b1b1b' : '#ffffff'
     },
     container: {
         flex: 1

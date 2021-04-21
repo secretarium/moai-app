@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import MainLayout from '../../common/MainLayout';
-import { useColorScheme } from 'react-native-appearance';
 import { withState } from '../../../store';
+import { useTheme } from '../../../hooks/useTheme';
 
 
 const ExpoPushToken = withState()(
@@ -11,20 +11,18 @@ const ExpoPushToken = withState()(
     }),
     ({ expoPushToken }) => {
 
-        // Color theme
-        const colorScheme = useColorScheme();
-        const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+        const { colors } = useTheme();
 
         return (
-            <MainLayout goBackRoute={'/infos'} showGoBack={true}>
+            <MainLayout goBackRoute={'/about'} showGoBack={true}>
                 <View style={{
                     paddingVertical: 30,
                     paddingHorizontal: 15
                 }}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
                         Expo Push Notification Token
                     </Text>
-                    <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
+                    <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>
                         {expoPushToken}
                     </Text>
                 </View>

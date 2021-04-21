@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import MainLayout from '../common/MainLayout';
-import { useColorScheme } from 'react-native-appearance';
 import { TouchableOpacity, Text, TextInput, View, ScrollView } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
@@ -8,6 +7,7 @@ import { useHistory, RouteComponentProps } from 'react-router';
 import i18n from 'i18n-js';
 import { getExposureRisk, registerExposureFeedback } from '../../actions';
 import { withState } from '../../store';
+import { useTheme } from '../../hooks/useTheme';
 
 type QuestionnaireProps = RouteComponentProps<{
     venueType: string;
@@ -405,11 +405,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     const history = useHistory();
     const [venue, setVenue] = useState<string>();
     const [finalAnswers] = useState([]);
-
-    // Color theme
-    const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+    const { colors } = useTheme();
 
     useEffect(() => {
         if (venueType) {
@@ -644,24 +640,24 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
 
     const renderPreviousButton = (onPress, enabled) => {
         return (
-            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_PREVIOUS')}</Text>
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_PREVIOUS')}</Text>
             </TouchableOpacity>
         );
     };
 
     const renderNextButton = (onPress, enabled) => {
         return (
-            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_NEXT')}</Text>
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_NEXT')}</Text>
             </TouchableOpacity>
         );
     };
 
     const renderFinishedButton = (onPress, enabled) => {
         return (
-            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{venue ? i18n.t('APP_FINISHED') : i18n.t('APP_GO_HOME')}</Text>
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{venue ? i18n.t('APP_FINISHED') : i18n.t('APP_GO_HOME')}</Text>
             </TouchableOpacity>
         );
     };
@@ -669,7 +665,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     const renderButton = (data, index, isSelected, onPress) => {
         return (
             <TouchableOpacity key={`selection_button_view_${index}`} onPress={onPress} style={[styles.optionButton, { backgroundColor: isSelected ? '#00b0ee' : '#e95c59' }]}>
-                <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{data.optionText}</Text>
+                <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{data.optionText}</Text>
             </TouchableOpacity>
         );
     };
@@ -677,7 +673,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     const renderQuestionText = (questionText) => {
         return (
             <View style={{ marginLeft: 15, marginRight: 15, marginBottom: 20 }}>
-                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{questionText}</Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{questionText}</Text>
             </View>
         );
     };
@@ -685,7 +681,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     const renderInfoText = (infoText) => {
         return (
             <View style={{ marginLeft: 15, marginRight: 15 }}>
-                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{infoText}</Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{infoText}</Text>
             </View>
         );
     };

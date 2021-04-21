@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import MainLayout from '../common/MainLayout';
-import { useColorScheme } from 'react-native-appearance';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import { useHistory } from 'react-router';
 import { styles } from './styles';
 import { withState } from '../../store';
 import i18n from 'i18n-js';
 import { setRiskProfile } from '../../actions';
+import { useTheme } from '../../hooks/useTheme';
 
 
 const RiskProfile = withState()(
@@ -15,11 +15,7 @@ const RiskProfile = withState()(
     ({ dispatch }) => {
 
         const history = useHistory();
-
-        // Color theme
-        const colorScheme = useColorScheme();
-        const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-        const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+        const { colors } = useTheme();
 
         const questions = [
             {
@@ -83,24 +79,24 @@ const RiskProfile = withState()(
 
         const renderPreviousButton = (onPress, enabled) => {
             return (
-                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_PREVIOUS')}</Text>
+                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_PREVIOUS')}</Text>
                 </TouchableOpacity>
             );
         };
 
         const renderNextButton = (onPress, enabled) => {
             return (
-                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_NEXT')}</Text>
+                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_NEXT')}</Text>
                 </TouchableOpacity>
             );
         };
 
         const renderFinishedButton = (onPress, enabled) => {
             return (
-                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_FINISHED')}</Text>
+                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_FINISHED')}</Text>
                 </TouchableOpacity>
             );
         };
@@ -108,7 +104,7 @@ const RiskProfile = withState()(
         const renderButton = (data, index, isSelected, onPress) => {
             return (
                 <TouchableOpacity key={`selection_button_view_${index}`} onPress={onPress} style={[styles.optionButton, { backgroundColor: isSelected ? '#00b0ee' : '#e95c59' }]}>
-                    <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{data.optionText}</Text>
+                    <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{data.optionText}</Text>
                 </TouchableOpacity>
             );
         };
@@ -116,7 +112,7 @@ const RiskProfile = withState()(
         const renderQuestionText = (questionText) => {
             return (
                 <View style={{ marginLeft: 10, marginRight: 10 }}>
-                    <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{questionText}</Text>
+                    <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{questionText}</Text>
                 </View>
             );
         };
@@ -124,7 +120,7 @@ const RiskProfile = withState()(
         const renderInfoText = (infoText) => {
             return (
                 <View style={{ marginLeft: 10, marginRight: 10 }}>
-                    <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle, fontSize: 15 }}>{infoText}</Text>
+                    <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{infoText}</Text>
                 </View>
             );
         };

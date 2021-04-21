@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import * as FileSystem from 'expo-file-system';
 import { Asset } from 'expo-asset';
 import { View, Text, ScrollView } from 'react-native';
-import { useColorScheme } from 'react-native-appearance';
 import MainLayout from '../../common/MainLayout/index';
 import disclaimerPath from '../../../../public/disclaimer.txt';
+import { useTheme } from '../../../hooks/useTheme';
+import i18n from 'i18n-js';
 
 
 const Notices: React.FC = () => {
-    const [disclaimer, setDisclaimer] = useState<string>();
 
-    // Color theme
-    const colorScheme = useColorScheme();
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+    const [disclaimer, setDisclaimer] = useState<string>();
+    const { colors } = useTheme();
 
     useEffect(() => {
         const fetchDisclaimer = async () => {
@@ -22,24 +21,23 @@ const Notices: React.FC = () => {
                 const data = await FileSystem.readAsStringAsync(disclaimerFile.localUri);
                 setDisclaimer(data);
             } catch (error) {
-                console.error(error);
-                setDisclaimer('Sorry, an error occured loading the disclaimer');
+                setDisclaimer(i18n.t('APP_ERROR_LOADING_LICENSES'));
             }
         };
         fetchDisclaimer();
     }, []);
 
     return (
-        <MainLayout goBackRoute={'/infos'} showGoBack={true}>
+        <MainLayout goBackRoute={'/about'} showGoBack={true}>
             <View style={{
                 paddingVertical: 30,
                 paddingHorizontal: 15
             }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
-                    External Licenses
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
+                    {i18n.t('APP_EXTERNAL_LICENSES')}
                 </Text>
                 <ScrollView>
-                    <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>{disclaimer}</Text>
+                    <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{disclaimer}</Text>
                 </ScrollView>
             </View>
         </MainLayout>

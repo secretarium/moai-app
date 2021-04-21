@@ -1,7 +1,7 @@
 import secretariumHandler from '../utils/secretariumHandler';
 import { actionTypes, commands } from './constants';
 import { ClearKeyPair } from '@secretarium/connector';
-import { ParsedCode } from '../components/Checkin/dataParser';
+import { ParsedCode } from '../services/scanner/dataParser';
 import { requestFactory } from './factories';
 import { getConversations } from './conversations';
 

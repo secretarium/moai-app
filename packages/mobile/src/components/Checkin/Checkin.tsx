@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image } from 'react-native';
-import { useColorScheme } from 'react-native-appearance';
-import { Redirect, useLocation } from '../../ReactRouter';
+import { Redirect, useLocation } from 'react-router-native';
 import { withState } from '../../store';
-import { ParsedCode } from './dataParser';
+import { ParsedCode } from '../../services/scanner/dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -11,6 +10,7 @@ import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
 import { checkIn, connect, registerTest } from '../../actions';
 import i18n from 'i18n-js';
+import { useTheme } from '../../hooks/useTheme';
 
 type LocationTypes = {
     testId: string;
@@ -41,13 +41,8 @@ const Checkin = withState<RouteComponentProps<{
         const [showModal, setShowModal] = useState<boolean>(false);
         const [isConnecting, setIsConnecting] = useState(false);
         const [isScanning, setIsScanning] = useState(false);
-
-        // Color theme
-        const colorScheme = useColorScheme();
-        const themeModalStyle = colorScheme !== 'dark' ? 'black' : 'white';
-        const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-        const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-        const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+        const { colors, theme } = useTheme();
+        const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
 
         useEffect(() => {
             async function connectBackend() {
@@ -108,7 +103,7 @@ const Checkin = withState<RouteComponentProps<{
             composition =
                 <>
                     <View style={commonStyles.main}>
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>{!test ? `${i18n.t('APP_CHECKIN')}...` : `${i18n.t('APP_REGISTERING')}...`}</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: colors.text, top: 30 }}>{!test ? `${i18n.t('APP_CHECKIN')}...` : `${i18n.t('APP_REGISTERING')}...`}</Text>
                         <Image
                             source={themeLogoStyle}
                             resizeMode={'contain'}
@@ -127,9 +122,9 @@ const Checkin = withState<RouteComponentProps<{
         return (
             <MainLayout showGoBack={false}>
                 <Modal isVisible={showModal}>
-                    <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
-                        <MaterialIcons name='error' size={84} color={themeModalStyle} />
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
+                    <View style={[commonStyles.modalContainer, { backgroundColor: colors.modalBackground }]}>
+                        <MaterialIcons name='error' size={84} color={colors.modalText} />
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.modalText }}>
                             {pageError}
                         </Text>
                         <Button title='Close' onPress={() => history.push('/')} />
