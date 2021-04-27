@@ -8,11 +8,10 @@ export const initialState: System = {
     localConfiguration: {
         theme: 'auto'
     },
-    expoPushToken: null,
     isConnected: false,
     showOnboarding: true,
     scanCounter: 0,
-    venues: [],
+    certificateRequested: false,
     log: []
 };
 
@@ -53,6 +52,29 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 showOnboarding: payload
             };
         }
+        case actionTypes.MOAI_SET_RISK_PROFILE: {
+            return {
+                ...state,
+                riskProfile: payload.riskLevel
+            };
+        }
+        case commands.MOAI_REQUEST_IMMUNITY_CERTIFICATE.FAILURE: {
+            return {
+                ...state
+            };
+        }
+        case commands.MOAI_REQUEST_IMMUNITY_CERTIFICATE.SUCCESS: {
+            return {
+                ...state,
+                certificateRequested: true
+            };
+        }
+        case commands.MOAI_GET_VACCINE_CODE.SUCCESS: {
+            return {
+                ...state,
+                vaccineId: payload.result
+            };
+        }
         case actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN: {
             return {
                 ...state,
@@ -65,16 +87,23 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 scanCounter: state.scanCounter + 1
             };
         }
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: {
+            delete state.connectionError;
+            return {
+                ...state
+            };
+        }
         case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL: {
             return {
                 ...state,
                 isConnected: true
             };
         }
-        case commands.MOAI_GET_VENUES.SUCCESS: {
+        case actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED: {
             return {
                 ...state,
-                venues: payload.result.venues
+                isConnected: false,
+                connectionError: 'Oops! Unknown error occured while trying to connect to Moai'
             };
         }
         case actionTypes.SECRETARIUM_CONNECT_SUCCESSFUL:
@@ -116,14 +145,17 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
                 ...state
             };
         case commands.MOAI_CHECK_IN.REQUEST:
+        case commands.MOAI_REGISTER_TEST.REQUEST:
             delete state.checkInError;
             return {
                 ...state
             };
         case commands.MOAI_CHECK_IN.SUCCESS:
+        case commands.MOAI_REGISTER_TEST.SUCCESS:
             return {
                 ...state
             };
+        case commands.MOAI_REGISTER_TEST.FAILURE:
         case commands.MOAI_CHECK_IN.FAILURE:
             return {
                 ...state,

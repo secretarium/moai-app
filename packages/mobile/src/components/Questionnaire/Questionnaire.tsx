@@ -1,403 +1,713 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MainLayout from '../common/MainLayout';
-import { useColorScheme } from 'react-native-appearance';
-import { TouchableOpacity, Text, TextInput, View } from 'react-native';
+import { TouchableOpacity, Text, TextInput, View, ScrollView } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
-import { RouteComponentProps, useHistory } from 'react-router';
+import { useHistory, RouteComponentProps } from 'react-router';
+import i18n from 'i18n-js';
+import { getExposureRisk, registerExposureFeedback } from '../../actions';
 import { withState } from '../../store';
+import { useTheme } from '../../hooks/useTheme';
 
 type QuestionnaireProps = RouteComponentProps<{
     venueType: string;
+    feedbackToken: string;
+    testId: string;
 }>;
 
-const Questionnaire = withState<QuestionnaireProps>()(
-    () => ({}),
-    ({ match }) => {
+const Questionnaire = withState<QuestionnaireProps>()((s) => ({
+    venues: s.exposure.venues
+}), ({ match, dispatch }) => {
 
-        const { params: { venueType } } = match;
+    const { params: { venueType, feedbackToken, testId } } = match;
 
-        const questions = [
+    let questions;
+
+    if (venueType) {
+        questions = [
             {
                 questionType: 'Info',
-                questionText: 'Welcome to the Moai questionnaire! Help us measure your exposure risk, by answering a few questions. Tap next to continue'
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_WELCOME')
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'How many people other than you do you estimate were present?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q2'),
                 questionId: '2',
                 options: [
                     { optionText: '0', value: '0' },
-                    { optionText: '1-5', value: '1-5' },
-                    { optionText: '5-10', value: '5-10' },
-                    { optionText: '11+', value: '11+' }
+                    { optionText: '1-5', value: '1' },
+                    { optionText: '5-10', value: '2' },
+                    { optionText: '11+', value: '3' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'How long did you stay at the location?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q3'),
                 questionId: '3',
                 options: [
-                    { optionText: '5min', value: '5min' },
-                    { optionText: '10min', value: '10min' },
-                    { optionText: '15min', value: '15min' },
-                    { optionText: '20min', value: '20min' },
-                    { optionText: '30min', value: '30min' },
-                    { optionText: '45min', value: '45min' },
-                    { optionText: '1h', value: '1h' },
-                    { optionText: '2h', value: '2h' },
-                    { optionText: '2h+', value: '2h+' }
+                    { optionText: '5min', value: '0' },
+                    { optionText: '10min', value: '1' },
+                    { optionText: '15min', value: '2' },
+                    { optionText: '20min', value: '3' },
+                    { optionText: '30min', value: '4' },
+                    { optionText: '45min', value: '5' },
+                    { optionText: '1h', value: '6' },
+                    { optionText: '2h', value: '7' },
+                    { optionText: '2h+', value: '8' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Were people and staff wearing masks?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q4'),
                 questionId: '4',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Were people following the social distancing rules?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q7'),
                 questionId: '7',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Was additional protection put in place? (e.g. one-way systems, walled separators at tills, etc.)',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q8'),
                 questionId: '8',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'How many were in your party?',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q10'),
+                questionId: '9',
+                options: [
+                    { optionText: i18n.t('APP_JUST_ME'), value: '0' },
+                    { optionText: '2', value: '1' },
+                    { optionText: '2-4', value: '2' },
+                    { optionText: '4+', value: '3' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q11'),
                 questionId: '10',
                 options: [
-                    { optionText: 'Just me', value: 'Just me' },
-                    { optionText: '2', value: '2' },
-                    { optionText: '2-4', value: '2-4' },
-                    { optionText: '4+', value: '4+' }
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
                 ]
             },
             {
                 questionType: 'SelectionGroup',
-                questionText: 'Were all the members of your party from your household?',
-                questionId: '11',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13'),
+                questionId: '12',
                 options: [
-                    { optionText: 'Yes', value: 'Yes' },
-                    { optionText: 'No', value: 'No' }
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A3'),
+                        value: '2'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A4'),
+                        value: '3'
+                    }
                 ]
             },
             {
-                questionType: 'MultipleSelectionGroup',
-                questionText: 'How was the air flow? (select all that apply)',
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17'),
                 questionId: '13',
-                questionSettings: {
-                    autoAdvance: false,
-                    allowDeselection: true,
-                    maxMultiSelect: 4,
-                    minMultiSelect: 1
-                },
                 options: [
                     {
-                        optionText: 'Well ventilated (doors or windows open, large inside space e.g. museums, etc.)',
-                        value: 'Well ventilated (doors or windows open, large inside space e.g. museums, etc.)'
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A1'),
+                        value: '0'
                     },
                     {
-                        optionText: 'Air conditioning or heating was present and very likely to be working',
-                        value: 'Air conditioning or heating was present and very likely to be working'
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A2'),
+                        value: '1'
                     },
                     {
-                        optionText: 'The air was circulating a lot',
-                        value: 'The air was circulating a lot'
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A3'),
+                        value: '2'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18'),
+                questionId: '14',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A1'),
+                        value: '0'
                     },
                     {
-                        optionText: 'Confined space with no apparent ventilation',
-                        value: 'Confined space with no apparent ventilation'
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A3'),
+                        value: '2'
                     }
                 ]
             }
         ];
+    } else {
+        questions = [
+            {
+                questionType: 'Info',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_WELCOME')
+            },
+            {
 
-        const history = useHistory();
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q19'),
+                questionId: '21',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20'),
+                questionId: '0',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A3'),
+                        value: '2'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A4'),
+                        value: '3'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A5'),
+                        value: '4'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A6'),
+                        value: '5'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A7'),
+                        value: '6'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A8'),
+                        value: '7'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A9'),
+                        value: '8'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A10'),
+                        value: '9'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A11'),
+                        value: '10'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A12'),
+                        value: '11'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A13'),
+                        value: '12'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A14'),
+                        value: '13'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A15'),
+                        value: '14'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A16'),
+                        value: '15'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A17'),
+                        value: '16'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A18'),
+                        value: '17'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q20_A19'),
+                        value: '18'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q2'),
+                questionId: '2',
+                options: [
+                    { optionText: '0', value: '0' },
+                    { optionText: '1-5', value: '1' },
+                    { optionText: '5-10', value: '2' },
+                    { optionText: '11+', value: '3' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q3'),
+                questionId: '3',
+                options: [
+                    { optionText: '5min', value: '0' },
+                    { optionText: '10min', value: '1' },
+                    { optionText: '15min', value: '2' },
+                    { optionText: '20min', value: '3' },
+                    { optionText: '30min', value: '4' },
+                    { optionText: '45min', value: '5' },
+                    { optionText: '1h', value: '6' },
+                    { optionText: '2h', value: '7' },
+                    { optionText: '2h+', value: '8' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q4'),
+                questionId: '4',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q7'),
+                questionId: '7',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q8'),
+                questionId: '8',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q10'),
+                questionId: '9',
+                options: [
+                    { optionText: i18n.t('APP_JUST_ME'), value: '0' },
+                    { optionText: '2', value: '1' },
+                    { optionText: '2-4', value: '2' },
+                    { optionText: '4+', value: '3' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q11'),
+                questionId: '10',
+                options: [
+                    { optionText: i18n.t('APP_YES'), value: '0' },
+                    { optionText: i18n.t('APP_NO'), value: '1' }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13'),
+                questionId: '12',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A3'),
+                        value: '2'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q13_A4'),
+                        value: '3'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17'),
+                questionId: '13',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q17_A3'),
+                        value: '2'
+                    }
+                ]
+            },
+            {
+                questionType: 'SelectionGroup',
+                questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18'),
+                questionId: '14',
+                options: [
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A1'),
+                        value: '0'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A2'),
+                        value: '1'
+                    },
+                    {
+                        optionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q18_A3'),
+                        value: '2'
+                    }
+                ]
+            }
+        ];
+    }
 
-        // Color theme
-        const colorScheme = useColorScheme();
-        const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-        const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+    const history = useHistory();
+    const [venue, setVenue] = useState<string>();
+    const [finalAnswers] = useState([]);
+    const { colors } = useTheme();
 
-        useEffect(() => {
-            switch (venueType) {
-                case '18':
-                case '24':
-                case '30': {
-                    questions.unshift(
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'What was the location type?',
-                            questionId: '1',
-                            options: [
-                                { optionText: 'Indoor', value: 'Indoor' },
-                                { optionText: 'Outdoor', value: 'Outdoor' }
-                            ]
-                        }
-                    );
-                    break;
+    useEffect(() => {
+        if (venueType) {
+            setVenue(venueType);
+        }
+    }, [venueType]);
+
+    useEffect(() => {
+        switch (venue) {
+            case '6':
+            case '12':
+            case '18': {
+                questions.push(
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
+                        questionId: '1',
+                        options: [
+                            { optionText: i18n.t('APP_INDOOR'), value: '0' },
+                            { optionText: i18n.t('APP_OUTDOOR'), value: '1' }
+                        ]
+                    }
+                );
+                break;
+            }
+            case '14': {
+                questions.push(
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
+                        questionId: '1',
+                        options: [
+                            { optionText: i18n.t('APP_INDOOR'), value: '0' },
+                            { optionText: i18n.t('APP_OUTDOOR'), value: '1' }
+                        ]
+                    },
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
+                        questionId: '15',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
+                        ]
+                    }
+                );
+
+                const index = questions.findIndex(question => question.questionId === '4');
+                questions.splice(index, 1);
+                break;
+            }
+            case '16': {
+                questions.push(
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q1'),
+                        questionId: '1',
+                        options: [
+                            { optionText: i18n.t('APP_INDOOR'), value: '0' },
+                            { optionText: i18n.t('APP_OUTDOOR'), value: '1' }
+                        ]
+                    },
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
+                        questionId: '15',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
+                        ]
+                    }
+                );
+                break;
+            }
+            case '0':
+            case '4':
+            case '7':
+            case '9':
+            case '17': {
+                questions.push(
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
+                        questionId: '15',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
+                        ]
+                    }
+                );
+                break;
+            }
+            case '3': {
+                questions.push(
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q14'),
+                        questionId: '15',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' },
+                            { optionText: i18n.t('APP_OFTEN'), value: '2' }
+                        ]
+                    },
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q15'),
+                        questionId: '16',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
+                        ]
+                    },
+                    {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q16'),
+                        questionId: '17',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
+                        ]
+                    }
+                );
+                break;
+            }
+            default:
+                break;
+        }
+    }, [venue]);
+
+    const onSurveyFinished = (answers) => {
+        for (let i = 1; i < 18; i++) {
+            if (answers.some(answer => Number(answer.questionId) === i)) {
+                const index = answers.findIndex(answer => Number(answer.questionId) === i);
+                finalAnswers.push(Number(answers[index].value.value));
+            } else {
+                finalAnswers.push(10);
+            }
+        }
+
+        if (feedbackToken && venue) {
+            finalAnswers.unshift(Number(venue));
+            dispatch(registerExposureFeedback(testId, feedbackToken, finalAnswers));
+        }
+
+        if (venue) {
+            finalAnswers.unshift(Number(venue));
+            dispatch(getExposureRisk(finalAnswers));
+            history.push('/feedback/completed');
+        } else {
+            history.push('/home');
+        }
+    };
+
+    const onAnswerSubmitted = (answer) => {
+        switch (answer.questionId) {
+            case '10': {
+                if (answer.value.value === '1') {
+                    const index = questions.findIndex(question => question.questionId === '10');
+                    questions.splice(index + 1, 0, {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q12'),
+                        questionId: '11',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
+                        ]
+                    });
                 }
-                case '26': {
-                    questions.unshift(
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'What was the location type?',
-                            questionId: '1',
-                            options: [
-                                { optionText: 'Indoor', value: 'Indoor' },
-                                { optionText: 'Outdoor', value: 'Outdoor' }
-                            ]
-                        },
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
-                            questionId: '14',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
-                            ]
-                        }
-                    );
-
+                break;
+            }
+            case '8': {
+                if (answer.value.value === '0') {
+                    const index = questions.findIndex(question => question.questionId === '8');
+                    questions.splice(index + 1, 0, {
+                        questionType: 'TextInput',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q9'),
+                        questionId: '22',
+                        placeholderText: `${i18n.t('APP_TYPE_ANSWER')}...`
+                    });
+                }
+                break;
+            }
+            case '4': {
+                if (answer.value.value === '0') {
                     const index = questions.findIndex(question => question.questionId === '4');
-                    questions.splice(index, 1);
-                    break;
+                    questions.splice(index + 1, 0, {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q5'),
+                        questionId: '5',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
+                        ]
+                    });
+                } else if (answer.value.value === '1') {
+                    const index = questions.findIndex(question => question.questionId === '4');
+                    questions.splice(index + 1, 0, {
+                        questionType: 'SelectionGroup',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_Q6'),
+                        questionId: '6',
+                        options: [
+                            { optionText: i18n.t('APP_YES'), value: '0' },
+                            { optionText: i18n.t('APP_NO'), value: '1' }
+                        ]
+                    });
                 }
-                case '28': {
-                    questions.unshift(
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'What was the location type?',
-                            questionId: '1',
-                            options: [
-                                { optionText: 'Indoor', value: 'Indoor' },
-                                { optionText: 'Outdoor', value: 'Outdoor' }
-                            ]
-                        },
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
-                            questionId: '14',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
-                            ]
-                        }
-                    );
-                    break;
-                }
-                case '12':
-                case '16':
-                case '19':
-                case '21':
-                case '29': {
-                    questions.push(
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
-                            questionId: '14',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
-                            ]
-                        }
-                    );
-                    break;
-                }
-                case '15': {
-                    questions.push(
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Were the surfaces cleaned after every usage?',
-                            questionId: '14',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' },
-                                { optionText: 'Often but not after every usage', value: 'Often but not after every usage' }
-                            ]
-                        },
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Did any contact between members of the party occur during the gathering?',
-                            questionId: '15',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
-                            ]
-                        },
-                        {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Did it involve singing or physical activities?',
-                            questionId: '16',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
-                            ]
-                        }
-                    );
-                    break;
-                }
-                default:
-                    break;
+                break;
             }
-        }, [venueType]);
-
-        const onSurveyFinished = (answers) => {
-            const infoQuestionsRemoved = [...answers];
-
-            const answersAsObj = {};
-            for (const elem of infoQuestionsRemoved) { answersAsObj[elem.questionId] = elem.value; }
-            history.push('/questionnaireCompleted');
-            console.log(answersAsObj);
-        };
-
-        const onAnswerSubmitted = (answer) => {
-            switch (answer.questionId) {
-                case '11': {
-                    if (answer.value.value === 'No') {
-                        const index = questions.findIndex(question => question.questionId === '11');
-                        questions.splice(index + 1, 0, {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Were all the members from your support bubble?',
-                            questionId: '12',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
-                            ]
-                        });
-                    }
-                    break;
+            case '21': {
+                if (answer.value.value === '1') {
+                    const index = questions.findIndex(question => question.questionId === '21');
+                    questions.splice(index + 1, 0, {
+                        questionType: 'Info',
+                        questionText: i18n.t('APP_EXPOSURE_QUESTIONNAIRE_UNKNOWN_VENUE')
+                    });
+                    questions.length = 3;
                 }
-                case '8': {
-                    if (answer.value.value === 'Yes') {
-                        const index = questions.findIndex(question => question.questionId === '8');
-                        questions.splice(index + 1, 0, {
-                            questionType: 'TextInput',
-                            questionText: 'Can you please describe it in a few words?',
-                            questionId: '9',
-                            placeholderText: 'Type your answer...'
-                        });
-                    }
-                    break;
-                }
-                case '4': {
-                    if (answer.value.value === 'Yes') {
-                        const index = questions.findIndex(question => question.questionId === '4');
-                        questions.splice(index + 1, 0, {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Were people using the PPE correctly? (e.g. covering both the nose and mouth)',
-                            questionId: '5',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
-                            ]
-                        });
-                    } else if (answer.value.value === 'No') {
-                        const index = questions.findIndex(question => question.questionId === '4');
-                        questions.splice(index + 1, 0, {
-                            questionType: 'SelectionGroup',
-                            questionText: 'Was the staff wearing any form of PPE?',
-                            questionId: '6',
-                            options: [
-                                { optionText: 'Yes', value: 'Yes' },
-                                { optionText: 'No', value: 'No' }
-                            ]
-                        });
-                    }
-                    break;
-                }
-                default:
-                    break;
+                break;
             }
-        };
+            case '0': {
+                setVenue(answer.value.value);
+                break;
+            }
+            default:
+                break;
+        }
+    };
 
-        const renderPreviousButton = (onPress, enabled) => {
-            return (
-                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Previous</Text>
-                </TouchableOpacity>
-            );
-        };
-
-        const renderNextButton = (onPress, enabled) => {
-            return (
-                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Next</Text>
-                </TouchableOpacity>
-            );
-        };
-
-        const renderFinishedButton = (onPress, enabled) => {
-            return (
-                <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Finished</Text>
-                </TouchableOpacity>
-            );
-        };
-
-        const renderButton = (data, index, isSelected, onPress) => {
-            return (
-                <TouchableOpacity key={`selection_button_view_${index}`} onPress={onPress} style={[styles.optionButton, { backgroundColor: isSelected ? '#00b0ee' : '#e95c59' }]}>
-                    <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{data.optionText}</Text>
-                </TouchableOpacity>
-            );
-        };
-
-        const renderQuestionText = (questionText) => {
-            return (
-                <View style={{ marginLeft: 10, marginRight: 10 }}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{questionText}</Text>
-                </View>
-            );
-        };
-
-        const renderInfoText = (infoText) => {
-            return (
-                <View style={{ marginLeft: 10, marginRight: 10 }}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{infoText}</Text>
-                </View>
-            );
-        };
-
-        const renderTextBox = (onChange, value, placeholder, onBlur) => {
-            return (
-                <View style={styles.textBox}>
-                    <TextInput
-                        onChangeText={text => onChange(text)}
-                        numberOfLines={1}
-                        underlineColorAndroid={'white'}
-                        placeholder={placeholder}
-                        placeholderTextColor={'rgba(184,184,184,1)'}
-                        value={value}
-                        multiline
-                        onBlur={onBlur}
-                        blurOnSubmit
-                        returnKeyType='done'
-                    />
-                </View>
-            );
-        };
-
+    const renderPreviousButton = (onPress, enabled) => {
         return (
-            <MainLayout goBackRoute={'/venues'} showGoBack={true}>
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_PREVIOUS')}</Text>
+            </TouchableOpacity>
+        );
+    };
+
+    const renderNextButton = (onPress, enabled) => {
+        return (
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_NEXT')}</Text>
+            </TouchableOpacity>
+        );
+    };
+
+    const renderFinishedButton = (onPress, enabled) => {
+        return (
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{venue ? i18n.t('APP_FINISHED') : i18n.t('APP_GO_HOME')}</Text>
+            </TouchableOpacity>
+        );
+    };
+
+    const renderButton = (data, index, isSelected, onPress) => {
+        return (
+            <TouchableOpacity key={`selection_button_view_${index}`} onPress={onPress} style={[styles.optionButton, { backgroundColor: isSelected ? '#00b0ee' : '#e95c59' }]}>
+                <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{data.optionText}</Text>
+            </TouchableOpacity>
+        );
+    };
+
+    const renderQuestionText = (questionText) => {
+        return (
+            <View style={{ marginLeft: 15, marginRight: 15, marginBottom: 20 }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{questionText}</Text>
+            </View>
+        );
+    };
+
+    const renderInfoText = (infoText) => {
+        return (
+            <View style={{ marginLeft: 15, marginRight: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{infoText}</Text>
+            </View>
+        );
+    };
+
+    const renderTextBox = (onChange, value, placeholder, onBlur) => {
+        return (
+            <View style={styles.textBox}>
+                <TextInput
+                    onChangeText={text => onChange(text)}
+                    numberOfLines={1}
+                    underlineColorAndroid={'white'}
+                    placeholder={placeholder}
+                    placeholderTextColor={'rgba(184,184,184,1)'}
+                    value={value}
+                    multiline
+                    onBlur={onBlur}
+                    blurOnSubmit
+                    returnKeyType='done'
+                />
+            </View>
+        );
+    };
+
+    return (
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
+            <ScrollView style={{ marginTop: 20 }}>
                 <SimpleSurvey
                     survey={questions}
                     renderSelector={renderButton}
@@ -411,8 +721,9 @@ const Questionnaire = withState<QuestionnaireProps>()(
                     renderInfo={renderInfoText}
                     renderTextInput={renderTextBox}
                 />
-            </MainLayout>
-        );
-    });
+            </ScrollView>
+        </MainLayout>
+    );
+});
 
 export default Questionnaire;

@@ -25,9 +25,31 @@ export const getConversation = (address: string, token: string): MoaiPortal.Func
         }
     });
 
-export const createConversation = (title: string, name: string, userId: string): MoaiPortal.FunctionAction =>
+export const createConversation = (title: string, name: string, userId: string, positive?: boolean): MoaiPortal.FunctionAction =>
     requestFactory(commands.MOAI_CREATE_CONVERSATION, { title: title, name: name, userId: userId })({
         onResult: result => {
+            if (positive === true) {
+                return {
+                    payload: {
+                        result
+                    },
+                    workload: dispatch => {
+                        dispatch(sendMessage(result.address, result.token, 'Your COVID-19 test results are positive. You now need to quarantine.'));
+                        dispatch(getConversations());
+                    }
+                };
+            } else if (positive === false) {
+                return {
+                    payload: {
+                        result
+                    },
+                    workload: dispatch => {
+                        dispatch(sendMessage(result.address, result.token, 'Your COVID-19 test results are negative.'));
+                        dispatch(getConversations());
+                    }
+                };
+            }
+
             return {
                 payload: {
                     result
@@ -38,7 +60,7 @@ export const createConversation = (title: string, name: string, userId: string):
     });
 
 export const getLastMessage = (address: string, token: string): MoaiPortal.FunctionAction =>
-    requestFactory({...commands.MOAI_GET_LAST_MESSAGE, explicit:`mglm-${address.slice(0,5)}`}, { address: address, token: token }, true)({
+    requestFactory({ ...commands.MOAI_GET_LAST_MESSAGE, explicit: `mglm-${address.slice(0, 5)}` }, { address: address, token: token }, true)({
         onResult: result => {
             return {
                 payload: {

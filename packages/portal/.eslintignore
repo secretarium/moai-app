@@ -1,0 +1,9 @@
+**/assets/**
+**/build/**
+**/coverage/**
+**/lib/**
+**/node_modules/**
+**/public/**
+**/reports/**
+**/.stryker-tmp/**
+!.eslintrc.js

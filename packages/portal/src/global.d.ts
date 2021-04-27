@@ -8,14 +8,23 @@ declare namespace MoaiPortal {
         (dispatch: Dispatch, getState: () => State): any;
     }
 
+    type ErrorObject = {
+        errorCode: string | number;
+        errorMessage: string,
+        errorDescription?: string,
+        errorTimestamp: string | number;
+        errorStack?: Array<ErrorObject>;
+    };
+
     interface AnyAction extends ReduxAnyAction {
         payload?: any;
+        error?: Error | ErrorObject;
         workload?: FunctionAction;
         unsubscribe?: boolean;
     }
 
     interface RequestFactory {
-        (command: QueryCommand & ActionTypeDecoration, args?: { [key: string]: any }, subscribe?: boolean, ticker?: (index: number, error?: boolean) => any): (handlers?: QueryHandlers) => (dispatch: Dispatch) => Promise<AnyAction>;
+        (command: QueryCommand & ActionTypeDecoration, args?: { [key: string]: any }, subscribe?: boolean, ticker?: (index: number, error?: boolean) => any): (handlers?: QueryHandlers) => (dispatch: Dispatch) => Promise<AnyAction | void>;
     }
 
     interface Dispatch {
@@ -109,14 +118,20 @@ declare namespace MoaiPortal {
         keyPairs: EncryptedKeyPair[];
     };
 
-    type Tracer = {
+    type Principal = {
         isConnected: boolean;
-        isVerified: boolean;
-        emailVerificationAttempt?: number;
-        validationError?: string;
+        group: number;
+        groupMembers: Tracer[];
+        isAdmin?: boolean;
         loginError?: string;
         registrationError?: string;
-        challengeError?: string;
+    };
+
+    type Tracer = {
+        tracer: { username: string };
+        userId: number;
+        status: number;
+        date: number;
     };
 
     type SearchResults = {
@@ -159,11 +174,26 @@ declare namespace MoaiPortal {
         messageError?: string;
     };
 
+    type RequestRecords = {
+        type: number;
+        date: number;
+        forecastedEndDate: number;
+        registerer: string;
+        registrationDate: number;
+    };
+
+    type Certificates = {
+        isFetching: boolean;
+        requesters: string[];
+        requestRecords: RequestRecords[];
+    };
+
     type State = {
         system: System;
-        tracer: Tracer;
+        principal: Principal;
         conversations: Conversations;
         searchResults: SearchResults;
+        certificates: Certificates;
         vault: Vault;
     };
 

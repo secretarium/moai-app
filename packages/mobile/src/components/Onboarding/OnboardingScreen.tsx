@@ -3,7 +3,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import Onboarding from 'react-native-onboarding-swiper';
 import { actionTypes } from '../../actions/constants';
 import { withState } from '../../store';
-import { Redirect } from '../../ReactRouter';
+import { Redirect } from 'react-router-native';
 
 const OnboardingScreen = withState()(
     null,

@@ -1,7 +1,7 @@
 import secretariumHandler from '../utils/secretariumHandler';
 import { actionTypes, commands } from './constants';
 import { ClearKeyPair } from '@secretarium/connector';
-import { ParsedCode } from '../components/Checkin/dataParser';
+import { ParsedCode } from '../services/scanner/dataParser';
 import { requestFactory } from './factories';
 import { getConversations } from './conversations';
 
@@ -36,12 +36,12 @@ export const connect = (clearKeyPair: ClearKeyPair): Moai.AnyAction => ({
                         });
                     })
                     .catch((error) => {
-                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED });
+                        dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED, error });
                         console.error('connect', error);
                     });
             })
             .catch((error) => {
-                dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED });
+                dispatch({ type: actionTypes.SECRETARIUM_CONNECT_CONFIGURATION_FAILED, error });
                 console.error('connect', error);
             });
     }
@@ -65,25 +65,28 @@ export const checkIn = (venue: ParsedCode): Moai.FunctionAction =>
         })
     });
 
-export const getVenues = (): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_GET_VENUES, { max: 10, cursor: 0 })({
-        onResult: result => {
-            return {
-                payload: {
-                    result
-                }
-            };
-        },
+export const registerTest = (testId: string, type: string): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_TEST, { testId: testId, type: type })({
         onError: (error) => ({
             error: new Error(error)
         })
     });
 
-export const registerNotificationToken = (): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { type: 'expo', data: 'notifToken' })();
+export const registerNotificationToken = (expoPushToken: string, encryptionKey: string, language: string): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_NOTIFICATION_TOKEN, { token: expoPushToken, encryptionKey: encryptionKey, language: language })({
+        onExecuted: () => ({
+            workload: dispatch => {
+                dispatch({ type: actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN, payload: expoPushToken });
+            }
+        }),
+        onError: (error) => ({
+            error: new Error(error)
+        })
+    });
 
-export const getExposureToken = (): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_GET_EXPOSURE_RISK, {})();
-
-export const registerExposureFeedback = (testId: string, token: string, data: Record<string, unknown>): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_EXPOSURE_FEEDBACK, { testId: testId, token: token, data: data })();
+export const setRiskProfile = (riskLevel: 'low' | 'medium' | 'high'): Moai.AnyAction => ({
+    type: actionTypes.MOAI_SET_RISK_PROFILE,
+    payload: {
+        riskLevel
+    }
+});

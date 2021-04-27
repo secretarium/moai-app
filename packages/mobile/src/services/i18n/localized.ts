@@ -6,6 +6,7 @@ import fr from './locales/fr.json';
 import pl from './locales/pl.json';
 
 export const initLocalize = (): void => {
+    i18n.defaultLocale = 'en';
     i18n.fallbacks = true;
     i18n.translations = { fr, en, pl };
     i18n.locale = Localization.locale;

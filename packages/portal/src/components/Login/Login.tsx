@@ -5,7 +5,6 @@ import { version as packageVersion } from '../../../package.json';
 import Hand from '../../assets/hand.png';
 import MoaiLogo from '../../assets/logo-black.png';
 import LoginRegister from './LoginRegister';
-import LoginValidation from './LoginValidation';
 import LoginLanding from './LoginLanding';
 import LoginSignin from './LoginSignin';
 import style from './Login.module.css';
@@ -22,8 +21,7 @@ const Login: React.FC = () => {
             <div className={style.containerLogin}>
                 <img src={MoaiLogo} alt="moai logo" style={{ width: '100px', height: 'auto', marginBottom: '20px' }} />
                 <Switch>
-                    <Route path="/login/register" component={LoginRegister} />
-                    <Route path="/login/validate" component={LoginValidation} />
+                    <Route path="/login/register/:token?" component={LoginRegister} />
                     <Route path="/login/signin" component={LoginSignin} />
                     <Route component={LoginLanding} />
                 </Switch>

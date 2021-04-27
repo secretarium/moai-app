@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image } from 'react-native';
-import { useColorScheme } from 'react-native-appearance';
-import { Redirect } from '../../ReactRouter';
+import { Redirect, useLocation } from 'react-router-native';
 import { withState } from '../../store';
-import { ParsedCode, Sources } from './dataParser';
+import { ParsedCode } from '../../services/scanner/dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 import { RouteComponentProps, useHistory } from 'react-router';
 import MainLayout from '../common/MainLayout';
-import { checkIn, connect } from '../../actions';
+import { checkIn, connect, registerTest } from '../../actions';
+import i18n from 'i18n-js';
+import { useTheme } from '../../hooks/useTheme';
 
+type LocationTypes = {
+    testId: string;
+    testType: 'covidTest' | 'covidAntibodyTest';
+};
 
 const Checkin = withState<RouteComponentProps<{
     venue: string;
@@ -25,22 +30,19 @@ const Checkin = withState<RouteComponentProps<{
     ({ dispatch, localKey, match, checkInError, isConnected }) => {
 
         const history = useHistory();
+        const location = useLocation<LocationTypes>();
         const [redirect, setRedirect] = useState(false);
+        const [test, setTest] = useState<string>(location.state.testId);
+        const [type, setType] = useState<string>(location.state.testType);
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
-            source: Sources.MOAI,
-            type: null,
             ...match.params
         });
         const [pageError, setPageError] = useState<string>();
         const [showModal, setShowModal] = useState<boolean>(false);
         const [isConnecting, setIsConnecting] = useState(false);
-
-        // Color theme
-        const colorScheme = useColorScheme();
-        const themeModalStyle = colorScheme !== 'dark' ? 'black' : 'white';
-        const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-        const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-        const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+        const [isScanning, setIsScanning] = useState(false);
+        const { colors, theme } = useTheme();
+        const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
 
         useEffect(() => {
             async function connectBackend() {
@@ -57,6 +59,7 @@ const Checkin = withState<RouteComponentProps<{
 
         useEffect(() => {
             async function checkInLocation() {
+                setIsScanning(true);
                 dispatch(checkIn(venueInfo))
                     .then(() => {
                         setRedirect(true);
@@ -68,10 +71,29 @@ const Checkin = withState<RouteComponentProps<{
                         setVenueInfo(undefined);
                     });
             }
-            if (isConnected && venueInfo && !isConnecting) {
-                checkInLocation();
+
+            async function registerUserTest() {
+                setIsScanning(true);
+                dispatch(registerTest(test, type))
+                    .then(() => {
+                        setRedirect(true);
+                    })
+                    .catch((error) => {
+                        console.error('registerTest', error);
+                        setPageError(checkInError);
+                        setShowModal(true);
+                        setTest(undefined);
+                        setType(undefined);
+                    });
             }
-        }, [dispatch, isConnected, venueInfo, checkInError, isConnecting]);
+
+            if (isConnected && venueInfo && !isConnecting && !test && !isScanning) {
+                checkInLocation();
+            } else if (isConnected && test && !isConnecting && !isScanning) {
+                registerUserTest();
+            }
+
+        }, [dispatch, isConnected, venueInfo, checkInError, isConnecting, test, type, isScanning]);
 
         let composition;
 
@@ -81,7 +103,7 @@ const Checkin = withState<RouteComponentProps<{
             composition =
                 <>
                     <View style={commonStyles.main}>
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Checking in...</Text>
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: colors.text, top: 30 }}>{!test ? `${i18n.t('APP_CHECKIN')}...` : `${i18n.t('APP_REGISTERING')}...`}</Text>
                         <Image
                             source={themeLogoStyle}
                             resizeMode={'contain'}
@@ -100,9 +122,9 @@ const Checkin = withState<RouteComponentProps<{
         return (
             <MainLayout showGoBack={false}>
                 <Modal isVisible={showModal}>
-                    <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
-                        <MaterialIcons name='error' size={84} color={themeModalStyle} />
-                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeModalStyle }}>
+                    <View style={[commonStyles.modalContainer, { backgroundColor: colors.modalBackground }]}>
+                        <MaterialIcons name='error' size={84} color={colors.modalText} />
+                        <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.modalText }}>
                             {pageError}
                         </Text>
                         <Button title='Close' onPress={() => history.push('/')} />

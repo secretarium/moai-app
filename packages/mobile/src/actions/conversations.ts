@@ -2,6 +2,7 @@ import { commands } from './constants';
 import { requestFactory } from './factories';
 import { sendPushNotification } from '../services/notifications/notifications';
 
+
 export const getConversations = (): Moai.FunctionAction =>
     requestFactory(commands.MOAI_GET_CONVERSATIONS, { max: 10, cursor: 0 })({
         onResult: result => {
@@ -46,7 +47,7 @@ export const getLastMessage = (address: string, token: string, expoPushToken: st
     requestFactory(commands.MOAI_GET_LAST_MESSAGE, { address: address, token: token }, true)({
         onResult: result => {
             if (result.sender === 0) {
-                sendPushNotification(result.text, expoPushToken);
+                sendPushNotification(result.text, expoPushToken, '/chat');
             }
             return {
                 payload: {

@@ -29,7 +29,7 @@
 }
 
 .option > span {
-    padding-left: 0.8rem;
+    padding-left: 0.9rem;
 }
 
 @media (max-width: 1200px) {
@@ -45,7 +45,16 @@
         object-fit: contain;
     }
 
-    .option > span {
+    .navOption {
         display: none;
+    }
+
+    .options {
+        padding: 25px 0px 25px 0px;
+        text-align: center;
+    }
+
+    .option > span {
+        padding-left: 0;
     }
 }

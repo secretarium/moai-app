@@ -3,6 +3,7 @@ let actionMarker = 0;
 const commandsPrototype = {
     MOAI: { application: 'moai', command: 'update-user' },
     MOAI_CHECK_IN: { application: 'moai', command: 'check-in' },
+    MOAI_REGISTER_TEST: { application: 'moai', command: 'register-test' },
     MOAI_GET_CONVERSATIONS: { application: 'moai', command: 'get-conversations' },
     MOAI_GET_CONVERSATION: { application: 'moai', command: 'conversations-get' },
     MOAI_GET_LAST_MESSAGE: { application: 'moai', command: 'conversations-get-latest-message' },
@@ -12,6 +13,10 @@ const commandsPrototype = {
     MOAI_REGISTER_NOTIFICATION_TOKEN: { application: 'moai', command: 'register-notification-token' },
     MOAI_GET_EXPOSURE_RISK: { application: 'moai', command: 'get-exposure-risk' },
     MOAI_REGISTER_EXPOSURE_FEEDBACK: { application: 'moai', command: 'register-exposure-feedback' },
+    MOAI_GET_IMMUNITY_RECORDS: { application: 'moai', command: 'get-immunity-records' },
+    MOAI_REQUEST_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'request-immunity-certificate' },
+    MOAI_GET_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'get-immunity-certificate' },
+    MOAI_GET_VACCINE_CODE: {application: 'moai', command: 'register-vaccine-id'},
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
@@ -21,6 +26,7 @@ const actionPrototypes = {
     MOAI_SHOW_ONBOARDING: 'MOAI_SHOW_ONBOARDING',
     MOAI_SAVE_QR_CODE: 'MOAI_SAVE_QR_CODE',
     MOAI_INCREMENT_SCAN_COUNTER: 'MOAI_INCREMENT_SCAN_COUNTER',
+    MOAI_SET_RISK_PROFILE: 'MOAI_SET_RISK_PROFILE',
     SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED: 'SECRETARIUM_CONNECT_CONFIGURATION_REQUESTED',
     SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL: 'SECRETARIUM_CONNECT_CONFIGURATION_SUCCESSFUL',
     SECRETARIUM_CONNECT_CONFIGURATION_FAILED: 'SECRETARIUM_CONNECT_CONFIGURATION_FAILED',

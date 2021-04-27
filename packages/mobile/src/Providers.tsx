@@ -1,23 +1,23 @@
 import React from 'react';
 import { AppearanceProvider } from 'react-native-appearance';
 import { Provider as ReduxProvider } from 'react-redux';
-import { Router } from './ReactRouter';
+import { NativeRouter } from 'react-router-native';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
-import FontLoader from './FontLoader';
+import Connector from './Connector';
 import secretariumHandler from './utils/secretariumHandler';
 
 secretariumHandler.initialize();
 
 const Providers: React.FC = ({ children }) => (
     <AppearanceProvider>
-        <FontLoader>
-            <ReduxProvider store={store}>
+        <ReduxProvider store={store}>
+            <Connector>
                 <PersistGate loading={null} persistor={persistor}>
-                    <Router>{children}</Router>
+                    <NativeRouter>{children}</NativeRouter>
                 </PersistGate>
-            </ReduxProvider>
-        </FontLoader>
+            </Connector>
+        </ReduxProvider>
     </AppearanceProvider>
 );
 

@@ -1,0 +1,27 @@
+.bar {
+    grid-area: status;
+    display: block;
+    line-height: 2.3rem;
+    padding: 0 2rem;
+    overflow: hidden;
+    color: #2F323E;
+}
+
+.bar i {
+    margin-right: 1rem;
+}
+
+.bar.alert {
+    border-top: solid 1px rgb(187, 33, 33);
+    background-color: rgb(187, 33, 33);
+    color: white;
+}
+
+.credits {
+    float: right;
+}
+
+.credits a {
+    color: inherit;
+    transition: none;
+}

@@ -1,8 +1,9 @@
 const config = {
     name: 'Moai',
-    description: 'An app for Confidential Track and Trace',
-    version: '0.0.23',
-    slug: 'moai-confidential-test-and-trace',
+    description: 'A research app developed by Secretarium',
+    version: '0.0.47',
+    slug: 'moai-app-research',
+    scheme: 'moai-app-research',
     icon: './assets/icon.png',
     splash: {
         image: './assets/splash.png',
@@ -12,18 +13,21 @@ const config = {
     userInterfaceStyle: 'automatic',
     orientation: 'portrait',
     ios: {
-        buildNumber: '23',
+        buildNumber: '47',
         icon: './assets/ios/icon.png',
-        bundleIdentifier: 'com.secretarium.moai.app',
+        bundleIdentifier: 'com.secretarium.moai.research',
         associatedDomains: [
             'applinks:moaiapp.com',
             'applinks:moai-app.com'
-        ]
+        ],
+        infoPlist: {
+            NSCameraUsageDescription: 'This app uses the camera to check into venues (e.g. bars, restaurants, shops, music venues, sports arenas) by scanning QR code posters at the entrances.'
+        }
     },
     android: {
-        versionCode: 23,
+        versionCode: 47,
         icon: './assets/android/icon.png',
-        package: 'com.secretarium.moai.app',
+        package: 'com.secretarium.moai.research',
         useNextNotificationsApi: true,
         permissions: [
             'CAMERA'
@@ -40,8 +44,21 @@ const config = {
                     },
                     {
                         scheme: 'https',
+                        host: '*.moaiapp.com',
+                        pathPrefix: '/immunity/certificate'
+                    },
+                    {
+                        scheme: 'https',
                         host: '*.moai-app.com',
                         pathPrefix: '/check'
+                    },
+                    {
+                        scheme: 'https',
+                        host: '*.moai-app.com',
+                        pathPrefix: '/immunity/certificate'
+                    },
+                    {
+                        scheme: 'moai-app-research'
                     }
                 ],
                 category: [
@@ -54,6 +71,9 @@ const config = {
     web: {
         favicon: './assets/android/icon.png'
     },
+    assetBundlePatterns: [
+        '**/*'
+    ],
     packagerOpts: {
         config: 'metro.config.js',
         sourceExts: [

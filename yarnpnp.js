@@ -2,7 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const getPluginUrl = plugin => `https://raw.githubusercontent.com/yarnpkg/berry/master/packages/plugin-${plugin}/bin/%40yarnpkg/plugin-${plugin}.js`;
+const getPluginUrl = plugin => `https://raw.githubusercontent.com/yarnpkg/berry/6ede39d33985e146578abb6907583fdd291e8095/packages/plugin-${plugin}/bin/%40yarnpkg/plugin-${plugin}.js`;
 
 const packageData = require('./package.json');
 

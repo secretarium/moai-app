@@ -10,3 +10,4 @@
 **/.stryker-tmp/**
 **/.yarn/**
 !.eslintrc.js
+**/vendor/msrCrypto.js

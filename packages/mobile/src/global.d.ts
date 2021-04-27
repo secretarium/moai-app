@@ -97,12 +97,27 @@ declare namespace Moai {
         currentConnection?: SystemConnection;
         checkInError?: string;
         connectionError?: string;
-        expoPushToken: string;
+        expoPushToken?: string;
         isConnected: boolean;
         showOnboarding: boolean;
+        riskProfile?: 'low' | 'medium' | 'high';
+        vaccineId?: string;
+        certificateRequested?: boolean;
         scanCounter: number;
-        venues: Venue[];
         log: SystemLog;
+    };
+
+    type Exposure = {
+        venues: Venue[];
+        cumulatedRisk?: string;
+        risk?: Risk;
+    };
+
+    type Risk = {
+        inferred: number;
+        riskIndex: number;
+        colour: string;
+        visuallyImpairedColour: string;
     };
 
     type Venue = {
@@ -131,9 +146,32 @@ declare namespace Moai {
         messageError?: string;
     };
 
+    type ImmunityRecord = {
+        type: 1 | 2 | 3;
+        datetime?: number;
+        forecastedEndDate?: number;
+        registerer?: string;
+        registrationDate?: number;
+        metadata?: Record<string, string>;
+    };
+
+    type ImmunityCertificate = {
+        userDetailsDigest: string;
+        expiryDate: number;
+        verificationToken: string;
+        approver: string;
+    };
+
+    type Immunity = {
+        immunityRecords: ImmunityRecord[];
+        immunityCertificate: ImmunityCertificate;
+    };
+
     type State = {
+        exposure: Exposure;
         system: System;
         conversations: Conversations;
+        immunity: Immunity;
     };
 }
 

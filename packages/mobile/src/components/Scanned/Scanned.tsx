@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Text, Image, View, Button, TouchableOpacity } from 'react-native';
-import { useColorScheme } from 'react-native-appearance';
 import { withState } from '../../store';
 import MainLayout from '../common/MainLayout';
-import { styles, commonStyles } from './styles';
+import { commonStyles } from './styles';
 import Modal from 'react-native-modal';
 import { useHistory } from 'react-router';
+import i18n from 'i18n-js';
+import { useTheme } from '../../hooks/useTheme';
 
 
 const Scanned = withState()((s) => ({
@@ -14,24 +15,22 @@ const Scanned = withState()((s) => ({
 
     const history = useHistory();
     const [showModal, setShowModal] = useState<boolean>(scanCounter === 1 || scanCounter === 5 || scanCounter === 15);
-    const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-    const themeLogoStyle = colorScheme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+    const { colors, theme } = useTheme();
+    const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     return (
-        <MainLayout showGoBack={true}>
-            <Modal isVisible={showModal}>
-                <View style={[commonStyles.modalContainer, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: themeTextStyle }}>
-                        Hi there! Remember to use the Moai App to scan the barcode, after getting tested for the coronavirus!
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
+            <Modal isVisible={false}>
+                <View style={[commonStyles.modalContainer, { backgroundColor: colors.button }]}>
+                    <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>
+                        {i18n.t('APP_USE_APP_TO_SCAN_TEST')}
                     </Text>
-                    <Button title="Got it!" onPress={() => setShowModal(false)} />
+                    <Button title={`${i18n.t('APP_GOT_IT')}!`} onPress={() => setShowModal(false)} />
                 </View>
             </Modal>
             <View style={commonStyles.main}>
-                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: themeTextStyle, top: 30 }}>Success!</Text>
+                <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 20, color: colors.text, top: 30 }}>{i18n.t('APP_SUCCESS')}!</Text>
                 <Image
                     source={themeLogoStyle}
                     resizeMode={'contain'}
@@ -45,15 +44,15 @@ const Scanned = withState()((s) => ({
                     />
                 </View>
             </View>
-            <View style={styles.messageContainer} >
-                <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: themeTextStyle, backgroundColor: themeColorStyle }]}>
-                    <Bold>How will NHS Test and Trace contact you?</Bold>{'\n'}{'\n'}
-                        You will be contacted via messaging, directly inside of Moai!
+            <View style={commonStyles.messageContainer} >
+                <Text style={[commonStyles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: colors.text, backgroundColor: colors.button }]}>
+                    <Bold>{i18n.t('APP_HOW_WILL_WE_CONTACT_YOU')}?</Bold>{'\n'}{'\n'}
+                    {i18n.t('APP_CONTACT_VIA_MESSAGING')}!
                 </Text>
             </View>
-            <View style={styles.homeButtonContainer} >
-                <TouchableOpacity onPress={() => history.push('/')} style={[styles.homeButton, { backgroundColor: themeColorStyle }]}>
-                    <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>Go back</Text>
+            <View style={commonStyles.homeButtonContainer} >
+                <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button }]}>
+                    <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_GO_HOME')}</Text>
                 </TouchableOpacity>
             </View>
         </MainLayout>
