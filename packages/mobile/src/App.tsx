@@ -204,11 +204,7 @@ const App = withState()(
                     <Route path="/immunity/:userDigest?" component={Immunity} />
                     <Route path="/setup" component={Setup} />
                     <Route path="/qrcode/:type" component={QR} />
-                    <Route render={() => {
-                        // if (showOnboarding)
-                        //     return <Redirect to="/onboarding" />;
-                        return <Redirect to="/home" />;
-                    }} />
+                    <Route render={() => { return <Redirect to="/home" />; }} />
                 </Switch>
             </>
         );

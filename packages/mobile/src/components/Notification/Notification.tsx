@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import MainLayout from '../common/MainLayout';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, useHistory } from 'react-router';
 import i18n from 'i18n-js';
 import { withState } from '../../store';
-import { useHistory } from 'react-router';
 import { commonStyles } from '../commonStyles';
 import { useTheme } from '../../hooks/useTheme';
 
