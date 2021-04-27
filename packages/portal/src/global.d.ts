@@ -174,11 +174,26 @@ declare namespace MoaiPortal {
         messageError?: string;
     };
 
+    type RequestRecords = {
+        type: number;
+        date: number;
+        forecastedEndDate: number;
+        registerer: string;
+        registrationDate: number;
+    };
+
+    type Certificates = {
+        isFetching: boolean;
+        requesters: string[];
+        requestRecords: RequestRecords[];
+    };
+
     type State = {
         system: System;
         principal: Principal;
         conversations: Conversations;
         searchResults: SearchResults;
+        certificates: Certificates;
         vault: Vault;
     };
 
