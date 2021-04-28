@@ -10,6 +10,9 @@ import { getVaccineCode } from '../../actions';
 import { useTheme } from '../../hooks/useTheme';
 
 type QRProps = RouteComponentProps<{
+    /**
+     * Type of QR code - can be either a certificate or a vaccine
+     */
     type: string;
 }>;
 

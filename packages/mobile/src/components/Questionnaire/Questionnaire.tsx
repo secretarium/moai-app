@@ -10,8 +10,17 @@ import { withState } from '../../store';
 import { useTheme } from '../../hooks/useTheme';
 
 type QuestionnaireProps = RouteComponentProps<{
+    /**
+     * 1 of 19 NHS location types
+     */
     venueType: string;
+    /**
+     * A token sent out by a Moai Portal user
+     */
     feedbackToken: string;
+    /**
+     * ID of a COVID-19 test
+     */
     testId: string;
 }>;
 
@@ -23,6 +32,10 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
 
     let questions;
 
+    /**
+     * Set the appropriate set of the questions for the questionnaire
+     * based on the type of venue the user visited
+     */
     if (venueType) {
         questions = [
             {

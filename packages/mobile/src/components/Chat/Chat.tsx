@@ -60,6 +60,11 @@ const Chat = withState()((s) => ({
         }
     };
 
+    /**
+     * Function to check if an object is empty
+     * @param obj - A JS object
+     * @returns A boolean
+     */
     const isEmptyObject = (obj) => {
         return JSON.stringify(obj) === '{}';
     };

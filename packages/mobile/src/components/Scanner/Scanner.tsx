@@ -26,6 +26,10 @@ const Scanner: React.FC = () => {
     const { colors, theme } = useTheme();
     const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
 
+    /**
+     * Function to handle scanned code, which can be either a QR code or a barcode 128
+     * @param code - Code scanned by the user
+     */
     const handleBarCodeScanned = (code) => {
         const parsedCode = parseCode(code);
         if (parsedCode.source !== Sources.INVALID) {

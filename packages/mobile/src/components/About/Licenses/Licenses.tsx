@@ -13,24 +13,33 @@ const Licenses: React.FC = () => {
 
     const { colors } = useTheme();
 
-    const getNameAndVersion = (key) => {
+    /**
+     * Function to extract name and version of the package
+     * @param packageName - Name of the package
+     * @returns A tuple [name, version] containing name and version of the package
+     */
+    const getNameAndVersion = (packageName: string) => {
         let name;
         let version;
-        if (key.split('@')[0].length < 1) {
-            name = key.split('@')[1];
-            version = key.split('@')[2];
+        if (packageName.split('@')[0].length < 1) {
+            name = packageName.split('@')[1];
+            version = packageName.split('@')[2];
         } else {
-            [name, version] = key.split('@');
+            [name, version] = packageName.split('@');
         }
         return [name, version];
     };
 
-    const getLicenses = Object.keys(licensesData).map(key => {
-        const { licenses, ...license } = licensesData[key];
-        const [name, version] = getNameAndVersion(key);
+    /**
+     * Function to iterate through the JSON containing all the dependencies
+     * used to create Moai
+     */
+    const getLicenses = Object.keys(licensesData).map(packageName => {
+        const { licenses, ...license } = licensesData[packageName];
+        const [name, version] = getNameAndVersion(packageName);
 
         return {
-            key,
+            packageName,
             name,
             licenses,
             version,

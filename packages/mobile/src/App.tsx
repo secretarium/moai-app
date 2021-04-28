@@ -33,6 +33,10 @@ import i18n from 'i18n-js';
 import { registerForPushNotificationsAsync, createPushNotifEncryptionKey, decryptPushNotification } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
 
+/**
+ * Top level React Component for the application
+ */
+
 const App = withState()(
     (s) => ({
         localKey: s.system.localKey,
@@ -58,11 +62,17 @@ const App = withState()(
         const notificationListener = useRef<any>();
         const responseListener = useRef<any>();
 
+        /**
+         * Handles loading of the fonts used throughout the application
+         */
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
             'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
         });
 
+        /**
+         * Handles Expo notifications
+         */
         Notifications.setNotificationHandler({
             handleNotification: async () => ({
                 shouldShowAlert: location.pathname !== '/chat',
@@ -95,6 +105,10 @@ const App = withState()(
             }
         }, [notificationMessage, history]);
 
+        /**
+         * Application can be opened based on a QR code scan
+         * This function parses a URL that triggers the application to open
+         */
         const parseUrl = useCallback((url: string | null | undefined) => {
             const comps = url ? url.split('/').slice(-2) : undefined;
             if (comps?.length === 2 && comps[0] === 'check')
@@ -152,6 +166,9 @@ const App = withState()(
             }
         }, [history, initialUrl]);
 
+        /**
+         * Function to reconnect to the Secretarium backend
+         */
         const reconnect = () => {
             dispatch(connect(localKey));
         };
@@ -163,6 +180,9 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
+        /**
+         * Render a splash screen if assets are not loaded, or application fails to connect to the backend
+         */
         if (!fontsLoaded || !hasParsedInitialURL || !isConnected)
             return <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
                 <Image source={require('./assets/logo-white.png')} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
