@@ -7,6 +7,10 @@ import style from './Contact.module.css';
 
 
 type ContactProps = {
+    /**
+     * Address endpoint and token for a specific conversation between
+     * a user on the Portal and a user on the Mobile App
+     */
     conversation: MoaiPortal.Conversation
 };
 

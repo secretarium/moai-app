@@ -123,6 +123,10 @@ const Admin = withState()((s) => ({
         setInviteEmail(e.target.value);
     };
 
+    /**
+     * Function to grant a user admin rights on Moai Portal
+     * @param userId - ID of the user
+     */
     const onGrantAdmin = (userId: string) => {
         setGrantingAdmin(true);
         dispatch(grantAdmin(group, userId))
@@ -131,6 +135,10 @@ const Admin = withState()((s) => ({
             });
     };
 
+    /**
+     * Function to revoke user's admin rights on Moai Portal
+     * @param userId - ID of the user
+     */
     const onRevokeAdmin = (userId: string) => {
         setRevokingAdmin(true);
         dispatch(revokeAdmin(group, userId))

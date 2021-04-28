@@ -9,6 +9,9 @@ import { useTranslation } from 'react-i18next';
 
 
 type RequesterProps = {
+    /**
+     * ID of the user requesting an immunity certificate
+     */
     requesterId: string;
 };
 

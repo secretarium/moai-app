@@ -14,6 +14,9 @@ import Admin from './components/Admin';
 import StatusBar from './components/Status';
 import { NotLoggedIn, LoggedIn } from './components/Login/LoginStatusSwitch';
 
+/**
+ * Top level React Component for the application
+ */
 
 const App: React.FC = () => {
     return (

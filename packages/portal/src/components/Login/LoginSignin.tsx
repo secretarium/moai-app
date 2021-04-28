@@ -7,6 +7,9 @@ import { useTranslation } from 'react-i18next';
 
 
 type LocationTypes = {
+    /**
+     * User's selected username
+     */
     username: string;
 };
 
