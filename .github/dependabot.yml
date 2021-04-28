@@ -1,0 +1,108 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  target-branch: develop
+  ignore:
+  - dependency-name: expo-localization
+    versions:
+    - 10.0.0
+  - dependency-name: react-native-screens
+    versions:
+    - 3.1.0
+  - dependency-name: expo-splash-screen
+    versions:
+    - 0.9.0
+  - dependency-name: expo-constants
+    versions:
+    - 10.0.1
+  - dependency-name: expo-crypto
+    versions:
+    - 9.0.0
+  - dependency-name: expo-barcode-scanner
+    versions:
+    - 10.0.0
+  - dependency-name: expo-file-system
+    versions:
+    - 10.0.0
+  - dependency-name: expo-linking
+    versions:
+    - 2.1.1
+  - dependency-name: "@storybook/addon-actions"
+    versions:
+    - 6.2.4
+    - 6.2.7
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.13.14
+    - 7.13.15
+  - dependency-name: metro-react-native-babel-preset
+    versions:
+    - 0.65.2
+  - dependency-name: commitlint
+    versions:
+    - 12.1.1
+  - dependency-name: "@babel/preset-typescript"
+    versions:
+    - 7.13.0
+  - dependency-name: "@secretarium/connector"
+    versions:
+    - 0.9.2
+  - dependency-name: jest-expo
+    versions:
+    - 40.0.2
+  - dependency-name: typescript
+    versions:
+    - 4.1.3
+    - 4.1.5
+    - 4.2.2
+    - 4.2.3
+  - dependency-name: react-native-web
+    versions:
+    - 0.15.0
+    - 0.15.3
+    - 0.15.5
+  - dependency-name: expo-notifications
+    versions:
+    - 0.9.0
+  - dependency-name: expo-font
+    versions:
+    - 9.0.0
+  - dependency-name: husky
+    versions:
+    - 4.3.8
+    - 5.0.9
+    - 5.1.0
+    - 5.1.1
+    - 5.1.3
+    - 5.2.0
+    - 6.0.0
+  - dependency-name: "@fortawesome/fontawesome-svg-core"
+    versions:
+    - 1.2.34
+    - 1.2.35
+  - dependency-name: "@stryker-mutator/core"
+    versions:
+    - 4.4.0
+    - 4.4.1
+    - 4.5.0
+    - 4.5.1
+  - dependency-name: expo-asset
+    versions:
+    - 8.2.2
+  - dependency-name: react-scripts
+    versions:
+    - 4.0.1
+    - 4.0.2
+    - 4.0.3
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.22
+    - 14.14.25
+  - dependency-name: expo-cli
+    versions:
+    - 4.1.3
+    - 4.1.5
