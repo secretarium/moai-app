@@ -7,9 +7,21 @@ import { useTheme } from '../../../hooks/useTheme';
 
 
 type MainLayoutProps = {
+    /**
+     * Main screen's background color
+     */
     backgroundColor?: string;
+    /**
+     * Boolean determining whether or not to display navigation buttons
+     */
     withNavigation?: boolean;
+    /**
+     * Boolean determining whether or not to display a 'go back' button
+     */
     showGoBack?: boolean;
+    /**
+     * The route to navigate to when the user presses 'go back' button
+     */
     goBackRoute?: string;
 };
 

@@ -19,6 +19,9 @@ const Venues = withState()((s) => ({
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
     const { colors } = useTheme();
 
+    /**
+     * 19 NHS location types
+     */
     const locationTypes = {
         0: 'Accommodation. For example, bed and breakfasts and campsites',
         1: 'Childcare in public and private settings',

@@ -13,6 +13,9 @@ const Keys: React.FC = () => {
 
     const [key, setKey] = useState<string>();
     const { colors } = useTheme();
+    /**
+     * Hard coded public key used to connect to Secretariums backend
+     */
     const publicKey = 'rliD_CISqPEeYKbWYdwa-L-8oytAPvdGmbLC0KdvsH-OVMraarm1eo-q4fte0cWJ7-kmsq8wekFIJK0a83_yCg==';
 
     useEffect(() => {

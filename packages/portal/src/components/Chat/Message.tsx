@@ -3,6 +3,9 @@ import style from './Message.module.css';
 import { toDateTime } from '../../utils/timeHandler';
 
 type Props = {
+    /**
+     * A message in string form
+     */
     message: MoaiPortal.Message
 };
 

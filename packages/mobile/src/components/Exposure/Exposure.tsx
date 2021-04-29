@@ -31,6 +31,10 @@ const Exposure = withState()((s) => ({
         }
     }, [risk]);
 
+    /**
+     * Function to switch between non and visually impaired colors
+     * @param on - A boolean to switch the colors for visually impaired
+     */
     const handleVisuallyImpaired = (on: boolean) => {
         if (on === true) {
             isVisuallyImpaired(true);
@@ -47,6 +51,10 @@ const Exposure = withState()((s) => ({
         2: i18n.t('APP_HIGH')
     };
 
+    /**
+     * Function to render a Moai pin
+     * @returns A Moai pin in the color based on the exposure level
+     */
     const renderPin = () => {
         switch (pinColor) {
             case '86ab50':

@@ -54,6 +54,10 @@ const themedColors = {
     }
 };
 
+/**
+ * Custom hook to determine whether to use a dark theme or a light theme
+ * @returns - Color pallete and theme name
+ */
 export const useTheme = (): { colors: Colors, theme: ColorSchemeName } => {
     const theme = useColorScheme();
     const colors = theme ? themedColors[theme] : themedColors.default;

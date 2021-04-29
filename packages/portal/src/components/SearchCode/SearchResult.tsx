@@ -12,9 +12,21 @@ import { useTranslation } from 'react-i18next';
 
 
 type SearchResultProps = {
+    /**
+     * ID of a COVID-19 or antibody test
+     */
     testId?: string;
+    /**
+     * Type of the test - can be either a COVID-19 test or antibody test
+     */
     testType?: 'covidTest' | 'covidAntibodyTest';
+    /**
+     * ID of the user that scanned the code
+     */
     userId: string;
+    /**
+     * Time at which the user checked into a location
+     */
     time: number;
 };
 

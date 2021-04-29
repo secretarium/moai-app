@@ -13,7 +13,13 @@ import i18n from 'i18n-js';
 import { useTheme } from '../../hooks/useTheme';
 
 type LocationTypes = {
+    /**
+     * ID of the COVID-19 test or antibody test scanned by the user
+     */
     testId: string;
+    /**
+     * Type of the test scanned by the user
+     */
     testType: 'covidTest' | 'covidAntibodyTest';
 };
 
@@ -58,6 +64,9 @@ const Checkin = withState<RouteComponentProps<{
         }, [dispatch, localKey, isConnected, isConnecting]);
 
         useEffect(() => {
+            /**
+             * Function to check into a location based on a QR code scan
+             */
             async function checkInLocation() {
                 setIsScanning(true);
                 dispatch(checkIn(venueInfo))
@@ -72,6 +81,9 @@ const Checkin = withState<RouteComponentProps<{
                     });
             }
 
+            /**
+             * Function to register a COVID-19 or antibody test based on a barcode scan
+             */
             async function registerUserTest() {
                 setIsScanning(true);
                 dispatch(registerTest(test, type))

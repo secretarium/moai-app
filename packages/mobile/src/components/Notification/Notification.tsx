@@ -8,6 +8,9 @@ import { commonStyles } from '../commonStyles';
 import { useTheme } from '../../hooks/useTheme';
 
 type NotificationProps = RouteComponentProps<{
+    /**
+     * Notification message in a stringified JSON form
+     */
     notificationMessage: string;
 }>;
 
@@ -29,6 +32,10 @@ const Notification = withState<NotificationProps>()(
             }
         }, [notificationMessage]);
 
+        /**
+         * Function to render notification content based on the type of the notification
+         * @returns A screen with the notification content
+         */
         const renderNotification = () => {
             switch (notifContent) {
                 case 'feedbackInvitation':

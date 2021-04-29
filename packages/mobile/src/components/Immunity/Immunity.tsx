@@ -16,6 +16,9 @@ import {
 } from '../../actions';
 
 type ImmunityProps = RouteComponentProps<{
+    /**
+     * An encrypted string based on user's passport scan
+     */
     userDigest: string;
 }>;
 
