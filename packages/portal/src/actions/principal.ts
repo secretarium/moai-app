@@ -14,8 +14,7 @@ export const register = (token: string, username: string, password: string): Moa
             .then(() => {
                 return new Promise((resolve) => {
                     secretariumHandler
-                        .createKey(password)
-                        .then((key) => key.exportEncryptedKey())
+                        .createKeyPair(password)
                         .then((encryptedKeyPair) => {
                             dispatch(addKeys(encryptedKeyPair, username)).then(() => resolve(encryptedKeyPair));
                         });

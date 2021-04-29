@@ -84,7 +84,10 @@
         "extends": "./eslint.config.js"
     },
     "dependencies": {
+        "bufferutil": "4.0.3",
         "expo-localization": "9.1.0",
-        "i18n-js": "3.8.0"
+        "i18n-js": "3.8.0",
+        "utf-8-validate": "5.0.4",
+        "ws": "7.4.5"
     }
 }

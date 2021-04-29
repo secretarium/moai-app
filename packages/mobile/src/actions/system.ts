@@ -7,7 +7,8 @@ import { getConversations } from './conversations';
 
 
 export const generateLocalKey = (): Moai.FunctionAction => (dispatch) =>
-    secretariumHandler.createDeviceKey()
+    secretariumHandler
+        .createDeviceKey()
         .then((key) => {
             key.exportKey()
                 .then((clearKeyPair) => {

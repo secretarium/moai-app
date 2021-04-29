@@ -1,4 +1,4 @@
-import { ClearKeyPair, Key, SCP, Transaction } from '@secretarium/connector';
+import { ClearKeyPair, Key, SCP, Transaction, Utils } from '@secretarium/connector';
 import { REACT_APP_SECRETARIUM_GATEWAYS } from '@env';
 
 interface SecretariumGatewayConfig {
@@ -13,14 +13,21 @@ interface SecretariumClusterConfig {
     [cluster: string]: SecretariumGatewayConfig;
 }
 
+interface ConnectionInformation {
+    cluster: string;
+    endpoint: string;
+    gateway: string;
+    socket: SCP;
+}
+
 const handlerStore: {
     currentConnection: SCP;
-    currentKey: Key;
-    clusters: SecretariumClusterConfig;
+    currentKey?: Key;
+    clusters?: SecretariumClusterConfig;
+    fileService?: string;
 } = {
     currentConnection: new SCP(),
-    currentKey: undefined,
-    clusters: {}
+    currentKey: undefined
 };
 
 const gatewaysConfigReducer = (config: SecretariumClusterConfig, current: string): SecretariumClusterConfig => {
@@ -38,7 +45,11 @@ const gatewaysConfigReducer = (config: SecretariumClusterConfig, current: string
     return config;
 };
 
-const printClusterInfo = () => {
+const printClusterInfo = (): void => {
+
+    if (!handlerStore.clusters)
+        return;
+
     const printableConfig: {
         [key: string]: string;
     } = {};
@@ -48,20 +59,43 @@ const printClusterInfo = () => {
         printableConfig[`c${cindex}_key`] = configuration.key;
         configuration.gateways.forEach((gateway, gindex) => {
             printableConfig[`c${cindex}_g${gindex}_name`] = gateway.name;
-            printableConfig[`c${cindex}_g${gindex}_key`] = gateway.endpoint;
+            printableConfig[`c${cindex}_g${gindex}_endpoint`] = gateway.endpoint;
         });
     });
 
-    console.info('Moai now using the following cluster configuration');
-    console.log(REACT_APP_SECRETARIUM_GATEWAYS);
+    console.info('Moai now using the following cluster configuration:');
     console.table(printableConfig);
 };
 
+const processClusterConfig: Window['moaiCluster'] = (config) => {
+    if (typeof config === 'string')
+        handlerStore.clusters = config.split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
+    else
+        handlerStore.clusters = config as SecretariumClusterConfig;
+    printClusterInfo();
+};
+
+let currentGateway = -1;
+
 const secretariumHandler = {
-    connector: new SCP(),
     initialize: (): void => {
-        handlerStore.clusters = (REACT_APP_SECRETARIUM_GATEWAYS as string ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
-        printClusterInfo();
+
+        let clusterConfigBase = REACT_APP_SECRETARIUM_GATEWAYS ?? '';
+
+        fetch(`/config.json?v=${process.env.REACT_APP_VERSION}&t=${Date.now()}`)
+            .then(response => response.json())
+            .then((config: any) => {
+                if (config.SECRETARIUM_GATEWAYS)
+                    clusterConfigBase = config.SECRETARIUM_GATEWAYS;
+                if (config.CFA_SERVICES)
+                    handlerStore.fileService = config.CFA_SERVICES;
+                processClusterConfig(clusterConfigBase);
+                console.info('Moai now using config.json overrides');
+            })
+            .catch(() => {
+                processClusterConfig(clusterConfigBase);
+            });
+
     },
     createDeviceKey: (): Promise<Key> =>
         new Promise((resolve, reject) => {
@@ -81,29 +115,51 @@ const secretariumHandler = {
                 })
                 .catch((e: any) => reject(e));
         }),
-    connect: (): Promise<any> =>
+    connect: (): Promise<ConnectionInformation> =>
         new Promise((resolve, reject) => {
-            const cluster = Object.entries<SecretariumGatewayConfig>(handlerStore.clusters)?.[0];
-            const endpoint = cluster?.[1]?.gateways?.[0]?.endpoint;
-            if (cluster && endpoint) {
+
+            const clusters = Object.entries<SecretariumGatewayConfig>(handlerStore.clusters ?? {});
+
+            if (!handlerStore.clusters)
+                return setTimeout(() => {
+                    resolve(secretariumHandler.connect());
+                }, 500);
+
+            if (!clusters[0]) {
+                console.error('There are no cluster configured !');
+                return reject('There are no cluster configured !');
+            }
+
+            const cluster = clusters[0];
+            let nextGateway = currentGateway;
+            do {
+                nextGateway = Math.floor(Math.random() * cluster[1].gateways.length);
+            } while ((nextGateway === currentGateway && cluster[1].gateways?.length > 1) || nextGateway < 0 || nextGateway >= cluster[1].gateways.length);
+
+            currentGateway = nextGateway;
+            const endpoint = cluster[1].gateways?.[nextGateway]?.endpoint;
+            if (cluster && endpoint && handlerStore.currentKey) {
+                console.info('Moai now using the following gateway:', endpoint);
                 handlerStore.currentConnection
                     .reset()
-                    .connect(endpoint, handlerStore.currentKey, cluster?.[1]?.key)
+                    .connect(endpoint, handlerStore.currentKey, secretariumHandler.utils.fromBase64(cluster[1].key))
                     .then(() => {
                         resolve({
-                            cluster: cluster?.[0],
+                            cluster: cluster[0],
+                            gateway: cluster[1]?.gateways?.[nextGateway]?.name ?? '',
                             endpoint,
                             socket: handlerStore.currentConnection
                         });
                     })
-                    .catch((e: any) => reject(e));
-            } else {
-                reject('Cluster not configured.');
-            }
+                    .catch((e: Error) => reject(e));
+            } else reject('Cluster not configured');
         }),
     disconnect: (): Promise<void> =>
         new Promise(resolve => {
-            handlerStore?.currentConnection?.close?.();
+            handlerStore.currentConnection?.reset();
+            handlerStore.currentConnection?.close();
+
+            handlerStore.currentConnection = new SCP();
             resolve();
         }),
     request: (dcApp: string, command: string, args: Record<string, unknown>, id?: string): Promise<Transaction> =>
@@ -114,21 +170,18 @@ const secretariumHandler = {
             } else {
                 reject('No connection to Secretarium.');
             }
-        })
+        }),
+    utils: Utils
 };
 
 if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM_GATEWAYS_OVERWRITABLE === 'true') && window) {
-    (window as any)['moaiCluster'] = (config: string | Record<string, any>) => {
-        if (typeof config === 'string') {
-            handlerStore.clusters = config.split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
-        } else {
-            handlerStore.clusters = config;
-        }
-        printClusterInfo();
+    window['moaiCluster'] = processClusterConfig;
+    window['moaiCommand'] = (dcApp, command, args, id): void => {
+        secretariumHandler.request(dcApp, command, args ?? {}, id ?? `${Math.random()}`).then(query => {
+            query.send();
+        });
     };
-    (window as any)['moaiCommand'] = (dcApp: string, command: string, args?: any, id?: string) => {
-        secretariumHandler.request(dcApp, command, args ?? {}, id ?? `${Math.random()}`);
-    };
+    window['moaiHandlerStore'] = handlerStore;
 }
 
 export default secretariumHandler;
