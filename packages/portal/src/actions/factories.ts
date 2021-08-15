@@ -6,18 +6,21 @@ const responseTimes: { [key: string]: { q?: number; e?: number; r?: number }[] }
 
 export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, subscribe, ticker) => handlers => dispatch =>
 
-    new Promise<MoaiPortal.AnyAction | void>(resolve => {
+    new Promise(resolve => {
 
         let tick = 0;
 
         dispatch({
             type: command.REQUEST,
-            payload: args
+            payload: {
+                args,
+                subscribe
+            }
         });
 
         const requestId = command.explicit ?? `${command.application}-${command.command}-${subscribe ? Object
             .values(args)
-            .filter(arg => typeof arg === 'number' || typeof args === 'string')
+            .filter(arg => typeof arg === 'number' || typeof arg === 'string')
             .map(arg => `${arg}`.replace(/[^\w]/g, ''))
             .reduce((previous, current, index) => {
                 return `${previous}${index}${current}`;
@@ -44,88 +47,86 @@ export const requestFactory: MoaiPortal.RequestFactory = (command, args = {}, su
 
         secretariumHandler
             .request(command.application, command.command, subscribe ? { ...args, subscribe } : args, requestId)
-            .then(query => {
-                query
-                    .onAcknowledged(() => {
-                        if (handlers?.onAcknowledged)
-                            dispatch({
-                                type: actionTypes.SECRETARIUM_TRANSACTION_ACKNOWLEDGED,
-                                ...(handlers.onAcknowledged() ?? {})
-                            });
-                    })
-                    .onProposed(() => {
-                        if (handlers?.onProposed)
-                            dispatch({
-                                type: actionTypes.SECRETARIUM_TRANSACTION_PROPOSED,
-                                ...(handlers.onProposed() ?? {})
-                            });
-                    })
-                    .onCommitted(() => {
-                        if (handlers?.onCommitted)
-                            dispatch({
-                                type: actionTypes.SECRETARIUM_TRANSACTION_COMMITED,
-                                ...(handlers.onCommitted() ?? {})
-                            });
-                    })
-                    .onExecuted((requestId: string) => {
-                        responseTimes[requestId].push({ e: new Date().getTime() });
-                        if (handlers?.onResult)
-                            dispatch({
-                                type: actionTypes.SECRETARIUM_TRANSACTION_EXECUTED,
-                                ...(handlers?.onExecuted?.() ?? {})
-                            });
-                        else
-                            resolve({
-                                type: command.SUCCESS,
-                                ...(handlers?.onExecuted?.() ?? {})
-                            });
-                    })
-                    .onResult((result: any, requestId: string) => {
-                        responseTimes[requestId].push({ r: new Date().getTime() });
-                        const outcome = handlers?.onResult?.(result) ?? {};
-                        if (subscribe && !outcome.unsubscribe) {
-                            dispatch({
-                                type: command.SUCCESS,
-                                payload: result,
-                                ...outcome
-                            }).then(() => {
-                                if (ticker)
-                                    ticker(tick++);
-                            });
-                        }
-                        else {
+            .then(query => query
+                .onAcknowledged(() => {
+                    if (handlers?.onAcknowledged)
+                        dispatch({
+                            type: actionTypes.SECRETARIUM_TRANSACTION_ACKNOWLEDGED,
+                            ...(handlers.onAcknowledged() ?? {})
+                        });
+                })
+                .onProposed(() => {
+                    if (handlers?.onProposed)
+                        dispatch({
+                            type: actionTypes.SECRETARIUM_TRANSACTION_PROPOSED,
+                            ...(handlers.onProposed() ?? {})
+                        });
+                })
+                .onCommitted(() => {
+                    if (handlers?.onCommitted)
+                        dispatch({
+                            type: actionTypes.SECRETARIUM_TRANSACTION_COMMITED,
+                            ...(handlers.onCommitted() ?? {})
+                        });
+                })
+                .onExecuted((requestId: string) => {
+                    responseTimes[requestId].push({ e: new Date().getTime() });
+                    if (handlers?.onResult)
+                        dispatch({
+                            type: actionTypes.SECRETARIUM_TRANSACTION_EXECUTED,
+                            ...(handlers?.onExecuted?.() ?? {})
+                        });
+                    else
+                        resolve({
+                            type: command.SUCCESS,
+                            ...(handlers?.onExecuted?.() ?? {})
+                        });
+                })
+                .onResult((result: any, requestId: string) => {
+                    responseTimes[requestId].push({ r: new Date().getTime() });
+                    const outcome = handlers?.onResult?.(result) ?? {};
+                    if (subscribe && !outcome.unsubscribe) {
+                        dispatch({
+                            type: command.SUCCESS,
+                            payload: result,
+                            ...outcome
+                        }).then(() => {
                             if (ticker)
                                 ticker(tick++);
-                            resolve({
-                                type: command.SUCCESS,
-                                payload: result,
-                                ...outcome
-                            });
-                            delete subscriptionMap[requestId];
-                        }
-                    })
-                    .onError(error => {
-                        const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
-                        if (subscribe && !outcome.unsubscribe) {
-                            dispatch({
-                                type: command.FAILURE,
-                                ...outcome
-                            }).then(() => {
-                                if (ticker)
-                                    ticker(tick++, true);
-                            });
-                        } else {
+                        });
+                    }
+                    else {
+                        if (ticker)
+                            ticker(tick++);
+                        resolve({
+                            type: command.SUCCESS,
+                            payload: result,
+                            ...outcome
+                        });
+                        delete subscriptionMap[requestId];
+                    }
+                })
+                .onError(error => {
+                    const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
+                    if (subscribe && !outcome.unsubscribe) {
+                        dispatch({
+                            type: command.FAILURE,
+                            ...outcome
+                        }).then(() => {
                             if (ticker)
                                 ticker(tick++, true);
-                            resolve({
-                                type: command.FAILURE,
-                                ...outcome
-                            });
-                            delete subscriptionMap[requestId];
-                        }
-                    })
-                    .send();
-            })
+                        });
+                    } else {
+                        if (ticker)
+                            ticker(tick++, true);
+                        resolve({
+                            type: command.FAILURE,
+                            ...outcome
+                        });
+                        delete subscriptionMap[requestId];
+                    }
+                })
+                .send())
             .catch(error => {
                 const outcome = handlers?.onError?.(error) ?? { error: `Oops! The server replied: ${error}` };
                 if (subscribe && !outcome.unsubscribe)
