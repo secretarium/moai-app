@@ -1,22 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import MainLayout from '../common/MainLayout';
-import { useColorScheme } from 'react-native-appearance';
 import { TouchableOpacity, Text, TextInput, View, ScrollView } from 'react-native';
 import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
 import { useHistory, RouteComponentProps } from 'react-router';
 import i18n from 'i18n-js';
+import { getExposureRisk, registerExposureFeedback } from '../../actions';
+import { withState } from '../../store';
+import { useTheme } from '../../hooks/useTheme';
 
 type QuestionnaireProps = RouteComponentProps<{
+    /**
+     * 1 of 19 NHS location types
+     */
     venueType: string;
+    /**
+     * A token sent out by a Moai Portal user
+     */
+    feedbackToken: string;
+    /**
+     * ID of a COVID-19 test
+     */
+    testId: string;
 }>;
 
-const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
+const Questionnaire = withState<QuestionnaireProps>()((s) => ({
+    venues: s.exposure.venues
+}), ({ match, dispatch }) => {
 
-    const { params: { venueType } } = match;
+    const { params: { venueType, feedbackToken, testId } } = match;
 
     let questions;
 
+    /**
+     * Set the appropriate set of the questions for the questionnaire
+     * based on the type of venue the user visited
+     */
     if (venueType) {
         questions = [
             {
@@ -399,17 +418,13 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
     const history = useHistory();
     const [venue, setVenue] = useState<string>();
     const [finalAnswers] = useState([]);
-
-    // Color theme
-    const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
+    const { colors } = useTheme();
 
     useEffect(() => {
         if (venueType) {
             setVenue(venueType);
         }
-    }, []);
+    }, [venueType]);
 
     useEffect(() => {
         switch (venue) {
@@ -547,13 +562,17 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
             }
         }
 
+        if (feedbackToken && venue) {
+            finalAnswers.unshift(Number(venue));
+            dispatch(registerExposureFeedback(testId, feedbackToken, finalAnswers));
+        }
+
         if (venue) {
             finalAnswers.unshift(Number(venue));
+            dispatch(getExposureRisk(finalAnswers));
             history.push('/feedback/completed');
-            //console.log('RESULTS', finalAnswers);
         } else {
             history.push('/home');
-            //console.log('RESULTS', finalAnswers);
         }
     };
 
@@ -634,24 +653,24 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
 
     const renderPreviousButton = (onPress, enabled) => {
         return (
-            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_PREVIOUS')}</Text>
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_PREVIOUS')}</Text>
             </TouchableOpacity>
         );
     };
 
     const renderNextButton = (onPress, enabled) => {
         return (
-            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{i18n.t('APP_NEXT')}</Text>
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_NEXT')}</Text>
             </TouchableOpacity>
         );
     };
 
     const renderFinishedButton = (onPress, enabled) => {
         return (
-            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: themeColorStyle }]}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{venue ? i18n.t('APP_FINISHED') : i18n.t('APP_GO_HOME')}</Text>
+            <TouchableOpacity onPress={onPress} disabled={!enabled} style={[styles.navButton, { backgroundColor: colors.button }]}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{venue ? i18n.t('APP_FINISHED') : i18n.t('APP_GO_HOME')}</Text>
             </TouchableOpacity>
         );
     };
@@ -659,23 +678,23 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
     const renderButton = (data, index, isSelected, onPress) => {
         return (
             <TouchableOpacity key={`selection_button_view_${index}`} onPress={onPress} style={[styles.optionButton, { backgroundColor: isSelected ? '#00b0ee' : '#e95c59' }]}>
-                <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle }}>{data.optionText}</Text>
+                <Text key={`button_${index}`} style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{data.optionText}</Text>
             </TouchableOpacity>
         );
     };
 
     const renderQuestionText = (questionText) => {
         return (
-            <View style={{ marginLeft: 10, marginRight: 10 }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{questionText}</Text>
+            <View style={{ marginLeft: 15, marginRight: 15, marginBottom: 20 }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{questionText}</Text>
             </View>
         );
     };
 
     const renderInfoText = (infoText) => {
         return (
-            <View style={{ marginLeft: 10, marginRight: 10 }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{infoText}</Text>
+            <View style={{ marginLeft: 15, marginRight: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text, fontSize: 15 }}>{infoText}</Text>
             </View>
         );
     };
@@ -700,8 +719,8 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
     };
 
     return (
-        <MainLayout goBackRoute={'/home'} showGoBack={true}>
-            <ScrollView>
+        <MainLayout goBackRoute={'/'} showGoBack={true}>
+            <ScrollView style={{ marginTop: 20 }}>
                 <SimpleSurvey
                     survey={questions}
                     renderSelector={renderButton}
@@ -718,6 +737,6 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({ match }) => {
             </ScrollView>
         </MainLayout>
     );
-};
+});
 
 export default Questionnaire;

@@ -3,8 +3,8 @@ import { requestFactory } from './factories';
 import { createConversation } from './conversations';
 
 
-export const getTested = (testId: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_GET_TESTED, { testId: testId })({
+export const getTested = (testId: string, type: 'covidTest' | 'covidAntibodyTest'): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_GET_TESTED, { testId: testId, type: type })({
         onResult: result => {
             return {
                 payload: {
@@ -31,14 +31,17 @@ export const getExposed = (venue: string, utc: number): MoaiPortal.FunctionActio
         })
     });
 
-export const setTestResult = (testId: string, positive: boolean, userId: string): MoaiPortal.FunctionAction =>
-    requestFactory(commands.MOAI_SET_TEST_RESULT, { testId: testId, positive: positive })({
+export const setTestResult = (testId: string, positive: boolean, userId: string, type: 'covidTest' | 'covidAntibodyTest'): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_SET_TEST_RESULT, { testId: testId, positive: positive, type: type })({
         onExecuted: () => ({
             workload: dispatch => {
                 dispatch(createConversation('title', 'name', userId, positive));
             }
         })
     });
+
+export const setNaturalImmunity = (testId: string): MoaiPortal.FunctionAction =>
+    requestFactory(commands.MOAI_SET_NATURAL_IMMUNITY, { testId: testId })({});
 
 export const clearSearchErrors = (): MoaiPortal.FunctionAction => (dispatch) => {
     dispatch({ type: actionTypes.MOAI_PORTAL_SEARCH_ERROR_CLEANUP });

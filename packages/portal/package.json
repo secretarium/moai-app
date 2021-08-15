@@ -1,13 +1,13 @@
 {
     "name": "@secretarium/moai-portal",
-    "version": "0.9.7",
+    "version": "0.9.8",
     "private": true,
     "dependencies": {
         "@ant-design/icons": "4.6.2",
         "@fortawesome/fontawesome-svg-core": "1.2.35",
         "@fortawesome/free-solid-svg-icons": "5.15.3",
         "@fortawesome/react-fontawesome": "0.1.14",
-        "@secretarium/connector": "0.10.0",
+        "@secretarium/connector": "0.8.4",
         "antd": "4.15.1",
         "deepmerge": "4.2.2",
         "i18next": "20.2.1",

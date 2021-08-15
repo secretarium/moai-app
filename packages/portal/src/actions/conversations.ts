@@ -34,7 +34,7 @@ export const createConversation = (title: string, name: string, userId: string, 
                         result
                     },
                     workload: dispatch => {
-                        dispatch(sendMessage(result.address, result.token, 'positive'));
+                        dispatch(sendMessage(result.address, result.token, 'Your COVID-19 test results are positive. You now need to quarantine.'));
                         dispatch(getConversations());
                     }
                 };
@@ -44,7 +44,7 @@ export const createConversation = (title: string, name: string, userId: string, 
                         result
                     },
                     workload: dispatch => {
-                        dispatch(sendMessage(result.address, result.token, 'negative'));
+                        dispatch(sendMessage(result.address, result.token, 'Your COVID-19 test results are negative.'));
                         dispatch(getConversations());
                     }
                 };

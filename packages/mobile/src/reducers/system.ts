@@ -11,6 +11,7 @@ export const initialState: System = {
     isConnected: false,
     showOnboarding: true,
     scanCounter: 0,
+    certificateRequested: false,
     log: []
 };
 
@@ -49,6 +50,29 @@ export const system: StoreComponent<System> = (state = initialState, { type, pay
             return {
                 ...state,
                 showOnboarding: payload
+            };
+        }
+        case actionTypes.MOAI_SET_RISK_PROFILE: {
+            return {
+                ...state,
+                riskProfile: payload.riskLevel
+            };
+        }
+        case commands.MOAI_REQUEST_IMMUNITY_CERTIFICATE.FAILURE: {
+            return {
+                ...state
+            };
+        }
+        case commands.MOAI_REQUEST_IMMUNITY_CERTIFICATE.SUCCESS: {
+            return {
+                ...state,
+                certificateRequested: true
+            };
+        }
+        case commands.MOAI_GET_VACCINE_CODE.SUCCESS: {
+            return {
+                ...state,
+                vaccineId: payload.result
             };
         }
         case actionTypes.MOAI_SAVE_EXPO_PUSH_TOKEN: {

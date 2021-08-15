@@ -1,0 +1,2 @@
+# Moai App
+The official Moai App can be found on the [Google Play Store](https://play.google.com/store/apps/details?id=com.secretarium.moai.research) and Apple's [App Store](https://apps.apple.com/us/app/moai/id1555274529).

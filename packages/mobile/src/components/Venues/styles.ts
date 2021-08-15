@@ -1,15 +1,7 @@
 import { StyleSheet } from 'react-native';
+export { commonStyles } from '../commonStyles';
 
-export default StyleSheet.create({
-    card: {
-        borderRadius: 4,
-        overflow: 'hidden',
-        alignItems: 'center',
-        maxWidth: '90%',
-        marginHorizontal: 12,
-        marginVertical: 6,
-        padding: 20
-    },
+export const styles = StyleSheet.create({
     cardText: {
         color: '#34495e',
         marginTop: 3

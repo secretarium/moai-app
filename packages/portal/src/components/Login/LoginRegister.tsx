@@ -7,6 +7,10 @@ import { useTranslation } from 'react-i18next';
 
 
 type ParamTypes = {
+    /**
+     * Token extracted from a URL - a group admin can send out invitations which contain such tokens
+     * Token is used for registering on the Moai Portal
+     */
     token: string;
 };
 

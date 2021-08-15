@@ -60,5 +60,15 @@ export const styles = StyleSheet.create({
         width: '85%',
         backgroundColor: '#203864',
         top: 15
+    },
+    button: {
+        backgroundColor: '#e95c59',
+        paddingHorizontal: 20,
+        paddingVertical: 8,
+        borderRadius: 8,
+        marginTop: 25,
+        marginHorizontal: 15,
+        justifyContent: 'center',
+        alignContent: 'center'
     }
 });

@@ -2,24 +2,37 @@ import React, { useEffect, useState } from 'react';
 import MoaiPin from '../../assets/moai-pin.png';
 import { toDateTime } from '../../utils/timeHandler';
 import { useHistory } from 'react-router-dom';
-import { createConversation, setTestResult } from '../../actions';
+import { createConversation, setTestResult, setNaturalImmunity } from '../../actions';
 import { withState } from '../../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import style from './SearchResult.module.css';
+import commonStyle from '../../Common.module.css';
 import { Modal, Radio, Popconfirm } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 
 type SearchResultProps = {
+    /**
+     * ID of a COVID-19 or antibody test
+     */
     testId?: string;
+    /**
+     * Type of the test - can be either a COVID-19 test or antibody test
+     */
+    testType?: 'covidTest' | 'covidAntibodyTest';
+    /**
+     * ID of the user that scanned the code
+     */
     userId: string;
+    /**
+     * Time at which the user checked into a location
+     */
     time: number;
 };
 
 const SearchResult = withState<SearchResultProps>()((s) => ({
     newConversation: s.conversations.newConversation
-}), ({ testId, userId, time, newConversation, dispatch }) => {
+}), ({ testType, testId, userId, time, newConversation, dispatch }) => {
 
     const history = useHistory();
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -44,11 +57,17 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
 
     const handleOkModal = (): void => {
         setModalConfirmLoading(true);
-        dispatch(setTestResult(testId, positive, userId))
-            .then(() => {
-                setIsModalVisible(false);
-                setModalConfirmLoading(false);
-            });
+        testType === 'covidTest'
+            ? dispatch(setTestResult(testId, positive, userId, testType))
+                .then(() => {
+                    setIsModalVisible(false);
+                    setModalConfirmLoading(false);
+                })
+            : dispatch(setNaturalImmunity(testId))
+                .then(() => {
+                    setIsModalVisible(false);
+                    setModalConfirmLoading(false);
+                });
     };
 
     const handleCancelModal = (): void => {
@@ -57,39 +76,44 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
 
     const handleOkPop = (): void => {
         setPopConfirmLoading(true);
-        dispatch(createConversation('title', 'name', userId))
-            .then(() => {
-                setPopConfirmLoading(false);
-            });
+        testType === 'covidTest'
+            ? dispatch(createConversation('title', 'name', userId))
+                .then(() => {
+                    setPopConfirmLoading(false);
+                })
+            : setPopConfirmLoading(false);
     };
 
     return (
-        <div className={style.searchResultContainer}>
-            <div className={style.searchResultHeader}>
+        <div className={commonStyle.searchResultContainer}>
+            <div className={commonStyle.searchResultHeader}>
                 <img src={MoaiPin} alt="Moai pin" style={{ width: '64px', height: 'auto', marginRight: '10px' }} />
             </div>
-            <div className={style.searchResultBody}>
+            <div className={commonStyle.searchResultBody}>
                 {`${t('APP_USER_ID')}: ${userId}`}
                 <br></br>{t('APP_TIME')}: {toDateTime(time)}
             </div>
-            <div className={style.searchResultFooter}>
+            <div className={commonStyle.searchResultFooter}>
                 {testId ?
                     <>
-                        <div className={style.searchResultButton} onClick={() => showModal()}>
-                            Set test result
+                        <div className={commonStyle.searchResultButton} onClick={() => showModal()}>
+                            {testType === 'covidTest' ? t('APP_SET_TEST_RESULT') : t('APP_SET_IMMUNITY')}
                         </div>
                         <Modal
-                            title="Set test result"
+                            title={testType === 'covidTest' ? t('APP_SET_TEST_RESULT') : t('APP_SET_IMMUNITY')}
                             visible={isModalVisible}
                             onOk={handleOkModal}
                             onCancel={handleCancelModal}
                             confirmLoading={modalConfirmLoading}
                             getContainer={false}
+                            okText="Confirm"
                         >
-                            <Radio.Group onChange={onChange} value={positive}>
-                                <Radio value={true}>Positive</Radio>
-                                <Radio value={false}>Negative</Radio>
-                            </Radio.Group>
+                            {testType === 'covidTest'
+                                ? <Radio.Group onChange={onChange} value={positive}>
+                                    <Radio value={true}>Positive</Radio>
+                                    <Radio value={false}>Negative</Radio>
+                                </Radio.Group>
+                                : null}
                         </Modal>
                     </> :
                     <>
@@ -100,7 +124,7 @@ const SearchResult = withState<SearchResultProps>()((s) => ({
                             cancelText="No"
                             okButtonProps={{ loading: popConfirmLoading }}
                         >
-                            <div className={style.searchResultButton}>
+                            <div className={commonStyle.searchResultButton}>
                                 <FontAwesomeIcon icon={faEnvelope} /> {t('APP_MESSAGE')}
                             </div>
                         </Popconfirm>

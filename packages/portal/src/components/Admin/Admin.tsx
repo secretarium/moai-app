@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import style from './Admin.module.css';
+import commonStyle from '../../Common.module.css';
 import { useTranslation } from 'react-i18next';
 import MoaiPin from '../../assets/moai-pin.png';
 import { Card, Table, Tag, Button, Modal, Input, Popconfirm } from 'antd';
@@ -123,6 +123,10 @@ const Admin = withState()((s) => ({
         setInviteEmail(e.target.value);
     };
 
+    /**
+     * Function to grant a user admin rights on Moai Portal
+     * @param userId - ID of the user
+     */
     const onGrantAdmin = (userId: string) => {
         setGrantingAdmin(true);
         dispatch(grantAdmin(group, userId))
@@ -131,6 +135,10 @@ const Admin = withState()((s) => ({
             });
     };
 
+    /**
+     * Function to revoke user's admin rights on Moai Portal
+     * @param userId - ID of the user
+     */
     const onRevokeAdmin = (userId: string) => {
         setRevokingAdmin(true);
         dispatch(revokeAdmin(group, userId))
@@ -140,8 +148,8 @@ const Admin = withState()((s) => ({
     };
 
     return (
-        <div className={style.containerAdmin}>
-            <div className={style.adminHeader}>
+        <div className={commonStyle.container}>
+            <div className={commonStyle.header}>
                 <img src={MoaiPin} alt="Moai pin" style={{ paddingRight: '10px' }} />
                 <h1>{t('APP_ADMIN_DASHBOARD')}</h1>
             </div>

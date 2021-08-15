@@ -1,23 +1,28 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
-import { Redirect, Route, Switch, useLocation } from './ReactRouter';
+import { Redirect, Route, Switch, useLocation } from 'react-router-native';
 import Home from './components/Home';
 import Scanned from './components/Scanned';
 import Chat from './components/Chat';
 import Scanner from './components/Scanner';
 import Checkin from './components/Checkin';
-import Keys from './components/Infos/Keys';
-import Key from './components/Infos/Keys/Key';
-import Notices from './components/Infos/Notices';
-import Licenses from './components/Infos/Licenses';
-import ExpoPushToken from './components/Infos/ExpoPushToken';
-import Infos from './components/Infos';
+import Keys from './components/About/Keys';
+import Key from './components/About/Keys/Key';
+import Notices from './components/About/Notices';
+import Licenses from './components/About/Licenses';
+import ExpoPushToken from './components/About/ExpoPushToken';
+import About from './components/About';
 import Questionnaire from './components/Questionnaire';
 import QuestionnaireCompleted from './components/Questionnaire/QuestionnaireCompleted';
+import RiskProfile from './components/Questionnaire/RiskProfile';
+import Exposure from './components/Exposure';
 import Venues from './components/Venues';
 import OnboardingScreen from './components/Onboarding/OnboardingScreen';
 import Notification from './components/Notification';
+import Immunity from './components/Immunity';
+import QR from './components/Immunity/QR';
+import Setup from './components/Immunity/Setup';
 import { connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
@@ -28,6 +33,9 @@ import i18n from 'i18n-js';
 import { registerForPushNotificationsAsync, createPushNotifEncryptionKey, decryptPushNotification } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
 
+/**
+ * Top level React Component for the application
+ */
 
 const App = withState()(
     (s) => ({
@@ -40,6 +48,7 @@ const App = withState()(
         initLocalize();
         const history = useHistory();
         const location = useLocation();
+        const [userDigest, setUserDigest] = useState<string>(undefined);
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
         const [pastInitialUrl, setPastInitialUrl] = useState<string>(undefined);
         const [isConnecting, setIsConnecting] = useState(false);
@@ -53,11 +62,17 @@ const App = withState()(
         const notificationListener = useRef<any>();
         const responseListener = useRef<any>();
 
+        /**
+         * Handles loading of the fonts used throughout the application
+         */
         const [fontsLoaded] = useFonts({
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
             'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
         });
 
+        /**
+         * Handles Expo notifications
+         */
         Notifications.setNotificationHandler({
             handleNotification: async () => ({
                 shouldShowAlert: location.pathname !== '/chat',
@@ -82,7 +97,6 @@ const App = withState()(
                 decryptPushNotification(encryptionKey, encryptedMessage as string)
                     .then((decryptedMessage) => setNotificationMessage(decryptedMessage));
             });
-
         }, []);
 
         useEffect(() => {
@@ -91,16 +105,23 @@ const App = withState()(
             }
         }, [notificationMessage, history]);
 
+        /**
+         * Application can be opened based on a QR code scan
+         * This function parses a URL that triggers the application to open
+         */
         const parseUrl = useCallback((url: string | null | undefined) => {
             const comps = url ? url.split('/').slice(-2) : undefined;
             if (comps?.length === 2 && comps[0] === 'check')
                 setInitialUrl(comps[1]);
-            else
+            else if (comps?.length === 2 && comps[0] === 'certificate') {
+                history.push(`/immunity/${comps[1]}`);
+                setUserDigest(comps[1]);
+            } else
                 setInitialUrl(null);
         }, []);
 
         useEffect(() => {
-            if (!initialUrl && !hasRequestedInitialURL) {
+            if (!initialUrl && !hasRequestedInitialURL && !userDigest) {
                 setHasRequestedInitialURL(true);
                 Linking.getInitialURL().then((url) => {
                     setHasParsedInitialURL(true);
@@ -113,7 +134,7 @@ const App = withState()(
                     parseUrl(url);
                 });
             }
-        }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, parseUrl]);
+        }, [hasParsedInitialURL, hasRequestedInitialURL, initialUrl, userDigest, parseUrl]);
 
         useEffect(() => {
             if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
@@ -145,6 +166,9 @@ const App = withState()(
             }
         }, [history, initialUrl]);
 
+        /**
+         * Function to reconnect to the Secretarium backend
+         */
         const reconnect = () => {
             dispatch(connect(localKey));
         };
@@ -156,6 +180,9 @@ const App = withState()(
             }
         }, [handleAppStateChange, hasPluggedStateChange]);
 
+        /**
+         * Render a splash screen if assets are not loaded, or application fails to connect to the backend
+         */
         if (!fontsLoaded || !hasParsedInitialURL || !isConnected)
             return <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
                 <Image source={require('./assets/logo-white.png')} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
@@ -179,7 +206,7 @@ const App = withState()(
                     <Route path={`/${i18n.t('APP_INFOS')[2]}`} component={Notices} />
                     <Route path={`/${i18n.t('APP_INFOS')[1]}`} component={Keys} />
                     <Route path="/key/:key" component={Key} />
-                    <Route path="/infos" component={Infos} />
+                    <Route path="/about" component={About} />
                     <Route path={`/${i18n.t('APP_INFOS')[0]}`} component={Licenses} />
                     <Route path="/onboarding" component={OnboardingScreen} />
                     <Route path="/home" component={Home} />
@@ -189,13 +216,15 @@ const App = withState()(
                     <Route path="/scanned" component={Scanned} />
                     <Route path="/venues" component={Venues} />
                     <Route path="/feedback/form/:venueType?" component={Questionnaire} />
+                    <Route path="/feedback/exposure/form/:feedbackToken/:testId" component={Questionnaire} />
                     <Route path="/feedback/completed" component={QuestionnaireCompleted} />
+                    <Route path="/feedback/exposure" component={Exposure} />
+                    <Route path="/feedback/riskProfile" component={RiskProfile} />
                     <Route path="/notification/:notificationMessage" component={Notification} />
-                    <Route render={() => {
-                        // if (showOnboarding)
-                        //     return <Redirect to="/onboarding" />;
-                        return <Redirect to="/home" />;
-                    }} />
+                    <Route path="/immunity/:userDigest?" component={Immunity} />
+                    <Route path="/setup" component={Setup} />
+                    <Route path="/qrcode/:type" component={QR} />
+                    <Route render={() => { return <Redirect to="/home" />; }} />
                 </Switch>
             </>
         );

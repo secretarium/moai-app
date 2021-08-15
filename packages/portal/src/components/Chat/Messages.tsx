@@ -11,6 +11,9 @@ import { useTranslation } from 'react-i18next';
 
 
 type ParamTypes = {
+    /**
+     * Address endpoint of the conversation
+     */
     address: string;
 };
 

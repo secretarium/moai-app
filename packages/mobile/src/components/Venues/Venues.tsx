@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { withState } from '../../store';
 import { Entypo } from '@expo/vector-icons';
-import { useColorScheme } from 'react-native-appearance';
-import { Link } from '../../ReactRouter';
+import { Link } from 'react-router-native';
 import MainLayout from '../common/MainLayout';
 import { getVenues } from '../../actions';
-import styles from './styles';
+import { styles, commonStyles } from './styles';
 import { toDateTime } from '../../utils/timeHandler';
 import i18n from 'i18n-js';
+import { useTheme } from '../../hooks/useTheme';
 
 
 const Venues = withState()((s) => ({
-    venues: s.exposure.venues
-}), ({ venues, dispatch }) => {
+    venues: s.exposure.venues,
+    riskProfile: s.system.riskProfile
+}), ({ venues, riskProfile, dispatch }) => {
 
-    const [hasFetchedVenues, setHasFetchedVenues] = useState(false);
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
+    const { colors } = useTheme();
 
-    // Color theme
-    const colorScheme = useColorScheme();
-    const themeColorStyle = colorScheme !== 'dark' ? '#D3D3D3' : '#404040';
-    const themeTextStyle = colorScheme !== 'dark' ? 'black' : 'white';
-
+    /**
+     * 19 NHS location types
+     */
     const locationTypes = {
         0: 'Accommodation. For example, bed and breakfasts and campsites',
         1: 'Childcare in public and private settings',
@@ -46,11 +45,8 @@ const Venues = withState()((s) => ({
     };
 
     useEffect(() => {
-        if (hasFetchedVenues === false) {
-            dispatch(getVenues());
-            setHasFetchedVenues(true);
-        }
-    }, [hasFetchedVenues, dispatch]);
+        dispatch(getVenues());
+    }, [dispatch]);
 
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
@@ -58,27 +54,27 @@ const Venues = withState()((s) => ({
                 paddingVertical: 30,
                 paddingHorizontal: 15
             }}>
-                <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 25, paddingBottom: 15 }}>
+                <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 25, paddingBottom: 15 }}>
                     {i18n.t('APP_CHECK_IN_HISTORY')}
                 </Text>
-                <Text style={{ fontFamily: 'Poppins-Regular', color: themeTextStyle }}>
+                <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>
                     {i18n.t('APP_ALL_CHECKED_IN_LOCATIONS')}
                 </Text>
             </View>
             <ScrollView>
                 {venues.length > 0 ?
                     venues.map((venue, index) =>
-                        <TouchableOpacity style={[styles.card, { backgroundColor: themeColorStyle }]} key={index}>
-                            <Link to={`/feedback/form/${venue.type}`} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
+                        <TouchableOpacity style={[commonStyles.card, { backgroundColor: colors.button }]} key={index}>
+                            <Link to={riskProfile ? `/feedback/form/${venue.type}/${venue.id}` : '/feedback/riskProfile'} style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }} underlayColor='transparent'>
                                 <>
                                     <View style={{ maxWidth: '90%' }}>
-                                        <Text style={{ fontFamily: 'Poppins-Bold', color: themeTextStyle, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
-                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: themeTextStyle }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
+                                        <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>{locationTypes[venue.type]}</Text>
+                                        <Text style={[styles.cardText, { fontFamily: 'Poppins-Regular', color: colors.text }]}>{i18n.t('APP_CHECKED_IN')} <Bold>{toDateTime(venue.time)}</Bold></Text>
                                     </View>
                                     <Entypo
                                         name="chevron-right"
                                         style={{ alignSelf: 'center' }}
-                                        color={themeTextStyle}
+                                        color={colors.text}
                                         size={24} />
                                 </>
                             </Link>

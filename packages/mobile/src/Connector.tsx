@@ -4,6 +4,10 @@ import { withState } from './store';
 import { styles } from './styles';
 import { generateLocalKey } from './actions';
 
+/**
+ * Wrapper used to generate a local key at application's launch,
+ * which is then used to connect to Secretarium's backend
+ */
 
 const Connector = withState()(
     (s) => ({

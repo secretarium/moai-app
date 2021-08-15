@@ -1,7 +1,7 @@
 import secretariumHandler from '../utils/secretariumHandler';
 import { actionTypes, commands } from './constants';
 import { ClearKeyPair } from '@secretarium/connector';
-import { ParsedCode } from '../components/Checkin/dataParser';
+import { ParsedCode } from '../services/scanner/dataParser';
 import { requestFactory } from './factories';
 import { getConversations } from './conversations';
 
@@ -65,8 +65,8 @@ export const checkIn = (venue: ParsedCode): Moai.FunctionAction =>
         })
     });
 
-export const registerTest = (testId: string): Moai.FunctionAction =>
-    requestFactory(commands.MOAI_REGISTER_TEST, { testId: testId })({
+export const registerTest = (testId: string, type: string): Moai.FunctionAction =>
+    requestFactory(commands.MOAI_REGISTER_TEST, { testId: testId, type: type })({
         onError: (error) => ({
             error: new Error(error)
         })
@@ -83,3 +83,10 @@ export const registerNotificationToken = (expoPushToken: string, encryptionKey: 
             error: new Error(error)
         })
     });
+
+export const setRiskProfile = (riskLevel: 'low' | 'medium' | 'high'): Moai.AnyAction => ({
+    type: actionTypes.MOAI_SET_RISK_PROFILE,
+    payload: {
+        riskLevel
+    }
+});
