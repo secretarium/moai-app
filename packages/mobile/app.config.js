@@ -4,6 +4,7 @@ const config = {
     version: '0.0.36',
     slug: 'moai-app-research',
     icon: './assets/icon.png',
+    owner: 'secretarium',
     splash: {
         image: './assets/splash.png',
         resizeMode: 'contain',
