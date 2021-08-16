@@ -71,6 +71,7 @@
     "devDependencies": {
         "@babel/core": "~7.15.0",
         "@babel/preset-typescript": "7.15.0",
+        "@expo/metro-config": "0.1.82",
         "@expo/webpack-config": "~0.14.0",
         "@storybook/addon-actions": "6.3.7",
         "@storybook/addon-links": "6.3.7",
