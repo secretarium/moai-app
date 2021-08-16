@@ -1,9 +1,10 @@
 {
-  "build": {
-    "release": {},
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
+    "build": {
+        "release": {},
+        "development": {
+            "developmentClient": true,
+            "distribution": "internal",
+            "yarn": "1.22.11"
+        }
     }
-  }
 }
