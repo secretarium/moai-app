@@ -1,12 +1,14 @@
-const merge = require('deepmerge');
-const isPlainObject = require('is-plain-object');
 const { getDefaultConfig } = require('@expo/metro-config');
+const merge = require('deepmerge');
 
 const baseConfig = getDefaultConfig(__dirname);
 const config = merge(baseConfig, {
     transformer: {
         minifierConfig: {
             ecma: 8,
+            compress: {
+                drop_console: true
+            },
             keep_classnames: true,
             keep_fnames: true,
             mangle: {
@@ -19,7 +21,7 @@ const config = merge(baseConfig, {
         assetExts: ['txt', 'ttf', 'png']
     }
 }, {
-    isMergeableObject: isPlainObject
+    arrayMerge: (target, source) => Array.from(new Set([...source, ...target]))
 });
 
 module.exports = config;
