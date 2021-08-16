@@ -1,8 +1,8 @@
 const merge = require('deepmerge');
 const isPlainObject = require('is-plain-object');
-const { createMetroConfiguration } = require('expo-yarn-workspaces');
+const { getDefaultConfig } = require('@expo/metro-config');
 
-const baseConfig = createMetroConfiguration(__dirname);
+const baseConfig = getDefaultConfig(__dirname);
 const config = merge(baseConfig, {
     transformer: {
         minifierConfig: {

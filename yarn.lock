@@ -4564,7 +4564,6 @@ __metadata:
     expo-notifications: ~0.12.3
     expo-optimize: 0.1.104
     expo-splash-screen: ~0.11.2
-    expo-yarn-workspaces: 1.5.2
     fs-extra: 10.0.0
     immutable: 4.0.0-rc.14
     jest: 26.6.3
@@ -4643,14 +4642,6 @@ __metadata:
     redux-logger: 3.0.6
     redux-persist: 6.0.0
     typescript: 4.3.5
-  languageName: unknown
-  linkType: soft
-
-"@secretarium/moai-server@workspace:packages/server":
-  version: 0.0.0-use.local
-  resolution: "@secretarium/moai-server@workspace:packages/server"
-  dependencies:
-    "@types/supertest": 2.0.11
   languageName: unknown
   linkType: soft
 
@@ -6078,13 +6069,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/cookiejar@npm:*":
-  version: 2.1.2
-  resolution: "@types/cookiejar@npm:2.1.2"
-  checksum: f663f2476ad0aed8ccab03056bbc18b62ed059642077eaec7ab497f56c78149558bfbc0f34345a85872e019352dc28f3c12872af971dc455da3c598ff3966cda
-  languageName: node
-  linkType: hard
-
 "@types/eslint@npm:^7.2.6":
   version: 7.28.0
   resolution: "@types/eslint@npm:7.28.0"
@@ -6564,25 +6548,6 @@ __metadata:
   version: 2.0.1
   resolution: "@types/stack-utils@npm:2.0.1"
   checksum: 3327ee919a840ffe907bbd5c1d07dfd79137dd9732d2d466cf717ceec5bb21f66296173c53bb56cff95fae4185b9cd6770df3e9745fe4ba528bbc4975f54d13f
-  languageName: node
-  linkType: hard
-
-"@types/superagent@npm:*":
-  version: 4.1.12
-  resolution: "@types/superagent@npm:4.1.12"
-  dependencies:
-    "@types/cookiejar": "*"
-    "@types/node": "*"
-  checksum: 1b1d627d771a25833231e88b341f9f953e467d34453f41748e0563ea66acfd56bfb8f5061a37f26c82364feeb25d3ed3f4bc65d18cf21510e6a272a41cabe644
-  languageName: node
-  linkType: hard
-
-"@types/supertest@npm:2.0.11":
-  version: 2.0.11
-  resolution: "@types/supertest@npm:2.0.11"
-  dependencies:
-    "@types/superagent": "*"
-  checksum: 77f1adc76a22ce266d5f8a601017eb9e0c0670000693dd52a52be86bb6bcda2536673798f3f0dc9fa990799ff96e68fa0ba0e5f712d19dafe375829f87d1a7d9
   languageName: node
   linkType: hard
 
