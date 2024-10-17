@@ -1,20 +1,20 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import MainLayout from '../../common/MainLayout';
-import { RouteComponentProps } from 'react-router';
 import { withState } from '../../../store';
 import { useTheme } from '../../../hooks/useTheme';
-import i18n from 'i18n-js';
+import i18n from '../../../services/i18n';
+import { useParams } from '../../../react-router';
 
-type KeyProps = RouteComponentProps<{
+type KeyProps = {
     key: string;
-}>;
+};
 
-const Key = withState<KeyProps>()(
-    () => ({}),
-    ({ match }) => {
+const Key = withState()(
+    null,
+    () => {
 
-        const { params: { key } } = match;
+        const { key } = useParams() as KeyProps;
         const { colors } = useTheme();
 
         return (

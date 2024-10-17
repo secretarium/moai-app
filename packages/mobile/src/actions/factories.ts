@@ -145,5 +145,5 @@ export const requestFactory: Moai.RequestFactory = (command, args = {}, subscrib
     });
 
 const isDev = process.env.NODE_ENV === 'development';
-if ((isDev || process.env.REACT_APP_MOAI_PRODUCTION_LOGGING === 'true') && window)
+if ((isDev || process.env.EXPO_PUBLIC_MOAI_PRODUCTION_LOGGING === 'true') && window)
     (window as any)['moaiSubscriptions'] = subscriptionMap;

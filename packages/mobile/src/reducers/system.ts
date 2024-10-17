@@ -4,7 +4,7 @@ import { actionTypes, commands } from '../actions/constants';
 import { version } from '../../package.json';
 
 export const initialState: System = {
-    version: process.env.REACT_APP_VERSION ?? version ?? '0.0.0',
+    version: process.env.EXPO_PUBLIC_VERSION ?? version ?? '0.0.0',
     localConfiguration: {
         theme: 'auto'
     },

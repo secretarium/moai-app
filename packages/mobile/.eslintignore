@@ -1,8 +1,0 @@
-**/coverage/**
-**/build/**
-**/node_modules/**
-**/reports/**
-**/web-build/**
-**/.expo/**
-**/.stryker-tmp/**
-**/vendor/msrCrypto.js

@@ -6,8 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import licensesData from '../../../../public/licenses-mobile.json';
 import MainLayout from '../../common/MainLayout';
 import { useTheme } from '../../../hooks/useTheme';
-import i18n from 'i18n-js';
-
+import i18n from '../../../services/i18n';
 
 const Licenses: React.FC = () => {
 

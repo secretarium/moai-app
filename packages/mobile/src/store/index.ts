@@ -21,7 +21,7 @@ const persistConfig = {
 const isDev = process.env.NODE_ENV === 'development';
 const middlewares = isDev ? [dispatchMiddleware, createLogger({
     collapsed: true,
-    stateTransformer: state => (state?.toJS ? state.toJS() : state)
+    stateTransformer: state => state
 })] : [dispatchMiddleware];
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const immutableStateReducer = (state: any, ownProps: any) => fromJS(persistedReducer(state?.toJS ? state.toJS() : state, ownProps));
@@ -37,7 +37,7 @@ const withState: Moai.StateCurry<typeof rootReducer> = () => (propsMapper, compo
         })
     );
 
-    return connector(component as React.FC);
+    return connector(component);
 };
 
 export {

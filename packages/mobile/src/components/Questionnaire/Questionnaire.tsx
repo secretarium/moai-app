@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import MainLayout from '../common/MainLayout';
 import { TouchableOpacity, Text, TextInput, View, ScrollView } from 'react-native';
-import { SimpleSurvey } from 'react-native-simple-survey';
+// import { SimpleSurvey } from 'react-native-simple-survey';
 import { styles } from './styles';
-import { useHistory, RouteComponentProps } from 'react-router';
-import i18n from 'i18n-js';
+import { useNavigate, useParams } from '../../react-router';
+import i18n from '../../services/i18n';
 import { getExposureRisk, registerExposureFeedback } from '../../actions';
 import { withState } from '../../store';
 import { useTheme } from '../../hooks/useTheme';
 
-type QuestionnaireProps = RouteComponentProps<{
+type QuestionnaireProps = {
     /**
      * 1 of 19 NHS location types
      */
@@ -19,16 +19,16 @@ type QuestionnaireProps = RouteComponentProps<{
      */
     feedbackToken: string;
     /**
-     * ID of a COVID-19 test
+     * ID of a test
      */
     testId: string;
-}>;
+};
 
-const Questionnaire = withState<QuestionnaireProps>()((s) => ({
+const Questionnaire = withState()((s) => ({
     venues: s.exposure.venues
-}), ({ match, dispatch }) => {
+}), ({ dispatch }) => {
 
-    const { params: { venueType, feedbackToken, testId } } = match;
+    const { venueType, feedbackToken, testId } = useParams() as QuestionnaireProps;
 
     let questions;
 
@@ -415,7 +415,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
         ];
     }
 
-    const history = useHistory();
+    const naviguate = useNavigate();
     const [venue, setVenue] = useState<string>();
     const [finalAnswers] = useState([]);
     const { colors } = useTheme();
@@ -570,9 +570,9 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
         if (venue) {
             finalAnswers.unshift(Number(venue));
             dispatch(getExposureRisk(finalAnswers));
-            history.push('/feedback/completed');
+            naviguate('/feedback/completed');
         } else {
-            history.push('/home');
+            naviguate('/home');
         }
     };
 
@@ -721,7 +721,8 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
     return (
         <MainLayout goBackRoute={'/'} showGoBack={true}>
             <ScrollView style={{ marginTop: 20 }}>
-                <SimpleSurvey
+                <Text>Survey not available at this time</Text>
+                {/* <SimpleSurvey
                     survey={questions}
                     renderSelector={renderButton}
                     navButtonContainerStyle={{ flexDirection: 'row', justifyContent: 'space-around' }}
@@ -733,7 +734,7 @@ const Questionnaire = withState<QuestionnaireProps>()((s) => ({
                     onAnswerSubmitted={(answer) => onAnswerSubmitted(answer)}
                     renderInfo={renderInfoText}
                     renderTextInput={renderTextBox}
-                />
+                /> */}
             </ScrollView>
         </MainLayout>
     );

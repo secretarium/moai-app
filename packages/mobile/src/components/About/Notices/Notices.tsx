@@ -3,9 +3,8 @@ import * as FileSystem from 'expo-file-system';
 import { Asset } from 'expo-asset';
 import { View, Text, ScrollView } from 'react-native';
 import MainLayout from '../../common/MainLayout/index';
-import disclaimerPath from '../../../../public/disclaimer.txt';
 import { useTheme } from '../../../hooks/useTheme';
-import i18n from 'i18n-js';
+import i18n from '../../../services/i18n';
 
 
 const Notices: React.FC = () => {
@@ -16,8 +15,9 @@ const Notices: React.FC = () => {
     useEffect(() => {
         const fetchDisclaimer = async () => {
             try {
-                const disclaimerFile = Asset.fromModule(disclaimerPath);
-                await disclaimerFile.downloadAsync();
+                // eslint-disable-next-line @typescript-eslint/no-require-imports
+                const disclaimerFile = Asset.fromModule(require('../../../../public/disclaimer.txt'));
+                // await disclaimerFile.downloadAsync();
                 const data = await FileSystem.readAsStringAsync(disclaimerFile.localUri);
                 setDisclaimer(data);
             } catch (error) {

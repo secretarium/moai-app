@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import MainLayout from '../common/MainLayout';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { commonStyles } from './styles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { withState } from '../../store';
 import { useTheme } from '../../hooks/useTheme';
+import LogoBlack from '../../assets/logo-black.png';
+import LogoWhite from '../../assets/logo-white.png';
+import Pin86 from '../../assets/pin-86ab50.png';
+import Pin64 from '../../assets/pin-648fff.png';
+import PinA1 from '../../assets/pin-a11708.png';
+import PinD7 from '../../assets/pin-d7230e.png';
+import PinDC from '../../assets/pin-dc267f.png';
+import PinFE from '../../assets/pin-fe6100.png';
+import PinFF from '../../assets/pin-ffb000.png';
 
 const Exposure = withState()((s) => ({
     risk: s.exposure.risk
 }), ({ risk }) => {
 
-    const history = useHistory();
+    const naviguate = useNavigate();
 
     const [riskIndex, setRiskIndex] = useState<number>();
     const [pinColor, setPinColor] = useState<string>();
@@ -19,7 +28,7 @@ const Exposure = withState()((s) => ({
     const [colorAlt, setColorAlt] = useState<string>();
     const [visuallyImpaired, isVisuallyImpaired] = useState<boolean>(false);
     const { colors, theme } = useTheme();
-    const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+    const themeLogoStyle = theme !== 'dark' ? LogoBlack : LogoWhite;
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     useEffect(() => {
@@ -59,43 +68,43 @@ const Exposure = withState()((s) => ({
         switch (pinColor) {
             case '86ab50':
                 return <Image
-                    source={require('../../assets/pin-86ab50.png')}
+                    source={Pin86}
                     resizeMode={'contain'}
                     style={commonStyles.pin}
                 />;
             case '648fff':
                 return <Image
-                    source={require('../../assets/pin-648fff.png')}
+                    source={Pin64}
                     resizeMode={'contain'}
                     style={commonStyles.pin}
                 />;
             case 'a11708':
                 return <Image
-                    source={require('../../assets/pin-a11708.png')}
+                    source={PinA1}
                     resizeMode={'contain'}
                     style={commonStyles.pin}
                 />;
             case 'd7230e':
                 return <Image
-                    source={require('../../assets/pin-d7230e.png')}
+                    source={PinD7}
                     resizeMode={'contain'}
                     style={commonStyles.pin}
                 />;
             case 'dc267f':
                 return <Image
-                    source={require('../../assets/pin-dc267f.png')}
+                    source={PinDC}
                     resizeMode={'contain'}
                     style={commonStyles.pin}
                 />;
             case 'fe6100':
                 return <Image
-                    source={require('../../assets/pin-fe6100.png')}
+                    source={PinFE}
                     resizeMode={'contain'}
                     style={commonStyles.pin}
                 />;
             case 'ffb000':
                 return <Image
-                    source={require('../../assets/pin-ffb000.png')}
+                    source={PinFF}
                     resizeMode={'contain'}
                     style={commonStyles.pin}
                 />;
@@ -125,7 +134,7 @@ const Exposure = withState()((s) => ({
                 </Text>
             </View>
             <View style={commonStyles.homeButtonContainer} >
-                <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
+                <TouchableOpacity onPress={() => naviguate('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
                     <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_GO_HOME')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => visuallyImpaired === false ? handleVisuallyImpaired(true) : handleVisuallyImpaired(false)} style={[commonStyles.homeButton, { backgroundColor: colors.button }]}>

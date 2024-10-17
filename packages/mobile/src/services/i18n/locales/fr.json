@@ -6,12 +6,10 @@
     "APP_TYPE_MESSAGE": "Tapper un message...",
     "APP_MEASURE_EXPOSURE_RISK": "Mesurer votre risque d'exposition",
     "APP_ABOUT": "À propos de Moai",
-    "APP_INFOS": [
-        "Licences",
-        "Clés",
-        "Avis",
-        "Expo Push Notification Token"
-    ],
+    "APP_INFOS_LICENSES": "Licences",
+    "APP_INFOS_KEYS": "Clés",
+    "APP_INFOS_NOTICES": "Avis",
+    "APP_INFOS_PUSH": "Expo Push Notification Token",
     "APP_CHECKIN": "Enregistrement",
     "APP_REGISTERING": "Enregistrement",
     "APP_CHECKED_IN": "Enregistré le",

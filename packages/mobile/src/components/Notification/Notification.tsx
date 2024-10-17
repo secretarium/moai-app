@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import MainLayout from '../common/MainLayout';
-import { RouteComponentProps, useHistory } from 'react-router';
-import i18n from 'i18n-js';
+import { useNavigate, useParams } from '../../react-router';
+import i18n from '../../services/i18n';
 import { withState } from '../../store';
 import { commonStyles } from '../commonStyles';
 import { useTheme } from '../../hooks/useTheme';
 
-type NotificationProps = RouteComponentProps<{
+type NotificationProps = {
     /**
      * Notification message in a stringified JSON form
      */
     notificationMessage: string;
-}>;
+};
 
-const Notification = withState<NotificationProps>()(
-    () => ({}),
-    ({ match }) => {
+const Notification = withState()(
+    null,
+    () => {
 
-        const { params: { notificationMessage } } = match;
-        const history = useHistory();
+        const { notificationMessage } = useParams() as NotificationProps;
+        const naviguate = useNavigate();
         const [notifContent, setNotifContent] = useState();
         const [notifObject, setNotifObject] = useState(JSON.parse(notificationMessage));
         const { colors } = useTheme();
@@ -43,11 +43,11 @@ const Notification = withState<NotificationProps>()(
                         <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_FEEDBACK_INVITATION')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
                             <TouchableOpacity onPress={() => notifObject.feedbackToken
-                                ? history.push(`/feedback/form/exposure/${notifObject.feedbackToken}/${notifObject.testId}`)
-                                : history.push('/feedback/form')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
+                                ? naviguate(`/feedback/form/exposure/${notifObject.feedbackToken}/${notifObject.testId}`)
+                                : naviguate('/feedback/form')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_YES')}</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button }]}>
+                            <TouchableOpacity onPress={() => naviguate('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button }]}>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_NO')}</Text>
                             </TouchableOpacity>
                         </View>
@@ -56,7 +56,7 @@ const Notification = withState<NotificationProps>()(
                     return <>
                         <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_NEW_IMMUNITY_RECORD')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
-                            <TouchableOpacity onPress={() => history.push('/immunity')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
+                            <TouchableOpacity onPress={() => naviguate('/immunity')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_CHECK_IMMUNITY_RECORDS')}</Text>
                             </TouchableOpacity>
                         </View>
@@ -65,7 +65,7 @@ const Notification = withState<NotificationProps>()(
                     return <>
                         <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_IMMUNITY_RECORD_APPROVED')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
-                            <TouchableOpacity onPress={() => history.push('/immunity')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
+                            <TouchableOpacity onPress={() => naviguate('/immunity')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_CHECK_IMMUNITY_RECORDS')}</Text>
                             </TouchableOpacity>
                         </View>
@@ -74,7 +74,7 @@ const Notification = withState<NotificationProps>()(
                     return <>
                         <Text style={{ fontFamily: 'Poppins-Regular', color: colors.text }}>{i18n.t('APP_IMMUNITY_RECORD_REJECTED')}</Text>
                         <View style={[commonStyles.homeButtonContainer, { marginTop: 80 }]} >
-                            <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
+                            <TouchableOpacity onPress={() => naviguate('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button, marginBottom: 15 }]}>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_GO_HOME')}</Text>
                             </TouchableOpacity>
                         </View>

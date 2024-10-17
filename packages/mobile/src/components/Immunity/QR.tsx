@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import MainLayout from '../common/MainLayout';
-import { RouteComponentProps } from 'react-router';
+import { useParams } from '../../react-router';
 import { styles, commonStyles } from './styles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { withState } from '../../store';
 import QRCode from 'react-native-qrcode-svg';
 import { getVaccineCode } from '../../actions';
 import { useTheme } from '../../hooks/useTheme';
 
-type QRProps = RouteComponentProps<{
+type QRProps = {
     /**
      * Type of QR code - can be either a certificate or a vaccine
      */
     type: string;
-}>;
+};
 
-const QR = withState<QRProps>()((s) => ({
+const QR = withState()((s) => ({
     certificate: s.immunity.immunityCertificate,
     vaccineId: s.system.vaccineId
-}), ({ certificate, vaccineId, match, dispatch }) => {
+}), ({ certificate, vaccineId, dispatch }) => {
 
-    const { params: { type } } = match;
+    const { type } = useParams() as QRProps;
     const [qrData, setQrData] = useState<string>();
 
     useEffect(() => {

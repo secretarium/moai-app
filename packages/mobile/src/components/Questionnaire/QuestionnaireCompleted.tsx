@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import MainLayout from '../common/MainLayout';
-import { useHistory } from 'react-router';
+import { useNavigate } from '../../react-router';
 import { styles } from './styles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
 
 const QuestionnaireCompleted: React.FC = () => {
 
-    const history = useHistory();
+    const naviguate = useNavigate();
     const { colors } = useTheme();
 
     return (
@@ -25,7 +25,7 @@ const QuestionnaireCompleted: React.FC = () => {
                 </Text>
             </View>
             <View style={styles.homeButtonContainer} >
-                <TouchableOpacity onPress={() => history.push('/feedback/exposure')} style={[styles.homeButton, { backgroundColor: colors.button }]}>
+                <TouchableOpacity onPress={() => naviguate('/feedback/exposure')} style={[styles.homeButton, { backgroundColor: colors.button }]}>
                     <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_CHECK_EXPOSURE')}</Text>
                 </TouchableOpacity>
             </View>

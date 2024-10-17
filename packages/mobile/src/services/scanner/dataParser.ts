@@ -1,5 +1,4 @@
-import { BarCodeScanningResult } from 'expo-camera';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import { BarcodeScanningResult, BarcodeType } from 'expo-camera';
 import { Utils } from '@secretarium/connector';
 
 export type ParsedCode = {
@@ -19,9 +18,9 @@ const isPrefixed = (text: string, prefix: Sources) => {
     return text.substr(0, prefix.length) === prefix;
 };
 
-export const parseCode = ({ type, data }: BarCodeScanningResult): ParsedCode => {
-    switch (type) {
-        case BarCodeScanner.Constants.BarCodeType.qr:
+export const parseCode = ({ type, data }: BarcodeScanningResult): ParsedCode => {
+    switch (type as BarcodeType) {
+        case 'qr':
             if (isPrefixed(data, Sources.MOAI) || isPrefixed(data, Sources.MOAIH)) {
                 const comps = data.split('/').slice(-2);
                 if (comps?.length === 2 && comps[0] === 'check')
@@ -44,7 +43,7 @@ export const parseCode = ({ type, data }: BarCodeScanningResult): ParsedCode => 
                 }
             }
             break;
-        case BarCodeScanner.Constants.BarCodeType.code128:
+        case 'code128':
             break;
     }
 

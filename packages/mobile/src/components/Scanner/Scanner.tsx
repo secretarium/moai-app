@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, View, Image, Button, Linking } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, View, Image, Button } from 'react-native';
 import Modal from 'react-native-modal';
 import { Link } from 'react-router-native';
 import MainLayout from '../common/MainLayout';
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { Camera } from 'expo-camera';
+import { openSettings } from 'expo-linking';
+import { CameraView, Camera } from 'expo-camera';
 import { styles } from './styles';
 import { parseCode, Sources, ParsedCode } from '../../services/scanner/dataParser';
-import { Redirect } from 'react-router';
+import { Navigate } from '../../react-router';
 import { commonStyles } from '../commonStyles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
-
+import LogoBlack from '../../assets/logo-black.png';
+import LogoWhite from '../../assets/logo-white.png';
 
 const Scanner: React.FC = () => {
 
     const [hasPermission, setHasPermission] = useState<boolean>(null);
     const [venuInfo, setVenuInfo] = useState<ParsedCode>();
     const [test, setTest] = useState<string>();
-    const [testType, setTestType] = useState<'covidTest' | 'covidAntibodyTest'>();
+    const [testType, setTestType] = useState<'affectTest' | 'affectABTest'>();
     const [error, setError] = useState<string>();
     const [showModal, setShowModal] = useState<boolean>(false);
     const [askForTestType, setAskForTestType] = useState<boolean>(false);
     const { colors, theme } = useTheme();
-    const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+    const themeLogoStyle = theme !== 'dark' ? LogoBlack : LogoWhite;
 
     /**
      * Function to handle scanned code, which can be either a QR code or a barcode 128
@@ -47,17 +48,17 @@ const Scanner: React.FC = () => {
 
     useEffect(() => {
         (async () => {
-            const { status } = await Camera.requestPermissionsAsync();
+            const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
     }, []);
 
     if (venuInfo) {
-        return <Redirect to={{ pathname: `/checkin/${[venuInfo.venue, venuInfo.source, venuInfo.type].filter(Boolean).join('/')}`, state: { testId: null } }} />;
+        return <Navigate to={{ pathname: `/checkin/${[venuInfo.venue, venuInfo.source, venuInfo.type].filter(Boolean).join('/')}` }} state={{ testId: null }} />;
     }
 
     if (test && testType) {
-        return <Redirect to={{ pathname: `/checkin/${test}`, state: { testId: test, testType: testType } }} />;
+        return <Navigate to={{ pathname: `/checkin/${test}` }} state={{ testId: test, testType: testType }} />;
     }
 
     let composition;
@@ -70,7 +71,7 @@ const Scanner: React.FC = () => {
                 <Text style={[styles.messageText, { fontFamily: 'Poppins-Regular', fontSize: 14, color: 'white' }]}>
                     {i18n.t('APP_NO_CAMERA_PERMISSION')}
                 </Text>
-                <TouchableOpacity onPress={() => Linking.openSettings()} style={styles.settingsButton}>
+                <TouchableOpacity onPress={() => openSettings()} style={styles.settingsButton}>
                     <Text style={{ fontFamily: 'Poppins-Bold', color: 'white' }}>{i18n.t('APP_GO_TO_SETTINGS')}</Text>
                 </TouchableOpacity>
             </View>
@@ -86,13 +87,13 @@ const Scanner: React.FC = () => {
                 />
             </View>
             <View style={styles.cameraView}>
-                <Camera
+                <CameraView
                     zoom={0}
-                    onBarCodeScanned={handleBarCodeScanned}
-                    barCodeScannerSettings={{
-                        barCodeTypes: [
-                            BarCodeScanner.Constants.BarCodeType.qr,
-                            BarCodeScanner.Constants.BarCodeType.code128
+                    onBarcodeScanned={handleBarCodeScanned}
+                    barcodeScannerSettings={{
+                        barcodeTypes: [
+                            'qr',
+                            'code128'
                         ]
                     }}
                     style={[StyleSheet.absoluteFillObject]}
@@ -122,12 +123,12 @@ const Scanner: React.FC = () => {
                         {i18n.t('APP_INFECTION_OR_ANTIBODY')}
                     </Text>
                     <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('covidTest'); }}>
+                        <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('affectTest'); }}>
                             <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>
                                 {i18n.t('APP_INFECTION')}
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('covidAntibodyTest'); }}>
+                        <TouchableOpacity style={[styles.button]} onPress={() => { setAskForTestType(false); setTestType('affectABTest'); }}>
                             <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>
                                 {i18n.t('APP_ANTIBODY')}
                             </Text>
@@ -135,7 +136,7 @@ const Scanner: React.FC = () => {
                     </View>
                 </View>
             </Modal>
-            { composition}
+            {composition}
         </MainLayout >
     );
 };

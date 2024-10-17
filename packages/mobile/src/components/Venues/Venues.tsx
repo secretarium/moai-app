@@ -7,7 +7,7 @@ import MainLayout from '../common/MainLayout';
 import { getVenues } from '../../actions';
 import { styles, commonStyles } from './styles';
 import { toDateTime } from '../../utils/timeHandler';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
 
 

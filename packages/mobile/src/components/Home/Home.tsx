@@ -3,14 +3,16 @@ import { Text, Image, View } from 'react-native';
 import { Link } from 'react-router-native';
 import MainLayout from '../common/MainLayout';
 import { commonStyles } from './styles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
-
+import LogoBlack from '../../assets/logo-black.png';
+import LogoWhite from '../../assets/logo-white.png';
+import PinDefault from '../../assets/pin-default.png';
 
 const Home: React.FC = () => {
 
     const { colors, theme } = useTheme();
-    const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+    const themeLogoStyle = theme !== 'dark' ? LogoBlack : LogoWhite;
 
     return (
         <MainLayout showGoBack={false}>
@@ -23,7 +25,7 @@ const Home: React.FC = () => {
                 />
                 <Link to={'/scanner'} style={commonStyles.pinButton} underlayColor='transparent'>
                     <Image
-                        source={require('../../assets/pin-default.png')}
+                        source={PinDefault}
                         resizeMode={'contain'}
                         style={commonStyles.pin}
                     />

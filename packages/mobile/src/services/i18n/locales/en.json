@@ -51,11 +51,10 @@
     "APP_SETUP_YOUR_IMMUNITY": "Answer a short questionnaire to help us determine your risk profile, by tapping the 'Create Risk Profile' button. You can also create a vaccine ID that preserves your identity, while allowing you to get records of your vaccinations.",
     "APP_VACCINE_ID": "Vaccine ID",
     "APP_CHANGE_VACCINE_ID": "Change Vaccine ID",
-    "APP_INFOS": [
-        "Licenses",
-        "Keys",
-        "Notices"
-    ],
+    "APP_INFOS_LICENSES": "Licenses",
+    "APP_INFOS_KEYS": "Keys",
+    "APP_INFOS_NOTICES": "Notices",
+    "APP_INFOS_PUSH": "Expo Push Notification Token",
     "APP_CHECKIN": "Checking in",
     "APP_REGISTERING": "Registering",
     "APP_CHECKED_IN": "Checked-in on",

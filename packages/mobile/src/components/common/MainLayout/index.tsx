@@ -1,10 +1,11 @@
-import React from 'react';
-import { SafeAreaView, View, StatusBar, TouchableOpacity, Image } from 'react-native';
+import React, { FC, PropsWithChildren } from 'react';
+import { SafeAreaView, View, StatusBar, Image } from 'react-native';
 import { Link } from 'react-router-native';
 import { MaterialCommunityIcons, Entypo, FontAwesome5 } from '@expo/vector-icons';
 import { commonStyles } from '../../commonStyles';
 import { useTheme } from '../../../hooks/useTheme';
-
+import LogoBlack from '../../../assets/logo-black.png';
+import LogoWhite from '../../../assets/logo-white.png';
 
 type MainLayoutProps = {
     /**
@@ -25,7 +26,7 @@ type MainLayoutProps = {
     goBackRoute?: string;
 };
 
-const MainLayout: React.FC<MainLayoutProps> = ({
+const MainLayout: FC<PropsWithChildren<MainLayoutProps>> = ({
     children,
     withNavigation = true,
     backgroundColor,
@@ -35,7 +36,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 
 
     const { colors, theme } = useTheme();
-    const themeLogoStyle = theme !== 'dark' ? require('../../../assets/logo-black.png') : require('../../../assets/logo-white.png');
+    const themeLogoStyle = theme !== 'dark' ? LogoBlack : LogoWhite;
 
     return (
         <View style={[commonStyles.applicationBackground, { backgroundColor: backgroundColor ? backgroundColor : colors.background }]}>
@@ -55,19 +56,19 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                                         resizeMode={'contain'}
                                         style={commonStyles.chatLogo}
                                     />
-                                    <Link to={'/about'} component={TouchableOpacity} disabled={true} style={commonStyles.topRightButton} underlayColor='transparent'>
+                                    <Link to={'/about'} disabled={true} style={commonStyles.topRightButton} underlayColor='transparent'>
                                         <MaterialCommunityIcons name="information" size={40} color={colors.background} />
                                     </Link>
                                 </>
                             ) : (
                                 <>
-                                    <Link to={'/chat'} component={TouchableOpacity} style={commonStyles.bottomLeftButton} underlayColor='transparent'>
+                                    <Link to={'/chat'} style={commonStyles.bottomLeftButton} underlayColor='transparent'>
                                         <Entypo name="chat" size={35} color={colors.icon} />
                                     </Link>
-                                    <Link to={'/immunity'} component={TouchableOpacity} underlayColor='transparent'>
+                                    <Link to={'/immunity'} underlayColor='transparent'>
                                         <FontAwesome5 name="shield-virus" size={35} color={colors.icon} />
                                     </Link>
-                                    <Link to={'/venues'} component={TouchableOpacity} underlayColor='transparent'>
+                                    <Link to={'/venues'} underlayColor='transparent'>
                                         <MaterialCommunityIcons name="history" size={40} color={colors.icon} />
                                     </Link>
                                     <Link to={'/about'} style={commonStyles.bottomRightButton} underlayColor='transparent'>

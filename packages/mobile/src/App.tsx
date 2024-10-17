@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { withState } from './store';
 import * as Linking from 'expo-linking';
-import { Redirect, Route, Switch, useLocation } from 'react-router-native';
+import { Navigate, Route, Routes, useLocation } from './react-router';
 import Home from './components/Home';
 import Scanned from './components/Scanned';
 import Chat from './components/Chat';
@@ -27,11 +27,12 @@ import { connect, registerNotificationToken } from './actions';
 import { useFonts } from 'expo-font';
 import { styles } from './styles';
 import { AppState, View, Image, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { initLocalize } from './services/i18n/localized';
-import i18n from 'i18n-js';
+import i18n from './services/i18n';
 import { registerForPushNotificationsAsync, createPushNotifEncryptionKey, decryptPushNotification } from './services/notifications/notifications';
 import * as Notifications from 'expo-notifications';
+import LogoWhite from './assets/logo-white.png';
 
 /**
  * Top level React Component for the application
@@ -46,7 +47,7 @@ const App = withState()(
     ({ dispatch, localKey, isConnected, connectionError }) => {
 
         initLocalize();
-        const history = useHistory();
+        const naviguate = useNavigate();
         const location = useLocation();
         const [userDigest, setUserDigest] = useState<string>(undefined);
         const [initialUrl, setInitialUrl] = useState<string>(undefined);
@@ -59,14 +60,16 @@ const App = withState()(
         const [expoToken, setExpoPushToken] = useState('');
         const [notification, setNotification] = useState<Notifications.Notification>();
         const [notificationMessage, setNotificationMessage] = useState<string>();
-        const notificationListener = useRef<any>();
-        const responseListener = useRef<any>();
+        const notificationListener = useRef<Notifications.Subscription>(null);
+        const responseListener = useRef<Notifications.Subscription>(null);
 
         /**
          * Handles loading of the fonts used throughout the application
          */
         const [fontsLoaded] = useFonts({
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
             'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
             'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
         });
 
@@ -101,9 +104,9 @@ const App = withState()(
 
         useEffect(() => {
             if (notificationMessage) {
-                history.push(`/notification/${notificationMessage}`);
+                naviguate(`/notification/${notificationMessage}`);
             }
-        }, [notificationMessage, history]);
+        }, [notificationMessage, naviguate]);
 
         /**
          * Application can be opened based on a QR code scan
@@ -114,7 +117,7 @@ const App = withState()(
             if (comps?.length === 2 && comps[0] === 'check')
                 setInitialUrl(comps[1]);
             else if (comps?.length === 2 && comps[0] === 'certificate') {
-                history.push(`/immunity/${comps[1]}`);
+                naviguate(`/immunity/${comps[1]}`);
                 setUserDigest(comps[1]);
             } else
                 setInitialUrl(null);
@@ -138,10 +141,10 @@ const App = withState()(
 
         useEffect(() => {
             if ((initialUrl !== pastInitialUrl && pastInitialUrl && initialUrl) || initialUrl) {
-                history.push(`/checkin/${initialUrl}`);
+                naviguate(`/checkin/${initialUrl}`);
                 setPastInitialUrl(initialUrl);
             }
-        }, [initialUrl, history, pastInitialUrl]);
+        }, [initialUrl, naviguate, pastInitialUrl]);
 
         useEffect(() => {
             async function connectBackend() {
@@ -160,11 +163,11 @@ const App = withState()(
         const handleAppStateChange = useCallback((nextAppState: string) => {
             if (nextAppState === 'active') {
                 setHasRequestedInitialURL(false);
-                if (!initialUrl && history.location.pathname.slice(0, 8) === '/scanner') {
-                    history.push('/');
+                if (!initialUrl && window.location.pathname.slice(0, 8) === '/scanner') {
+                    naviguate('/');
                 }
             }
-        }, [history, initialUrl]);
+        }, [initialUrl, naviguate]);
 
         /**
          * Function to reconnect to the Secretarium backend
@@ -185,7 +188,7 @@ const App = withState()(
          */
         if (!fontsLoaded || !hasParsedInitialURL || !isConnected)
             return <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-                <Image source={require('./assets/logo-white.png')} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
+                <Image source={LogoWhite} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
                 {connectionError
                     ? <>
                         <Text style={[styles.text, { width: '80%' }]}>{connectionError}</Text>
@@ -201,31 +204,31 @@ const App = withState()(
 
         return (
             <>
-                <Switch>
-                    <Route path={`/${i18n.t('APP_INFOS')[3]}`} component={ExpoPushToken} />
-                    <Route path={`/${i18n.t('APP_INFOS')[2]}`} component={Notices} />
-                    <Route path={`/${i18n.t('APP_INFOS')[1]}`} component={Keys} />
-                    <Route path="/key/:key" component={Key} />
-                    <Route path="/about" component={About} />
-                    <Route path={`/${i18n.t('APP_INFOS')[0]}`} component={Licenses} />
-                    <Route path="/onboarding" component={OnboardingScreen} />
-                    <Route path="/home" component={Home} />
-                    <Route path="/chat" component={Chat} />
-                    <Route path="/scanner" component={Scanner} />
-                    <Route path="/checkin/:venue/:source?/:type?" component={Checkin} />
-                    <Route path="/scanned" component={Scanned} />
-                    <Route path="/venues" component={Venues} />
-                    <Route path="/feedback/form/:venueType?" component={Questionnaire} />
-                    <Route path="/feedback/exposure/form/:feedbackToken/:testId" component={Questionnaire} />
-                    <Route path="/feedback/completed" component={QuestionnaireCompleted} />
-                    <Route path="/feedback/exposure" component={Exposure} />
-                    <Route path="/feedback/riskProfile" component={RiskProfile} />
-                    <Route path="/notification/:notificationMessage" component={Notification} />
-                    <Route path="/immunity/:userDigest?" component={Immunity} />
-                    <Route path="/setup" component={Setup} />
-                    <Route path="/qrcode/:type" component={QR} />
-                    <Route render={() => { return <Redirect to="/home" />; }} />
-                </Switch>
+                <Routes>
+                    <Route path="/push" element={<ExpoPushToken />} />
+                    <Route path="/notices" element={<Notices />} />
+                    <Route path="/keys" element={<Keys />} />
+                    <Route path="/key/:key" element={<Key />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/licenses" element={<Licenses />} />
+                    <Route path="/onboarding" element={<OnboardingScreen />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/chat" element={<Chat />} />
+                    <Route path="/scanner" element={<Scanner />} />
+                    <Route path="/checkin/:venue/:source?/:type?" element={<Checkin />} />
+                    <Route path="/scanned" element={<Scanned />} />
+                    <Route path="/venues" element={<Venues />} />
+                    <Route path="/feedback/form/:venueType?" element={<Questionnaire />} />
+                    <Route path="/feedback/exposure/form/:feedbackToken/:testId" element={<Questionnaire />} />
+                    <Route path="/feedback/completed" element={<QuestionnaireCompleted />} />
+                    <Route path="/feedback/exposure" element={<Exposure />} />
+                    <Route path="/feedback/riskProfile" element={<RiskProfile />} />
+                    <Route path="/notification/:notificationMessage" element={<Notification />} />
+                    <Route path="/immunity/:userDigest?" element={<Immunity />} />
+                    <Route path="/setup" element={<Setup />} />
+                    <Route path="/qrcode/:type" element={<QR />} />
+                    <Route element={<Navigate to="/home" />} />
+                </Routes>
             </>
         );
     }

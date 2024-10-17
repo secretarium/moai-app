@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { withState } from '../../store';
 import MainLayout from '../common/MainLayout';
-import { useHistory, RouteComponentProps } from 'react-router';
+import { useNavigate, useParams } from '../../react-router';
 import { Entypo } from '@expo/vector-icons';
 import { openURL } from 'expo-linking';
 import { commonStyles } from './styles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
 import {
     requestImmunityCertificate,
@@ -15,23 +15,23 @@ import {
     getVaccineCode
 } from '../../actions';
 
-type ImmunityProps = RouteComponentProps<{
+type ImmunityProps = {
     /**
      * An encrypted string based on user's passport scan
      */
     userDigest: string;
-}>;
+};
 
-const Immunity = withState<ImmunityProps>()((s) => ({
+const Immunity = withState()((s) => ({
     records: s.immunity.immunityRecords,
     certificate: s.immunity.immunityCertificate,
     riskProfile: s.system.riskProfile,
     vaccineId: s.system.vaccineId,
     requested: s.system.certificateRequested
-}), ({ records, certificate, riskProfile, vaccineId, requested, match, dispatch }) => {
+}), ({ records, certificate, riskProfile, vaccineId, requested, dispatch }) => {
 
-    const { params: { userDigest } } = match;
-    const history = useHistory();
+    const { userDigest } = useParams() as ImmunityProps;
+    const naviguate = useNavigate();
     const { colors } = useTheme();
 
     useEffect(() => {
@@ -46,7 +46,7 @@ const Immunity = withState<ImmunityProps>()((s) => ({
 
     const handleGetVaccineCode = () => {
         dispatch(getVaccineCode());
-        history.push('/qrcode/vaccine');
+        naviguate('/qrcode/vaccine');
     };
 
     const immunity = {
@@ -73,7 +73,7 @@ const Immunity = withState<ImmunityProps>()((s) => ({
                             </Text>
                         </View>
                         <TouchableOpacity
-                            onPress={() => history.push('/feedback/riskProfile')}
+                            onPress={() => naviguate('/feedback/riskProfile')}
                             style={[commonStyles.card, { backgroundColor: colors.button, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]}>
                             <>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>{i18n.t('APP_CREATE_RISK_PROFILE')}</Text>
@@ -112,7 +112,7 @@ const Immunity = withState<ImmunityProps>()((s) => ({
                         </View>
                         {certificate
                             ? <TouchableOpacity
-                                onPress={() => history.push('/qrcode/certificate')}
+                                onPress={() => naviguate('/qrcode/certificate')}
                                 style={[commonStyles.card, { backgroundColor: colors.button, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]}>
                                 <>
                                     <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>{i18n.t('APP_VIEW_IMMUNITY_CERTIFICATE')}</Text>
@@ -140,7 +140,7 @@ const Immunity = withState<ImmunityProps>()((s) => ({
                             </Text>
                         </View>
                         <TouchableOpacity
-                            onPress={() => history.push('/qrcode/vaccine')}
+                            onPress={() => naviguate('/qrcode/vaccine')}
                             style={[commonStyles.card, { backgroundColor: colors.button, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]}>
                             <>
                                 <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>{i18n.t('APP_VIEW_VACCINE_ID')}</Text>

@@ -1,6 +1,0 @@
-{
-    "hello": "Bienvenue sur Expo + Next.js",
-    "change-locale": "Changer la langue",
-    "error-with-status": "Une erreur {{statusCode}} est apparu",
-    "error-without-status": "Une erreur est apparu"
-}

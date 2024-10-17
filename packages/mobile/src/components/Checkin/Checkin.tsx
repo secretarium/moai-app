@@ -1,54 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Button, Image } from 'react-native';
-import { Redirect, useLocation } from 'react-router-native';
+import { useLocation } from 'react-router-native';
 import { withState } from '../../store';
 import { ParsedCode } from '../../services/scanner/dataParser';
 import Modal from 'react-native-modal';
 import { commonStyles } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
-import { RouteComponentProps, useHistory } from 'react-router';
+import { Location, Navigate, useNavigate, useParams } from '../../react-router';
 import MainLayout from '../common/MainLayout';
 import { checkIn, connect, registerTest } from '../../actions';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
+import LogoBlack from '../../assets/logo-black.png';
+import LogoWhite from '../../assets/logo-white.png';
+import PinCheckin from '../../assets/pin-checkin.png';
 
 type LocationTypes = {
     /**
-     * ID of the COVID-19 test or antibody test scanned by the user
+     * ID of the test or AB test scanned by the user
      */
     testId: string;
     /**
      * Type of the test scanned by the user
      */
-    testType: 'covidTest' | 'covidAntibodyTest';
+    testType: 'affectTest' | 'affectABTest';
 };
 
-const Checkin = withState<RouteComponentProps<{
-    venue: string;
-    source?: string;
-    type?: string
-}>>()(
+const Checkin = withState()(
     (s) => ({
         localKey: s.system.localKey,
         checkInError: s.system.checkInError,
         isConnected: s.system.isConnected
     }),
-    ({ dispatch, localKey, match, checkInError, isConnected }) => {
+    ({ dispatch, localKey, checkInError, isConnected }) => {
 
-        const history = useHistory();
-        const location = useLocation<LocationTypes>();
+        const params = useParams() as {
+            venue: string;
+            source?: string;
+            type?: string
+        };
+        const naviguate = useNavigate();
+        const location = useLocation() as Location<LocationTypes>;
         const [redirect, setRedirect] = useState(false);
         const [test, setTest] = useState<string>(location.state.testId);
         const [type, setType] = useState<string>(location.state.testType);
         const [venueInfo, setVenueInfo] = useState<ParsedCode>({
-            ...match.params
+            ...params
         });
         const [pageError, setPageError] = useState<string>();
         const [showModal, setShowModal] = useState<boolean>(false);
         const [isConnecting, setIsConnecting] = useState(false);
         const [isScanning, setIsScanning] = useState(false);
         const { colors, theme } = useTheme();
-        const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+        const themeLogoStyle = theme !== 'dark' ? LogoBlack : LogoWhite;
 
         useEffect(() => {
             async function connectBackend() {
@@ -82,7 +86,7 @@ const Checkin = withState<RouteComponentProps<{
             }
 
             /**
-             * Function to register a COVID-19 or antibody test based on a barcode scan
+             * Function to register a test or AB test based on a barcode scan
              */
             async function registerUserTest() {
                 setIsScanning(true);
@@ -110,7 +114,7 @@ const Checkin = withState<RouteComponentProps<{
         let composition;
 
         if (redirect === true)
-            composition = <Redirect to={'/scanned'} />;
+            composition = <Navigate to={'/scanned'} />;
         else
             composition =
                 <>
@@ -123,7 +127,7 @@ const Checkin = withState<RouteComponentProps<{
                         />
                         <View style={commonStyles.pinButton}>
                             <Image
-                                source={require('../../assets/pin-checkin.png')}
+                                source={PinCheckin}
                                 resizeMode={'contain'}
                                 style={commonStyles.pin}
                             />
@@ -139,7 +143,7 @@ const Checkin = withState<RouteComponentProps<{
                         <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.modalText }}>
                             {pageError}
                         </Text>
-                        <Button title='Close' onPress={() => history.push('/')} />
+                        <Button title='Close' onPress={() => naviguate('/')} />
                     </View>
                 </Modal>
                 {composition}

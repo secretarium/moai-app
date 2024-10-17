@@ -1,5 +1,4 @@
-import { StatusBarStyle } from 'react-native';
-import { ColorSchemeName, useColorScheme } from 'react-native-appearance';
+import { StatusBarStyle, ColorSchemeName, useColorScheme } from 'react-native';
 
 type Colors = {
     modalBackground: string;

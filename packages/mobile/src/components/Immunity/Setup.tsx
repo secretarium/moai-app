@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { withState } from '../../store';
 import MainLayout from '../common/MainLayout';
-import { useHistory } from 'react-router';
+import { useNavigate } from '../../react-router';
 import { Entypo } from '@expo/vector-icons';
 import { commonStyles } from './styles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { getVaccineCode } from '../../actions';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -13,12 +13,12 @@ const Setup = withState()(
     null,
     ({ dispatch }) => {
 
-        const history = useHistory();
+        const naviguate = useNavigate();
         const { colors } = useTheme();
 
         const handleGetVaccineCode = () => {
             dispatch(getVaccineCode());
-            history.push('/qrcode/vaccine');
+            naviguate('/qrcode/vaccine');
         };
 
         return (
@@ -36,7 +36,7 @@ const Setup = withState()(
                 </View>
                 <ScrollView>
                     <TouchableOpacity
-                        onPress={() => history.push('/feedback/riskProfile')}
+                        onPress={() => naviguate('/feedback/riskProfile')}
                         style={[commonStyles.card, { backgroundColor: colors.button, width: '100%', flexDirection: 'row', justifyContent: 'space-between' }]}>
                         <>
                             <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text, fontSize: 15 }}>{i18n.t('APP_CREATE_RISK_PROFILE')}</Text>

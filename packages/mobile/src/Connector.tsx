@@ -3,6 +3,7 @@ import { View, Image, ActivityIndicator, Text } from 'react-native';
 import { withState } from './store';
 import { styles } from './styles';
 import { generateLocalKey } from './actions';
+import LogoWhite from './assets/logo-white.png';
 
 /**
  * Wrapper used to generate a local key at application's launch,
@@ -32,7 +33,7 @@ const Connector = withState()(
 
         if (!hasObtainedLocalKey)
             return <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-                <Image source={require('./assets/logo-white.png')} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
+                <Image source={LogoWhite} resizeMode={'contain'} style={{ width: '40%', bottom: 20 }} />
                 <ActivityIndicator size="large" color="#fff" />
                 <Text style={[styles.text]}>Generating local key...</Text>
             </View>;

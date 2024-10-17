@@ -1,6 +1,7 @@
-import { AnyAction as ReduxAnyAction } from 'redux';
-import { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
-import { ClearKeyPair } from '@secretarium/connector';
+import type { AnyAction as ReduxAnyAction } from 'redux';
+import type { MapStateToProps, TypedUseSelectorHook } from 'react-redux';
+import type { ClearKeyPair } from '@secretarium/connector';
+import type { PropsWithChildren } from 'react';
 
 declare namespace Moai {
     interface FunctionAction {
@@ -52,7 +53,7 @@ declare namespace Moai {
     }
 
     interface StateCurry<R> {
-        <O = unknown>(): (<S = Record<string, unknown>>(propsMapper: MapStateToProps<S, O, ReturnType<R>> | null, component: React.FC<O & S & DispatchProp>) => React.FC<O & Partial<S>>);
+        <O = unknown>(): (<S = Record<string, unknown>>(propsMapper: MapStateToProps<S, O, ReturnType<R>> | null, component: React.FC<O & S & DispatchProp & PropsWithChildren>) => React.FC<O & Partial<S> & PropsWithChildren>);
     }
 
     type StateSelector = TypedUseSelectorHook<State>;
@@ -84,7 +85,7 @@ declare namespace Moai {
     type LogEntry = {
         type: string;
         time: number;
-        payload: Array<string>;
+        payload: string[];
         hadWorkload?: boolean;
     };
 

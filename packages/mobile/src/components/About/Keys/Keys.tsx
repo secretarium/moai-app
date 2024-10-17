@@ -6,7 +6,7 @@ import * as Crypto from 'expo-crypto';
 import styles from './styles';
 import { Link } from 'react-router-native';
 import { useTheme } from '../../../hooks/useTheme';
-import i18n from 'i18n-js';
+import i18n from '../../../services/i18n';
 
 
 const Keys: React.FC = () => {

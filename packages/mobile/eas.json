@@ -1,10 +1,21 @@
 {
+    "cli": {
+        "appVersionSource": "remote",
+        "version": ">= 11.0.2"
+    },
     "build": {
-        "release": {},
         "development": {
             "developmentClient": true,
-            "distribution": "internal",
-            "yarn": "1.22.11"
+            "distribution": "internal"
+        },
+        "preview": {
+            "distribution": "internal"
+        },
+        "production": {
+            "autoIncrement": true
         }
+    },
+    "submit": {
+        "production": {}
     }
 }

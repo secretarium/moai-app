@@ -1,12 +1,11 @@
 import { ClearKeyPair, Key, SCP, Transaction } from '@secretarium/connector';
-import { REACT_APP_SECRETARIUM_GATEWAYS } from '@env';
 
 interface SecretariumGatewayConfig {
     key: string;
-    gateways: Array<{
+    gateways: {
         endpoint: string;
         name: string;
-    }>;
+    }[];
 }
 
 interface SecretariumClusterConfig {
@@ -53,14 +52,14 @@ const printClusterInfo = () => {
     });
 
     console.info('Moai now using the following cluster configuration');
-    console.log(REACT_APP_SECRETARIUM_GATEWAYS);
+    console.info(process.env.EXPO_PUBLIC_SECRETARIUM_GATEWAYS);
     console.table(printableConfig);
 };
 
 const secretariumHandler = {
     connector: new SCP(),
     initialize: (): void => {
-        handlerStore.clusters = (REACT_APP_SECRETARIUM_GATEWAYS as string ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
+        handlerStore.clusters = (process.env.EXPO_PUBLIC_SECRETARIUM_GATEWAYS as string ?? '').split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});
         printClusterInfo();
     },
     createDeviceKey: (): Promise<Key> =>
@@ -117,7 +116,7 @@ const secretariumHandler = {
         })
 };
 
-if ((process.env.NODE_ENV === 'development' || process.env.REACT_APP_SECRETARIUM_GATEWAYS_OVERWRITABLE === 'true') && window) {
+if ((process.env.NODE_ENV === 'development' || process.env.EXPO_PUBLIC_SECRETARIUM_GATEWAYS_OVERWRITABLE === 'true') && window) {
     (window as any)['moaiCluster'] = (config: string | Record<string, any>) => {
         if (typeof config === 'string') {
             handlerStore.clusters = config.split(',').reduce<SecretariumClusterConfig>(gatewaysConfigReducer, {});

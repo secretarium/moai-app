@@ -16,7 +16,7 @@ const commandsPrototype = {
     MOAI_GET_IMMUNITY_RECORDS: { application: 'moai', command: 'get-immunity-records' },
     MOAI_REQUEST_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'request-immunity-certificate' },
     MOAI_GET_IMMUNITY_CERTIFICATE: { application: 'moai', command: 'get-immunity-certificate' },
-    MOAI_GET_VACCINE_CODE: {application: 'moai', command: 'register-vaccine-id'},
+    MOAI_GET_VACCINE_CODE: { application: 'moai', command: 'register-vaccine-id' },
     SECRETARIUM_FORCED_DISCONNECT: { application: '__local__', command: '__systemForceDisconnectHook__', explicit: 'active-disconnection' }
 };
 
@@ -53,7 +53,7 @@ const decorateCommands = (commands: CommandTypeMap) => {
     for (const key in commands)
         decoratedCommands[key as keyof CommandTypeMap] = {
             ...commands[key as keyof CommandTypeMap],
-            ...(process.env.NODE_ENV === 'development' || process.env.REACT_APP_MOAI_PRODUCTION_LOGGING === 'true'
+            ...(process.env.NODE_ENV === 'development' || process.env.EXPO_PUBLIC_MOAI_PRODUCTION_LOGGING === 'true'
                 ? {
                     REQUEST: `${key}_REQUEST`,
                     SUCCESS: `${key}_SUCCESS`,
@@ -74,7 +74,7 @@ type ActionTypeArray = typeof actionPrototypes;
 
 const mangleActions = (actions: ActionTypeArray) => {
     const mangledActions: Partial<ActionTypeArray> = {};
-    if (process.env.NODE_ENV === 'development' || process.env.REACT_APP_MOAI_PRODUCTION_LOGGING === 'true')
+    if (process.env.NODE_ENV === 'development' || process.env.EXPO_PUBLIC_MOAI_PRODUCTION_LOGGING === 'true')
         return actions;
     else {
         for (const key in actions)

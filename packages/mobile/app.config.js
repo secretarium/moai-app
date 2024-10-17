@@ -1,21 +1,27 @@
-const config = {
-    name: 'Moai',
-    description: 'A research app developed by Secretarium',
-    version: '0.0.47',
+const VERSION = '0.1.2';
+const BUILD_NUMBER = 52;
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default ({ config }) => ({
+
+    ...config,
+
+    version: VERSION,
     slug: 'moai-app-research',
     scheme: 'moai-app-research',
-    icon: './assets/icon.png',
     owner: 'secretarium',
+    icon: './assets/icon.png',
+    orientation: 'portrait',
+    userInterfaceStyle: 'automatic',
     splash: {
         image: './assets/splash.png',
         resizeMode: 'contain',
         backgroundColor: '#eb7473'
     },
-    userInterfaceStyle: 'automatic',
-    orientation: 'portrait',
     ios: {
-        buildNumber: '47',
+        buildNumber: `${BUILD_NUMBER}`,
         icon: './assets/ios/icon.png',
+        supportsTablet: true,
         bundleIdentifier: 'com.secretarium.moai.research',
         associatedDomains: [
             'applinks:moaiapp.com',
@@ -26,8 +32,13 @@ const config = {
         }
     },
     android: {
-        versionCode: 47,
+        versionCode: BUILD_NUMBER,
         icon: './assets/android/icon.png',
+        adaptiveIcon: {
+            foregroundImage: './assets/android/adaptive-icon.png',
+            backgroundColor: '#ffffff'
+        },
+        googleServicesFile: './google-services.json',
         package: 'com.secretarium.moai.research',
         useNextNotificationsApi: true,
         permissions: [
@@ -70,37 +81,33 @@ const config = {
         ]
     },
     web: {
-        favicon: './assets/android/icon.png'
+        favicon: './assets/favicon.png'
     },
-    assetBundlePatterns: [
-        '**/*'
-    ],
-    packagerOpts: {
-        config: 'metro.config.js',
-        sourceExts: [
-            'native.tsx',
-            'native.jsx',
-            'native.ts',
-            'native.js',
-            'android.tsx',
-            'android.jsx',
-            'android.ts',
-            'android.js',
-            'ios.tsx',
-            'ios.jsx',
-            'ios.ts',
-            'ios.js',
-            'jsx',
-            'js',
-            'json',
-            'ts',
-            'tsx',
-            'txt'
+    plugins: [
+        [
+            'expo-build-properties',
+            {
+                ios: {
+                    newArchEnabled: true,
+                    deploymentTarget: '13.4'
+                },
+                android: {
+                    newArchEnabled: true,
+                    minSdkVersion: 34,
+                    compileSdkVersion: 34,
+                    targetSdkVersion: 34,
+                    buildToolsVersion: '34.0.0'
+                }
+            }
         ]
-    },
+    ],
     experiments: {
-        turboModules: true
+        reactCanary: true,
+        reactCompiler: true
+    },
+    extra: {
+        eas: {
+            projectId: 'afb1e9b5-c7c4-4775-95f2-806250b3eb8f'
+        }
     }
-};
-
-module.exports = config;
+});

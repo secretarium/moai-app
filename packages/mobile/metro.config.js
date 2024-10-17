@@ -1,27 +1,13 @@
 const { getDefaultConfig } = require('@expo/metro-config');
-const merge = require('deepmerge');
 
-const baseConfig = getDefaultConfig(__dirname);
-const config = merge(baseConfig, {
-    transformer: {
-        minifierConfig: {
-            ecma: 8,
-            compress: {
-                drop_console: true
-            },
-            keep_classnames: true,
-            keep_fnames: true,
-            mangle: {
-                keep_classnames: true,
-                keep_fnames: true
-            }
-        }
-    },
-    resolver: {
-        assetExts: ['txt', 'ttf', 'png']
-    }
-}, {
-    arrayMerge: (target, source) => Array.from(new Set([...source, ...target]))
-});
+const defaultConfig = getDefaultConfig(__dirname);
 
-module.exports = config;
+// Remove svg from the asset extensions.
+defaultConfig.resolver.assetExts = defaultConfig.resolver.assetExts.filter((ext) => ext !== 'svg');
+// And add it to the source code extensions.
+defaultConfig.resolver.sourceExts.push('svg');
+
+// Add a custom babel transformer which converts svg files to React components.
+defaultConfig.transformer.babelTransformerPath = require.resolve('react-native-svg-transformer');
+
+module.exports = defaultConfig;

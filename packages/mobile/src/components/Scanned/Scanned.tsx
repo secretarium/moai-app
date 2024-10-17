@@ -4,19 +4,21 @@ import { withState } from '../../store';
 import MainLayout from '../common/MainLayout';
 import { commonStyles } from './styles';
 import Modal from 'react-native-modal';
-import { useHistory } from 'react-router';
-import i18n from 'i18n-js';
+import { useNavigate } from '../../react-router';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
-
+import LogoBlack from '../../assets/logo-black.png';
+import LogoWhite from '../../assets/logo-white.png';
+import PinSuccess from '../../assets/pin-success.png';
 
 const Scanned = withState()((s) => ({
     scanCounter: s.system.scanCounter
 }), ({ scanCounter }) => {
 
-    const history = useHistory();
+    const naviguate = useNavigate();
     const [showModal, setShowModal] = useState<boolean>(scanCounter === 1 || scanCounter === 5 || scanCounter === 15);
     const { colors, theme } = useTheme();
-    const themeLogoStyle = theme !== 'dark' ? require('../../assets/logo-black.png') : require('../../assets/logo-white.png');
+    const themeLogoStyle = theme !== 'dark' ? LogoBlack : LogoWhite;
     const Bold = ({ children }) => <Text style={{ fontFamily: 'Poppins-Bold' }}>{children}</Text>;
 
     return (
@@ -38,7 +40,7 @@ const Scanned = withState()((s) => ({
                 />
                 <View style={commonStyles.pinButton}>
                     <Image
-                        source={require('../../assets/pin-success.png')}
+                        source={PinSuccess}
                         resizeMode={'contain'}
                         style={commonStyles.pin}
                     />
@@ -51,7 +53,7 @@ const Scanned = withState()((s) => ({
                 </Text>
             </View>
             <View style={commonStyles.homeButtonContainer} >
-                <TouchableOpacity onPress={() => history.push('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button }]}>
+                <TouchableOpacity onPress={() => naviguate('/')} style={[commonStyles.homeButton, { backgroundColor: colors.button }]}>
                     <Text style={{ fontFamily: 'Poppins-Bold', color: colors.text }}>{i18n.t('APP_GO_HOME')}</Text>
                 </TouchableOpacity>
             </View>

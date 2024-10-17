@@ -6,10 +6,8 @@
     "APP_TYPE_MESSAGE": "Napisz wiadomość...",
     "APP_MEASURE_EXPOSURE_RISK": "Zmierz ryzyko zakażenia",
     "APP_ABOUT": "O Moai",
-    "APP_INFOS": [
-        "Licencje",
-        "Klucze",
-        "Informacje prawne",
-        "Expo Push Notification Token"
-    ]
+    "APP_INFOS_LICENSES": "Licencje",
+    "APP_INFOS_KEYS": "Klucze",
+    "APP_INFOS_NOTICES": "Informacje prawne",
+    "APP_INFOS_PUSH": "Expo Push Notification Token"
 }

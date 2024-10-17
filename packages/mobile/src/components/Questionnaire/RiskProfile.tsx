@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import MainLayout from '../common/MainLayout';
-import { SimpleSurvey } from 'react-native-simple-survey';
-import { useHistory } from 'react-router';
+// import { SimpleSurvey } from 'react-native-simple-survey';
+import { useNavigate } from '../../react-router';
 import { styles } from './styles';
 import { withState } from '../../store';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { setRiskProfile } from '../../actions';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -14,7 +14,7 @@ const RiskProfile = withState()(
     null,
     ({ dispatch }) => {
 
-        const history = useHistory();
+        const naviguate = useNavigate();
         const { colors } = useTheme();
 
         const questions = [
@@ -74,7 +74,7 @@ const RiskProfile = withState()(
                 dispatch(setRiskProfile('medium'));
             else
                 dispatch(setRiskProfile('low'));
-            history.push('/immunity');
+            naviguate('/immunity');
         };
 
         const renderPreviousButton = (onPress, enabled) => {
@@ -127,8 +127,9 @@ const RiskProfile = withState()(
 
         return (
             <MainLayout goBackRoute={'/'} showGoBack={true}>
-                <ScrollView style={{marginTop: 20}}>
-                    <SimpleSurvey
+                <ScrollView style={{ marginTop: 20 }}>
+                    <Text>Survey not available at this time</Text>
+                    {/* <SimpleSurvey
                         survey={questions}
                         renderSelector={renderButton}
                         navButtonContainerStyle={{ flexDirection: 'row', justifyContent: 'space-around' }}
@@ -138,7 +139,7 @@ const RiskProfile = withState()(
                         renderQuestionText={renderQuestionText}
                         onSurveyFinished={(answers) => onSurveyFinished(answers)}
                         renderInfo={renderInfoText}
-                    />
+                    /> */}
                 </ScrollView>
             </MainLayout>
         );

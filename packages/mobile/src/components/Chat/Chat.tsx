@@ -6,13 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 import MainLayout from '../common/MainLayout';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import { styles } from './styles';
-import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer } from 'react-native-gifted-chat';
+import { GiftedChat, Bubble, Time, Send, InputToolbar, Composer, IMessage } from 'react-native-gifted-chat';
 import { getConversation, sendMessage } from '../../actions';
 import { withState } from '../../store';
-import { useHistory } from 'react-router';
+import { useNavigate } from '../../react-router';
 import { commonStyles } from '../commonStyles';
-import i18n from 'i18n-js';
+import i18n from '../../services/i18n';
 import { useTheme } from '../../hooks/useTheme';
+import MoaiPin from '../../assets/moai-pin.png';
 
 
 const Chat = withState()((s) => ({
@@ -21,7 +22,7 @@ const Chat = withState()((s) => ({
     expoPushToken: s.system.expoPushToken
 }), ({ messages, conversation, expoPushToken, dispatch }) => {
 
-    const history = useHistory();
+    const naviguate = useNavigate();
     const { colors } = useTheme();
     const [stateMessages, setMessages] = useState([]);
     const [hasFetchedConversation, setHasFetchedConversation] = useState(false);
@@ -36,7 +37,7 @@ const Chat = withState()((s) => ({
                 createdAt: new Date(message.datetime / 1000000),
                 user: {
                     _id: message.sender,
-                    avatar: message.sender === 0 ? require('../../assets/moai-pin.png') : null
+                    avatar: message.sender === 0 ? MoaiPin : null
                 }
             }
         )).reverse();
@@ -52,11 +53,11 @@ const Chat = withState()((s) => ({
             setHasFetchedConversation(true);
             dispatch(getConversation(conversation.address, conversation.token, expoPushToken));
         }
-    }, [dispatch, hasFetchedConversation, conversation, messages, history, expoPushToken]);
+    }, [dispatch, hasFetchedConversation, conversation, messages, naviguate, expoPushToken]);
 
-    const onSend = ([message]) => {
+    const onSend = (messages: IMessage[]) => {
         if (!isEmptyObject(conversation) || conversation !== null) {
-            dispatch(sendMessage(conversation.address, conversation.token, message.text));
+            messages.forEach(message => dispatch(sendMessage(conversation.address, conversation.token, message.text)));
         }
     };
 
@@ -146,7 +147,7 @@ const Chat = withState()((s) => ({
                     <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 16, color: colors.text }}>
                         {error}
                     </Text>
-                    <Button title='Close' onPress={() => history.push('/')} />
+                    <Button title='Close' onPress={() => naviguate('/')} />
                 </View>
             </Modal>
             <GiftedChat
