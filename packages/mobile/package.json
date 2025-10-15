@@ -30,7 +30,7 @@
         "@secretarium/connector": "0.8.4",
         "Base64": "1.1.0",
         "deepmerge": "4.2.2",
-        "expo": "40.0.1",
+        "expo": "48.0.0",
         "expo-asset": "8.2.2",
         "expo-barcode-scanner": "9.1.0",
         "expo-camera": "9.1.1",
